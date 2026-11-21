@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nextstep-techwomenaz",
+  "pages_build_output_dir": "./dist/pages",
+  "compatibility_date": "2026-11-21",
+  "vars": {
+    "DEMO_MODE": "true",
+    "SEED_DEMO_DATA": "false",
+    "AI_MODEL": "gpt-6.2-sol"
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "nextstep-pages-review",
+    "database_id": "65c96faf-09c0-42eb-85d2-45530266bcb0"
+  }]
+}

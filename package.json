@@ -1,0 +1,25 @@
+{
+  "name": "nextstep-mentorship",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --env production",
+    "check": "tsc --noEmit",
+    "db:local": "wrangler d1 execute nextstep-db --local --file=migrations/schema.sql",
+    "db:remote": "wrangler d1 execute nextstep-prod --env production --remote --file=migrations/schema.sql",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "pages:build": "node scripts/build-pages.mjs",
+    "pages:dev": "wrangler pages dev --cwd dist/pages-config --persist-to ../../.wrangler/pages-state",
+    "pages:deploy": "npm run pages:build && wrangler pages deploy --cwd dist/pages-config --branch main"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261121.1",
+    "esbuild": "^0.28.2",
+    "miniflare": "^5.20261119.0-beta",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.166.0"
+  }
+}
