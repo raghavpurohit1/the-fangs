@@ -10,9 +10,9 @@ The internal test build is available from [Get NextStep for Android](https://nex
 - Admins: Home, People, Plans, and More. Open **Applications** from Home or People to review learner surveys. Manage participants, mentors, meetings, courses, needs, events, resources, results, funding, program settings, and encrypted AI settings.
 - Mentors: sign in through the website for their existing mentor workspace.
 
-Advanced CSV import/export, full course authoring, and email/SMS queue controls open the website. Admins can add, price, edit, archive, and choose a default membership plan. Prices are informational; the app does not collect payments or gate course access. Twelve career stages are available in registration, learner profiles, and admin forms. Meeting buttons open external HTTPS video rooms.
+Advanced CSV import/export, full course authoring, and email/SMS queue controls open the website. Admins can add, price, edit, archive, and choose a default membership plan. Plans control new course access, mentoring requests and AI help using native form controls. The app does not collect payments. Course generation, full lesson editing and learner preview open the website from Manage → Course builder and learner preview. Manage → AI program agent opens the admin agent on the website; the browser may require its own sign-in. Twelve career stages are available in registration, learner profiles, and admin forms. Meeting buttons open external HTTPS video rooms.
 
-The public review workspace has shared test logins documented in the root README. It blocks external email/SMS delivery and has no configured live AI key. Create a learner account for an individual test session. Do not enter real participant records into the shared review workspace.
+The public review workspace has shared test logins documented in the root README. It blocks external email/SMS delivery and uses the server-configured AI key when available. Create a learner account for an individual test session. Do not enter real participant records into the shared review workspace.
 
 ## Build and check
 

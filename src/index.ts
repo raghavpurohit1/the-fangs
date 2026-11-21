@@ -1,4 +1,6 @@
 import * as seed from './content';
+import { generateCourse } from './course-generation';
+import { requestAgentPlan, prepareAgentAction, agentActionIsCurrent, publicProposal } from './program-agent';
 import { sendEmail, sendSms } from './communications';
 import { planNextSteps } from './assistant';
 import { readAIConfig, getAISettingsMetadata, saveAISettings, AISettingsError } from './ai-settings';
@@ -27,12 +29,30 @@ const DEFAULT_TIERS=[
   {id:'guided',name:'Guided',description:'A free program grouping for coordinated mentor support.',benefits:['Mentorship coordination','A recorded meeting cadence','Learning and goal check-ins']},
   {id:'supporter',name:'Supporter',description:'A free program grouping for members helping the community grow.',benefits:['Community learning','Opportunities to contribute','Program updates']}
 ];
-const PLAN_FIELDS=['name','description','benefits','priceAmount','currency','billingPeriod','active','isDefault'];
+const PLAN_FIELDS=['name','description','benefits','priceAmount','currency','billingPeriod','active','isDefault','access'];
 const PLAN_CURRENCIES=['USD','CAD','EUR','GBP','AUD','INR'];
+const DEFAULT_ACCESS={courses:'all',courseIds:[] as string[],mentoring:true,aiHelp:true};
+function planAccess(plan:Data|undefined):Data {return {...DEFAULT_ACCESS,...plan?.access};}
+async function memberAccess(env:Env,user:UserRow):Promise<Data> {
+  const {settings}=await programSettings(env);
+  return planAccess(settings.membershipTiers.find((p:Data)=>p.id===(publicUser(user).membershipTier||'community')));
+}
+function courseIncluded(access:Data,courseId:string):boolean {return access.courses==='all'||(access.courses==='selected'&&access.courseIds.includes(courseId));}
+async function requireFeature(env:Env,user:UserRow,feature:'mentoring'|'aiHelp') {
+  if(!(await memberAccess(env,user))[feature]) fail(403,`Your membership plan does not include ${feature==='mentoring'?'new mentoring requests':'AI help'}. Contact the program team about your plan.`);
+}
+function validateAccess(value:unknown):Data {
+  if(value==null)return {...DEFAULT_ACCESS};
+  if(typeof value!=='object'||Array.isArray(value))fail(400,'Choose the features included in this plan.');
+  const a=value as Data;allowed(a,['courses','courseIds','mentoring','aiHelp']);
+  if(!['all','selected','none'].includes(a.courses))fail(400,'Choose all courses, selected courses, or no new courses.');
+  const courseIds=list(a.courseIds,'Included courses',200);
+  return {courses:a.courses,courseIds:[...new Set(courseIds)],mentoring:boolean(a.mentoring,'Mentoring'),aiHelp:boolean(a.aiHelp,'AI help')};
+}
 function membershipPlans(settings:Data):Data[] {
   const saved=Array.isArray(settings.membershipTiers)&&settings.membershipTiers.length?settings.membershipTiers:DEFAULT_TIERS;
   const defaultId=saved.find((p:Data)=>p.isDefault===true)?.id || saved.find((p:Data)=>p.id==='community')?.id || saved[0].id;
-  return saved.map((p:Data)=>({priceAmount:0,currency:'USD',billingPeriod:'free',active:true,revision:1,...p,isDefault:p.id===defaultId}));
+  return saved.map((p:Data)=>({priceAmount:0,currency:'USD',billingPeriod:'free',active:true,revision:1,...p,access:planAccess(p),isDefault:p.id===defaultId}));
 }
 async function programSettings(env:Env):Promise<{raw:string;settings:Data}> {
   const row=await env.DB.prepare('SELECT data FROM settings WHERE id=1').first<{data:string}>();
@@ -46,7 +66,7 @@ function validatePlan(data:Data,recordId:string,revision:number):Data {
   if(!PLAN_CURRENCIES.includes(data.currency)) fail(400,'Choose USD, CAD, EUR, GBP, AUD or INR.');
   if(!['free','monthly','yearly','one_time'].includes(data.billingPeriod)) fail(400,'Choose free, monthly, yearly or one_time.');
   if((data.billingPeriod==='free')!==(priceAmount===0)) fail(400,'Free plans must cost zero. Choose a positive price for paid plans.');
-  return {id:recordId,name:text(data.name,'Plan name',80,true),description:text(data.description,'Plan description',500,true),benefits:list(data.benefits,'Benefits',10),priceAmount:Math.round(priceAmount*100)/100,currency:data.currency,billingPeriod:data.billingPeriod,active:boolean(data.active,'Active'),isDefault:boolean(data.isDefault,'Default plan'),revision};
+  return {id:recordId,name:text(data.name,'Plan name',80,true),description:text(data.description,'Plan description',500,true),benefits:list(data.benefits,'Benefits',10),priceAmount:Math.round(priceAmount*100)/100,currency:data.currency,billingPeriod:data.billingPeriod,active:boolean(data.active,'Active'),isDefault:boolean(data.isDefault,'Default plan'),access:validateAccess(data.access),revision};
 }
 async function validatePlanAssignment(env:Env,planId:string,currentId?:string) {
   const {settings}=await programSettings(env);
@@ -253,7 +273,15 @@ function requestData(r: Data): Data { return {id:r.id,userId:r.user_id,mentorId:
 async function requests(env: Env, userId?: string): Promise<Data[]> { return (await rows(env.DB,`${REQUEST_SELECT}${userId?' WHERE r.user_id=?':''} ORDER BY r.created_at DESC`,...(userId?[userId]:[]))).map(requestData); }
 function needData(row:Data):Data {return {id:row.id,userId:row.user_id,category:row.category,summary:row.summary,priority:row.priority,status:row.status,createdAt:row.created_at,updatedAt:row.updated_at,adminNote:row.admin_note};}
 async function getEnrollment(env: Env, userId: string, courseId: string): Promise<Data|null> { return (await enrollments(env,userId)).find(e=>e.courseId===courseId)||null; }
-async function getCourse(env: Env, courseId: unknown) { const course = await content(env,'course',text(courseId,'Course',100,true)); if (!course || !course.published) fail(404,'This learning path is not available.'); return course as Data; }
+async function getCourse(env: Env, courseId: unknown, member:UserRow) {
+  const recordId=text(courseId,'Course',100,true);
+  const snapshot=await env.DB.prepare('SELECT s.data FROM enrollment_courses s JOIN enrollments e ON e.id=s.enrollment_id WHERE e.user_id=? AND e.course_id=?').bind(member.id,recordId).first<{data:string}>();
+  if(snapshot)return parse(snapshot.data);
+  const course=await content(env,'course',recordId);
+  if(!course||!course.published)fail(404,'This learning path is not available.');
+  if(!courseIncluded(await memberAccess(env,member),recordId))fail(403,'This course is not included in your membership plan. Contact the program team.');
+  return course;
+}
 function score(answers: unknown, questions: Data[]): number {
   if (!Array.isArray(answers) || answers.length !== questions.length || !questions.length) fail(400,'Answer every assessment question.');
   for(let i=0;i<questions.length;i++) number((answers as any[])[i],`Answer ${i+1}`,0,questions[i].options.length-1);
@@ -409,6 +437,13 @@ async function route(request: Request, env: Env): Promise<Response> {
     const result:Data={...initial,courses:admin?courses:courses.filter((c:Data)=>c.published),mentors:admin?mentors:mentors.filter((m:Data)=>m.active),resources:admin?resources:resources.filter((r:Data)=>r.active),events:admin?events:events.filter((e:Data)=>e.active),settings:settings?parse(settings.data):seed.settings,enrollments:enrolled,requests:allRequests};
     if(!admin) result.mentors=mentors.filter((m:Data)=>m.active||allRequests.some((r:Data)=>r.mentorId===m.id));
     result.settings={...result.settings,membershipTiers:membershipPlans(result.settings)};
+    if(!admin) {
+      result.access=planAccess(result.settings.membershipTiers.find((p:Data)=>p.id===(result.user.membershipTier||'community')));
+      const snapshots=await rows(env.DB,'SELECT s.data FROM enrollment_courses s JOIN enrollments e ON e.id=s.enrollment_id WHERE e.user_id=?',user.id);
+      const owned=new Map(snapshots.map(s=>{const c=parse(s.data);return [c.id,{...c,published:true,enrolledVersion:true}];}));
+      result.courses=courses.filter((c:Data)=>c.published&&courseIncluded(result.access,c.id)||owned.has(c.id)).map((c:Data)=>owned.get(c.id)||c);
+      for(const [courseId,c] of owned)if(!result.courses.some((row:Data)=>row.id===courseId))result.courses.push(c);
+    }
     result.needs=(await rows(env.DB,`SELECT * FROM member_needs${admin?'':' WHERE user_id=?'} ORDER BY created_at DESC`,...(admin?[]:[user.id]))).map(needData);
     result.applications=(await rows(env.DB,`SELECT * FROM applications${admin?'':' WHERE user_id=?'} ORDER BY created_at DESC,id DESC`,...(admin?[]:[user.id]))).map(applicationData);
     const announcements:Data[]=(await rows(env.DB,'SELECT data FROM announcements ORDER BY rowid DESC')).map(r=>({revision:1,...parse(r.data)}));
@@ -530,14 +565,18 @@ async function route(request: Request, env: Env): Promise<Response> {
     return json({ok:true});
   }
   if(path==='/api/enroll' && method==='POST') {
-    const member=requireLearner(user), data=await body(request), course=await getCourse(env,data.courseId);
+    const member=requireLearner(user), data=await body(request), course=await getCourse(env,data.courseId,member);
     const existing=await getEnrollment(env,member.id,course.id); if(existing) return json({enrollment:existing,score:existing.baselineScore});
     const result=score(data.answers,course.preQuiz), confidence=number(data.confidence,'Confidence',1,5);
-    await env.DB.prepare('INSERT OR IGNORE INTO enrollments(id,user_id,course_id,baseline_score,baseline_confidence,started_at) VALUES(?,?,?,?,?,?)').bind(id('enrollment'),member.id,course.id,result,confidence,now()).run();
+    await env.DB.batch([
+      env.DB.prepare("INSERT OR IGNORE INTO enrollments(id,user_id,course_id,baseline_score,baseline_confidence,started_at) SELECT ?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM content WHERE kind='course' AND id=? AND data=?)").bind(id('enrollment'),member.id,course.id,result,confidence,now(),course.id,stringify(course)),
+      env.DB.prepare('INSERT OR IGNORE INTO enrollment_courses(enrollment_id,data) SELECT id,? FROM enrollments WHERE user_id=? AND course_id=?').bind(stringify(course),member.id,course.id),
+    ]);
+    if(!await getEnrollment(env,member.id,course.id))fail(409,'This course changed while you were starting it. Refresh and take its updated starting assessment.');
     const enrollment=await getEnrollment(env,member.id,course.id); return json({enrollment,score:enrollment!.baselineScore});
   }
   if(path==='/api/lesson/complete' && method==='POST') {
-    const member=requireLearner(user), data=await body(request), course=await getCourse(env,data.courseId);
+    const member=requireLearner(user), data=await body(request), course=await getCourse(env,data.courseId,member);
     const enrollment=await getEnrollment(env,member.id,course.id); if(!enrollment) fail(409,'Take the baseline check before starting lessons.');
     const lesson=course.lessons.find((l:Data)=>l.id===data.lessonId); if(!lesson) fail(404,'Lesson not found.');
     const answer=number(data.answer,'Answer',0,lesson.options.length-1), correct=answer===lesson.answer;
@@ -545,7 +584,7 @@ async function route(request: Request, env: Env): Promise<Response> {
     return json({enrollment:await getEnrollment(env,member.id,course.id),correct,explanation:lesson.explanation});
   }
   if(path==='/api/course/complete' && method==='POST') {
-    const member=requireLearner(user), data=await body(request), course=await getCourse(env,data.courseId);
+    const member=requireLearner(user), data=await body(request), course=await getCourse(env,data.courseId,member);
     const enrollment=await getEnrollment(env,member.id,course.id); if(!enrollment) fail(409,'Take the baseline check first.');
     if(enrollment!.postScore!==null) return json({enrollment,score:enrollment!.postScore});
     if(!course.lessons.every((l:Data)=>enrollment!.completedLessons.includes(l.id))) fail(409,'Complete every lesson before the final check.');
@@ -554,8 +593,9 @@ async function route(request: Request, env: Env): Promise<Response> {
     const updated=await getEnrollment(env,member.id,course.id); return json({enrollment:updated,score:updated!.postScore});
   }
   if(path==='/api/feedback' && method==='POST') {
-    const member=requireLearner(user), data=await body(request), course=await getCourse(env,data.courseId);
+    const member=requireLearner(user), data=await body(request), course=await getCourse(env,data.courseId,member);
     const lesson=course.lessons.find((l:Data)=>l.id===data.lessonId); if(!lesson) fail(404,'Lesson not found.');
+    await requireFeature(env,member,'aiHelp');
     const question=text(data.question,'Question',2000,true); await limit(env,'feedback:'+member.id,30,3600);
     const fallback={text:`Course guide: ${lesson.explanation}\n\n${lesson.body}\n\nTry this: explain the key idea in your own words, then apply it to one task you want AI to help with.`,mode:'course-guide'};
     const ai=await readAIConfig(env);
@@ -570,15 +610,17 @@ async function route(request: Request, env: Env): Promise<Response> {
   }
   if(path==='/api/assistant'&&method==='POST') {
     const member=requireUser(user); if(member.role==='mentor') fail(403,'This assistant is available to learners and program staff.');
+    if(member.role==='learner')await requireFeature(env,member,'aiHelp');
     const data=await body(request); allowed(data,['message']);
     await limit(env,'assistant:'+member.id,30,3600);
-    const published=(await content(env,'course')).filter((c:Data)=>c.published).map((c:Data)=>({id:c.id,title:c.title,description:c.description,skills:c.skills}));
+    const access=member.role==='learner'?await memberAccess(env,member):DEFAULT_ACCESS;
+    const published=(await content(env,'course')).filter((c:Data)=>c.published&&courseIncluded(access,c.id)).map((c:Data)=>({id:c.id,title:c.title,description:c.description,skills:c.skills}));
     const ai=await readAIConfig(env);
     const result=await planNextSteps({...env,OPENAI_API_KEY:ai.apiKey,AI_MODEL:ai.model},{message:text(data.message,'Message',2000,true),role:member.role==='admin'?'admin':'learner',goal:publicUser(member).goal||'',courses:published});
     return json(result);
   }
   if(path==='/api/requests' && method==='POST') {
-    const member=requireLearner(user), data=await body(request); await limit(env,'request:'+member.id,10,3600);
+    const member=requireLearner(user), data=await body(request); await requireFeature(env,member,'mentoring'); await limit(env,'request:'+member.id,10,3600);
     const mentorId=data.mentorId?text(data.mentorId,'Mentor',100,true):null;
     if(mentorId) { const mentor=await content(env,'mentor',mentorId); if(!mentor||!mentor.active||mentor.capacity<1) fail(400,'This mentor is not currently accepting requests.'); }
     const topic=text(data.topic,'Mentoring topic',2000,true);
@@ -596,6 +638,74 @@ async function route(request: Request, env: Env): Promise<Response> {
   }
   if(path.startsWith('/api/admin/')) {
     const admin=requireAdmin(user);
+    const agentState=async()=>await (await route(new Request(new URL('/api/state',target.origin),{headers:{Cookie:request.headers.get('Cookie')||''}}),env)).json() as Data;
+    if(path==='/api/admin/agent/history'&&method==='GET') {
+      const saved=await rows(env.DB,"SELECT value FROM meta WHERE key LIKE 'agent-proposal:%' AND json_extract(value,'$.actorId')=? ORDER BY json_extract(value,'$.createdAt') DESC LIMIT 20",admin.id);
+      return json({proposals:saved.map(row=>publicProposal(parse(row.value)))});
+    }
+    if(path==='/api/admin/agent/propose'&&method==='POST') {
+      const data=await body(request);allowed(data,['message']);const message=text(data.message,'Request',6000,true);
+      await limit(env,'program-agent:'+admin.id,10,3600);
+      const state=await agentState(),plan=await requestAgentPlan(env,message,{...state,choices:{careerStages:STAGES,meetingCadences:CADENCES,currencies:['USD','CAD','EUR','GBP','AUD','INR'],billingPeriods:['free','monthly','yearly','one_time']}}),actions:Data[]=[];
+      for(const command of plan.commands) {
+        const action=await prepareAgentAction(env,command,state);
+        // Course generation and content edits use the same validator as manual authoring.
+        const contentKind=action.path.match(/^\/api\/admin\/(course|mentor|resource|event)$/)?.[1];
+        if(contentKind)validateContent(contentKind,action.payload);
+        if(action.operation==='plan')validatePlan({priceAmount:0,currency:'USD',billingPeriod:'free',active:true,isDefault:false,...action.before,...action.payload},action.targetId||'proposed-plan',1);
+        if(actions.some(a=>a.source===action.source&&a.targetId&&a.targetId===action.targetId))fail(400,'The agent proposed changing the same record twice. Ask for one combined change.');
+        actions.push(action);
+      }
+      const record={id:id('proposal'),actorId:admin.id,reply:plan.reply,status:actions.length?'pending':'answered',createdAt:now(),expiresAt:new Date(Date.now()+30*60000).toISOString(),actions,results:[]};
+      if(stringify(record).length>300000)fail(400,'This proposal is too large. Request fewer changes.');
+      await env.DB.prepare('INSERT INTO meta(key,value) VALUES(?,?)').bind('agent-proposal:'+record.id,stringify(record)).run();
+      return json({proposal:publicProposal(record)});
+    }
+    const agentMatch=path.match(/^\/api\/admin\/agent\/(proposal-[\w-]+)\/(apply|cancel)$/);
+    if(agentMatch&&method==='POST') {
+      const input=await body(request);allowed(input,[]);
+      const key='agent-proposal:'+agentMatch[1],row=await env.DB.prepare('SELECT value FROM meta WHERE key=?').bind(key).first<{value:string}>();
+      if(!row)fail(404,'Proposal not found.');const record=parse(row!.value);
+      if(record.actorId!==admin.id)fail(404,'Proposal not found.');
+      if(['applied','partial','failed','canceled'].includes(record.status))return json({proposal:publicProposal(record)});
+      if(record.status!=='pending')fail(409,'This proposal is already being processed. Review its history and the affected records before making another request.');
+      if(Date.parse(record.expiresAt)<Date.now())fail(409,'This proposal expired. Ask the agent again using the latest records.');
+      if(agentMatch[2]==='cancel') {
+        record.status='canceled';
+        const changed=await env.DB.prepare('UPDATE meta SET value=? WHERE key=? AND value=?').bind(stringify(record),key,row!.value).run();
+        if(!changed.meta.changes)fail(409,'The proposal changed. Refresh its history.');return json({proposal:publicProposal(record)});
+      }
+      const state=await agentState();
+      if(!record.actions.every((a:Data)=>agentActionIsCurrent(a,state)))fail(409,'A record changed after this proposal was prepared. Nothing was applied. Ask the agent again to use the latest information.');
+      record.status='applying';
+      const claim=await env.DB.prepare('UPDATE meta SET value=? WHERE key=? AND value=?').bind(stringify(record),key,row!.value).run();
+      if(!claim.meta.changes)fail(409,'This proposal was already claimed. Refresh its history.');
+      for(const action of record.actions) {
+        try {
+          const result=await route(new Request(new URL(action.path,target.origin),{method:action.method,headers:{Cookie:request.headers.get('Cookie')||'',Origin:target.origin,'Content-Type':'application/json'},body:stringify(action.payload)}),env);
+          if(!result.ok)throw new Error('The operation was not accepted.');
+          const saved=await result.json() as Data;
+          const entity=Object.values(saved).find((value:any)=>value&&typeof value==='object'&&value.id) as Data|undefined;
+          record.results.push({title:action.title,status:'succeeded',recordId:entity?.id||action.targetId});
+        } catch(error) {
+          record.results.push({title:action.title,status:'failed',error:error instanceof ApiError||error instanceof AISettingsError?error.message:'This action could not be confirmed. Review the affected record before repeating it.'});
+          break;
+        }
+        // Persist each result; a retry must never run successful actions again.
+        await env.DB.prepare('UPDATE meta SET value=? WHERE key=?').bind(stringify(record),key).run();
+      }
+      record.status=record.results.every((r:Data)=>r.status==='succeeded')&&record.results.length===record.actions.length?'applied':record.results.some((r:Data)=>r.status==='succeeded')?'partial':'failed';
+      await env.DB.prepare('UPDATE meta SET value=? WHERE key=?').bind(stringify(record),key).run();
+      return json({proposal:publicProposal(record)});
+    }
+    if(path==='/api/admin/course/generate'&&method==='POST') {
+      const data=await body(request);allowed(data,['brief','lessonCount','audience']);
+      const brief=text(data.brief,'Course description',6000,true),lessonCount=number(data.lessonCount,'Number of lessons',1,8),audience=text(data.audience,'Audience',200,true);
+      await limit(env,'course-generation:'+admin.id,10,3600);
+      const draft=await generateCourse(env,brief,lessonCount,audience);
+      try{return json({course:validateContent('course',draft),mode:'ai-draft'});}
+      catch(error){if(error instanceof ApiError)fail(502,'The AI draft needs another attempt. Your description is still here. Try again or write the course yourself.');throw error;}
+    }
     const planId=path.match(/^\/api\/admin\/membership-plan\/([\w-]+)$/)?.[1];
     if((path==='/api/admin/membership-plan'&&method==='POST')||(planId&&method==='PUT')) {
       const data=await body(request);
@@ -609,6 +719,7 @@ async function route(request: Request, env: Env): Promise<Response> {
       if(!/^[a-z0-9][a-z0-9_-]{0,79}$/.test(recordId)) fail(400,'Use a lowercase plan ID with letters, numbers, dashes or underscores.');
       if(!original&&plans.some(p=>p.id===recordId)) fail(409,'That plan ID already exists.');
       const plan=validatePlan({priceAmount:0,currency:'USD',billingPeriod:'free',active:true,isDefault:false,...original,...data},recordId,original?original.revision+1:1);
+      if(plan.access.courseIds.length){const known=new Set((await content(env,'course')).map((c:Data)=>c.id));if(plan.access.courseIds.some((courseId:string)=>!known.has(courseId)))fail(400,'Choose existing courses for this plan.');}
       if(plan.isDefault&&!plan.active) fail(400,'The default plan must be active. Choose another default before archiving this plan.');
       if(original?.isDefault&&!plan.isDefault) fail(400,'Choose another plan as the default before removing this default.');
       const updatedPlans=plans.map(p=>p.id===recordId?plan:plan.isDefault&&p.isDefault?{...p,isDefault:false,revision:p.revision+1}:p);
@@ -748,10 +859,23 @@ async function route(request: Request, env: Env): Promise<Response> {
     }
     const kind=path.match(/^\/api\/admin\/(course|mentor|resource|event)$/)?.[1];
     if(kind && method==='POST') {
-      const data=validateContent(kind,await body(request));
+      const input=await body(request),data=validateContent(kind,input);
       if(kind==='course') {
-        const existing=await content(env,'course',data.id); const used=await env.DB.prepare('SELECT id FROM enrollments WHERE course_id=? LIMIT 1').bind(data.id).first();
-        if(existing&&used&&(stringify(existing.preQuiz)!==stringify(data.preQuiz)||stringify(existing.postQuiz)!==stringify(data.postQuiz)||stringify(existing.lessons.map((l:Data)=>l.id))!==stringify(data.lessons.map((l:Data)=>l.id)))) fail(409,'This path has learner records. Preserve its assessments and lesson IDs, or create a new path to keep results comparable.');
+        const row=await env.DB.prepare("SELECT data FROM content WHERE kind='course' AND id=?").bind(data.id).first<{data:string}>();
+        const existing=row?parse(row.data):null;
+        if(existing&&(input.revision??1)!==(existing.revision||1))fail(409,'This course changed elsewhere. Reopen it before saving your edits.');
+        data.revision=existing?(existing.revision||1)+1:1;
+        if(existing) {
+          const saved=await env.DB.batch([
+            env.DB.prepare("INSERT OR IGNORE INTO enrollment_courses(enrollment_id,data) SELECT e.id,c.data FROM enrollments e JOIN content c ON c.kind='course' AND c.id=e.course_id WHERE e.course_id=?").bind(data.id),
+            env.DB.prepare("UPDATE content SET data=? WHERE kind='course' AND id=? AND data=?").bind(stringify(data),data.id,row!.data),
+          ]);
+          if(!saved[1].meta.changes)fail(409,'This course changed elsewhere. Reopen it before saving your edits.');
+        } else {
+          const saved=await env.DB.prepare("INSERT OR IGNORE INTO content(kind,id,data) VALUES('course',?,?)").bind(data.id,stringify(data)).run();
+          if(!saved.meta.changes)fail(409,'This course was just created. Refresh before editing.');
+        }
+        return json({course:data});
       }
       await env.DB.prepare('INSERT INTO content(kind,id,data) VALUES(?,?,?) ON CONFLICT(kind,id) DO UPDATE SET data=excluded.data').bind(kind,data.id,stringify(data)).run(); return json({[kind]:data});
     }

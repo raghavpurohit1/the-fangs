@@ -99,7 +99,7 @@ Suggestions compare career stage and shared words in your profile and mentor exp
 
 Open **Membership plans** to compare names, descriptions, benefits, prices, currencies, and billing periods. Your current plan is marked. Ask the program team if you need a different plan; staff control assignments.
 
-Published prices are informational. NextStep does not collect payments, create paid subscriptions, or restrict course/mentor access by plan. An archived plan may remain visible if you are still assigned to it.
+NextStep does not collect payments or create paid subscriptions. Your plan controls new course access, new mentoring requests, and AI help. Courses you have already started and existing meetings stay available. Messages, applications, profile editing, and support requests remain available to everyone. An archived plan may remain visible if you are still assigned to it.
 
 ### Read updates and request help
 
@@ -126,7 +126,7 @@ Sign in as an admin and review **Home**. A useful setup order is:
 
 1. Open **Membership plans** and select **Add plan**, or **Edit plan** on an existing card. On Android, use **Plans**.
 2. Enter the plan name, description, and benefits. Use one benefit per line, up to 10 benefits of 120 characters each.
-3. Choose a billing period: Free, Monthly, Yearly, or One-time.
+3. Under **What members can use**, select all published courses, specific courses, or no new courses. Switch mentoring requests and AI help on or off. Then choose a billing period: Free, Monthly, Yearly, or One-time.
 4. Choose a currency: USD, CAD, EUR, GBP, AUD, or INR.
 5. Enter the price in that currency, using at most two decimal places. Free plans save as zero; paid periods require a positive amount.
 6. Keep the plan active if it should be available for new assignments.
@@ -169,7 +169,17 @@ The website also supports reviewed email/SMS drafts for reminders, group announc
 
 ### Manage courses, resources, and events
 
-Use **Courses** to edit course metadata and publish/unpublish a course. Full lesson and quiz authoring is available in the web editor; review its structured content carefully. Once enrollments exist, preserve assessment definitions and lesson IDs, or create a new course for a substantially different assessment.
+1. Open **Courses → Create a course**.
+2. Describe what the course should teach, the audience, and the number of lessons (1–8 for AI creation).
+3. Click **Create course draft**. A configured OpenAI API key and compatible model are required in **Settings → AI settings**. If generation fails, your description remains in the form. **Write it myself** opens a blank editor without AI.
+4. Edit the title, description, skills, level, time estimate, and every lesson. Lesson text uses ordinary paragraphs. Add, remove, and reorder lessons with buttons; up to 20 lessons can be saved.
+5. Edit each practice question, its answer choices, the selected correct answer, and its explanation. Expand **Starting assessment** and **Final assessment** to edit their questions. No JSON or code is needed.
+6. Click **Try as a learner** to take the starting assessment, read lessons, answer practice questions, and see final results. **Back to course editor** restores your unsaved draft.
+7. Click **Save course** to store your changes. Check **Publish** when ready to make it available to learners whose plans include it. Generated drafts are not automatically saved or published.
+
+Existing learners keep the course version they started, so changing quizzes, removing lessons, or archiving the latest course does not reset their progress. New learners receive the newest published version. If another administrator saves while you are editing, reopen the course before saving to avoid overwriting their changes.
+
+The top **Try as a learner** button previews the default membership plan. **Membership plans → Try this plan as a learner** previews any specific plan. These previews contain no real learner profiles and save no results or requests. Course previews can show a draft even when that plan excludes it; use the plan preview to test actual plan access. **Start over** clears practice progress. Other forms can be viewed, but their submissions and live AI are blocked in preview. Refreshing or exiting discards practice progress. On Android, open **Manage → Course builder and learner preview** to use these web tools.
 
 Use **Events and resources** to add relevant links and descriptions and control whether records are active. A listed event is an informational entry; it does not create tickets or calendar invitations.
 
@@ -202,6 +212,22 @@ In **Settings**, choose the exact provider model identifier and optionally enter
 - Saving settings does not verify model access or billing. Check the guide's displayed response mode when testing.
 
 Program settings and plan settings are saved separately. The admin can change their password in Settings. There is no complete self-service password recovery or MFA flow yet.
+
+### AI program agent
+
+1. Sign in as an administrator and open **AI agent** in the Program navigation group. On Android, open **Manage → AI program agent** to launch the web workspace; sign in there if needed.
+2. If no key is configured, open **Settings → AI settings** and save your model and API key.
+3. Type the task in ordinary language. Include exact record names, prices, dates/time zones, or meeting links when relevant. You can also choose an example button.
+4. Click **Prepare changes**. The agent uses the saved API configuration to prepare a proposal. Course generation may take longer; the course is still an unsaved draft at this point.
+5. Read **Review exact changes** for every action, including the current and proposed values. Expand a course proposal to inspect lessons, options, correct answers, and assessments.
+6. Click **Apply these changes** to save the proposal, or **Cancel proposal**. A proposal expires after 30 minutes. Applying multiple actions runs them in order and stops on a failure; the result explains which changes were saved.
+7. Use **Agent activity** to reopen recent proposals and results. Use **New request** when switching to a different task. If a record changed after a proposal was made, ask for a fresh proposal.
+
+Try: “Create a three-lesson course for beginners on preparing for a first tech interview, with examples and practice. Keep it as a draft.” Or: “Change the Guided plan to $20 per month, including all courses, AI help and mentoring requests.” These are example requests; sending and applying them changes your program.
+
+The agent supports plans, course drafts/edits, learner records, mentor profiles, existing meeting requests, staff-specified application status/responses, member-need responses, in-app announcements, events, resources, manual results, funding records and basic settings. It asks for missing details rather than inventing amounts, meeting links or achievements. It cannot change passwords, API keys, account roles, actual learner assessment results, or send external messages, collect payments, delete records or deploy software. Adding a learner record does not create a login.
+
+Your request and a limited program index go to the configured AI provider. Contact details, grades, private learner stories, application answers and support summaries are excluded from that index. Anything you type into the request is included. Course content may be sent when you name a course to edit. No JSON editing is required.
 
 ## 4. Mentor walkthrough
 

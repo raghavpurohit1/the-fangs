@@ -13,6 +13,8 @@ class MembershipPage extends StatelessWidget {
   Future<void> edit(BuildContext context, [Map<String, dynamic>? plan]) async {
     final original = plan ?? <String, dynamic>{};
     final currentDefault = original['isDefault'] == true;
+    final access = {'courses': 'all', 'courseIds': <String>[], 'mentoring': true, 'aiHelp': true, ...asMap(original['access'])};
+    final courses = asList(controller.state['courses']);
     await Navigator.push(
       context,
       MaterialPageRoute(
@@ -29,6 +31,8 @@ class MembershipPage extends StatelessWidget {
             'isDefault': false,
             ...original,
             'benefits': (original['benefits'] as List? ?? []).join('\n'),
+            'courseAccess': access['courses'], 'mentoring': access['mentoring'], 'aiHelp': access['aiHelp'],
+            for(final course in courses) 'include-${course['id']}': (access['courseIds'] as List).contains(course['id']),
           },
           fields: [
             const FieldSpec('name', 'Plan name', required: true, maxLength: 80),
@@ -45,6 +49,10 @@ class MembershipPage extends StatelessWidget {
               lines: 4,
               help: 'Up to 10 benefits, each no longer than 120 characters.',
             ),
+            const FieldSpec('courseAccess', 'Course access', required: true, options: {'all': 'All published courses, including future courses', 'selected': 'Only the courses selected below', 'none': 'No new courses'}),
+            for(final course in courses) FieldSpec('include-${course['id']}', 'Include ${course['title']}', toggle: true, help: 'Applies when access is Only the courses selected below.'),
+            const FieldSpec('mentoring', 'New mentoring requests', toggle: true),
+            const FieldSpec('aiHelp', 'AI learning help and planning assistant', toggle: true),
             const FieldSpec(
               'billingPeriod',
               'Billing period',
@@ -125,6 +133,7 @@ class MembershipPage extends StatelessWidget {
                 'isDefault',
               ])
                 key: values[key],
+              'access': {'courses': values['courseAccess'], 'courseIds': [for(final course in courses) if(values['include-${course['id']}']==true) course['id']], 'mentoring': values['mentoring']==true, 'aiHelp': values['aiHelp']==true},
               'priceAmount': amount,
               'benefits': benefits,
               if (plan != null) 'revision': plan['revision'] ?? 1,
@@ -271,7 +280,7 @@ class MembershipPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text(
-                'Compare plan prices and benefits. Prices are informational; this app does not collect payments or restrict learning access.',
+                'Compare plan prices and benefits. Plans control new course access, mentoring requests and AI help. Existing learning and meetings stay available. Payments are handled outside this app.',
               ),
               const SizedBox(height: 22),
               for (final t in tiers.where(
@@ -294,6 +303,7 @@ class MembershipPage extends StatelessWidget {
     },
   );
   Widget _plan(BuildContext context, Map<String, dynamic> t, bool admin) {
+    final access = {'courses': 'all', 'courseIds': <String>[], 'mentoring': true, 'aiHelp': true, ...asMap(t['access'])};
     final current =
         !admin && (controller.user['membershipTier'] ?? 'community') == t['id'];
     final members = asList(controller.state['users'])
@@ -333,6 +343,10 @@ class MembershipPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text('${t['description'] ?? ''}'),
+            const SizedBox(height: 12),
+            Text('Courses: ${access['courses'] == 'all' ? 'All published courses' : access['courses'] == 'none' ? 'No new courses' : '${(access['courseIds'] as List).length} selected courses'}'),
+            Text('New mentoring requests: ${access['mentoring'] == true ? 'Included' : 'Not included'}'),
+            Text('AI help: ${access['aiHelp'] == true ? 'Included' : 'Not included'}'),
             const SizedBox(height: 18),
             for (final benefit in (t['benefits'] as List? ?? []))
               Padding(

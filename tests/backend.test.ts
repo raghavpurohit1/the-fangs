@@ -126,8 +126,10 @@ test('D1 API supports authorized learning, administration, records, and durable 
       const metric=await admin.call('/api/metrics?cohort=Independent%20learners'); assert.equal(metric.body.pairedCount,1); assert.equal(metric.body.scoreChange,100); assert.equal(metric.body.activeLearners,1);
       const csv=await admin.call('/api/admin/export.csv?cohort=Independent%20learners'); assert.equal(csv.status,200); assert.match(csv.body,/Test learner/); assert.match(csv.body,/percentage points/);
       const change=structuredClone(course); change.preQuiz[0].answer=(change.preQuiz[0].answer+1)%change.preQuiz[0].options.length;
-      assert.equal((await admin.call('/api/admin/course','POST',change)).status,409);
-      const safe=structuredClone(course); safe.title+=' updated'; assert.equal((await admin.call('/api/admin/course','POST',safe)).status,200);
+      const edited=await admin.call('/api/admin/course','POST',change);assert.equal(edited.status,200);
+      assert.equal((await admin.call('/api/admin/course','POST',course)).status,409);
+      assert.deepEqual((await learner.call('/api/state')).body.courses.find((c:any)=>c.id===course.id).preQuiz,course.preQuiz);
+      const safe={...edited.body.course,title:course.title+' updated'};assert.equal((await admin.call('/api/admin/course','POST',safe)).status,200);
     });
     await t.test('mentor requests validate scheduling and meeting URLs',async()=>{
       const state=await admin.call('/api/state'); const mentor=state.body.mentors.find((m:any)=>m.active&&m.capacity>0);
@@ -524,4 +526,99 @@ test('membership plans support prices, defaults, archives and concurrent review-
       assert.equal((await admin.call('/api/admin/mentor','POST',mentor)).status,200);
     });
   } finally { await runtime.dispose(); }
+});
+
+test('plan entitlements are enforced, existing learning is preserved, and editing creates isolated course versions',async()=>{
+ const {runtime,env}=await environment(true,undefined,false);const admin=new Client(env),learner=new Client(env),newLearner=new Client(env);
+ try {
+  await admin.call('/api/login','POST',{username:'admin',password:'test1234'});
+  await learner.call('/api/register','POST',{name:'Access tester',username:'access-test',password:'example-password',stage:STAGES[0],goal:'Learn'});
+  const course=courses[0];
+  assert.equal((await learner.call('/api/enroll','POST',{courseId:course.id,answers:course.preQuiz.map(q=>q.answer),confidence:3})).status,200);
+  let plan=(await admin.call('/api/state')).body.settings.membershipTiers.find((p:any)=>p.id==='community');
+  const access={courses:'none',courseIds:[],mentoring:false,aiHelp:false};
+  assert.equal((await admin.call('/api/admin/membership-plan/community','PUT',{access,revision:plan.revision})).status,200);
+  const state=(await learner.call('/api/state')).body;
+  assert.deepEqual(state.access,access);assert.deepEqual(state.courses.map((c:any)=>c.id),[course.id]);
+  assert.equal((await learner.call('/api/enroll','POST',{courseId:courses[1].id,answers:courses[1].preQuiz.map(q=>q.answer),confidence:3})).status,403);
+  assert.equal((await learner.call('/api/requests','POST',{topic:'New meeting'})).status,403);
+  assert.equal((await learner.call('/api/feedback','POST',{courseId:course.id,lessonId:course.lessons[0].id,question:'Explain'})).status,403);
+  assert.equal((await learner.call('/api/assistant','POST',{message:'Help me'})).status,403);
+  assert.equal((await learner.call('/api/profile','PUT',{membershipTier:'guided'})).status,400);
+  assert.equal((await learner.call('/api/needs','POST',{category:'learning',priority:'routine',summary:'Please change my plan'})).status,201);
+  const rewritten=structuredClone(course);rewritten.lessons=[{...course.lessons[0],id:'new-lesson',body:'A completely revised lesson.'}];rewritten.preQuiz[0].answer=(rewritten.preQuiz[0].answer+1)%rewritten.preQuiz[0].options.length;
+  const saved=await admin.call('/api/admin/course','POST',rewritten);assert.equal(saved.status,200);assert.equal(saved.body.course.revision,2);
+  assert.equal((await admin.call('/api/admin/course','POST',rewritten)).status,409);
+  assert.deepEqual((await learner.call('/api/state')).body.courses[0].lessons,course.lessons);
+  for(const lesson of course.lessons)assert.equal((await learner.call('/api/lesson/complete','POST',{courseId:course.id,lessonId:lesson.id,answer:lesson.answer})).body.correct,true);
+  assert.equal((await learner.call('/api/course/complete','POST',{courseId:course.id,answers:course.postQuiz.map(q=>q.answer),confidence:5})).body.score,100);
+  plan=(await admin.call('/api/state')).body.settings.membershipTiers.find((p:any)=>p.id==='community');
+  assert.equal((await admin.call('/api/admin/membership-plan/community','PUT',{access:{...access,courses:'selected',courseIds:['missing']},revision:plan.revision})).status,400);
+  assert.equal((await admin.call('/api/admin/membership-plan/community','PUT',{access:{...access,courses:'selected',courseIds:[course.id]},revision:plan.revision})).status,200);
+  await newLearner.call('/api/register','POST',{name:'New version tester',username:'new-version',password:'example-password',stage:STAGES[0],goal:'Learn'});
+  assert.equal((await newLearner.call('/api/state')).body.courses[0].lessons[0].id,'new-lesson');
+  assert.equal((await newLearner.call('/api/enroll','POST',{courseId:course.id,answers:rewritten.preQuiz.map(q=>q.answer),confidence:3})).body.score,100);
+  assert.equal((await admin.call('/api/enroll','POST',{courseId:course.id,answers:course.preQuiz.map(q=>q.answer),confidence:3})).status,403);
+ } finally {await runtime.dispose();}
+});
+
+test('course generation is admin-only, validates AI output, never publishes automatically and hides provider secrets',async()=>{
+ const {runtime,env}=await environment(true,undefined,false);const admin=new Client(env),anon=new Client(env);const originalFetch=globalThis.fetch;
+ try {
+  await admin.call('/api/login','POST',{username:'admin',password:'test1234'});
+  const input={brief:'Teach safe AI prompting',audience:'Beginners',lessonCount:3};
+  assert.equal((await anon.call('/api/admin/course/generate','POST',input)).status,401);
+  assert.equal((await admin.call('/api/admin/course/generate','POST',input)).status,503);
+  env.OPENAI_API_KEY='synthetic-test-key-do-not-use';env.AI_MODEL='configured-model';
+  globalThis.fetch=async(url,options)=>{assert.equal(String(url),'https://api.openai.com/v1/responses');const body=JSON.parse(options!.body as string);assert.equal(body.model,'configured-model');assert.equal(body.store,false);assert.equal(body.text.format.strict,true);assert.equal(body.tools,undefined);return new Response(JSON.stringify({status:'completed',output:[{content:[{type:'output_text',text:JSON.stringify(courses[0])}]}]}));};
+  const generated=await admin.call('/api/admin/course/generate','POST',input);assert.equal(generated.status,200);assert.equal(generated.body.course.published,false);assert.notEqual(generated.body.course.id,courses[0].id);
+  assert.doesNotMatch(JSON.stringify(generated.body),/synthetic-test-key/);
+  assert.equal((await admin.call('/api/state')).body.courses.length,3);
+  globalThis.fetch=async()=>new Response(JSON.stringify({status:'incomplete',output:[]}));
+  assert.equal((await admin.call('/api/admin/course/generate','POST',input)).status,502);
+  globalThis.fetch=async()=>new Response(JSON.stringify({status:'completed',output:[{content:[{type:'output_text',text:JSON.stringify({...courses[0],minutes:-10})}]}]}));
+  assert.equal((await admin.call('/api/admin/course/generate','POST',input)).status,502);
+  globalThis.fetch=async()=>new Response('secret-provider-error',{status:401});
+  const failed=await admin.call('/api/admin/course/generate','POST',input);assert.equal(failed.status,502);assert.doesNotMatch(JSON.stringify(failed.body),/secret-provider-error/);
+ } finally {globalThis.fetch=originalFetch;await runtime.dispose();}
+});
+
+test('program agent prepares without writing, blocks unauthorized actions, checks freshness and applies each proposal once',async()=>{
+ const {runtime,env}=await environment(true,undefined,false);const admin=new Client(env),learner=new Client(env);const originalFetch=globalThis.fetch;
+ try {
+  await admin.call('/api/login','POST',{username:'admin',password:'test1234'});
+  await learner.call('/api/register','POST',{name:'Agent learner',username:'agent-learner',password:'example-password',stage:STAGES[0],goal:'Learn'});
+  assert.equal((await learner.call('/api/admin/agent/propose','POST',{message:'Change a plan'})).status,403);
+  assert.equal((await learner.call('/api/admin/agent/history')).status,403);
+  assert.equal((await admin.call('/api/admin/agent/propose','POST',{message:'Create a plan'})).status,503);
+  env.OPENAI_API_KEY='synthetic-test-key';
+  let commands:any[]=[];
+  globalThis.fetch=async(_url,options)=>{const request=JSON.parse(options!.body as string);assert.equal(request.store,false);assert.doesNotMatch(request.input,/synthetic-test-key|password_hash/);return new Response(JSON.stringify({status:'completed',output:[{content:[{type:'output_text',text:JSON.stringify({reply:'Review these proposed changes.',commands})}]}]}));};
+  const command=(operation:string,targetId:string,changes:any)=>({operation,targetId,changes:Object.entries(changes).map(([field,value])=>({field,value:JSON.stringify(value)}))});
+  commands=[command('plan','',{name:'AI prepared plan',description:'A new community plan',priceAmount:0})];
+  const proposed=await admin.call('/api/admin/agent/propose','POST',{message:'Create a plan'});assert.equal(proposed.status,200);assert.equal(proposed.body.proposal.status,'pending');
+  assert.equal((await admin.call('/api/state')).body.settings.membershipTiers.length,3);
+  const proposalId=proposed.body.proposal.id;
+  assert.equal((await learner.call(`/api/admin/agent/${proposalId}/apply`,'POST',{})).status,403);
+  const responses=await Promise.all([admin.call(`/api/admin/agent/${proposalId}/apply`,'POST',{}),admin.call(`/api/admin/agent/${proposalId}/apply`,'POST',{})]);assert.ok(responses.some(r=>r.status===200));
+  assert.equal((await admin.call('/api/state')).body.settings.membershipTiers.length,4);
+  assert.equal((await admin.call(`/api/admin/agent/${proposalId}/apply`,'POST',{})).body.proposal.status,'applied');
+  assert.equal((await admin.call('/api/state')).body.settings.membershipTiers.length,4);
+  commands=[command('plan','community',{description:'Agent proposed change'})];
+  const stale=(await admin.call('/api/admin/agent/propose','POST',{message:'Change community'})).body.proposal;
+  let community=(await admin.call('/api/state')).body.settings.membershipTiers.find((p:any)=>p.id==='community');
+  await admin.call('/api/admin/membership-plan/community','PUT',{description:'A human changed it',revision:community.revision});
+  assert.equal((await admin.call(`/api/admin/agent/${stale.id}/apply`,'POST',{})).status,409);
+  community=(await admin.call('/api/state')).body.settings.membershipTiers.find((p:any)=>p.id==='community');assert.equal(community.description,'A human changed it');
+  commands=[command('learner',(await learner.call('/api/state')).body.user.id,{role:'admin'})];
+  assert.equal((await admin.call('/api/admin/agent/propose','POST',{message:'Change roles'})).status,400);
+  commands=[command('settings','',{apiKey:'do-not-save'})];
+  assert.equal((await admin.call('/api/admin/agent/propose','POST',{message:'Change key'})).status,400);
+  commands=[command('announcement','',{title:'Prepared update',body:'Update your goals.',active:false})];
+  const cancel=(await admin.call('/api/admin/agent/propose','POST',{message:'Draft an update'})).body.proposal;
+  assert.equal((await admin.call(`/api/admin/agent/${cancel.id}/cancel`,'POST',{})).body.proposal.status,'canceled');
+  assert.equal((await admin.call(`/api/admin/agent/${cancel.id}/apply`,'POST',{})).body.proposal.status,'canceled');
+  assert.equal((await admin.call('/api/state')).body.announcements.length,0);
+  const history=await admin.call('/api/admin/agent/history');assert.ok(history.body.proposals.length>=3);assert.doesNotMatch(JSON.stringify(history.body),/password_hash|synthetic-test-key|payload|actorId/);
+ } finally {globalThis.fetch=originalFetch;await runtime.dispose();}
 });

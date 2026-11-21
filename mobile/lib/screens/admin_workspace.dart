@@ -319,6 +319,18 @@ class _AdminWorkspaceState extends State<AdminWorkspace> {
       password,
     ),
     tile(
+      'AI program agent',
+      'Ask the agent to prepare and apply program changes.',
+      Icons.auto_awesome,
+      () => openWebLink(context, 'https://nextstep-techwomenaz.pages.dev/#agent'),
+    ),
+    tile(
+      'Course builder and learner preview',
+      'Describe a course, edit lessons and quizzes, and practice as a learner.',
+      Icons.school_outlined,
+      () => openWebLink(context, 'https://nextstep-techwomenaz.pages.dev/#courses'),
+    ),
+    tile(
       'Advanced web tools',
       'CSV imports, exports, and email/SMS queue.',
       Icons.open_in_browser,

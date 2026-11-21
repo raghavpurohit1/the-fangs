@@ -162,3 +162,12 @@ CREATE INDEX IF NOT EXISTS applications_user ON applications(user_id,created_at)
 CREATE UNIQUE INDEX IF NOT EXISTS applications_one_active_type ON applications(user_id,application_type)
   WHERE status IN ('submitted','in_review','follow_up');
 INSERT OR IGNORE INTO meta(key,value) VALUES('migration-0003-applications',strftime('%Y-%m-%dT%H:%M:%fZ','now'));
+
+-- Preserve the course each enrolled learner started; later edits serve new learners.
+CREATE TABLE IF NOT EXISTS enrollment_courses (
+  enrollment_id TEXT PRIMARY KEY REFERENCES enrollments(id) ON DELETE CASCADE,
+  data TEXT NOT NULL CHECK(json_valid(data))
+);
+INSERT OR IGNORE INTO enrollment_courses(enrollment_id,data)
+SELECT e.id,c.data FROM enrollments e JOIN content c ON c.kind='course' AND c.id=e.course_id;
+INSERT OR IGNORE INTO meta(key,value) VALUES('migration-0004-course-snapshots',strftime('%Y-%m-%dT%H:%M:%fZ','now'));

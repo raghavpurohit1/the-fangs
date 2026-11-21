@@ -1,0 +1,89 @@
+'use strict';
+let courseDraft = null;
+let learnerPreview = null;
+const defaultPlanAccess = {courses:'all',courseIds:[],mentoring:true,aiHelp:true};
+function accessFor(plan) { return {...defaultPlanAccess,...plan?.access}; }
+function planAccessForm(plan) {
+  const a=accessFor(plan);
+  return `<section class="plan-access"><h3>What members can use</h3><p class="small muted">These controls change access in the app. Members keep courses they have already started and existing meetings. Messages, applications, profiles and support requests stay available to everyone.</p><div class="field"><label for="plan-courses">Course access</label><select id="plan-courses" name="courseAccess">${Object.entries({all:'All published courses, including future courses',selected:'Only courses I select',none:'No new courses'}).map(([k,v])=>`<option value="${k}" ${a.courses===k?'selected':''}>${v}</option>`).join('')}</select></div><fieldset class="course-picker" ${a.courses!=='selected'?'hidden':''}><legend>Included courses</legend>${(data.courses||[]).map(c=>`<label class="check-field"><input type="checkbox" name="courseIds" value="${esc(c.id)}" ${a.courseIds.includes(c.id)?'checked':''}> ${esc(c.title)}${c.published?'':' (draft)'}</label>`).join('')||'<p>Create a course first, then select it here.</p>'}</fieldset><label class="check-field"><input type="checkbox" name="mentoring" ${a.mentoring?'checked':''}> Request a mentor and new meetings</label><label class="check-field"><input type="checkbox" name="aiHelp" ${a.aiHelp?'checked':''}> AI learning help and planning assistant</label><p class="help">AI features also need a configured API key. Without one, included members can use prepared guidance.</p></section>`;
+}
+function accessSummary(plan) {
+ const a=accessFor(plan);
+ return `<div class="plan-inclusions"><h3>Included in the app</h3><ul><li>${a.courses==='all'?'All published courses':a.courses==='selected'?`${a.courseIds.length} selected course${a.courseIds.length===1?'':'s'}`:'No new courses'}</li><li>New mentoring requests: ${a.mentoring?'included':'not included'}</li><li>AI help: ${a.aiHelp?'included':'not included'}</li><li>Messages, applications and member support</li></ul></div>`;
+}
+function newQuestion() {return {question:'',options:['','',''],answer:0,explanation:''};}
+function initializeCourseEditor(id) {
+  courseDraft=structuredClone((data.courses||[]).find(c=>c.id===id)||{title:'',category:'Career skills',level:'Beginner',description:'',minutes:15,skills:[],published:false,lessons:[{...newQuestion(),id:crypto.randomUUID(),title:'',body:''}],preQuiz:[newQuestion()],postQuiz:[newQuestion()]});
+}
+function courseBriefForm() {
+ return `<form data-form="course-generate">${formError()}<p class="muted">Describe what you want to teach. We’ll draft the lessons, practice questions, and before-and-after assessments for you to review.</p><div class="field"><label for="course-brief">What should this course teach?</label><textarea id="course-brief" name="brief" rows="6" maxlength="6000" required placeholder="Teach beginners how to prepare for their first tech interview. Include a worked example, practice with the STAR method, and a short confidence-building activity."></textarea></div>${field('Who is it for?','audience','Beginners exploring a technology career',{required:true})}<div class="field"><label for="course-lesson-count">Number of lessons</label><select id="course-lesson-count" name="lessonCount">${[1,2,3,4,5,6,7,8].map(n=>`<option ${n===3?'selected':''}>${n}</option>`).join('')}</select></div><p class="small muted">Only this description and audience go to the AI provider. Review the generated content before publishing. Creation may take up to a minute.</p>${!data.aiAvailable?'<div class="note mb-16">Connect your API key in Settings → AI settings to generate a course. You can write and edit courses yourself now.</div>':''}<div class="modal-actions"><button type="button" class="btn btn-secondary" data-action="manual-course">Write it myself</button><button type="submit" class="btn btn-primary">Create course draft</button></div></form>`;
+}
+function questionEditor(q,group,i,lesson=false) {
+ const prefix=`${group}-${i}`;
+ return `<section class="editor-question" data-question-group="${group}" data-index="${i}"><div class="row between"><h3>${lesson?'Practice question':`Question ${i+1}`}</h3>${lesson?'':`<button type="button" class="btn btn-ghost btn-small" data-action="remove-course-item" data-group="${group}" data-index="${i}" ${courseDraft[group].length===1?'disabled':''}>Remove question ${i+1}</button>`}</div>${field('Question',`${prefix}-question`,q.question,{textarea:true,required:true,rows:2})}<fieldset><legend>Answer choices · select the correct answer</legend>${q.options.map((option,j)=>`<div class="answer-editor"><label class="answer-choice"><input type="radio" name="${prefix}-answer" value="${j}" ${q.answer===j?'checked':''} required><span>Correct answer ${j+1}</span></label><label class="sr-only" for="${prefix}-option-${j}">Answer choice ${j+1}</label><input id="${prefix}-option-${j}" name="${prefix}-option-${j}" value="${esc(option)}" maxlength="120" required><button type="button" class="btn btn-ghost btn-small" data-action="remove-course-option" data-group="${group}" data-index="${i}" data-option="${j}" ${q.options.length<=2?'disabled':''} aria-label="Remove answer choice ${j+1}">Remove</button></div>`).join('')}<button type="button" class="btn btn-secondary btn-small" data-action="add-course-option" data-group="${group}" data-index="${i}" ${q.options.length>=6?'disabled':''}>Add answer choice</button></fieldset>${field('Why is this answer correct?',`${prefix}-explanation`,q.explanation,{textarea:true,required:true,rows:2})}</section>`;
+}
+function courseEditorForm() {
+ const c=courseDraft;
+ return `<form data-form="admin-course" data-id="${esc(c.id||'')}">${formError()}<div class="note mb-16">Edit any part of this course. Existing learners keep the version they started, including their progress. New learners receive your latest published version.</div>${c.generated?'<p class="badge purple">AI draft · review before publishing</p>':''}${field('Course title','title',c.title,{required:true})}<div class="field-row">${field('Category','category',c.category,{required:true})}${field('Level','level',c.level,{required:true})}</div>${field('Description','description',c.description,{textarea:true,required:true,rows:3})}<div class="field-row">${field('Estimated minutes','minutes',c.minutes,{type:'number',min:1,max:600,required:true})}${field('Skills (comma separated)','skills',c.skills.join(', '),{required:true})}</div><section class="course-editor-section"><h2>Lessons</h2><p class="small muted">Write the explanation, example, and activity as ordinary text. Use the buttons to add, remove, or reorder lessons.</p>${c.lessons.map((l,i)=>`<details class="lesson-editor" ${i===0?'open':''}><summary>Lesson ${i+1}: ${esc(l.title||'Untitled lesson')}</summary><div class="row wrap mb-16"><button type="button" class="btn btn-ghost btn-small" data-action="move-course-lesson" data-index="${i}" data-direction="-1" ${i===0?'disabled':''}>Move earlier</button><button type="button" class="btn btn-ghost btn-small" data-action="move-course-lesson" data-index="${i}" data-direction="1" ${i===c.lessons.length-1?'disabled':''}>Move later</button><button type="button" class="btn btn-ghost btn-small" data-action="remove-course-item" data-group="lessons" data-index="${i}" ${c.lessons.length===1?'disabled':''}>Remove lesson ${i+1}</button></div>${field('Lesson title',`lessons-${i}-title`,l.title,{required:true})}${field('Lesson text, example and activity',`lessons-${i}-body`,l.body,{textarea:true,required:true,rows:8})}${questionEditor(l,'lessons',i,true)}</details>`).join('')}<button type="button" class="btn btn-secondary" data-action="add-course-item" data-group="lessons" ${c.lessons.length>=20?'disabled':''}>Add lesson</button></section>${[['preQuiz','Starting assessment','Measure the learner’s starting point.'],['postQuiz','Final assessment','Use different questions to measure the same skills after learning.']].map(([group,title,help])=>`<section class="course-editor-section"><details><summary>${title} · ${c[group].length} question${c[group].length===1?'':'s'}</summary><p class="small muted">${help}</p>${c[group].map((q,i)=>questionEditor(q,group,i)).join('')}<button type="button" class="btn btn-secondary" data-action="add-course-item" data-group="${group}" ${c[group].length>=15?'disabled':''}>Add question</button></details></section>`).join('')}<label class="check-field"><input type="checkbox" name="published" ${c.published?'checked':''}> Publish for learners whose plan includes this course</label><div class="editor-save"><button type="button" class="btn btn-secondary" data-action="preview-course-draft">Try as a learner</button><button class="btn btn-primary" type="submit">Save course</button></div></form>`;
+}
+function readCourseEditor(form) {
+ const values=new FormData(form),c=structuredClone(courseDraft),get=name=>String(values.get(name)||'').trim();
+ for(const key of ['title','category','level','description'])c[key]=get(key);
+ c.minutes=Number(get('minutes'));c.skills=get('skills').split(',').map(x=>x.trim()).filter(Boolean);c.published=values.has('published');
+ for(const group of ['lessons','preQuiz','postQuiz'])c[group]=c[group].map((q,i)=>{const p=`${group}-${i}`,next={...q,question:get(p+'-question'),answer:Number(get(p+'-answer')),explanation:get(p+'-explanation'),options:q.options.map((_,j)=>get(p+'-option-'+j))};if(group==='lessons'){next.title=get(p+'-title');next.body=get(p+'-body');}return next;});
+ return c;
+}
+function validateCourseForm(form) {
+ form.querySelectorAll('details').forEach(d=>d.open=true);
+ return form.reportValidity();
+}
+async function courseBuilderAction(action,button) {
+ if(action==='preview-learner'){startLearnerPreview(button.dataset.id);return true;}
+ if(action==='exit-learner-preview'){exitLearnerPreview();return true;}
+ if(action==='reset-learner-preview'){const {planId,course,returnEditor}=learnerPreview;exitLearnerPreview(false);startLearnerPreview(planId,course,returnEditor);return true;}
+ if(action==='preview-saved-course'){startLearnerPreview(defaultPlanId(),structuredClone(data.courses.find(c=>c.id===button.dataset.id)));return true;}
+ if(action==='manual-course'){const brief=modalRoot.querySelector('[name=brief]')?.value||'';initializeCourseEditor(null);courseDraft.description=brief;modal={kind:'course',id:null};renderModal();return true;}
+ if(!['add-course-item','remove-course-item','move-course-lesson','add-course-option','remove-course-option','preview-course-draft'].includes(action))return false;
+ const form=modalRoot.querySelector('[data-form="admin-course"]');
+ if(action==='preview-course-draft'&&!validateCourseForm(form))return true;
+ courseDraft=readCourseEditor(form);
+ if(action==='preview-course-draft'){validateContent(courseDraft);startLearnerPreview(defaultPlanId(),structuredClone(courseDraft),true);return true;}
+ const group=button.dataset.group,i=Number(button.dataset.index),j=Number(button.dataset.option);
+ if(action==='add-course-item')courseDraft[group].push(group==='lessons'?{...newQuestion(),id:crypto.randomUUID(),title:'',body:''}:newQuestion());
+ if(action==='remove-course-item')courseDraft[group].splice(i,1);
+ if(action==='move-course-lesson'){const to=i+Number(button.dataset.direction);[courseDraft.lessons[to],courseDraft.lessons[i]]=[courseDraft.lessons[i],courseDraft.lessons[to]];}
+ if(action==='add-course-option')courseDraft[group][i].options.push('');
+ if(action==='remove-course-option'){const q=courseDraft[group][i];q.options.splice(j,1);q.answer=q.answer===j?0:q.answer>j?q.answer-1:q.answer;}
+ const scroll=modalRoot.querySelector('.modal-backdrop').scrollTop;renderModal();modalDirty=true;modalRoot.querySelectorAll('details').forEach(d=>d.open=true);modalRoot.querySelector('.modal-backdrop').scrollTop=scroll;
+ return true;
+}
+function previewBanner() {
+ if(!learnerPreview)return '';
+ return `<section class="learner-preview-banner" aria-label="Learner preview"><div><strong>Learner preview · ${esc(tierDefinitions().find(p=>p.id===learnerPreview.planId)?.name||'Plan')}</strong><p>Practice stays in this tab. No learner records, messages, or AI charges are created.${learnerPreview.course?' This course is available for preview even if it is a draft or excluded from this plan.':''}</p></div><div class="row wrap"><button class="btn btn-secondary" data-action="reset-learner-preview">Start over</button><button class="btn btn-dark" data-action="exit-learner-preview">${learnerPreview.returnEditor?'Back to course editor':'Exit preview'}</button></div></section>`;
+}
+function startLearnerPreview(planId,course=null,returnEditor=false) {
+ if(data.user?.role!=='admin')return;
+ const adminData=data,plan=tierDefinitions().find(p=>p.id===planId)||tierDefinitions().find(p=>p.isDefault),access=accessFor(plan);
+ learnerPreview={adminData,planId:plan.id,course,returnEditor,returnView:view};
+ let courses=(data.courses||[]).filter(c=>c.published&&(access.courses==='all'||access.courses==='selected'&&access.courseIds.includes(c.id)));
+ if(course){course={...course,id:course.id||'preview-course',published:true};courses=[...courses.filter(c=>c.id!==course.id),course];}
+ data={user:{id:'preview-learner',role:'learner',name:'Practice learner',membershipTier:plan.id,stage:stages[0],goal:'Explore the learner experience',cohort:'Preview',confidence:3,active:true},settings:structuredClone(adminData.settings),courses:structuredClone(courses),mentors:structuredClone(adminData.mentors.filter(m=>m.active)),resources:structuredClone(adminData.resources.filter(r=>r.active)),events:structuredClone(adminData.events.filter(e=>e.active)),enrollments:[],requests:[],applications:[],needs:[],announcements:structuredClone(adminData.announcements.filter(a=>a.active&&a.cohort==='all')),announcementReads:[],access,aiAvailable:false};
+ closeModal();selectedLessonId=null;lessonResult=null;coachResponse=null;coursePhase='lesson';selectedCourseId=course?.id||null;view=course?'course':'overview';history.replaceState(null,'',course?`#course/${encodeURIComponent(course.id)}`:'#overview');render();window.scrollTo(0,0);
+}
+function exitLearnerPreview(reopen=true) {
+ if(!learnerPreview)return;
+ const previous=learnerPreview;data=previous.adminData;learnerPreview=null;closeModal();view=previous.returnView;selectedCourseId=null;lessonResult=null;coachResponse=null;history.replaceState(null,'',`#${view}`);render();
+ if(reopen&&previous.returnEditor){modal={kind:'course',id:courseDraft.id||null};renderModal();modalDirty=true;document.body.style.overflow='hidden';}
+}
+async function previewRequest(path,method,payload={}) {
+ if(path==='/api/state')return data;
+ const course=data.courses.find(c=>c.id===payload.courseId),e=enrollment(payload.courseId);
+ const score=(answers,questions)=>Math.round(100*questions.filter((q,i)=>q.answer===answers[i]).length/questions.length);
+ if(path==='/api/enroll'&&course){const result=e||{id:'preview-'+course.id,userId:data.user.id,courseId:course.id,baselineScore:score(payload.answers,course.preQuiz),baselineConfidence:payload.confidence,postScore:null,postConfidence:null,startedAt:new Date().toISOString(),completedAt:null,completedLessons:[]};if(!e)data.enrollments.push(result);return {enrollment:result,score:result.baselineScore};}
+ if(path==='/api/lesson/complete'&&course&&e){const l=course.lessons.find(l=>l.id===payload.lessonId),correct=l.answer===payload.answer;if(correct&&!e.completedLessons.includes(l.id))e.completedLessons.push(l.id);return {correct,explanation:l.explanation,enrollment:e};}
+ if(path==='/api/course/complete'&&course&&e){if(!course.lessons.every(l=>e.completedLessons.includes(l.id)))throw new Error('Complete every lesson first.');if(e.postScore===null){e.postScore=score(payload.answers,course.postQuiz);e.postConfidence=payload.confidence;e.completedAt=new Date().toISOString();}return {enrollment:e,score:e.postScore};}
+ if(path==='/api/feedback'&&course){if(data.access.aiHelp===false)throw new Error('AI help is not included in this plan.');const l=course.lessons.find(l=>l.id===payload.lessonId);return {text:`Preview course guide: ${l.explanation}\n\n${l.body}`,mode:'course-guide'};}
+ throw new Error('This is a learner preview. Explore pages and try courses here; exit preview to change real records or use live AI.');
+}
+document.addEventListener('change',event=>{if(event.target.name==='courseAccess'){const picker=event.target.closest('form').querySelector('.course-picker');picker.hidden=event.target.value!=='selected';}});
+document.addEventListener('invalid',event=>{event.target.closest('details')?.setAttribute('open','');},true);

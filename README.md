@@ -48,7 +48,7 @@ For a page-by-page local review guide, run `python3 -m http.server 8788 --bind 1
 | Personal journey | Career stage, goal, story, résumé highlights, optional coursework/grades, and optional contact preferences. |
 | Application survey | New learners submit goals, interests, experience, availability, and support needs. Staff review status and a response are visible to the applicant; account access and plan assignment remain separate. |
 | Member support | Members share needs; staff track open/in-progress/resolved status and a response visible to the member. |
-| Membership | Staff can add plans and edit names, descriptions, benefits, prices, six currencies, billing periods, availability, and the default for new learners. Existing assignments survive archiving; no checkout or access gates. |
+| Membership | Staff can add plans and edit names, descriptions, benefits, prices, six currencies, billing periods, availability, and the default for new learners. Plans control new courses, mentoring requests and AI help. Existing assignments survive archiving; no checkout. |
 | Next-step assistant | A planning assistant suggests published courses and program actions. Prepared guidance works without a key; it does not take actions for the user. |
 | Mentor access | Transparent keyword and career-stage suggestions, limited scheduling capacity, a meeting cadence, last/next meeting tracking, and external HTTPS meeting links. |
 | Mentor workspace | Separate login, own professional profile, assigned mentees, and assigned session updates; no grades, contacts, or program-wide records. |
@@ -75,13 +75,13 @@ See [metric definitions and operational details](docs/OPERATIONS.md#metric-defin
 
 ## Optional services and deployment
 
-The core preview needs no AI, email, or SMS account. Administrators can change the model and save a write-only API key in **Settings**. The default model is `gpt-6.2-sol`; calls use the server-side Responses API. A saved key is encrypted with AES-256-GCM under `AI_SETTINGS_KEY` and overrides `OPENAI_API_KEY`. Blank keeps the saved key; removing it restores any environment-key fallback. API responses never return the key. See [AI settings](docs/OPERATIONS.md#administrator-ai-settings). No live AI key or model access has been verified; prepared guidance works without one.
+The core preview needs no AI, email, or SMS account. Administrators can change the model and save a write-only API key in **Settings**. The default model is `gpt-6.2-sol`; calls use the server-side Responses API. A saved key is encrypted with AES-256-GCM under `AI_SETTINGS_KEY` and overrides `OPENAI_API_KEY`. Blank keeps the saved key; removing it restores any environment-key fallback. API responses never return the key. See [AI settings](docs/OPERATIONS.md#administrator-ai-settings). A live course-generation request was verified with the configured provider on November 21, 2026; prepared guidance still works without a key.
 
 Email uses Resend; SMS uses Twilio. Secrets stay in Worker bindings, never browser code. Demo mode blocks actual delivery even if provider credentials are configured. In production, a queue status of `sent` means the provider accepted the request, not that a recipient received or read it.
 
 Production is a separate Wrangler environment with `DEMO_MODE=false` and its own D1 database. It starts with curriculum and one administrator, without the fictional participant/mentor/outcome records. It requires a strong `ADMIN_PASSWORD` for first initialization. Never point production at a demo database; a stored mode check rejects that configuration.
 
-**Deployment status:** the [Pages review site](https://nextstep-techwomenaz.pages.dev) is live. Publish checks verified both review logins, three courses, five official resources, and no mentor profiles or preloaded activity/results. It uses a dedicated D1 database with `DEMO_MODE=true` and `SEED_DEMO_DATA=false`; external email/SMS is blocked, no live AI key is configured, and the Pages package has no cron. See [Pages deployment details](docs/PAGES_DEPLOY.md). The separate production Worker is **not deployed** and still needs its own database binding and production setup in the [operations runbook](docs/OPERATIONS.md#cloudflare-deployment).
+**Deployment status:** the [Pages review site](https://nextstep-techwomenaz.pages.dev) is live. Publish checks verified both review logins, three courses, five official resources, and no mentor profiles or preloaded activity/results. It uses a dedicated D1 database with `DEMO_MODE=true` and `SEED_DEMO_DATA=false`; external email/SMS is blocked, a saved AI key is configured, and the Pages package has no cron. See [Pages deployment details](docs/PAGES_DEPLOY.md). The separate production Worker is **not deployed** and still needs its own database binding and production setup in the [operations runbook](docs/OPERATIONS.md#cloudflare-deployment).
 
 ## Project layout
 
@@ -116,3 +116,11 @@ The project requester separately reported scarce mentor time, limited funding, i
 This is a working, tested prototype with targeted integration review, not a completed production security audit. It has server-enforced roles, hashed passwords, HTTP-only sessions, bounded requests, and database guards for key concurrent operations. Before onboarding real participants, complete provider verification and delivery testing, choose recovery/MFA and account-verification flows, establish data retention and backup operations, and review program content and mentor credentials. See the [specific launch limitations](docs/OPERATIONS.md#known-limitations) rather than treating the demo as a production certification.
 
 For the presentation, use [the three-minute demo guide](docs/DEMO.md).
+
+### Course builder and plan access
+
+Admins can describe a course in plain language, generate an unpublished draft using their configured AI key/model, and edit lessons, answer choices, correct answers and assessments with ordinary forms. No JSON editing is required. **Try as a learner** offers temporary practice without adding results to the database. Plans control all/selected/no new courses, mentoring requests and AI help; existing learning and meetings remain available. Android includes plan access controls and a link to the full web course builder. See [the user guide](docs/USER_GUIDE.md). Existing databases need [migration 0004](migrations/0004_course_snapshots.sql) before deploying this version.
+
+### AI program agent
+
+Open **AI agent** as an admin, describe a task, and choose **Prepare changes**. Review the exact proposed updates, then **Apply these changes** or cancel. The agent can manage plans, course drafts/content, participant and mentor records, existing meetings, staff-specified application decisions, member needs, in-app announcements, events, resources, manual results, funding records and basic settings. It uses the saved OpenAI model/key, runs up to five reviewed actions in order, and records their results. Credentials, roles, actual learner assessment scores, external sending, payments, deletion and deployments are outside its action set. See [agent instructions](docs/USER_GUIDE.md#ai-program-agent) and the [editable sample README](README.sample.md).

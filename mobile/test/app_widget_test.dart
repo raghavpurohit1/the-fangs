@@ -192,13 +192,16 @@ void main() {
       await tester.tap(find.text('Plans').last);
       await tester.pumpAndSettle();
       expect(find.text('USD 29.95 / month'), findsOneWidget);
-      await tester.ensureVisible(find.text('Edit plan').first);
+      await tester.scrollUntilVisible(find.text('Edit plan').first, 250, scrollable: find.descendant(of: find.byType(ListView).last, matching: find.byType(Scrollable)).first);
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Edit plan').first);
       await tester.pumpAndSettle();
       await tester.enterText(
         find.byKey(const ValueKey('field-name')),
         'Community Plus',
       );
+      tester.testTextInput.hide();
+      await tester.scrollUntilVisible(find.byKey(const ValueKey('field-priceAmount')), 300, scrollable: find.descendant(of: find.byType(Form), matching: find.byType(Scrollable)).first);
       await tester.enterText(
         find.byKey(const ValueKey('field-priceAmount')),
         '49.50',
@@ -219,6 +222,7 @@ void main() {
       await tester.tap(find.widgetWithText(FilledButton, 'Save plan'));
       await tester.pumpAndSettle();
       expect(submitted?['revision'], 1);
+      expect(submitted?['access'], {'courses':'all','courseIds':[], 'mentoring':true, 'aiHelp':true});
       expect(submitted?['priceAmount'], 49.5);
       expect(submitted?['name'], 'Community Plus');
       expect(submitted?['isDefault'], true);

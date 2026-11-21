@@ -1,46 +1,82 @@
 # NextStep
 
-A mentoring and learning companion for nonprofit programs: help members learn while mentor time is limited, coordinate human support, and keep program records in one place.
+**Team:** [YOUR TEAM NAME]
 
-**Live review:** [nextstep-techwomenaz.pages.dev](https://nextstep-techwomenaz.pages.dev)
+**Hackathon:** [HACKATHON NAME AND YEAR]
 
-**User guide:** [docs/USER_GUIDE.md](docs/USER_GUIDE.md)
+**Members:** [NAMES AND ROLES]
 
-This README is a copy-ready example for the current repository. NextStep is an independent hackathon prototype for the TechWomenAZ use case, not the organization's official site. The public deployment is a review workspace, not a production certification.
+NextStep helps nonprofit programs connect learners with mentors, offer self-paced courses, and keep membership, communication, and outcome records in one place.
 
-## Features
+- **Website:** [Open NextStep](https://nextstep-techwomenaz.pages.dev)
+- **Source:** [raghavpurohit1/the-fangs](https://github.com/raghavpurohit1/the-fangs)
+- **User guide:** [How to use every workspace](docs/USER_GUIDE.md)
+- **Android:** [Internal test build](https://nextstep-techwomenaz.pages.dev/android.html)
+- **Presentation / demo video:** [ADD YOUR LINK]
 
-- Learner, mentor, and administrator roles with server-enforced permissions.
-- Learner applications with goals, interests, availability, support needs, and manual staff review.
-- Twelve career stages across registration, profiles, mentor records, and filters.
-- Short AI literacy courses with baseline/follow-up quizzes, lesson checks, and confidence ratings.
-- Mentor suggestions, requests, staff assignments, meeting cadence, and external video-room links.
-- Admin-managed plans: names, benefits, prices, currency, billing period, active status, and default selection.
-- Member support requests, staff responses, and cohort-targeted announcements.
-- Workshop records, CSV import/export, impact metrics, and funding tracking.
-- Configurable server-side OpenAI model/key with prepared guidance when live AI is unavailable.
-- Native Flutter Android workspaces for learners and admins.
+> This is an independent hackathon prototype for the TechWomenAZ use case, not the organization's official site. The public deployment is a shared review workspace. Replace the bracketed placeholders and adapt this README before using it as your project's main README.
 
-Plan prices are informational; there is no checkout or payment collection. Meeting links open an external service. Email/SMS delivery is disabled on the public review deployment.
+## The problem
 
-## Architecture
+Nonprofit teams have limited mentor time and funding. Information spread across documents makes it difficult to follow up with members, match mentors, and measure progress. NextStep brings those workflows together and gives administrators an AI assistant that can prepare and carry out supported program changes.
+
+## What the app does
+
+| Workspace | Main capabilities |
+| --- | --- |
+| Learner | Create an account, submit an application, complete courses and assessments, request mentoring, read announcements, ask for support, and update a profile |
+| Mentor | View assigned mentees and meetings, manage meeting details, and maintain a professional profile |
+| Administrator | Manage members, mentor accounts, applications, plans, courses, events, resources, communications, results, funding records, and program settings |
+| AI agent | Prepare changes from plain English, show exact changes for review, apply approved actions, and keep an activity history |
+
+### AI agent
+
+Sign in as an administrator and open **AI agent**. Type a request, click **Prepare changes**, review the proposal, and click **Apply these changes** or **Cancel proposal**.
+
+Examples to adapt:
+
+- “Create a free Career Starter plan for beginners. Include all courses and AI help, but no new mentoring requests. Keep the current default.”
+- “Create a three-lesson course about first technology interviews for beginners, with examples and practice. Keep it as a draft.”
+- “Change the Guided plan to $20 per month, including all courses, AI help, and mentoring requests.”
+
+The agent uses the model and API key saved in **Settings → AI settings**. It can manage plans, course drafts and content, participant records, mentor profiles, existing meeting requests, staff-specified application decisions, member-need responses, in-app announcements, events, resources, manual results, funding records, and basic settings. It supports up to five actions per proposal; proposals expire after 30 minutes.
+
+It does not change passwords or API keys, grant account roles, alter actual learner assessment scores, send external messages, collect payments, delete records, or deploy software. Creating a learner record does not create a login. Multi-action requests run in order and stop if an action fails; the history shows what succeeded. Missing details require a follow-up request.
+
+### Courses without JSON
+
+Open **Courses → Create a course**, describe the topic and audience, choose the lesson count, and generate a draft. Edit ordinary fields for lessons, examples, answer choices, correct answers, and starting/final assessments. Save it as a draft or publish it. AI generation requires a configured API key; manual authoring remains available without one.
+
+Use **Try as a learner** or the course preview to practice without saving test progress or calling paid AI. Existing enrollments keep their original course version when administrators edit a course.
+
+### Membership plans
+
+Admins can change names, descriptions, benefit text, prices, currencies, billing periods, active status, and the default plan. Access controls choose all, selected, or no new courses, plus mentoring requests and AI help. Plan cards offer **Try this plan as a learner**. Existing enrollments and meetings remain available after plan changes.
+
+Prices are informational: there is no checkout or automatic billing. Membership is assigned by staff.
+
+### Connections and results
+
+The app includes twelve career stages, learner applications, mentor suggestions and assignment, meeting cadence, external video-room links, support requests, cohort announcements, CSV import/export, manual program results, and funding tracking. Assessment metrics compare a learner's before/after scores; they do not establish that the program caused a career outcome. Funding records track opportunities and amounts without moving money.
+
+## Technology
 
 | Layer | Technology |
 | --- | --- |
-| Website | HTML, CSS, JavaScript on Cloudflare Pages |
-| API | TypeScript Pages Functions using the Workers runtime |
-| Database | Cloudflare D1 |
-| Runtime secrets | Cloudflare secret bindings; saved AI keys encrypted server-side |
-| Android | Flutter and Dart, calling the same HTTPS API |
-| Optional AI | OpenAI Responses API; prepared fallback without credentials |
+| Website | HTML, CSS, and JavaScript on Cloudflare Pages |
+| API | TypeScript in an advanced-mode Pages Functions Worker |
+| Database | Cloudflare D1, bound as `DB` |
+| AI | Server-side OpenAI Responses API with structured output |
+| Credentials | Cloudflare secret bindings; saved AI keys encrypted server-side |
+| Android | Flutter and Dart using the same HTTPS API |
 | Optional messaging | Resend email and Twilio SMS adapters |
-| Tooling | Wrangler, TypeScript, Node test runner, Flutter tests |
+| Checks | TypeScript, Node test runner, Flutter analysis and tests |
 
-The current project does not use Workers AI, R2, KV, Firebase, or hosted video calling.
+The current deployment does not use Firebase, Workers AI, R2, KV, or built-in video hosting. Meeting links open an external provider.
 
 ## Run locally
 
-Use Node.js 22 or later compatible with the locked Wrangler version. From the repository root:
+Use Node.js 22 or later compatible with the locked Wrangler version:
 
 ```bash
 npm ci
@@ -48,11 +84,20 @@ npm run db:local
 npm run dev
 ```
 
-Open the localhost URL Wrangler prints. The bootstrap command is for a fresh local database. For an existing legacy database, follow the ordered migrations in [OPERATIONS.md](docs/OPERATIONS.md) instead of resetting data.
+Open the localhost URL printed by Wrangler. `db:local` initializes a fresh database. For existing databases, apply the ordered migrations in [OPERATIONS.md](docs/OPERATIONS.md); do not reset stored records. Course editing requires `0004_course_snapshots.sql`.
 
-The default configuration is review mode with sample activity disabled. Learners use **Create learner account**. Admins create mentor logins from an active mentor profile. Review-only administrator credentials are documented separately in the main project README; replace shared credentials before real use.
+Learners use **Create learner account**. Admins create mentor logins from an active mentor profile. Shared review credentials are documented in the main project README; replace those accounts before using real participant data.
 
-## Verify
+## Configure AI
+
+1. Configure the server's `AI_SETTINGS_KEY` encryption secret using the [Pages setup guide](docs/PAGES_DEPLOY.md).
+2. Sign in as an administrator and open **Settings → AI settings**.
+3. Choose an OpenAI model available to your API account and save the API key.
+4. Try **AI agent** or generate a course draft to verify that the model and billing access work.
+
+A consumer chat subscription does not replace an API key. Keys stay on the server and are never returned to the browser. The agent sends your request and a limited program index to the provider; contact details, grades, private profile stories, and application answers are excluded from that index. Text you enter in a request is sent as part of the request.
+
+## Check the code
 
 ```bash
 npm run check
@@ -61,59 +106,67 @@ mobile/tool/flutter.sh analyze
 mobile/tool/flutter.sh test
 ```
 
-Backend tests use disposable databases and mocked delivery providers. They do not send real email or SMS. Flutter tests exercise authentication, navigation, survey and plan forms, and saved-data flows.
+Backend tests use disposable databases and mocked AI/messaging responses. They cover role checks, course versions and plan access, proposal review/apply/cancel behavior, stale edits, duplicate execution prevention, and preview isolation. Flutter tests cover authentication, navigation, applications, plans, and record forms.
 
 ## Deploy to Cloudflare Pages
 
-The configured Pages project is `nextstep-techwomenaz`, with D1 binding `DB` to `nextstep-pages-review`.
-
-After the account, D1 schema, and required secret bindings are configured:
+Configure your Cloudflare account, Pages project, D1 database, migrations, and secrets first. The repository currently targets `nextstep-techwomenaz` and D1 `nextstep-pages-review`; update `wrangler.pages.jsonc` for your own project.
 
 ```bash
 npm run pages:build
 npx wrangler pages deploy --cwd dist/pages-config --branch main --commit-dirty=true
 ```
 
-The build creates `dist/pages` for uploads and a separate `dist/pages-config/wrangler.json` for the CLI. Use the deployment URL returned by Wrangler. See [PAGES_DEPLOY.md](docs/PAGES_DEPLOY.md) for one-time setup and migration commands.
+The build writes upload assets to `dist/pages` and a CLI configuration to `dist/pages-config`. Follow [PAGES_DEPLOY.md](docs/PAGES_DEPLOY.md) for initial provisioning and migration commands.
 
-The public Pages deployment has `DEMO_MODE=true`, no sample activity, blocked external email/SMS, and no cron handler. The separate production Worker configuration is not deployed. Do not repurpose the shared review database for real participants.
+The public review deployment has `DEMO_MODE=true`, sample activity disabled, external email/SMS blocked, and no cron trigger. A separately configured scheduled Worker is needed for automatic future message delivery.
 
 ## Build Android
 
-Install Flutter, Java, and the Android SDK, then use the repository wrapper:
+Install Flutter, Java, and the Android SDK, then run:
 
 ```bash
 mobile/tool/flutter.sh pub get
 mobile/tool/flutter.sh build apk --release --target-platform android-arm64 --split-per-abi
 ```
 
-The APK appears at `mobile/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk`. This optimized internal build currently uses a local debug signing certificate. Configure an organization-owned release keystore and distribution process before publishing to a store. See [mobile/TOOLCHAIN.md](mobile/TOOLCHAIN.md).
+Output: `mobile/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk`.
 
-The API origin defaults to the public Pages website. An alternate HTTPS backend can be supplied through `--dart-define=API_BASE_URL=https://your-backend.example`. Never put provider keys in the mobile build.
-
-## Optional configuration
-
-Core courses, applications, plans, records, and prepared guidance work without provider credentials. An admin can configure the OpenAI model and key in Settings. Keys stay server-side; saving does not verify provider access or billing. Real messaging requires provider setup, consent workflows, and an explicitly configured production sender.
-
-Do not commit `.dev.vars`, `.env` files, credentials, database files, or signing keys.
+The native app includes learner/admin workflows and plan controls. Its admin workspace links to the web AI agent, full course builder, and learner preview. This internal APK uses a local debug signing certificate; configure an organization-owned release keystore before store distribution. See [mobile/TOOLCHAIN.md](mobile/TOOLCHAIN.md).
 
 ## Repository layout
 
 ```text
-src/                 TypeScript API, curriculum, AI and messaging adapters
-public/              Website and Android download assets
-migrations/          Bootstrap schema and ordered database upgrades
-mobile/              Flutter app and native/widget tests
-tests/               Backend integration and provider tests
-scripts/             Pages build packaging
-docs/USER_GUIDE.md    Learner, mentor, and admin instructions
-docs/OPERATIONS.md    Configuration, data handling, and limitations
-wrangler.pages.jsonc Public review Pages configuration
-wrangler.jsonc       Local and separate production Worker configuration
+src/                   API, AI integrations, validation, and messaging
+public/                Browser interface and Android download assets
+migrations/            Fresh schema and ordered database upgrades
+mobile/                Flutter application and tests
+tests/                 Backend, AI agent, and preview tests
+scripts/               Pages build packaging
+docs/USER_GUIDE.md      Role-by-role usage instructions
+docs/OPERATIONS.md      Configuration and operational limitations
+wrangler.pages.jsonc   Cloudflare Pages and D1 configuration
 ```
 
-## Before real deployment
+## Project status and next steps
 
-Complete credential/account recovery and MFA decisions, backups and restore testing, data-retention processes, accessibility and content review, provider verification, and an independent security review. Prices do not create subscriptions; funding records do not move money; mentor status is staff-reviewed. Do not describe practice score changes as proof of program-caused career outcomes.
+This is a working prototype, not a completed production security audit. Before real participant onboarding, complete account recovery/MFA and verification decisions, backup/restore testing, retention processes, accessibility review, content review, production signing, and provider testing.
 
-Add the team's names, repository URL, and chosen license before publishing this README as your project's final documentation.
+- [ADD YOUR TEAM'S NEXT PRIORITY]
+- [ADD A LINK TO YOUR ISSUE TRACKER]
+
+Never commit `.dev.vars`, `.env` files, provider credentials, database files, or signing keys.
+
+## Team and credits
+
+| Member | Contribution |
+| --- | --- |
+| [NAME] | [ROLE / CONTRIBUTION] |
+| [NAME] | [ROLE / CONTRIBUTION] |
+| [NAME] | [ROLE / CONTRIBUTION] |
+
+**Acknowledgments:** [MENTORS, ORGANIZERS, AND OTHER CREDITS]
+
+## License
+
+[CHOOSE A LICENSE, ADD ITS LICENSE FILE, AND REPLACE THIS TEXT.]
