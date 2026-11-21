@@ -94,10 +94,12 @@ function meetingDetails(request){return `<div class="meta">${esc(cadenceNames[re
 
 async function api(path, method = 'GET', body, recovered = false) {
   if(learnerPreview)return previewRequest(path,method,body);
-  const response = await fetch(path, { method, credentials: 'same-origin', headers: body !== undefined ? { 'Content-Type': 'application/json' } : {}, ...(body !== undefined ? { body: JSON.stringify(body) } : {}) });
+  const headers=body !== undefined ? { 'Content-Type': 'application/json' } : {};
+  if(data.user && !['GET','HEAD','OPTIONS'].includes(method.toUpperCase()) && !['/api/login','/api/register'].includes(path))headers['X-NextStep-User']=data.user.id;
+  const response = await fetch(path, { method, credentials: 'same-origin', headers, ...(body !== undefined ? { body: JSON.stringify(body) } : {}) });
   const result = await response.json().catch(() => ({ error: 'The server returned an unexpected response.' }));
   if(response.status===401 && data.user && !recovered && !['/api/login','/api/register','/api/logout'].includes(path) && window.NextStepSession){await window.NextStepSession.recover({...data.user});return api(path,method,body,true);}
-  if (!response.ok) { const error=new Error(result.error || 'Something went wrong. Please try again.'); error.status=response.status; throw error; }
+  if (!response.ok) { const error=new Error(result.error || 'Something went wrong. Please try again.'); error.status=response.status; error.code=result.code; throw error; }
   return result;
 }
 async function refreshState() { data = await api('/api/state'); return data; }
@@ -425,7 +427,7 @@ document.addEventListener('click', async event => {
       if(plan.isDefault)throw new Error('Choose another active plan as the default before archiving this one.');
       button.disabled=true;
       try{const result=await api(`/api/admin/membership-plan/${encodeURIComponent(id)}`,'PUT',{active:!plan.active,revision:plan.revision});data.settings=result.settings;render();notify(plan.active?'Plan archived. Existing assignments are retained.':'Plan reactivated.');}
-      catch(error){if(error.status!==409)throw error;await refreshState();render();notify('This plan changed elsewhere. Review the latest details before changing it.',true);}return;
+      catch(error){if(error.status!==409||error.code==='ACCOUNT_CHANGED')throw error;await refreshState();render();notify('This plan changed elsewhere. Review the latest details before changing it.',true);}return;
     }
     if(action==='create-mentor-account'&&data.user?.role==='admin')return openModal('mentor-account',id);
     if(action==='edit-mentor-request'&&data.user?.role==='mentor')return openModal('mentor-request',id);
@@ -446,13 +448,13 @@ document.addEventListener('click', async event => {
     if (action === 'select-recipients') { modalDirty=true;modalRoot.querySelectorAll('.recipient-row').forEach(row=>{const checkbox=row.querySelector('input');checkbox.checked=!row.hidden && !checkbox.disabled;});return; }
     if (action === 'send-message') {button.disabled=true;await api(`/api/admin/message/${encodeURIComponent(id)}/send`,'POST',{});await refreshState();render();notify('Send attempt finished. Check the recorded provider status.');return;}
     if (action === 'cancel-message') {button.disabled=true;const result=await api(`/api/admin/message/${encodeURIComponent(id)}/cancel`,'POST',{});data.communicationJobs=(data.communicationJobs || []).map(j=>j.id===id?result.job:j);render();notify('Queued message canceled.');try{await refreshState();render();}catch{notify('Canceled successfully. Refresh the page to load the latest workspace.',true);}return;}
-    if (action === 'mark-read') { button.disabled=true;const announcement=(data.announcements || []).find(a=>a.id===id);try{await api(`/api/announcements/${encodeURIComponent(id)}/read`,'POST',{revision:announcement?.revision || 1});await refreshState();render();notify('Marked as read.');}catch(error){if(error.status!==409)throw error;await refreshState();render();notify('This update changed. Read the latest version, then mark it as read.',true);}return; }
+    if (action === 'mark-read') { button.disabled=true;const announcement=(data.announcements || []).find(a=>a.id===id);try{await api(`/api/announcements/${encodeURIComponent(id)}/read`,'POST',{revision:announcement?.revision || 1});await refreshState();render();notify('Marked as read.');}catch(error){if(error.status!==409||error.code==='ACCOUNT_CHANGED')throw error;await refreshState();render();notify('This update changed. Read the latest version, then mark it as read.',true);}return; }
     if (action === 'copy-reminder') { const r=(data.requests || []).find(r=>r.id===id); if(!r) return; try { await navigator.clipboard.writeText(sessionReminder(r)); notify('Reminder copied. Review it before sharing.'); } catch { const draft=document.getElementById('session-reminder'); draft?.focus(); draft?.select(); notify('Select and copy the reminder text above.'); } return; }
     if (action === 'close-modal') return requestCloseModal();
     if (action.startsWith('add-')) return openModal(action.slice(4));
     if (action.startsWith('edit-')) return openModal(action === 'edit-request' ? 'request-admin' : action.slice(5),id);
     if (action.startsWith('toggle-')) { const kind=action.slice(7); const listName={course:'courses',mentor:'mentors',resource:'resources',event:'events',announcement:'announcements'}[kind]; const item=(data[listName] || []).find(x=>x.id===id); const key=kind==='course' ? 'published' : 'active'; button.disabled=true; await api(`/api/admin/${kind}`,'POST',{...item,[key]:!item[key]}); await refreshState(); render(); notify('Changes saved.'); return; }
-  } catch(error) { if(error.status===409 && action==='toggle-announcement'){try{await refreshState();render();notify('This update changed elsewhere. Review the latest version before changing its visibility.',true);}catch{notify('This update changed. Refresh the page to load its latest version.',true);button.disabled=false;}}else{notify(error.message,true);button.disabled=false;} }
+  } catch(error) { if(error.status===409 && error.code!=='ACCOUNT_CHANGED' && action==='toggle-announcement'){try{await refreshState();render();notify('This update changed elsewhere. Review the latest version before changing its visibility.',true);}catch{notify('This update changed. Refresh the page to load its latest version.',true);button.disabled=false;}}else{notify(error.message,true);button.disabled=false;} }
 });
 document.addEventListener('input',event=>{if(event.target.id==='course-search'){courseSearchQuery=event.target.value;filterCourseCards();}});
 document.addEventListener('input',event=>{if(modal&&modalRoot.contains(event.target)&&event.target.closest('form'))modalDirty=true;});
@@ -551,7 +553,7 @@ document.addEventListener('submit', async event => {
       try{
         if(type==='application')await api(id?`/api/applications/${encodeURIComponent(id)}`:'/api/applications',id?'PUT':'POST',{goals:values.goals,interests,experience:values.experience,availability:values.availability,supportNeeds:values.supportNeeds,...(id?{revision}:{applicationType:'learner'})});
         else await api(`/api/admin/application/${encodeURIComponent(id)}`,'PUT',{status:values.status,staffNote:values.staffNote,revision});
-      }catch(error){if(error.status!==409)throw error;await refreshState();closeModal();render();notify('This application changed or an active application already exists. Review the latest saved version before continuing.',true);return;}
+      }catch(error){if(error.status!==409||error.code==='ACCOUNT_CHANGED')throw error;await refreshState();closeModal();render();notify('This application changed or an active application already exists. Review the latest saved version before continuing.',true);return;}
       await refreshState();closeModal();render();notify(type==='application'?'Application saved for review.':'Application review saved.');return;
     }
     if(type==='membership-assignment'){if(!(data.users || []).some(u=>u.id===values.learnerId))throw new Error('Choose a learner from the list.');openModal('learner',values.learnerId);setTimeout(()=>modalRoot.querySelector('[name="membershipTier"]')?.focus(),0);return;}
@@ -568,7 +570,7 @@ document.addEventListener('submit', async event => {
       if(isDefault&&!active)throw new Error('The default plan must be active.');
       const payload={access:{courses:values.courseAccess,courseIds:formData.getAll('courseIds'),mentoring:formData.has('mentoring'),aiHelp:formData.has('aiHelp')},name,description,benefits,priceAmount,currency:values.currency,billingPeriod:values.billingPeriod,active,isDefault,...(id?{revision:Number(form.dataset.revision)}:{})};
       try{const result=await api(id?`/api/admin/membership-plan/${encodeURIComponent(id)}`:'/api/admin/membership-plan',id?'PUT':'POST',payload);data.settings=result.settings;closeModal();render();notify(id?'Membership plan saved.':'Membership plan created.');}
-      catch(error){if(error.status!==409)throw error;await refreshState();closeModal();render();notify('The membership plans changed elsewhere. Review the latest details before saving again.',true);}return;
+      catch(error){if(error.status!==409||error.code==='ACCOUNT_CHANGED')throw error;await refreshState();closeModal();render();notify('The membership plans changed elsewhere. Review the latest details before saving again.',true);}return;
     }
     if (type==='settings') { await api('/api/admin/settings','PUT',{programName:values.programName,description:values.description,weeklyGoal:Number(values.weeklyGoal),contactUrl:values.contactUrl}); await refreshState(); render(); notify('Program settings saved.'); return; }
     if (type==='password') { await api('/api/admin/password','POST',values); form.reset(); notify('Administrator password updated.'); return; }
@@ -586,7 +588,7 @@ document.addEventListener('submit', async event => {
     }
     if (type==='admin-mentor') { const original=(data.mentors || []).find(m=>m.id===id)||{}; await api('/api/admin/mentor','POST',{...original,...values,...(id ? {id}:{}),expertise:split(values.expertise),experiences:split(values.experiences),capacity:Number(values.capacity),verified:formData.has('verified'),active:formData.has('active')}); }
     if (type==='admin-request') { if(values.lastMetAt && new Date(values.lastMetAt)>new Date())throw new Error('The last meeting date cannot be in the future.');await api(`/api/admin/request/${encodeURIComponent(id)}`,'PUT',{...values,mentorId:values.mentorId || null,sessionAt:values.sessionAt ? new Date(values.sessionAt).toISOString() : null,lastMetAt:values.lastMetAt ? new Date(values.lastMetAt).toISOString() : null}); }
-    if (type==='admin-announcement') { const original=(data.announcements || []).find(a=>a.id===id)||{};try{await api('/api/admin/announcement','POST',{...original,...values,...(id ? {id,revision:original.revision || 1}:{}),createdAt:original.createdAt || new Date().toISOString(),active:formData.has('active')});}catch(error){if(error.status!==409)throw error;await refreshState();closeModal();render();notify('This update changed elsewhere. Open its latest version before editing again.',true);return;} }
+    if (type==='admin-announcement') { const original=(data.announcements || []).find(a=>a.id===id)||{};try{await api('/api/admin/announcement','POST',{...original,...values,...(id ? {id,revision:original.revision || 1}:{}),createdAt:original.createdAt || new Date().toISOString(),active:formData.has('active')});}catch(error){if(error.status!==409||error.code==='ACCOUNT_CHANGED')throw error;await refreshState();closeModal();render();notify('This update changed elsewhere. Open its latest version before editing again.',true);return;} }
     if (type==='admin-resource' || type==='admin-event') { const kind=type.slice(6); const original=(data[kind==='resource' ? 'resources':'events'] || []).find(x=>x.id===id)||{}; await api(`/api/admin/${kind}`,'POST',{...original,...values,...(id?{id}:{}),active:formData.has('active')}); }
     if (type.startsWith('admin-')) { await refreshState(); closeModal(); if(view==='overview')await loadMetrics(); render(); notify('Changes saved.'); }
   } catch(error) { showError(form,error); }

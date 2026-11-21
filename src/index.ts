@@ -427,6 +427,10 @@ async function route(request: Request, env: Env): Promise<Response> {
   if (!['GET','HEAD','OPTIONS'].includes(method)) sameOrigin(request);
   await ensureSeed(env);
   let user = await currentUser(request,env);
+  const expectedUser=request.headers.get('X-NextStep-User');
+  if(method!=='GET'&&!['/api/login','/api/register'].includes(path)&&expectedUser&&user&&expectedUser!==user.id){
+    return json({error:'The signed-in account changed in another tab. Nothing was saved. Reload this page to use the current account, or sign back into the account shown here before trying again. Use separate browser profiles to test different accounts side by side.',code:'ACCOUNT_CHANGED'},409);
+  }
   if(user?.role==='learner'){
     const profile=publicUser(user);
     if(profile.membershipExpiresAt&&Date.parse(profile.membershipExpiresAt)<=Date.now()){
@@ -1016,7 +1020,11 @@ async function route(request: Request, env: Env): Promise<Response> {
         }
         return json({course:data});
       }
-      await env.DB.prepare('INSERT INTO content(kind,id,data) VALUES(?,?,?) ON CONFLICT(kind,id) DO UPDATE SET data=excluded.data').bind(kind,data.id,stringify(data)).run(); return json({[kind]:data});
+      const saves=[env.DB.prepare('INSERT INTO content(kind,id,data) VALUES(?,?,?) ON CONFLICT(kind,id) DO UPDATE SET data=excluded.data').bind(kind,data.id,stringify(data))];
+      // Archiving a mentor must revoke their sessions permanently. Otherwise an
+      // old browser cookie becomes valid again when staff reactivate the profile.
+      if(kind==='mentor'&&!data.active)saves.push(env.DB.prepare('DELETE FROM sessions WHERE user_id IN (SELECT user_id FROM mentor_accounts WHERE mentor_id=?)').bind(data.id));
+      await env.DB.batch(saves); return json({[kind]:data});
     }
     if(path==='/api/admin/learner' && method==='POST') {
       const data=profileUpdates(await body(request),true); if(!data.name) fail(400,'Name is required.');

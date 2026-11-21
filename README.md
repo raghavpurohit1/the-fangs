@@ -6,7 +6,7 @@ The idea came from a straightforward problem: a small nonprofit has more people 
 
 This is an independent hackathon project built around the TechWomenAZ use case. It is not the organization's official website, an accredited college, or a claim that a production security review has been completed.
 
-**[Open the website](https://nextstep-techwomenaz.pages.dev)** · **[Full user guide](docs/USER_GUIDE.md)** · **[Website slideshow](docs/NextStep-Website-Guide.pptx)** · **[Detailed project description](docs/APP_DESCRIPTION.md)** · **[Editable README template](README.sample.md)**
+**[Open the website](https://nextstep-techwomenaz.pages.dev)** · **[Full user guide](docs/USER_GUIDE.md)** · **[Side-by-side testing guide](docs/TESTING.md)** · **[Website slideshow](docs/NextStep-Website-Guide.pptx)** · **[Detailed project description](docs/APP_DESCRIPTION.md)** · **[Editable README template](README.sample.md)**
 
 ## What you can do
 
