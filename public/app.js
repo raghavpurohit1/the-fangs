@@ -157,6 +157,15 @@ const adminNavGroups=[{label:'',ids:['overview']},{label:'People',ids:['learners
 function navigationMarkup(nav,activeView,admin){const item=([id,ico,label])=>`<button class="nav-button ${id===activeView?'active':''}" data-action="navigate" data-view="${id}" ${id===activeView?'aria-current="page"':''}>${icon(ico)}${label}</button>`;return admin?adminNavGroups.map(group=>`<div class="nav-group">${group.label?`<div class="nav-group-label">${group.label}</div>`:''}${group.ids.map(id=>item(nav.find(row=>row[0]===id))).join('')}</div>`).join(''):nav.map(item).join('');}
 function syncNavigation(){const small=window.matchMedia?.('(max-width: 900px)').matches;const sidebar=document.getElementById('primary-navigation');if(sidebar)sidebar.inert=Boolean(small&&!navigationOpen);const main=document.getElementById('main');if(main)main.inert=Boolean(small&&navigationOpen);document.querySelector('.shell')?.classList.toggle('nav-open',navigationOpen);document.querySelector('[data-action="toggle-navigation"]')?.setAttribute('aria-expanded',String(navigationOpen));}
 function setNavigation(open){navigationOpen=open;syncNavigation();if(open)document.querySelector('#primary-navigation .nav-button')?.focus();else document.querySelector('[data-action="toggle-navigation"]')?.focus();}
+async function refreshFromAssistant(){
+ const drafts=[...app.querySelectorAll('form[data-form]')].filter(form=>[...form.elements].some(field=>
+  field.type==='checkbox'||field.type==='radio'?field.checked!==field.defaultChecked:
+  field.tagName==='SELECT'?[...field.options].some((option,index)=>option.selected!==(option.defaultSelected||(!field.multiple&&![...field.options].some(item=>item.defaultSelected)&&index===0))):
+  'defaultValue' in field&&field.value!==field.defaultValue));
+ const state=await refreshState();render();
+ for(const draft of drafts){const replacement=[...app.querySelectorAll('form[data-form]')].find(form=>form.dataset.form===draft.dataset.form&&form.dataset.id===draft.dataset.id);replacement?.replaceWith(draft);}
+ return state;
+}
 function openAssistantDrawer(){
  const admin=data.user?.role==='admin';
  if(view==='agent'&&admin){document.getElementById('agent-message')?.focus();return;}
@@ -164,7 +173,7 @@ function openAssistantDrawer(){
  const drawer=document.createElement('dialog');drawer.className='assistant-drawer';drawer.setAttribute('aria-label',admin?'NextStep program agent':'NextStep AI assistant');
  drawer.innerHTML=`<div class="row between mb-16"><h2>${admin?'NextStep agent':'AI assistant'}</h2><button class="btn btn-ghost" type="button" aria-label="Close assistant">Close</button></div><div data-assistant-content></div>`;
  const content=drawer.querySelector('[data-assistant-content]');drawer.querySelector('button').onclick=()=>drawer.close();drawer.addEventListener('close',()=>drawer.remove());document.body.append(drawer);drawer.showModal();
- const context={state:data,request:api,refresh:refreshState,notify,openCourse:async id=>{drawer.close();selectedCourseId=id;selectedLessonId=null;coursePhase='lesson';await navigate('course');}};
+ const context={state:data,request:api,refresh:refreshFromAssistant,notify,openCourse:async id=>{drawer.close();selectedCourseId=id;selectedLessonId=null;coursePhase='lesson';await navigate('course');}};
  Promise.resolve((admin?window.NextStepAgent:window.NextStepSupport).mount(content,context)).catch(e=>{content.innerHTML=empty('Could not open the assistant',e.message);});
 }
 function mountLearningReview(){

@@ -2,7 +2,7 @@
 
 This is an additional deployment target. The existing Workers configuration and its production cron remain in `wrangler.jsonc`. Pages uses `wrangler.pages.jsonc`, a dedicated D1 database, and the generated `dist/pages` folder.
 
-The current review is published at [NextStep](https://nextstep-techwomenaz.pages.dev), deployment [3d173296](https://3d173296.nextstep-techwomenaz.pages.dev). It includes the plain-chat admin agent, AI course generation and editing, mentor sign-in creation, course-result feedback with private follow-up courses, real mentor discovery and introduction requests, course search and plan locks, and PayPal test checkout. Saved AI and PayPal credentials are encrypted; provider connection checks passed. Payment completion is covered by mocked-provider integration tests; no buyer transaction is claimed as completed.
+The current review is published at [NextStep](https://nextstep-techwomenaz.pages.dev), deployment [3e432ecd](https://3e432ecd.nextstep-techwomenaz.pages.dev). It includes the plain-chat admin agent, AI course generation and editing, mentor sign-in creation, course-result feedback with private follow-up courses, real mentor discovery and introduction requests, course search and plan locks, and PayPal test checkout. Saved AI and PayPal credentials are encrypted; provider connection checks passed. Payment completion is covered by mocked-provider integration tests; no buyer transaction is claimed as completed.
 
 The catalog contains 12 practical study courses and seven academic subjects: forensic science, psychology, statistics, research methods, biology, chemistry and criminal justice. Existing user courses and participant records were preserved. These independent study materials do not award college credit.
 
@@ -12,7 +12,9 @@ The current deliverable is the website. Android download prompts have been remov
 
 The review configuration deliberately sets `DEMO_MODE=true` and `SEED_DEMO_DATA=false`. It starts with the administrator, curriculum, and resource links, with no fictional learners or activity. Email and SMS delivery remain blocked. The initial review login is `admin` / `test1234`; change that password in Settings before giving a public URL access to real program data or a paid AI key. The public review database must stay separate from production.
 
-The final website check passed TypeScript validation and **94 automated tests**. Live browser checks verified course search, wrapping of long course URLs within cards, real mentor discovery with a staff-request form, and an actual AI reply rendered as a table. Local browser checks verified plan-selected course locks and upgrade navigation. These checks did not create public test learning activity or mentor requests.
+The latest website check passed TypeScript validation and **98 automated tests**. Live browser checks verified course search, wrapping of long course URLs within cards, real mentor discovery with a staff-request form, and an actual AI reply rendered as a table. Local browser checks verified plan-selected course locks and upgrade navigation. These checks did not create public test learning activity or mentor requests.
+
+The November 21 follow-up audit fixed conflicting profile saves overwriting membership upgrades or deactivations, password changes reporting success after a conflicting update, AI program-settings changes using the wrong HTTP method, and floating-agent changes leaving the underlying page stale. Regression tests cover these cases, including preserving unsaved form drafts when the assistant refreshes the page. The dependency audit reported no known vulnerabilities. This was a five-minute targeted audit, with no claim of an exhaustive security assessment.
 
 ## One-time setup
 

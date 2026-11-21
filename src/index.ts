@@ -316,7 +316,8 @@ async function saveUser(env: Env, row: UserRow, changes: Data, actorId=row.id) {
   }
   if(data.emailOptIn&&!data.email) fail(400,'Provide an email address before opting into email.');
   if(data.smsOptIn&&!data.phone) fail(400,'Provide a phone number before opting into text messages.');
-  await env.DB.prepare('UPDATE users SET data=?,active=? WHERE id=?').bind(stringify(data),data.active?1:0,row.id).run();
+  const saved=await env.DB.prepare('UPDATE users SET data=?,active=? WHERE id=? AND data=? AND active=?').bind(stringify(data),data.active?1:0,row.id,row.data,row.active).run();
+  if(!saved.meta.changes)fail(409,'This profile changed while you were saving. Refresh and try again.');
   return data;
 }
 function validateQuestion(q: Data): Data {
@@ -686,7 +687,9 @@ async function route(request: Request, env: Env): Promise<Response> {
     const current=passwordInput(input.currentPassword,'Current password'),password=passwordInput(input.newPassword,'New password',14);
     if(!await verifyPassword(current,member.password_hash))fail(400,'Current password is incorrect.');
     const token=(request.headers.get('Cookie')||'').split(';').map(x=>x.trim()).find(x=>x.startsWith(COOKIE+'='))?.slice(COOKIE.length+1)||'';
-    await env.DB.batch([env.DB.prepare('UPDATE users SET password_hash=? WHERE id=? AND password_hash=?').bind(await hashPassword(password),member.id,member.password_hash),env.DB.prepare('DELETE FROM sessions WHERE user_id=? AND token_hash<>? AND changes()>0').bind(member.id,await digest(token))]);return json({ok:true});
+    const saved=await env.DB.batch([env.DB.prepare('UPDATE users SET password_hash=? WHERE id=? AND password_hash=? AND active=1').bind(await hashPassword(password),member.id,member.password_hash),env.DB.prepare('DELETE FROM sessions WHERE user_id=? AND token_hash<>? AND changes()>0').bind(member.id,await digest(token))]);
+    if(!saved[0].meta.changes)fail(409,'Your account changed while you were saving. Sign in again before changing your password.');
+    return json({ok:true});
   }
   if(path==='/api/payments/order'&&method==='POST'){
     const member=requireLearner(user),input=await body(request);allowed(input,['planId','revision']);await limit(env,'checkout:'+member.id,15,3600);
@@ -1052,7 +1055,8 @@ async function route(request: Request, env: Env): Promise<Response> {
       if(!isDemo(env)&&/test1234|learn1234/i.test(password)) fail(400,'Choose a strong password without demo credentials.');
       if(!await verifyPassword(current,admin.password_hash)) fail(400,'Current password is incorrect.');
       const token=tokenFrom(request);
-      await env.DB.batch([env.DB.prepare('UPDATE users SET password_hash=? WHERE id=?').bind(await hashPassword(password),admin.id),env.DB.prepare('DELETE FROM sessions WHERE user_id=? AND token_hash<>?').bind(admin.id,await digest(token))]);
+      const saved=await env.DB.batch([env.DB.prepare('UPDATE users SET password_hash=? WHERE id=? AND password_hash=? AND active=1').bind(await hashPassword(password),admin.id,admin.password_hash),env.DB.prepare('DELETE FROM sessions WHERE user_id=? AND token_hash<>? AND changes()>0').bind(admin.id,await digest(token))]);
+      if(!saved[0].meta.changes)fail(409,'Your account changed while you were saving. Sign in again before changing your password.');
       return json({ok:true});
     }
     if((path==='/api/admin/result'||path==='/api/admin/funding') && method==='POST') {

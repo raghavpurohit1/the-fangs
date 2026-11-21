@@ -722,3 +722,43 @@ test('AI course edits stay unsaved and preserve course identity, mentor context 
   assert.equal((await admin.call('/api/state')).body.courses.find((c:any)=>c.id===original.id).title,original.title);
  }finally{globalThis.fetch=originalFetch;await runtime.dispose();}
 });
+
+test('concurrent profile and password changes cannot overwrite account updates or report false success',async()=>{
+  const {runtime,env}=await environment(true,undefined,false),originalDB=env.DB;
+  let concurrentUpdate:((user:any)=>Promise<void>)|null=null;
+  env.DB=new Proxy(originalDB,{get(target,key){
+    if(key==='prepare')return (sql:string)=>{
+      const statement=target.prepare(sql);
+      if(!sql.startsWith('SELECT u.* FROM users u JOIN sessions'))return statement;
+      return {bind(...args:any[]){const bound=statement.bind(...args);return {async first(){
+        const user=await bound.first<any>(),update=concurrentUpdate; concurrentUpdate=null;
+        if(user&&update)await update(user);
+        return user;
+      }};}};
+    };
+    const value=Reflect.get(target,key,target);return typeof value==='function'?value.bind(target):value;
+  }});
+  try {
+    const member=new Client(env),admin=new Client(env);
+    const registration=await member.call('/api/register','POST',{name:'Concurrency learner',username:'concurrency-learner',password:'Initial learner password',stage:STAGES[0],goal:'Learn'});
+    assert.equal(registration.status,200);
+    const userId=registration.body.user.id;
+    concurrentUpdate=async user=>{await originalDB.prepare("UPDATE users SET data=json_set(data,'$.membershipTier','guided','$.membershipPurchaseId','concurrent-order') WHERE id=?").bind(user.id).run();};
+    const profile=await member.call('/api/profile','PUT',{name:'Edited name'});
+    assert.equal(profile.status,409);
+    const upgraded=await originalDB.prepare('SELECT data FROM users WHERE id=?').bind(userId).first<any>();
+    assert.equal(JSON.parse(upgraded.data).membershipTier,'guided');
+    assert.equal(JSON.parse(upgraded.data).membershipPurchaseId,'concurrent-order');
+    assert.equal((await member.call('/api/profile','PUT',{name:'Edited name'})).status,200);
+    const replacementHash=await hashPassword('Concurrent password 2026');
+    concurrentUpdate=async user=>{await originalDB.prepare('UPDATE users SET password_hash=? WHERE id=?').bind(replacementHash,user.id).run();};
+    assert.equal((await member.call('/api/account/password','POST',{currentPassword:'Initial learner password',newPassword:'Losing password change'})).status,409);
+    assert.equal((await originalDB.prepare('SELECT password_hash FROM users WHERE id=?').bind(userId).first<any>())!.password_hash,replacementHash);
+    concurrentUpdate=async user=>{await originalDB.prepare("UPDATE users SET active=0,data=json_set(data,'$.active',json('false')) WHERE id=?").bind(user.id).run();};
+    assert.equal((await member.call('/api/profile','PUT',{name:'Must not reactivate'})).status,409);
+    assert.equal((await originalDB.prepare('SELECT active FROM users WHERE id=?').bind(userId).first<any>())!.active,0);
+    assert.equal((await admin.call('/api/login','POST',{username:'admin',password:'test1234'})).status,200);
+    concurrentUpdate=async user=>{await originalDB.prepare('UPDATE users SET password_hash=? WHERE id=?').bind(replacementHash,user.id).run();};
+    assert.equal((await admin.call('/api/admin/password','POST',{currentPassword:'test1234',newPassword:'Losing admin password'})).status,409);
+  } finally {await runtime.dispose();}
+});

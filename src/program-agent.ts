@@ -71,7 +71,7 @@ export async function prepareAgentAction(env:AISettingsEnv,command:Data,state:Da
  let payload:Data={...changes},path='/api/admin/'+rule.path,method='POST';
  if(['plan','learner','meeting','application','need'].includes(command.operation)&&old){path+='/'+old.id;method='PUT';}
  if(['course','mentor','resource','event','announcement','settings','result','funding'].includes(command.operation))payload={...rule.defaults,...(old||{}),...changes};
- if(command.operation==='settings')payload=fields(payload,rule.fields);
+ if(command.operation==='settings'){payload=fields(payload,rule.fields);method='PUT';}
  if(command.operation==='plan')payload={...(old?{}:rule.defaults),...changes};
  if(['plan','course','announcement','application','result','funding'].includes(command.operation)&&old)payload.revision=old.revision||1;
  const title=`${old?'Update':'Create'} ${command.operation}: ${old?.name||old?.title||changes.name||changes.title||changes.organization||old?.organization||old?.id||'program settings'}`;
