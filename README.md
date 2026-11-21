@@ -6,6 +6,8 @@ This is an independent prototype. It is not the official TechWomenAZ website or 
 
 **Public review:** [Open NextStep on Cloudflare Pages](https://nextstep-techwomenaz.pages.dev). This shared test workspace is separate from the local database and is not a production deployment.
 
+**Documentation:** [Complete user guide](docs/USER_GUIDE.md) · [Sample README](README.sample.md) · [Android app guide](mobile/README.md) · [Operations and setup](docs/OPERATIONS.md)
+
 ![NextStep administrator Home on the live Pages review site](docs/screenshots/nextstep-pages-live.jpg)
 
 ## Run locally

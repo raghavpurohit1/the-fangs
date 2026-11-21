@@ -98,19 +98,23 @@ class MembershipPage extends StatelessWidget {
                 .map((s) => s.trim())
                 .where((s) => s.isNotEmpty)
                 .toList();
-            if (benefits.length > 10 || benefits.any((s) => s.length > 120))
+            if (benefits.length > 10 || benefits.any((s) => s.length > 120)) {
               throw Exception(
                 'Use up to 10 benefits, each no longer than 120 characters.',
               );
+            }
             final amount = values['billingPeriod'] == 'free'
                 ? 0
                 : values['priceAmount'] as num;
-            if ((amount * 100 - (amount * 100).round()).abs() > 0.000001)
+            if ((amount * 100 - (amount * 100).round()).abs() > 0.000001) {
               throw Exception('Use up to two decimal places.');
-            if (values['billingPeriod'] != 'free' && amount <= 0)
+            }
+            if (values['billingPeriod'] != 'free' && amount <= 0) {
               throw Exception('Paid plans need a price greater than zero.');
-            if (values['isDefault'] == true && values['active'] != true)
+            }
+            if (values['isDefault'] == true && values['active'] != true) {
               throw Exception('The default plan must be active.');
+            }
             await savePlan(plan == null ? null : '${plan['id']}', {
               for (final key in [
                 'name',

@@ -47,8 +47,9 @@ const careerStageOptions = <String, String>{
 String membershipPrice(Map<String, dynamic>? plan) {
   if (plan == null ||
       plan['billingPeriod'] == null ||
-      plan['billingPeriod'] == 'free')
+      plan['billingPeriod'] == 'free') {
     return 'Free';
+  }
   final price = (plan['priceAmount'] as num? ?? 0).toStringAsFixed(2);
   final period = plan['billingPeriod'] == 'monthly'
       ? ' / month'

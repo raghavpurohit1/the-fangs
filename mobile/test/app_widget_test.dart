@@ -160,9 +160,11 @@ void main() {
       await phoneSize(tester);
       final state = fixture('admin');
       final settings = state['settings'] as Map<String, dynamic>;
-      final plans = (settings['membershipTiers'] as List).map((p)=>Map<String,dynamic>.from(p as Map)).toList();
+      final plans = (settings['membershipTiers'] as List)
+          .map((p) => Map<String, dynamic>.from(p as Map))
+          .toList();
       settings['membershipTiers'] = plans;
-      plans[0] = <String,dynamic>{
+      plans[0] = <String, dynamic>{
         ...plans[0] as Map,
         'priceAmount': 29.95,
         'currency': 'USD',
@@ -176,7 +178,11 @@ void main() {
         if (request.method == 'PUT') {
           expect(request.url.path, '/api/admin/membership-plan/community');
           submitted = jsonDecode(request.body) as Map<String, dynamic>;
-          plans[0] = <String,dynamic>{...plans[0] as Map, ...submitted!, 'revision': 2};
+          plans[0] = <String, dynamic>{
+            ...plans[0] as Map,
+            ...submitted!,
+            'revision': 2,
+          };
           return jsonResponse({'plan': plans[0], 'settings': settings});
         }
         return jsonResponse(state);
@@ -200,8 +206,15 @@ void main() {
       settings['programName'] = 'Updated elsewhere';
       tester.testTextInput.hide();
       await tester.pumpAndSettle();
-      await tester.ensureVisible(
+      await tester.scrollUntilVisible(
         find.widgetWithText(FilledButton, 'Save plan'),
+        450,
+        scrollable: find
+            .descendant(
+              of: find.byType(Form),
+              matching: find.byType(Scrollable),
+            )
+            .first,
       );
       await tester.tap(find.widgetWithText(FilledButton, 'Save plan'));
       await tester.pumpAndSettle();
