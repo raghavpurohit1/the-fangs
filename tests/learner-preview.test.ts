@@ -21,3 +21,19 @@ test('browser preview intercepts requests, keeps practice temporary, and blocks 
  assert.match((await call('/api/feedback',{courseId:c.id,lessonId:c.lessons[0].id,question:'Explain'})).text,/Preview course guide/);
  assert.equal(networkCalls,0);
 });
+
+test('course editor preserves commas inside skills through edits and preview',async()=>{
+ const builder=await readFile(new URL('../public/course-builder.js',import.meta.url),'utf8');
+ const skills=['Interpret controls, calibration, and uncertainty.','Write a report with observations, interpretations, and limits.'];
+ const source={...courses[0],skills};
+ const values=new Map<string,string>(Object.entries({title:source.title,category:source.category,level:source.level,description:source.description,minutes:String(source.minutes),skills:skills.join('\r\n'),published:'on'}));
+ for(const group of ['lessons','preQuiz','postQuiz'] as const)source[group].forEach((q,i)=>{
+  for(const key of ['question','explanation','answer'] as const)values.set(`${group}-${i}-${key}`,String(q[key]));
+  q.options.forEach((option,j)=>values.set(`${group}-${i}-option-${j}`,option));
+  if(group==='lessons'){const l=source.lessons[i];values.set(`lessons-${i}-title`,l.title);values.set(`lessons-${i}-body`,l.body);}
+ });
+ const context=vm.createContext({document:{addEventListener(){}},structuredClone,FormData:class{get(key:string){return values.get(key);}has(key:string){return values.has(key);}}});
+ vm.runInContext(builder+`\ncourseDraft=${JSON.stringify(source)};`,context);
+ const saved=vm.runInContext('readCourseEditor({})',context);
+ assert.deepEqual(Array.from(saved.skills),skills);
+});

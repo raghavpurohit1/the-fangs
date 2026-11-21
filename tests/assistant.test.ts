@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {planNextSteps,preparedPlan,type PlanInput} from '../src/assistant';
 
 const input:PlanInput={message:'Help me learn AI',role:'learner',goal:'AI confidence',courses:[{id:'ai',title:'Practical AI',description:'Learn safe AI prompting',skills:['AI']},{id:'lead',title:'Leadership',description:'Practice leadership',skills:['Leadership']}]};
@@ -28,4 +29,16 @@ test('AI planner validates structured results and limits data sent to the provid
       const result=await planNextSteps({OPENAI_API_KEY:'test-key'},input);assert.equal(result.mode,'program-guide');assert.doesNotMatch(JSON.stringify(result),/PRIVATE|test-key/);
     });
   }finally{globalThis.fetch=original;}
+});
+
+// Real catalog copy previously favored a long web description over the explicit Python request.
+test('prepared learner plans prioritize named subjects over common mentor and project wording', () => {
+  const web = JSON.parse(readFileSync(new URL('../curriculum/web.json', import.meta.url), 'utf8'));
+  const python = JSON.parse(readFileSync(new URL('../curriculum/python.json', import.meta.url), 'utf8'));
+  const plan = preparedPlan({role: 'learner', message: 'Help me learn Python and prepare a question for a mentor.', goal: 'Learn Python and improve project skills', courses: [web, python]});
+  assert.equal(plan.steps[0].courseId, python.id);
+  const webPlan = preparedPlan({role: 'learner', message: 'I want to learn HTML and CSS', goal: 'Build an accessible web page', courses: [python, web]});
+  assert.equal(webPlan.steps[0].courseId, web.id);
+  const shortSubject = preparedPlan({role: 'learner', message: 'AI', goal: '', courses: [{id: 'other', title: 'Python', description: 'Learn coding with a mentor', skills: []}, {id: 'ai', title: 'Practical AI', description: '', skills: []}]});
+  assert.equal(shortSubject.steps[0].courseId, 'ai', 'Two-letter technology subjects remain searchable');
 });

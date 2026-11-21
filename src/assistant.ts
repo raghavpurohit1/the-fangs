@@ -5,8 +5,12 @@ export interface PlanStep { title: string; detail: string; courseId: string|null
 export interface Plan { mode: 'live-ai'|'program-guide'; reply: string; steps: PlanStep[]; sources: string[] }
 
 export function preparedPlan(input: PlanInput): Plan {
-  const tokens = new Set(`${input.message} ${input.goal}`.toLowerCase().match(/[a-z]{3,}/g) || []);
-  const courses = input.courses.map(course => ({course, score: [...new Set(`${course.title} ${course.description} ${course.skills.join(' ')}`.toLowerCase().match(/[a-z]{3,}/g) || [])].filter(word => tokens.has(word)).length})).sort((a,b) => b.score-a.score);
+  // Rank the requested subject above generic learning/mentor language in long descriptions.
+  const stopwords = new Set('a an and are as at be been by can could do for from get have help how i if in into is it its learn learning me my of on or our please prepare question questions that the their them there these they this to want we what when which who will with work would you your improve skills project projects mentor mentors course courses'.split(' '));
+  const words = (value: string) => new Set((value.toLowerCase().match(/[a-z0-9]+(?:[+#]+)?/g) || []).filter(word => !stopwords.has(word)));
+  const tokens = words(`${input.message} ${input.goal}`);
+  const matches = (value: string) => [...words(value)].filter(word => tokens.has(word)).length;
+  const courses = input.courses.map(course => ({course, score: matches(course.title) * 12 + matches(course.skills.join(' ')) * 5 + matches(course.description)})).sort((a,b) => b.score-a.score);
   const course = courses[0]?.course;
   const steps: PlanStep[] = input.role==='admin' ? [
     {title:'Start with unanswered needs',detail:'Review open member check-ins. Set a status and leave a clear next step so each member knows their request has been seen.',courseId:null},
