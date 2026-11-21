@@ -1,0 +1,150 @@
+{
+  "id": "study-career",
+  "mentorPrompt": "I am studying Explore Your Next Tech Career. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "ASU: Career Roadmap",
+      "url": "https://thecollege.asu.edu/student-life/careers/roadmap"
+    }
+  ],
+  "title": "Explore Your Next Tech Career",
+  "category": "Career development",
+  "level": "Beginner",
+  "minutes": 55,
+  "description": "Explore developer, data, and technical support work by connecting your past experience to real tasks, gathering firsthand insights, and designing a 30-day plan that produces evidence of what you learned. For adult beginners, career changers, and returning professionals. You can request a mentor through the program; no mentor has been assigned yet, and you can complete the course on your own. Optional further reading: ASU: Career Roadmap, https://thecollege.asu.edu/student-life/careers/roadmap",
+  "skills": [
+    "Identify interests and document transferable skills with evidence",
+    "Compare developer, data, and technical support tasks",
+    "Conduct an informational conversation and turn notes into a next step",
+    "Build a 30-day exploration plan with observable evidence of learning"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-8caf2a0f-c8e3-42ed-a9e9-e75f302c9cad",
+      "title": "1. Inventory Your Interests and Transferable Skills",
+      "body": "Start with something you did, not a job title you think you should pursue. Experience from paid work, caregiving, volunteering, or a personal project can show how you solve problems. Separate three things: an interest is what you want to do more of; a transferable skill is an action you can use in another setting; evidence is a result or artifact that shows what you did. Being good at a task does not mean you want it to fill your workweek.\n\n**Worked example (fictional):** Morgan managed a volunteer signup sheet. The input was a sheet with two entries for the same shift and three entries missing contact details. Morgan marked the duplicates, confirmed which entry to keep, and followed up for the missing details. The output was an updated roster with one confirmed entry per volunteer and a note explaining how each issue was resolved. Morgan’s inventory reads: “Skill: check records and resolve inconsistencies. Evidence: updated roster and correction notes. Interest: I liked spotting patterns; I disliked repeated follow-up.” Morgan decides to try cleaning a small sample dataset before ruling out work that involves frequent follow-up.\n\n**Practice:** List three experiences. For each, write what you started with, what you did, what changed, and whether you would choose to do that kind of work again. Circle one skill with concrete evidence and underline one interest you want to test. Describe any sensitive work artifacts rather than sharing them.\n\n**Suggested mentor discussion:** “Which of these examples shows my skill most clearly, and what detail would make the evidence stronger?”",
+      "question": "Which inventory entry gives the clearest evidence of a transferable skill?",
+      "options": [
+        "I enjoy helping people when they have trouble with technology.",
+        "I tested three signup steps and wrote a guide that another volunteer used to register.",
+        "I was responsible for the signup system during two events.",
+        "I would like a role that involves writing instructions."
+      ],
+      "answer": 1,
+      "explanation": "This entry names what the learner did, what they produced, and how the output was used. The other entries describe an interest, a responsibility, or a preference without showing a result."
+    },
+    {
+      "id": "lesson-5507668d-aaf7-4058-877f-9b053c1e0c82",
+      "title": "2. Compare Developer, Data, and Support Tasks",
+      "body": "Compare roles by what someone starts with, what they do, and what they hand back. A developer might change how a tool behaves and test the change. A data worker might check records and summarize what they show. A technical support worker might reproduce a reported problem and guide someone toward a resolution. These tasks can overlap, and employers use job titles differently. Treat each example as a sample of the work, not a complete job description.\n\n**Worked example (fictional):** A workshop signup form accepts entries with a blank email address. A developer starts with that behavior and produces a rule that blocks submission when the email field is blank. Two test results accompany the change: a blank email is rejected; a completed email field is accepted when the other required fields are filled. A data worker starts with four existing records: `A: a@example.com; B: blank; C: c@example.com; D: blank`. The output is a note: “Two of four records lack email addresses: B and D.” A support worker starts with a coordinator’s report that two attendees did not receive confirmations. After checking the records, the worker replies: “B and D have no email on file. Please confirm their addresses before resending.”\n\n**Practice:** Pick a familiar tool and write one plausible input, action, and output for each role. Choose a task you could try with sample data or on paper. Note what attracts you and what you still want to know.\n\n**Suggested mentor discussion:** “Where do these tasks overlap on teams you know, and what might a beginner handle first?”",
+      "question": "Which output best matches the data task in the signup example?",
+      "options": [
+        "A form rule that blocks blank email fields",
+        "A reply asking the coordinator to verify two attendees’ addresses",
+        "A note counting missing addresses and identifying the affected records",
+        "A test confirming the form accepts a completed email field"
+      ],
+      "answer": 2,
+      "explanation": "The data task examines existing records and summarizes what they contain. The rule and test concern developer work; the reply helps the coordinator resolve a support issue."
+    },
+    {
+      "id": "lesson-9b60046f-cf44-433a-ba62-2ce5bdf934be",
+      "title": "3. Conduct an Informational Conversation",
+      "body": "An informational conversation helps you test what you think a role involves. It is not a job interview or a request for a referral. Ask for a short, specific amount of time, prepare open questions about recent work, and respect the other person’s time. Ask about the work without requesting private records or internal details. Take notes with permission, and distinguish what one person experienced from what you can conclude about the whole field.\n\n**Worked example (fictional):** Sam sends a former coworker this message: “I’m exploring technical support. Would you have 15 minutes next week to talk about a typical request and what a beginner could practice? No worries if you’re unavailable.” During the call, Sam asks, “Can you walk me through a recent request, from the first report to the handoff, without naming the customer?” The coworker describes asking what changed, trying to reproduce the problem, and writing notes for the next team. Sam records two outputs: “Evidence: this team uses written handoffs” and “Next test: write a handoff for a sample ticket and see if another person can follow it.” Sam sends a brief thank-you naming the tip that helped.\n\n**Practice:** Draft a message and three questions about a recent task, a tricky decision, and a beginner practice activity. Send the request to someone whose work you want to understand. If no one is available, rehearse with a peer or on paper; label the notes as rehearsal, not firsthand evidence.\n\n**Suggested mentor discussion:** “Which question is most likely to get a concrete example rather than a general opinion?”",
+      "question": "Which question is most likely to reveal how support work happens in practice?",
+      "options": [
+        "Is technical support a good field for a beginner?",
+        "Does your team value good communication?",
+        "Would you say support is more rewarding than development?",
+        "Without sharing private details, how did you handle a recent request from start to finish?"
+      ],
+      "answer": 3,
+      "explanation": "Asking about a recent request invites a concrete sequence of actions and decisions. The other questions are more likely to yield general opinions or brief yes-or-no answers."
+    },
+    {
+      "id": "lesson-cb042be6-787a-4c41-bc2a-39d11f30a8fc",
+      "title": "4. Capstone: Make a 30-Day Exploration Plan",
+      "body": "Your capstone deliverable is a one-page 30-day exploration plan. Start with a question you can investigate, break the month into small sessions, and name an artifact each action will produce. You submit the plan now; you collect the artifacts as you carry it out. On day 30, use them to decide whether to keep exploring a role, compare it with another, or revise your question.\n\n**Worked example (fictional):** Riley asks, “Do I prefer checking records or explaining fixes?” Riley budgets two 25-minute sessions per week. Days 1–7: write an inventory and mark missing fields in eight invented signup records; save the marked sheet and count. Days 8–14: write replies to two sample support tickets and save one revised reply with a note explaining the change. Days 15–21: request a 15-minute informational conversation and save a takeaway and follow-up question. If no one replies, compare two role descriptions and label those notes as document observations. Days 22–30: review the artifacts and write a five-sentence decision note citing two specific findings and naming the next task to test.\n\n**Practice and four-point self-review:** Draft your plan. Give yourself one point for each item you can verify:\n1. The question connects to an interest or skill from your inventory.\n2. Dated actions fit your available time and include a fallback for anything that depends on someone else.\n3. Each action names an artifact and what you will check in it.\n4. The day-30 review uses the artifacts to justify a next step.\n\n**Suggested mentor discussion:** “Which activity would give me useful evidence even if nobody responds to my outreach?”",
+      "question": "Which plan entry makes learning easiest to verify?",
+      "options": [
+        "By day 10, write a reply to a sample ticket, revise it, and note what made the next step clearer.",
+        "By day 10, read several support articles and keep the links.",
+        "By day 10, spend an hour learning about common support problems.",
+        "By day 10, make a list of support topics to explore later."
+      ],
+      "answer": 0,
+      "explanation": "The entry names a deadline, a work sample, and a revision note that shows what the learner learned. The other entries track resources, time, or intentions without showing applied learning."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "You enjoyed organizing supplies at a community event. Which note best separates your interest from evidence of a skill?",
+      "options": [
+        "Interest: organization. Evidence: I like having things in order.",
+        "Interest: public events. Evidence: I attended the event and watched setup.",
+        "Interest: organizing supplies. Evidence: I labeled bins and made a checklist the setup crew used.",
+        "Interest: teamwork. Evidence: my title was event volunteer."
+      ],
+      "answer": 2,
+      "explanation": "This note separates what the person enjoyed from an action, an artifact, and its use by the crew."
+    },
+    {
+      "question": "A club website shows the wrong meeting time after an edit. Which task most directly tests developer work?",
+      "options": [
+        "Change the code that displays the time, then test it with two sample times.",
+        "Count how many event pages have a time that differs from the calendar.",
+        "Ask members what time they saw and give them the correct details.",
+        "Draft a guide showing club members where to find schedule updates."
+      ],
+      "answer": 0,
+      "explanation": "Changing and testing how a website behaves is a developer task. The other options focus on analyzing records or helping users."
+    },
+    {
+      "question": "You want a conversation with a data worker to inform your 30-day plan. Which approach is strongest?",
+      "options": [
+        "Ask what tools they use, then add all the tools they mention to your reading list.",
+        "Ask about a recent task, then choose a small version to try and save the result.",
+        "Ask whether they like their job, then choose a role based on their answer.",
+        "Ask about promotion paths, then save their description as your only evidence."
+      ],
+      "answer": 1,
+      "explanation": "A recent task gives you a concrete example to test. Trying a small version and saving the result gives you evidence from your own work as well as the conversation."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "You liked making handovers clearer while volunteering. Which note gives the strongest basis for choosing a tech task to try?",
+      "options": [
+        "I attended weekly handovers, so I will practice building a website.",
+        "I like clear instructions, so I will choose a role after reading its title.",
+        "My coordinator valued teamwork, so I will look for jobs that mention it.",
+        "I wrote a closing checklist the next shift used, so I will try writing a support handoff."
+      ],
+      "answer": 3,
+      "explanation": "The note links a demonstrated skill and an interest to a related tech task the learner can try."
+    },
+    {
+      "question": "A library’s room-booking records contain duplicate entries. Which set of outputs best distinguishes the three roles?",
+      "options": [
+        "Developer: duplicate count; data: user reply; support: tested booking rule.",
+        "Developer: tested booking rule; data: duplicate count; support: user reply with next steps.",
+        "Developer: user reply; data: tested booking rule; support: duplicate count.",
+        "Developer: tested booking rule; data: user reply; support: duplicate count."
+      ],
+      "answer": 1,
+      "explanation": "The developer changes and tests behavior, the data worker summarizes records, and the support worker helps the user take the next step."
+    },
+    {
+      "question": "A support worker describes reproducing issues before handoff. Which plan entry best tests and records what you learned?",
+      "options": [
+        "By day 14, try to reproduce a sample issue, save the handoff, and note what you verified.",
+        "By day 14, ask another worker about handoffs and record whether their team uses them.",
+        "By day 14, watch two handoff tutorials and record their titles and lengths.",
+        "By day 14, draft a list of people who might let you observe a handoff."
+      ],
+      "answer": 0,
+      "explanation": "The dated entry turns a firsthand insight into a small test and leaves evidence of both the output and what the learner was able to verify."
+    }
+  ],
+  "published": true
+}

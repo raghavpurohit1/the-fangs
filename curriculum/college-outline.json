@@ -1,0 +1,132 @@
+[
+  {
+    "slug": "forensic-science",
+    "title": "Introduction to Forensic Science",
+    "category": "Forensic studies",
+    "minutes": 240,
+    "prerequisites": "Basic secondary-school science, reading tables, and careful note-taking; no laboratory experience required.",
+    "outline": "1 Scope of forensic science: testable questions and competing explanations; 2 Evidence preservation and chain-of-custody documentation using an entirely fictional paper evidence log, distinguish continuity from truth; 3 Trace evidence and transfer/persistence: what observations can and cannot establish; 4 Analytical measurement: controls, calibration, contamination, and uncertainty using fictional measurements, no laboratory protocol; 5 DNA evidence: profiles, mixtures, and why a profile association does not establish when or how material arrived; 6 Fingerprint and pattern comparison: feature observations, validation, possible error, and appropriate limits; 7 Human factors and evidence interpretation: context bias, independent review, and distinguish P(evidence|hypothesis) from P(hypothesis|evidence), avoid guilt probabilities; 8 Capstone: critical report on a fully supplied fictional case packet with log, measurements, alternative explanations, uncertainty, and four-point rubric. Provide enough fictional packet detail to complete the task.",
+    "sources": [
+      {
+        "title": "NIST: Forensic science",
+        "url": "https://www.nist.gov/forensic-science"
+      },
+      {
+        "title": "NIST: Human factors in forensic science",
+        "url": "https://www.nist.gov/forensic-science/human-factors-forensic-science"
+      }
+    ]
+  },
+  {
+    "slug": "psychology",
+    "title": "Introduction to Psychology",
+    "category": "Psychology",
+    "minutes": 240,
+    "prerequisites": "Comfort reading short academic passages and calculating simple percentages; no prior psychology study required.",
+    "outline": "1 Psychology as a science: behavior, mental processes, and evidence; 2 Research design and ethics: experiment versus observation, consent and no real study recruitment for this course; 3 Biological foundations: neurons, signaling, brain networks and limits of brain-behavior inference; 4 Sensation, perception and attention with a safe text-based fictional example; 5 Learning: classical versus operant conditioning, positive/negative reinforcement distinguished from punishment; 6 Memory and cognition: encoding retrieval reconstructive memory, no medical assessment; 7 Development and social influence: context, individual variation, cross-sectional versus longitudinal evidence, avoid stereotypes; 8 Capstone: evaluate a fully supplied fictional learning experiment with hypotheses, independent/dependent variables, confound, limits and four-point rubric. Include worked inputs and outputs throughout, no diagnostic or treatment recommendations.",
+    "sources": [
+      {
+        "title": "OpenStax: Psychology 2e",
+        "url": "https://openstax.org/books/psychology-2e/pages/1-introduction"
+      }
+    ]
+  },
+  {
+    "slug": "statistics",
+    "title": "Introduction to Statistics",
+    "category": "Mathematics and statistics",
+    "minutes": 300,
+    "prerequisites": "Arithmetic, fractions, percentages, and basic algebra; a calculator or spreadsheet is helpful.",
+    "outline": "1 Populations samples variables and measurement scales; 2 Tables graphs distributions and misleading scales; 3 Mean median spread using fictional [2,4,4,6,9], mean5 median4 range7 and show calculations; 4 Probability and conditional probability with a fully supplied small frequency table; 5 Sampling and random assignment: selection bias versus causal confounding; 6 Sampling uncertainty, confidence intervals and p-values: explain repeated-sampling coverage, p-value conditional on null not probability null is true, avoid needing unintroduced formulas; 7 Correlation and linear models: inspect patterns, residuals, association not causation, avoid extrapolation; 8 Capstone: analyze a fully supplied fictional dataset, calculate summaries, compare groups with limitations, provide reproducible steps and four-point rubric. Verify every numerical answer. Include at least one distinct final transfer problem with all data needed.",
+    "sources": [
+      {
+        "title": "OpenStax: Introductory Statistics 2e",
+        "url": "https://openstax.org/books/introductory-statistics-2e/pages/1-introduction"
+      },
+      {
+        "title": "OpenStax: Descriptive Statistics",
+        "url": "https://openstax.org/books/introductory-statistics-2e/pages/2-introduction"
+      }
+    ]
+  },
+  {
+    "slug": "research-methods",
+    "title": "Research Methods and Evidence",
+    "category": "Research methods",
+    "minutes": 240,
+    "prerequisites": "Reading tables, percentages, and short academic summaries; no prior research project required.",
+    "outline": "1 Research questions hypotheses and operational definitions; 2 Reading a study: question sample method results limits, distinguish claim from evidence; 3 Sampling and recruitment: target population selection bias and missing responses using a fictional dataset; 4 Designs: observational studies randomized experiments confounders and limits; 5 Measurement reliability and validity with concrete toy scores; 6 Summarizing evidence: effect sizes in original units, uncertainty and transparent missing-data handling; 7 Research ethics, consent, privacy, preregistration and replication, practice on supplied fictional data only not human participants; 8 Capstone: write a mini research proposal and critically analyze a fully supplied fictional study packet, include question design measurement analysis ethics limits and four-point rubric. Clearly label a proposal as unperformed and give an achievable academic deliverable.",
+    "sources": [
+      {
+        "title": "Kwantlen Polytechnic University: Research Methods in Psychology, 4th edition",
+        "url": "https://kpu.pressbooks.pub/psychmethods4e/"
+      }
+    ]
+  },
+  {
+    "slug": "biology",
+    "title": "Introduction to Biology",
+    "category": "Biological sciences",
+    "minutes": 300,
+    "prerequisites": "Basic arithmetic, percentages, and secondary-school science vocabulary; no laboratory required.",
+    "outline": "1 Biology as a science: levels of organization, testable hypotheses, controls and replicated fictional observations; 2 Chemistry of life: water, carbon and macromolecules with structure/function examples; 3 Cells: prokaryotic/eukaryotic organization, organelles and scale; 4 Membranes and transport: diffusion, osmosis and active transport with a safe paper-only hypothetical cell model; 5 Energy and enzymes: ATP, cellular respiration and photosynthesis as linked processes, energy conservation and matter cycling; 6 Heredity and gene expression: DNA RNA protein, genotype and phenotype, a clearly simplified single-gene Punnett-square worked example with probabilities not guarantees; 7 Evolution and ecology: natural selection across generations, populations, food webs and why individuals do not evolve traits because they need them; 8 Academic capstone: analyze a fully supplied fictional plant-growth dataset, calculate group means, identify controls and limits, connect cell processes to organism response, and propose an unperformed follow-up with four-point rubric. No culturing organisms, biological specimen collection, medical diagnosis or interventions; all work is text/data only.",
+    "sources": [
+      {
+        "title": "OpenStax: Biology 2e",
+        "url": "https://openstax.org/books/biology-2e/pages/1-introduction"
+      },
+      {
+        "title": "OpenStax Biology 2e: Passive transport",
+        "url": "https://openstax.org/books/biology-2e/pages/5-2-passive-transport"
+      },
+      {
+        "title": "OpenStax Biology 2e: Characteristics and traits",
+        "url": "https://openstax.org/books/biology-2e/pages/12-2-characteristics-and-traits"
+      }
+    ]
+  },
+  {
+    "slug": "chemistry",
+    "title": "Introduction to Chemistry",
+    "category": "Chemical sciences",
+    "minutes": 300,
+    "prerequisites": "Fractions, percentages, scientific notation, and elementary algebra; a calculator is useful.",
+    "outline": "1 Matter measurements units and significant figures: fictional density calculation with units and no real lab activity; 2 Atomic structure isotopes ions and periodic table: atomic/mass numbers and electron counts; 3 Bonding and molecular structure: ionic versus covalent, compounds and mixtures, molecular representations; 4 Chemical equations and conservation: count atoms and balance equations on paper without altering subscripts; 5 Moles and stoichiometry: molar mass and ratios, provide all masses/constants used and correct worked calculations; 6 Solutions and concentration: molarity = moles/liters, dilution as arithmetic only, all supplied theoretical values; 7 Energy rates and acid-base concepts: activation energy, catalysts not changing equilibrium composition, pH logarithmic comparison without practical mixing instructions; 8 Academic capstone: use a fully supplied hypothetical data packet to calculate amount of substance and concentration, balance an equation and explain uncertainty, conservation and a four-point rubric. Strictly paper/calculator/simulation only; no home laboratory steps, mixing instructions, hazardous chemical synthesis, heat/pressure procedures or chemical handling. Use original academic explanations not generic workplace advice.",
+    "sources": [
+      {
+        "title": "OpenStax: Chemistry 2e",
+        "url": "https://openstax.org/books/chemistry-2e/pages/1-introduction"
+      },
+      {
+        "title": "OpenStax Chemistry 2e: Measurement uncertainty, accuracy, and precision",
+        "url": "https://openstax.org/books/chemistry-2e/pages/1-5-measurement-uncertainty-accuracy-and-precision"
+      },
+      {
+        "title": "OpenStax Chemistry 2e: Molarity",
+        "url": "https://openstax.org/books/chemistry-2e/pages/3-3-molarity"
+      },
+      {
+        "title": "OpenStax Chemistry 2e: Writing and balancing chemical equations",
+        "url": "https://openstax.org/books/chemistry-2e/pages/4-1-writing-and-balancing-chemical-equations"
+      }
+    ]
+  },
+  {
+    "slug": "criminal-justice",
+    "title": "Introduction to Criminal Justice",
+    "category": "Criminal justice studies",
+    "minutes": 240,
+    "prerequisites": "Reading short academic texts and interpreting counts and percentages; no prior legal study required.",
+    "outline": "1 Criminal justice and criminology: institutions versus explanatory research, public safety and fair treatment; 2 U.S. federal/state/local structures and different roles: focus on federal examples, procedures vary by jurisdiction; 3 Fair process and ethical decision-making: presumption of innocence, government burden at criminal trial, limits of conclusions, general education not advice for any real case; 4 Broad case pathway: investigation, charging decisions, initial proceedings, negotiated resolutions or trial, sentencing after conviction and review, not every case traverses all stages; 5 Evidence and professional roles: judges juries prosecutors defense and forensic experts, fact-finding versus scientific interpretation, no claim evidence alone decides guilt; 6 Crime data and measurement: reported incidents arrests convictions distinct measures, rate denominators with fully supplied fictional numbers, unreported events and selection bias; 7 Corrections rehabilitation and policy evaluation: distinguish goals, compare outcomes with baseline differences and ethical safeguards, avoid invented efficacy studies; 8 Academic capstone: analyze a fully supplied fictional policy/case packet, map decision roles, compare rates correctly, critique an unsupported causal claim and write an evidence-limited policy memo with four-point rubric. No evasion or tactical instructions, no case-specific legal recommendations, no unsupported current sentencing/statute claims. Be explicit about general U.S. educational scope and jurisdiction differences.",
+    "sources": [
+      {
+        "title": "Open Oregon: Introduction to the American Criminal Justice System — An Equity Lens",
+        "url": "https://openoregon.pressbooks.pub/crimjustsysintro1e/"
+      },
+      {
+        "title": "United States Courts: Criminal cases",
+        "url": "https://www.uscourts.gov/about-federal-courts/types-cases/criminal-cases"
+      }
+    ]
+  }
+]

@@ -1,0 +1,262 @@
+{
+  "id": "college-biology",
+  "mentorPrompt": "I am studying Introduction to Biology. Please connect me with a mentor to review my academic project, explain difficult concepts and discuss further study. I will bring my draft, the suggested readings, and two questions.",
+  "sources": [
+    {
+      "title": "OpenStax: Biology 2e",
+      "url": "https://openstax.org/books/biology-2e/pages/1-introduction"
+    },
+    {
+      "title": "OpenStax Biology 2e: Passive transport",
+      "url": "https://openstax.org/books/biology-2e/pages/5-2-passive-transport"
+    },
+    {
+      "title": "OpenStax Biology 2e: Characteristics and traits",
+      "url": "https://openstax.org/books/biology-2e/pages/12-2-characteristics-and-traits"
+    }
+  ],
+  "title": "Introduction to Biology",
+  "category": "Biological sciences",
+  "level": "Introductory undergraduate",
+  "minutes": 300,
+  "description": "College-style introductory study course for independent learning. Prerequisites: Basic arithmetic, percentages, and secondary-school science vocabulary; no laboratory required. Eight lessons, an academic project, and optional mentor review. No college credit or accredited qualification is awarded.",
+  "skills": [
+    "Distinguish testable hypotheses, comparison controls, and independent replicates.",
+    "Connect water and the structures of biological molecules to their functions.",
+    "Compare prokaryotic and eukaryotic cells and convert units of cellular scale.",
+    "Predict net movement in a paper model of membrane transport.",
+    "Trace energy transfers and matter cycling through photosynthesis and respiration.",
+    "Explain gene expression and calculate probabilities in a simplified Punnett square.",
+    "Explain natural selection across generations and interpret food-web links.",
+    "Calculate group means and use fictional data to support a limited conclusion."
+  ],
+  "lessons": [
+    {
+      "id": "lesson-0d1b97ce-5f0b-4fda-b912-2c84c8bf8af3",
+      "title": "1. Biology as a Science",
+      "body": "Biology studies life at several levels. Molecules form structures within cells, and cells are the basic units of life. In multicellular organisms, cells can form tissues, tissues form organs, and organs work together in organ systems. Organisms of the same species in an area make up a population. Interacting populations make up a community. An ecosystem includes the community and its nonliving surroundings; the biosphere includes all ecosystems. The level you choose shapes what you measure: leaf length describes part of an organism, while the number of plants in an area describes a population.\n\nA hypothesis is a proposed explanation that can be tested. It leads to a prediction about what you should observe if the explanation is correct. A comparison control gives you a reference point. Keeping other conditions similar helps isolate the factor being tested. Independent replicates show how much outcomes vary across separate experimental units; measuring the same unit twice does not create two independent replicates.\n\nWorked example (fictional study and data): Suppose a hypothesis proposes that extra light increases seedling growth because it allows more photosynthesis. The prediction is that seedlings under brighter light will gain more height over seven days. With water and soil held constant, three separate brighter-light pots gained 4, 5, and 6 cm. Three separate standard-light control pots gained 2, 3, and 4 cm. The means were 5 cm and 3 cm. The result supports the growth prediction but does not establish the proposed mechanism: photosynthesis was not measured.\n\nPractice: For this fictional study, name the changed factor, measured outcome, and comparison control. Optional mentor discussion: Why does the 4 cm result in both groups not erase the difference between the means?",
+      "question": "What counts as independent replication in the fictional seedling study?",
+      "options": [
+        "Measuring one seedling three times at the end",
+        "Using three separate pots with one seedling per pot in each light group",
+        "Recording one seedling's starting height and ending height",
+        "Having three people read the same ruler measurement"
+      ],
+      "answer": 1,
+      "explanation": "Each separate pot is an experimental unit. Repeated readings of one pot can improve measurement precision but do not provide independent biological replicates."
+    },
+    {
+      "id": "lesson-3a2c5054-a35e-434f-acf4-a7fe400e7c43",
+      "title": "2. Chemistry of Life",
+      "body": "Water is polar: its oxygen end carries a partial negative charge, and its hydrogen ends carry partial positive charges. These partial charges allow hydrogen bonds to form between water molecules and help water interact with ions and other polar substances. This is why many substances can dissolve in water and move through cells. Nonpolar substances, such as many oils, do not mix readily with water. Carbon has a different kind of versatility: it can form four covalent bonds, allowing it to build chains, branches, and rings.\n\nFour major groups of biological molecules illustrate how structure supports function. Carbohydrates include sugars and long chains of sugars. Starch stores sugar units that can be released, while cellulose forms strong fibers in plant cell walls. Both are built from glucose, but their different linkages give them different shapes and properties. Many lipids have nonpolar regions. Phospholipids also have water-interacting heads, allowing them to form membrane bilayers. Proteins are amino acid chains whose folds can create binding sites, such as an enzyme pocket that fits a particular molecule. Nucleic acids are nucleotide chains; their base sequences carry biological information.\n\nWorked example (fictional molecule cards): Card A describes a chain of amino acids folded into a shape with a binding pocket. Card B describes a chain of nucleotides with an ordered base sequence. The classification is A = protein and B = nucleic acid. The inputs are the building blocks and structural clues; the outputs are the likely molecule groups.\n\nPractice: Add a fictional card with a water-interacting head and two nonpolar tails. Classify it and predict which parts face water in a bilayer. Optional mentor discussion: Why is a list of building blocks not always enough to predict a molecule's function?",
+      "question": "How can starch and cellulose have different functions if both are made from glucose?",
+      "options": [
+        "Their glucose units contain different elements.",
+        "Cellulose contains amino acids between its glucose units.",
+        "Starch is a lipid when it is packed for storage.",
+        "Their glucose units are linked differently, changing the shapes and properties of the chains."
+      ],
+      "answer": 3,
+      "explanation": "Different linkages between glucose units give starch and cellulose distinct structures suited to storage and structural support, respectively."
+    },
+    {
+      "id": "lesson-dabb2b54-0b0c-4909-bc29-28c2ea5ce23e",
+      "title": "3. Cells: Organization and Scale",
+      "body": "The basic cellular plan includes a plasma membrane, cytoplasm, genetic material, and ribosomes. Some specialized cells lose components as they mature. Prokaryotic cells, such as bacteria and archaea, lack a membrane-bound nucleus; their main DNA is located in a region called the nucleoid. They still have internal organization and carry out complex chemical reactions. Eukaryotic cells, including those of plants, animals, and fungi, typically keep most of their DNA in a membrane-bound nucleus and contain other membrane-bound compartments.\n\nThese compartments help organize cell functions. Mitochondria are major sites of ATP production during aerobic respiration in many eukaryotic cells. Chloroplasts carry out photosynthesis in photosynthetic plant cells and algae. The endoplasmic reticulum and Golgi apparatus help make, modify, and route many proteins and lipids. Ribosomes build proteins in both prokaryotic and eukaryotic cells; they are not surrounded by a membrane. Photosynthetic plant cells can contain both chloroplasts and mitochondria because capturing light energy and extracting usable energy from sugars are different jobs.\n\nWorked example (fictional diagram and measurements): A diagram lists cell A as 0.004 millimeters wide and cell B as 20 micrometers wide. One millimeter equals 1,000 micrometers, so A is 0.004 × 1,000 = 4 micrometers wide. The output is a width ratio: B is 20 ÷ 4 = 5 times as wide as A. Size alone does not identify either cell. A clearly shown membrane-bound nucleus would be stronger evidence of eukaryotic organization.\n\nPractice: Convert the width of fictional cell B to millimeters and name one feature the two cells share regardless of type. Optional mentor discussion: How might keeping different chemical reactions in separate compartments help a cell?",
+      "question": "Which feature of a cell is the strongest evidence that it is eukaryotic?",
+      "options": [
+        "A membrane-bound nucleus",
+        "Ribosomes in its cytoplasm",
+        "DNA carrying genetic information",
+        "A membrane surrounding the cell"
+      ],
+      "answer": 0,
+      "explanation": "A membrane-bound nucleus is characteristic of eukaryotic organization. Prokaryotic cells also have DNA, ribosomes, and a plasma membrane."
+    },
+    {
+      "id": "lesson-afafd2b3-ae93-46c7-8330-7ca7b9a54bd8",
+      "title": "4. Membranes and Transport",
+      "body": "A cell membrane separates the cell interior from its surroundings without sealing it off completely. The phospholipid bilayer allows some small nonpolar molecules to cross more readily than many charged or polar substances. Membrane proteins can provide selective pathways. In simple diffusion, a substance that can cross moves randomly in both directions, but its net movement is from higher to lower concentration. Facilitated diffusion uses a protein pathway and is still passive: the cell does not spend energy to drive the movement.\n\nOsmosis is the net movement of water across a selectively permeable membrane. In a simple model with equal starting pressure and a solute that cannot cross, water initially moves toward the side with more dissolved solute. Active transport is different: a transporter uses energy, directly or indirectly, to move a substance against its gradient. A pump that uses ATP to accumulate a substance on the side where it is already more concentrated is an example.\n\nWorked example (fictional paper-only cell model): Draw two boxes separated by a line that allows water, but not sugar, to cross. Write “2 units of sugar per 100 units of solution” outside and “6 units per 100” inside. With equal starting pressures, draw a net water arrow into the cell. Sugar stays on its original side. Individual water molecules can cross both ways; the arrow shows the net result, not every crossing.\n\nPractice: In the same fictional model, switch the two sugar concentrations and redraw the initial water arrow. Then predict the result if the two concentrations and starting pressures are equal. Optional mentor discussion: Why is the word “net” important even when the arrow points in one direction?",
+      "question": "If the fictional model has more non-crossing sugar outside than inside and equal starting pressures, what happens first?",
+      "options": [
+        "Sugar moves inward and there is no net water movement.",
+        "Water moves into the cell on balance.",
+        "Water moves out of the cell on balance.",
+        "Water can cross only after an ATP-powered pump starts."
+      ],
+      "answer": 2,
+      "explanation": "Water moves on balance toward the higher concentration of non-crossing sugar, which is outside in this version of the model."
+    },
+    {
+      "id": "lesson-7667d1de-588d-4aad-8de4-912efc437f40",
+      "title": "5. Energy and Enzymes",
+      "body": "Cells transfer energy from one process to another. ATP helps make that transfer possible: when ATP is broken down to ADP and phosphate, the overall reaction can be coupled to work such as moving a substance across a membrane. Enzymes speed up reactions by lowering the energy barrier to reaching the transition state. They do not supply the energy released by a reaction or change where the reaction settles at equilibrium. The shape and chemistry of an enzyme's active site help determine which molecules it acts on.\n\nIn photosynthesis, plants capture light energy and use it to make sugars from carbon dioxide and water, releasing oxygen. In aerobic cellular respiration, cells break down fuel molecules such as sugars, consume oxygen, and release carbon dioxide and water. Some of the transferred energy supports ATP production, and some is released as heat. Plants perform cellular respiration as well as photosynthesis. The processes are linked because products of one can be inputs to the other. Atoms can cycle through organisms and the environment; energy is conserved as it changes form, but it does not cycle like atoms. Much of it eventually spreads into the surroundings as heat.\n\nWorked example (fictional energy ledger): A bookkeeping model follows 100 energy units transferred from a cell's fuel. If 35 units are temporarily captured through ATP production and the remaining 65 are transferred as heat, the accounted output is 35 + 65 = 100 units. Those numbers illustrate conservation, not a measured efficiency.\n\nPractice: In the fictional ledger, replace 35 with 40 and calculate the heat transfer. Then name a molecule released in respiration that can supply carbon for photosynthesis. Optional mentor discussion: Why does energy conservation not mean that cells can reuse all the energy they release as heat?",
+      "question": "Which statement correctly distinguishes matter cycling from energy transfer?",
+      "options": [
+        "Heat from respiration is the main energy input for photosynthesis.",
+        "Carbon atoms can cycle between sugars and carbon dioxide; energy changes form and disperses as heat.",
+        "Respiration destroys the carbon atoms in sugar and replaces them with ATP.",
+        "Plants recycle all the energy from respiration, so photosynthesis needs no outside energy."
+      ],
+      "answer": 1,
+      "explanation": "Carbon atoms are rearranged and can be used again. Energy is conserved during transfers, but heat disperses rather than cycling back as the light that powers photosynthesis."
+    },
+    {
+      "id": "lesson-521fffdc-4870-4cd6-a040-0e1cabeeb46d",
+      "title": "6. Heredity and Gene Expression",
+      "body": "DNA stores information in its base sequence. When a protein-coding gene is expressed, a cell makes an RNA copy in a process called transcription. In translation, a ribosome reads the messenger RNA sequence and joins amino acids in the corresponding order. The resulting protein can affect a trait by changing how a cell works. Not all genes encode proteins; some produce functional RNAs. A genotype is the set of alleles an organism carries at the gene or genes under discussion. A phenotype is an observable or measurable trait. Phenotypes can reflect the effects of genes, the environment, or both.\n\nWorked example (fictional and deliberately simplified): One gene determines flower color in this model. A plant with at least one P allele has purple flowers, and only pp plants have white flowers. Cross two Pp parents, each passing on P or p with equal probability. Put P and p across the top of a two-by-two Punnett square for one parent and down the side for the other. The four equally likely boxes are PP and Pp in the top row, then Pp and pp in the bottom row. The output is a 25% chance of white and a 75% chance of purple for each offspring. This does not guarantee exactly three purple plants out of four. Dominant also does not mean common.\n\nPractice: Use the same fictional model to cross Pp with pp. List the four box entries and calculate the probability of purple flowers. Optional mentor discussion: Why can you predict the genotype of a white plant in this model but not necessarily that of a purple plant?",
+      "question": "In the fictional model, what is the chance that a single offspring from Pp × pp has purple flowers?",
+      "options": [
+        "0%",
+        "25%",
+        "75%",
+        "50%"
+      ],
+      "answer": 3,
+      "explanation": "The pp parent always passes on p. The Pp parent passes on P half the time, giving a Pp offspring that has purple flowers."
+    },
+    {
+      "id": "lesson-423a3e5d-55aa-4578-8367-837cad6853d7",
+      "title": "7. Evolution and Ecology",
+      "body": "Evolution is change in inherited characteristics of a population across generations. Natural selection can contribute to that change when individuals differ in a heritable trait and those differences affect how many offspring they leave. Traits that help in one setting may offer no advantage in another. An individual can change during its lifetime, but it does not evolve a heritable trait because it needs one. Selection acts on differences among individuals; the resulting change is measured in the population across generations.\n\nWorked example (fictional population and data): In a starting generation of 100 beetles, 20 have dark shells. In the next generation, 35 of 100 have dark shells. The fraction increases from 20% to 35%, a rise of 15 percentage points. This pattern would be consistent with natural selection if shell color were inherited and dark beetles consistently left more offspring under local conditions. The counts alone cannot establish the cause: chance or movement of beetles between populations could also change the fraction.\n\nA food web describes feeding links among populations in a community. An arrow points from a resource to its consumer, showing the direction of matter and energy transfer. In a fictional food web, leaves → beetles → birds shows that beetles eat leaves and birds eat beetles. A change in beetle numbers could affect both bird food supply and leaf consumption, but other feeding links matter too.\n\nPractice: Add fictional caterpillars that also eat leaves and are eaten by birds. Draw the two additional arrows and explain why fewer beetles would not necessarily leave birds without food. Optional mentor discussion: What evidence beyond the beetle counts would help distinguish selection from chance?",
+      "question": "Which new finding would most directly support natural selection as the cause of the fictional change in beetle color?",
+      "options": [
+        "Shell color is inherited, and dark beetles consistently leave more offspring under local conditions.",
+        "Some individual beetles darken temporarily as the temperature changes.",
+        "Dark and light beetles leave equal numbers of offspring across several generations.",
+        "Some dark beetles migrate into the area each year."
+      ],
+      "answer": 0,
+      "explanation": "Natural selection requires heritable variation linked to reproductive success. Migration can alter the population's color distribution without selection."
+    },
+    {
+      "id": "lesson-34f9c48c-6789-40b1-ba01-c3d007f5e493",
+      "title": "8. Academic Capstone: Interpreting Plant-Growth Data",
+      "body": "In this fictional study, one seedling of the same species was grown in each of eight pots. Pots were randomly assigned to standard light (comparison control) or reduced light. Light duration, soil, water, and temperature were held constant. Height was measured at the start and on day 14. The dataset below contains all eight seedlings; each pair gives (start, day 14) height in centimeters.\n\nFictional dataset: Standard S1 (4, 10), S2 (5, 11), S3 (4, 9), S4 (5, 12). Reduced R1 (5, 8), R2 (4, 8), R3 (5, 7), R4 (4, 9).\n\nWorked example: S1 gained 10 − 4 = 6 cm. Standard-light gains were 6, 6, 5, and 7 cm, so their mean was 24 ÷ 4 = 6 cm. Growth rather than final height accounts for the different starting heights. Lower light could limit photosynthesis, reducing the sugars available for respiration and for making new tissue. That is a possible cell-to-organism explanation, not a measured mechanism. Height reflects elongation and is not a direct measure of biomass or photosynthesis.\n\nPractice: Compute the reduced-light gains and their mean. Compare mean gains, identify the comparison group and two held-constant conditions, and state a limit of the evidence. Propose a follow-up on paper only. For example, propose a way to compare whether height and biomass would tell the same story; do not carry it out.\n\nFour-point rubric, one point each: (1) reduced-light mean of 3.5 cm and difference of 2.5 cm; (2) correct comparison group and two held conditions; (3) plausible cell-level explanation and evidence limit; (4) testable, unperformed follow-up with a comparison and a measurable outcome. Optional mentor discussion: Why does overlap in individual gains matter even when group means differ?",
+      "question": "Which conclusion is supported by the fictional plant-growth dataset?",
+      "options": [
+        "Every standard-light seedling gained more height than every reduced-light seedling.",
+        "The difference in height gain proves that reduced light lowered photosynthesis.",
+        "Standard-light seedlings gained 2.5 cm more on average; photosynthesis was not measured.",
+        "The groups had identical mean height gains because some seedlings gained the same amount."
+      ],
+      "answer": 2,
+      "explanation": "The mean gains were 6 cm and 3.5 cm. One seedling in each group gained 5 cm, and the study did not directly measure photosynthesis."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "In a fictional study, cooler pots gain 2, 4, and 6 cm. Standard-temperature pots gain 1, 3, and 5 cm. What is the cooler-group mean and which group is the control?",
+      "options": [
+        "4 cm; standard-temperature group",
+        "3 cm; standard-temperature group",
+        "4 cm; cooler group",
+        "3 cm; cooler group"
+      ],
+      "answer": 0,
+      "explanation": "The cooler-group mean is (2 + 4 + 6) ÷ 3 = 4 cm. Standard temperature provides the comparison for the changed condition."
+    },
+    {
+      "question": "In a fictional diagram, a divider passes water but not sugar. Concentrations are 1% sugar on the left and 4% on the right, with equal starting pressures. What is the initial net water movement?",
+      "options": [
+        "From right to left",
+        "There is no net movement.",
+        "From left to right",
+        "The direction cannot be predicted unless sugar can cross."
+      ],
+      "answer": 2,
+      "explanation": "With equal starting pressures and sugar unable to cross, water moves on balance toward the higher sugar concentration on the right."
+    },
+    {
+      "question": "In a fictional single-gene model, G gives a green stem and only gg gives a yellow stem. Two Gg parents pass either allele with equal probability. What is the chance of a yellow-stemmed offspring?",
+      "options": [
+        "0%",
+        "25%",
+        "50%",
+        "75%"
+      ],
+      "answer": 1,
+      "explanation": "The offspring must receive g from both parents. That is one of four equally likely allele combinations."
+    },
+    {
+      "question": "Which statement about photosynthetic plant cells is accurate?",
+      "options": [
+        "They can contain both chloroplasts and mitochondria.",
+        "They never perform cellular respiration.",
+        "They create energy from nothing.",
+        "They have no need for a plasma membrane."
+      ],
+      "answer": 0,
+      "explanation": "Photosynthetic cells capture light energy in chloroplasts and can also use mitochondrial respiration. These are different cellular functions."
+    },
+    {
+      "question": "Which condition is required for natural selection to change an inherited trait across generations?",
+      "options": [
+        "Every individual develops the trait because it needs it.",
+        "The trait is inherited and relates to reproductive success.",
+        "All individuals must have identical traits.",
+        "The population must stop reproducing."
+      ],
+      "answer": 1,
+      "explanation": "Natural selection can change trait frequencies when heritable variation affects how many offspring individuals leave."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "In a fictional growth study, shaded seedlings gain 2, 3, 3, and 4 cm. Standard-light seedlings gain 4, 4, 6, and 6 cm. What is the shaded-group mean and which group is the control?",
+      "options": [
+        "5 cm; shaded group",
+        "3 cm; shaded group",
+        "5 cm; standard-light group",
+        "3 cm; standard-light group"
+      ],
+      "answer": 3,
+      "explanation": "The shaded group gains 12 cm in total across four seedlings, for a mean of 3 cm. The standard-light group is the comparison control."
+    },
+    {
+      "question": "In a fictional cell diagram, sugar is 8% inside and 3% outside. The membrane passes water but not sugar, and starting pressures are equal. What does the initial net water arrow show?",
+      "options": [
+        "Water moving out of the cell",
+        "Water moving into the cell",
+        "No net water movement",
+        "Water moving inward only when an ATP-powered pump runs"
+      ],
+      "answer": 1,
+      "explanation": "The inside has the higher concentration of non-crossing sugar, so water initially moves into the cell on balance without an ATP-powered pump."
+    },
+    {
+      "question": "In a fictional single-gene model, B gives smooth seeds and only bb gives wrinkled seeds. In a Bb × bb cross, each parent passes one allele at random. What is the chance of a wrinkled seed?",
+      "options": [
+        "25%",
+        "75%",
+        "50%",
+        "100%"
+      ],
+      "answer": 2,
+      "explanation": "The bb parent always passes b. The Bb parent passes b half the time, so each offspring has a 50% chance of inheriting bb. This does not guarantee an exact split in a batch of seeds."
+    },
+    {
+      "question": "A fictional plant cell captures light and also uses sugars to support ATP production. Which interpretation fits?",
+      "options": [
+        "The cell violates energy conservation.",
+        "Photosynthesis makes respiration unnecessary.",
+        "Photosynthesis and respiration can occur in the same plant.",
+        "The cell must be a bacterium because it uses sugar."
+      ],
+      "answer": 2,
+      "explanation": "Plants can capture light energy and also use respiration to support cellular work. Matter is transformed and energy is transferred rather than created."
+    },
+    {
+      "question": "A heritable trait becomes more common after its carriers consistently leave more offspring. Which explanation fits?",
+      "options": [
+        "Individuals acquired the trait solely because they wanted it.",
+        "Every offspring must have exactly the same trait.",
+        "A rise in a trait proves that migration never occurred.",
+        "Natural selection is a supported explanation for the population change."
+      ],
+      "answer": 3,
+      "explanation": "The scenario supplies heritable variation and differential reproduction. These support selection without implying that all other processes are impossible."
+    }
+  ],
+  "published": true
+}

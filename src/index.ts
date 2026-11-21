@@ -1,4 +1,7 @@
+import { paymentSettings, savePaymentSettings, createPayment, finishPayment, ownedOrders } from './payments';
+import { matchConnections } from './matching';
 import * as seed from './content';
+import {preparedReview,generateLearningReview} from './learning-review';
 import { generateCourse } from './course-generation';
 import { requestAgentPlan, prepareAgentAction, agentActionIsCurrent, publicProposal } from './program-agent';
 import { sendEmail, sendSms } from './communications';
@@ -277,6 +280,8 @@ async function getCourse(env: Env, courseId: unknown, member:UserRow) {
   const recordId=text(courseId,'Course',100,true);
   const snapshot=await env.DB.prepare('SELECT s.data FROM enrollment_courses s JOIN enrollments e ON e.id=s.enrollment_id WHERE e.user_id=? AND e.course_id=?').bind(member.id,recordId).first<{data:string}>();
   if(snapshot)return parse(snapshot.data);
+  const privateCourse=await env.DB.prepare('SELECT data FROM personalized_courses WHERE id=? AND user_id=?').bind(recordId,member.id).first<{data:string}>();
+  if(privateCourse){if((await memberAccess(env,member)).courses==='none')fail(403,'Your plan does not include starting new courses.');return parse(privateCourse.data);}
   const course=await content(env,'course',recordId);
   if(!course||!course.published)fail(404,'This learning path is not available.');
   if(!courseIncluded(await memberAccess(env,member),recordId))fail(403,'This course is not included in your membership plan. Contact the program team.');
@@ -288,9 +293,9 @@ function score(answers: unknown, questions: Data[]): number {
   return Math.round(100 * (answers as number[]).filter((answer,i)=>answer===questions[i].answer).length / questions.length);
 }
 function profileUpdates(data: Data, admin = false) {
-  allowed(data,['name','stage','goal','story','resume','grades','cohort','confidence','email','phone','emailOptIn','smsOptIn',...(admin?['active','membershipTier']:[])]);
+  allowed(data,['name','stage','goal','interests','availability','story','resume','grades','cohort','confidence','email','phone','emailOptIn','smsOptIn',...(admin?['active','membershipTier']:[])]);
   const out: Data = {};
-  for(const key of ['name','goal','story','resume','grades','cohort']) if(key in data) out[key]=text(data[key],key,key==='resume'?10000:key==='story'?5000:key==='goal'?1000:key==='grades'?2000:150,key==='name');
+  for(const key of ['name','goal','interests','availability','story','resume','grades','cohort']) if(key in data) out[key]=text(data[key],key,key==='resume'?10000:key==='story'?5000:['goal','interests','availability'].includes(key)?1000:key==='grades'?2000:150,key==='name');
   if('stage' in data) out.stage=stage(data.stage);
   if('confidence' in data) out.confidence=number(data.confidence,'Confidence',1,5);
   if(admin && 'active' in data) out.active=boolean(data.active,'Active');
@@ -302,6 +307,7 @@ function profileUpdates(data: Data, admin = false) {
 }
 async function saveUser(env: Env, row: UserRow, changes: Data, actorId=row.id) {
   const original=publicUser(row),data = {...original,...changes};
+  if('membershipTier' in changes&&changes.membershipTier!==original.membershipTier){delete data.membershipExpiresAt;delete data.membershipPurchaseId;delete data.membershipPaymentMode;}
   for(const [contact,optIn] of [['email','emailOptIn'],['phone','smsOptIn']]) {
     if(contact in changes&&changes[contact]!==original[contact]&&!(optIn in changes)) data[optIn]=false;
     if(optIn in changes||(contact in changes&&changes[contact]!==original[contact])) {
@@ -327,9 +333,10 @@ function validateContent(kind: string, data: Data): Data {
     const lessons = (data.lessons as Data[]).map(l=>({id:text(l.id,'Lesson ID',100,true),title:text(l.title,'Lesson title',200,true),body:text(l.body,'Lesson content',15000,true),...validateQuestion(l)}));
     if(new Set(lessons.map(l=>l.id)).size!==lessons.length) fail(400,'Lesson IDs must be unique.');
     for(const name of ['preQuiz','postQuiz']) if(!Array.isArray(data[name])||!data[name].length||data[name].length>15) fail(400,`${name} must have 1–15 questions.`);
-    return {...common,title:text(data.title,'Title',200,true),category:text(data.category,'Category',100,true),level:text(data.level,'Level',100,true),minutes:number(data.minutes,'Minutes',1,600),description:text(data.description,'Description',3000,true),skills:list(data.skills,'Skills'),lessons,preQuiz:data.preQuiz.map(validateQuestion),postQuiz:data.postQuiz.map(validateQuestion),published:boolean(data.published,'Published',false)};
+    if(data.sources!=null&&(!Array.isArray(data.sources)||data.sources.length>10))fail(400,'Use at most 10 reading sources.');
+    return {...common,mentorPrompt:text(data.mentorPrompt,'Mentor check-in',2000),sources:(data.sources||[]).map((source:Data)=>({title:text(source.title,'Source title',200,true),url:url(source.url,'Reading URL',true)})),title:text(data.title,'Title',200,true),category:text(data.category,'Category',100,true),level:text(data.level,'Level',100,true),minutes:number(data.minutes,'Minutes',1,600),description:text(data.description,'Description',3000,true),skills:list(data.skills,'Skills'),lessons,preQuiz:data.preQuiz.map(validateQuestion),postQuiz:data.postQuiz.map(validateQuestion),published:boolean(data.published,'Published',false)};
   }
-  if(kind==='mentor') return {...common,name:text(data.name,'Name',150,true),role:text(data.role,'Role',200,true),company:text(data.company,'Company',200,true),story:text(data.story,'Story',5000,true),expertise:list(data.expertise,'Expertise'),experiences:list(data.experiences,'Experiences'),stage:stage(data.stage),availability:text(data.availability,'Availability',500,true),capacity:number(data.capacity,'Capacity',0,100),verified:boolean(data.verified,'Verified',false),active:boolean(data.active,'Active',true)};
+  if(kind==='mentor') return {...common,name:text(data.name,'Name',150,true),role:text(data.role,'Role',200,true),company:text(data.company,'Company',200,true),story:text(data.story,'Story',5000,true),expertise:list(data.expertise,'Expertise'),experiences:list(data.experiences,'Experiences'),stage:data.stage==='Not specified'?'Not specified':stage(data.stage),availability:text(data.availability,'Availability',500,true),capacity:number(data.capacity,'Capacity',0,100),verified:boolean(data.verified,'Verified',false),active:boolean(data.active,'Active',true)};
   if(kind==='resource') return {...common,title:text(data.title,'Title',200,true),type:text(data.type,'Type',100,true),description:text(data.description,'Description',3000,true),url:url(data.url,'Resource URL',true),stage:text(data.stage,'Stage',100,true),active:boolean(data.active,'Active',true)};
   const date = text(data.date,'Date',100,true); if(!Number.isFinite(Date.parse(date))) fail(400,'Provide a valid event date.');
   return {...common,title:text(data.title,'Title',200,true),description:text(data.description,'Description',3000,true),date,format:text(data.format,'Format',100,true),url:url(data.url,'Event URL'),active:boolean(data.active,'Active',true)};
@@ -418,7 +425,15 @@ async function route(request: Request, env: Env): Promise<Response> {
   if (!['GET','POST','PUT'].includes(method)) fail(405,'This HTTP method is not supported.');
   if (!['GET','HEAD','OPTIONS'].includes(method)) sameOrigin(request);
   await ensureSeed(env);
-  const user = await currentUser(request,env);
+  let user = await currentUser(request,env);
+  if(user?.role==='learner'){
+    const profile=publicUser(user);
+    if(profile.membershipExpiresAt&&Date.parse(profile.membershipExpiresAt)<=Date.now()){
+      const defaultTier=await defaultMembershipPlan(env);
+      await env.DB.prepare("UPDATE users SET data=json_remove(json_set(data,'$.membershipTier',?),'$.membershipPurchaseId','$.membershipExpiresAt','$.membershipPaymentMode') WHERE id=? AND data=?").bind(defaultTier,user.id,user.data).run();
+      user=await env.DB.prepare('SELECT * FROM users WHERE id=?').bind(user.id).first<UserRow>();
+    }
+  }
   if(path==='/api/state' && method==='GET') {
     const aiMetadata=await getAISettingsMetadata(env);
     const initial = {user:user?publicUser(user):null,demo:isDemo(env),sampleData:seedDemoData(env),aiAvailable:aiMetadata.keyConfigured};
@@ -434,15 +449,17 @@ async function route(request: Request, env: Env): Promise<Response> {
     }
     const admin=user.role==='admin';
     const [courses,mentors,resources,events,settings,enrolled,allRequests] = await Promise.all([content(env,'course'),content(env,'mentor'),content(env,'resource'),content(env,'event'),env.DB.prepare('SELECT data FROM settings WHERE id=1').first<{data:string}>(),enrollments(env,admin?undefined:user.id),requests(env,admin?undefined:user.id)]);
-    const result:Data={...initial,courses:admin?courses:courses.filter((c:Data)=>c.published),mentors:admin?mentors:mentors.filter((m:Data)=>m.active),resources:admin?resources:resources.filter((r:Data)=>r.active),events:admin?events:events.filter((e:Data)=>e.active),settings:settings?parse(settings.data):seed.settings,enrollments:enrolled,requests:allRequests};
+    const result:Data={...initial,payments:await paymentSettings(env),...(admin?{}:{paymentOrders:await ownedOrders(env,user.id)}),courses:admin?courses:courses.filter((c:Data)=>c.published),mentors:admin?mentors:mentors.filter((m:Data)=>m.active),resources:admin?resources:resources.filter((r:Data)=>r.active),events:admin?events:events.filter((e:Data)=>e.active),settings:settings?parse(settings.data):seed.settings,enrollments:enrolled,requests:allRequests};
     if(!admin) result.mentors=mentors.filter((m:Data)=>m.active||allRequests.some((r:Data)=>r.mentorId===m.id));
     result.settings={...result.settings,membershipTiers:membershipPlans(result.settings)};
     if(!admin) {
       result.access=planAccess(result.settings.membershipTiers.find((p:Data)=>p.id===(result.user.membershipTier||'community')));
       const snapshots=await rows(env.DB,'SELECT s.data FROM enrollment_courses s JOIN enrollments e ON e.id=s.enrollment_id WHERE e.user_id=?',user.id);
       const owned=new Map(snapshots.map(s=>{const c=parse(s.data);return [c.id,{...c,published:true,enrolledVersion:true}];}));
+      result.lockedCourses=courses.filter((c:Data)=>c.published&&!courseIncluded(result.access,c.id)&&!owned.has(c.id)).map((c:Data)=>({id:c.id,title:c.title,description:c.description,category:c.category,level:c.level,minutes:c.minutes,skills:c.skills,lessonCount:c.lessons.length,locked:true}));
       result.courses=courses.filter((c:Data)=>c.published&&courseIncluded(result.access,c.id)||owned.has(c.id)).map((c:Data)=>owned.get(c.id)||c);
       for(const [courseId,c] of owned)if(!result.courses.some((row:Data)=>row.id===courseId))result.courses.push(c);
+      if(result.access.courses!=='none'){const personal=await rows(env.DB,'SELECT data FROM personalized_courses WHERE user_id=?',user.id);for(const row of personal){const c=parse(row.data);if(!result.courses.some((r:Data)=>r.id===c.id))result.courses.push(c);}}
     }
     result.needs=(await rows(env.DB,`SELECT * FROM member_needs${admin?'':' WHERE user_id=?'} ORDER BY created_at DESC`,...(admin?[]:[user.id]))).map(needData);
     result.applications=(await rows(env.DB,`SELECT * FROM applications${admin?'':' WHERE user_id=?'} ORDER BY created_at DESC,id DESC`,...(admin?[]:[user.id]))).map(applicationData);
@@ -569,7 +586,7 @@ async function route(request: Request, env: Env): Promise<Response> {
     const existing=await getEnrollment(env,member.id,course.id); if(existing) return json({enrollment:existing,score:existing.baselineScore});
     const result=score(data.answers,course.preQuiz), confidence=number(data.confidence,'Confidence',1,5);
     await env.DB.batch([
-      env.DB.prepare("INSERT OR IGNORE INTO enrollments(id,user_id,course_id,baseline_score,baseline_confidence,started_at) SELECT ?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM content WHERE kind='course' AND id=? AND data=?)").bind(id('enrollment'),member.id,course.id,result,confidence,now(),course.id,stringify(course)),
+      env.DB.prepare("INSERT OR IGNORE INTO enrollments(id,user_id,course_id,baseline_score,baseline_confidence,started_at) SELECT ?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM content WHERE kind='course' AND id=? AND data=?) OR EXISTS(SELECT 1 FROM personalized_courses WHERE id=? AND user_id=? AND data=?)").bind(id('enrollment'),member.id,course.id,result,confidence,now(),course.id,stringify(course),course.id,member.id,stringify(course)),
       env.DB.prepare('INSERT OR IGNORE INTO enrollment_courses(enrollment_id,data) SELECT id,? FROM enrollments WHERE user_id=? AND course_id=?').bind(stringify(course),member.id,course.id),
     ]);
     if(!await getEnrollment(env,member.id,course.id))fail(409,'This course changed while you were starting it. Refresh and take its updated starting assessment.');
@@ -589,8 +606,53 @@ async function route(request: Request, env: Env): Promise<Response> {
     if(enrollment!.postScore!==null) return json({enrollment,score:enrollment!.postScore});
     if(!course.lessons.every((l:Data)=>enrollment!.completedLessons.includes(l.id))) fail(409,'Complete every lesson before the final check.');
     const result=score(data.answers,course.postQuiz), confidence=number(data.confidence,'Confidence',1,5);
-    await env.DB.prepare('UPDATE enrollments SET post_score=?,post_confidence=?,completed_at=? WHERE id=? AND post_score IS NULL').bind(result,confidence,now(),enrollment!.id).run();
+    await env.DB.batch([env.DB.prepare("INSERT OR IGNORE INTO course_reviews(enrollment_id,answers) SELECT id,? FROM enrollments WHERE id=? AND post_score IS NULL").bind(stringify(data.answers),enrollment!.id),env.DB.prepare('UPDATE enrollments SET post_score=?,post_confidence=?,completed_at=? WHERE id=? AND post_score IS NULL').bind(result,confidence,now(),enrollment!.id)]);
     const updated=await getEnrollment(env,member.id,course.id); return json({enrollment:updated,score:updated!.postScore});
+  }
+  if(['/api/course/review','/api/course/practice-check','/api/course/follow-up'].includes(path)&&method==='POST') {
+    const member=requireLearner(user),input=await body(request);allowed(input,path.endsWith('practice-check')?['courseId','answers']:['courseId']);
+    const course=await getCourse(env,input.courseId,member),enrollment=await getEnrollment(env,member.id,course.id);
+    if(!enrollment?.completedAt)fail(409,'Complete this course before requesting a learning review.');
+    if(path.endsWith('practice-check')) {
+      score(input.answers,course.postQuiz);
+      await env.DB.prepare("INSERT OR IGNORE INTO course_reviews(enrollment_id,answers,evidence_source) VALUES(?,?,'practice')").bind(enrollment!.id,stringify(input.answers)).run();
+      return json({ok:true});
+    }
+    const record=await env.DB.prepare('SELECT * FROM course_reviews WHERE enrollment_id=?').bind(enrollment!.id).first<Data>();
+    if(!record)return json({needsPracticeCheck:true,message:'This older completion saved a score, but not individual answers. Take a practice check to get specific feedback. Your original score stays unchanged.'});
+    const answers=JSON.parse(record.answers) as number[],access=await memberAccess(env,member);
+    const personal=await env.DB.prepare('SELECT id FROM personalized_courses WHERE source_enrollment_id=? AND user_id=?').bind(enrollment!.id,member.id).first<{id:string}>();
+    const base=preparedReview(course,answers,record.evidence_source),available=access.aiHelp&&access.courses!=='none'&&base.missedCount>0;
+    if(path.endsWith('review')) {
+      if(record.review)return json({review:parse(record.review),personalCourseId:personal?.id||null,canCreatePersonalCourse:available});
+      if(!access.aiHelp)return json({review:{...base,notice:'Your plan includes course explanations. Ask the program team about AI help.'},canCreatePersonalCourse:false,personalCourseId:personal?.id||null});
+      if(!(await readAIConfig(env)).apiKey)return json({review:{...base,notice:'AI is not configured. These explanations come from the course.'},canCreatePersonalCourse:false,personalCourseId:personal?.id||null});
+      await limit(env,'learning-review:'+member.id,20,3600);
+      const claim=crypto.randomUUID();
+      const claimed=await env.DB.prepare('UPDATE course_reviews SET review_claim=?,review_started_at=? WHERE enrollment_id=? AND review IS NULL AND (review_claim IS NULL OR review_started_at<?)').bind(claim,Date.now(),enrollment!.id,Date.now()-90000).run();
+      if(!claimed.meta.changes)fail(409,'Your feedback is being prepared in another request. Try again in a moment.');
+      try {
+        const review=await generateLearningReview(env,course,answers,record.evidence_source);
+        if(review.mode==='live-ai')await env.DB.prepare('UPDATE course_reviews SET review=? WHERE enrollment_id=? AND review_claim=?').bind(stringify(review),enrollment!.id,claim).run();
+        return json({review,personalCourseId:personal?.id||null,canCreatePersonalCourse:available});
+      } finally {await env.DB.prepare('UPDATE course_reviews SET review_claim=NULL WHERE enrollment_id=? AND review_claim=?').bind(enrollment!.id,claim).run();}
+    }
+    if(personal)return json({courseId:personal.id});
+    if(!available)fail(403,base.missedCount===0?'You answered every question correctly. Choose another course to extend your skills.':'Your membership plan does not include new AI-generated courses.');
+    if(!(await readAIConfig(env)).apiKey)fail(503,'The program administrator needs to configure AI before creating a personalized course.');
+    await limit(env,'personal-course:'+member.id,5,86400);
+    const claim=crypto.randomUUID();
+    const claimed=await env.DB.prepare('UPDATE course_reviews SET course_claim=?,course_started_at=? WHERE enrollment_id=? AND (course_claim IS NULL OR course_started_at<?)').bind(claim,Date.now(),enrollment!.id,Date.now()-120000).run();
+    if(!claimed.meta.changes)fail(409,'Your personalized course is already being created. Try again in a moment.');
+    try {
+      const gaps=base.evidence.filter((q:Data)=>!q.correct).map((q:Data)=>({question:q.question,chosen:q.selected,correct:q.correctAnswer,explanation:q.explanation}));
+      const brief=`Create a private follow-up to ${course.title}. Teach the missed concepts using new examples and practice, not a copy of these assessment questions. Evidence from the learner's ${record.evidence_source==='practice'?'practice check':'final assessment'}: ${stringify(gaps).slice(0,22000)}. Do not infer anything about the learner beyond these answers.`;
+      const generated=validateContent('course',await generateCourse(env,brief,3,'A learner practicing the specific concepts missed in the supplied assessment.'));
+      const result={...generated,id:'personal-'+enrollment!.id,published:true,personalized:true,sourceCourseId:course.id};
+      const inserted=await env.DB.prepare('INSERT OR IGNORE INTO personalized_courses(id,user_id,source_enrollment_id,data) SELECT ?,?,?,? WHERE EXISTS(SELECT 1 FROM course_reviews WHERE enrollment_id=? AND course_claim=?)').bind(result.id,member.id,enrollment!.id,stringify(result),enrollment!.id,claim).run();
+      if(!inserted.meta.changes&&!await env.DB.prepare('SELECT id FROM personalized_courses WHERE source_enrollment_id=?').bind(enrollment!.id).first())fail(409,'The generation request changed. Open your results and try again.');
+      return json({courseId:result.id},201);
+    }finally{await env.DB.prepare('UPDATE course_reviews SET course_claim=NULL WHERE enrollment_id=? AND course_claim=?').bind(enrollment!.id,claim).run();}
   }
   if(path==='/api/feedback' && method==='POST') {
     const member=requireLearner(user), data=await body(request), course=await getCourse(env,data.courseId,member);
@@ -619,15 +681,57 @@ async function route(request: Request, env: Env): Promise<Response> {
     const result=await planNextSteps({...env,OPENAI_API_KEY:ai.apiKey,AI_MODEL:ai.model},{message:text(data.message,'Message',2000,true),role:member.role==='admin'?'admin':'learner',goal:publicUser(member).goal||'',courses:published});
     return json(result);
   }
-  if(path==='/api/requests' && method==='POST') {
-    const member=requireLearner(user), data=await body(request); await requireFeature(env,member,'mentoring'); await limit(env,'request:'+member.id,10,3600);
+  if(path==='/api/account/password'&&method==='POST'){
+    const member=requireUser(user),input=await body(request);allowed(input,['currentPassword','newPassword']);await limit(env,'password:'+member.id,10,900);
+    const current=passwordInput(input.currentPassword,'Current password'),password=passwordInput(input.newPassword,'New password',14);
+    if(!await verifyPassword(current,member.password_hash))fail(400,'Current password is incorrect.');
+    const token=(request.headers.get('Cookie')||'').split(';').map(x=>x.trim()).find(x=>x.startsWith(COOKIE+'='))?.slice(COOKIE.length+1)||'';
+    await env.DB.batch([env.DB.prepare('UPDATE users SET password_hash=? WHERE id=? AND password_hash=?').bind(await hashPassword(password),member.id,member.password_hash),env.DB.prepare('DELETE FROM sessions WHERE user_id=? AND token_hash<>? AND changes()>0').bind(member.id,await digest(token))]);return json({ok:true});
+  }
+  if(path==='/api/payments/order'&&method==='POST'){
+    const member=requireLearner(user),input=await body(request);allowed(input,['planId','revision']);await limit(env,'checkout:'+member.id,15,3600);
+    const {settings}=await programSettings(env),plan=settings.membershipTiers.find((p:Data)=>p.id===text(input.planId,'Plan',100,true));
+    if(!plan||!plan.active)fail(404,'This plan is unavailable.');
+    if(input.revision!==plan.revision)fail(409,'This plan changed. Refresh and review the price and benefits before checkout.');
+    if(publicUser(member).membershipTier===plan.id)fail(409,'You already have this plan.');
+    return json(await createPayment(env,member.id,plan,target.origin));
+  }
+  const paymentId=path.match(/^\/api\/payments\/([a-f0-9-]{36})\/(capture|cancel)$/);
+  if(paymentId&&method==='POST'){
+    const member=requireLearner(user);allowed(await body(request),[]);await limit(env,'payment-check:'+member.id,40,3600);
+    return json(await finishPayment(env,member.id,paymentId[1],paymentId[2]==='cancel'));
+  }
+  if(path==='/api/matches'&&method==='POST') {
+    const actor=requireUser(user),input=await body(request);allowed(input,['learnerId','courseId']);
+    if(actor.role==='mentor')fail(403,'Program staff coordinate new matches. Your assigned learners are in My mentees.');
+    if(actor.role==='learner'&&input.learnerId&&input.learnerId!==actor.id)fail(403,'Only your own matches are available.');
+    const targetId=actor.role==='admin'?text(input.learnerId,'Learner',100,true):actor.id;
+    const targetUser=await env.DB.prepare("SELECT * FROM users WHERE id=? AND role='learner' AND active=1").bind(targetId).first<UserRow>();
+    if(!targetUser)fail(404,'Active learner not found.');
+    if(actor.role==='learner')await requireFeature(env,actor,'mentoring');
+    await limit(env,'matches:'+actor.id,20,3600);
+    const mentors=(await content(env,'mentor')).filter((m:Data)=>m.active&&m.capacity>0);
+    const scheduled=await rows(env.DB,"SELECT mentor_id,COUNT(*) AS total FROM mentor_requests WHERE status='scheduled' GROUP BY mentor_id");
+    const available=mentors.filter((m:Data)=>m.capacity>Number(scheduled.find(r=>r.mentor_id===m.id)?.total||0));
+    const access=await memberAccess(env,targetUser!);
+    const courses=(await content(env,'course')).filter((c:Data)=>c.published&&courseIncluded(access,c.id));
+    const selected=input.courseId?courses.find((c:Data)=>c.id===text(input.courseId,'Course',100,true)):null;
+    if(input.courseId&&!selected)fail(404,'This course is not available for matching.');
+    return json(await matchConnections(env,publicUser(targetUser!),available,courses,selected,actor.role==='admin'||access.aiHelp));
+  }
+  if((path==='/api/requests'||path==='/api/admin/connection-request') && method==='POST') {
+    const adminRequest=path==='/api/admin/connection-request',actor=adminRequest?requireAdmin(user):requireLearner(user),data=await body(request);
+    allowed(data,adminRequest?['userId','mentorId','topic','cadence']:['mentorId','topic','cadence']);
+    const member=adminRequest?await env.DB.prepare("SELECT * FROM users WHERE id=? AND role='learner' AND active=1").bind(text(data.userId,'Learner',100,true)).first<UserRow>():actor;
+    if(!member)fail(404,'Active learner not found.');
+    await requireFeature(env,member!,'mentoring'); await limit(env,'request:'+actor.id,10,3600);
     const mentorId=data.mentorId?text(data.mentorId,'Mentor',100,true):null;
-    if(mentorId) { const mentor=await content(env,'mentor',mentorId); if(!mentor||!mentor.active||mentor.capacity<1) fail(400,'This mentor is not currently accepting requests.'); }
+    if(mentorId) { const mentor=await content(env,'mentor',mentorId); const scheduled=await env.DB.prepare("SELECT COUNT(*) AS total FROM mentor_requests WHERE mentor_id=? AND status='scheduled'").bind(mentorId).first<{total:number}>();if(!mentor||!mentor.active||mentor.capacity<=Number(scheduled?.total||0)) fail(400,'This mentor is not currently accepting requests.'); }
     const topic=text(data.topic,'Mentoring topic',2000,true);
-    const existing=await env.DB.prepare("SELECT * FROM mentor_requests WHERE user_id=? AND mentor_id IS ? AND status IN ('waiting','scheduled')").bind(member.id,mentorId).first<Data>();
+    const existing=await env.DB.prepare("SELECT * FROM mentor_requests WHERE user_id=? AND mentor_id IS ? AND status IN ('waiting','scheduled')").bind(member!.id,mentorId).first<Data>();
     if(existing) fail(409,'You already have an open request for this mentor.');
     const cadence=data.cadence??'one_time'; if(!CADENCES.includes(cadence)) fail(400,'Choose a valid meeting cadence.');
-    const record={id:id('request'),userId:member.id,mentorId,topic,status:'waiting',createdAt:now(),sessionAt:null,meetingUrl:'',notes:'',cadence,lastMetAt:null};
+    const record={id:id('request'),userId:member!.id,mentorId,topic,status:'waiting',createdAt:now(),sessionAt:null,meetingUrl:'',notes:'',cadence,lastMetAt:null};
     try { await env.DB.batch([env.DB.prepare('INSERT INTO mentor_requests(id,user_id,mentor_id,topic,status,created_at) VALUES(?,?,?,?,?,?)').bind(record.id,record.userId,mentorId,topic,record.status,record.createdAt),env.DB.prepare('INSERT INTO mentorship_preferences(request_id,cadence) VALUES(?,?)').bind(record.id,cadence)]); }
     catch(error) { if(String(error).includes('UNIQUE')) fail(409,'You already have an open request for this mentor.'); throw error; }
     return json({request:record},201);
@@ -644,9 +748,9 @@ async function route(request: Request, env: Env): Promise<Response> {
       return json({proposals:saved.map(row=>publicProposal(parse(row.value)))});
     }
     if(path==='/api/admin/agent/propose'&&method==='POST') {
-      const data=await body(request);allowed(data,['message']);const message=text(data.message,'Request',6000,true);
-      await limit(env,'program-agent:'+admin.id,10,3600);
-      const state=await agentState(),plan=await requestAgentPlan(env,message,{...state,choices:{careerStages:STAGES,meetingCadences:CADENCES,currencies:['USD','CAD','EUR','GBP','AUD','INR'],billingPeriods:['free','monthly','yearly','one_time']}}),actions:Data[]=[];
+      const data=await body(request);allowed(data,['message','context']);const message=text(data.message,'Request',5000,true),context=text(data.context,'Conversation context',1600);
+      await limit(env,'program-agent:'+admin.id,40,3600);
+      const state=await agentState(),plan=await requestAgentPlan(env,(context?'Previous exchange for context only:\n'+context+'\nCurrent administrator request:\n':'')+message,{...state,choices:{careerStages:STAGES,meetingCadences:CADENCES,currencies:['USD','CAD','EUR','GBP','AUD','INR'],billingPeriods:['free','monthly','yearly','one_time']}}),actions:Data[]=[];
       for(const command of plan.commands) {
         const action=await prepareAgentAction(env,command,state);
         // Course generation and content edits use the same validator as manual authoring.
@@ -656,9 +760,11 @@ async function route(request: Request, env: Env): Promise<Response> {
         if(actions.some(a=>a.source===action.source&&a.targetId&&a.targetId===action.targetId))fail(400,'The agent proposed changing the same record twice. Ask for one combined change.');
         actions.push(action);
       }
-      const record={id:id('proposal'),actorId:admin.id,reply:plan.reply,status:actions.length?'pending':'answered',createdAt:now(),expiresAt:new Date(Date.now()+30*60000).toISOString(),actions,results:[]};
+      const record={id:id('proposal'),actorId:admin.id,request:message,reply:plan.reply,status:actions.length?'pending':'answered',createdAt:now(),expiresAt:new Date(Date.now()+30*60000).toISOString(),actions,results:[]};
       if(stringify(record).length>300000)fail(400,'This proposal is too large. Request fewer changes.');
       await env.DB.prepare('INSERT INTO meta(key,value) VALUES(?,?)').bind('agent-proposal:'+record.id,stringify(record)).run();
+      const directArchive=/^(?:please\s+)?(?:archive|unpublish)\s+|^(?:can|could|would)\s+you\s+(?:please\s+)?(?:archive|unpublish)\s+/i.test(message.trim())&&!/\b(if|don't|do not|never|except|unless)\b/i.test(message);
+      if(directArchive&&actions.length&&actions.every(a=>a.operation==='course'&&a.targetId&&Object.keys(a.changes).length===1&&a.changes.published===false))return route(new Request(new URL('/api/admin/agent/'+record.id+'/apply',target.origin),{method:'POST',headers:{Cookie:request.headers.get('Cookie')||'',Origin:target.origin,'Content-Type':'application/json'},body:'{}'}),env);
       return json({proposal:publicProposal(record)});
     }
     const agentMatch=path.match(/^\/api\/admin\/agent\/(proposal-[\w-]+)\/(apply|cancel)$/);
@@ -680,11 +786,13 @@ async function route(request: Request, env: Env): Promise<Response> {
       record.status='applying';
       const claim=await env.DB.prepare('UPDATE meta SET value=? WHERE key=? AND value=?').bind(stringify(record),key,row!.value).run();
       if(!claim.meta.changes)fail(409,'This proposal was already claimed. Refresh its history.');
+      const credentials:Data[]=[];
       for(const action of record.actions) {
         try {
           const result=await route(new Request(new URL(action.path,target.origin),{method:action.method,headers:{Cookie:request.headers.get('Cookie')||'',Origin:target.origin,'Content-Type':'application/json'},body:stringify(action.payload)}),env);
           if(!result.ok)throw new Error('The operation was not accepted.');
           const saved=await result.json() as Data;
+          if(saved.credentials)credentials.push(saved.credentials);
           const entity=Object.values(saved).find((value:any)=>value&&typeof value==='object'&&value.id) as Data|undefined;
           record.results.push({title:action.title,status:'succeeded',recordId:entity?.id||action.targetId});
         } catch(error) {
@@ -696,12 +804,23 @@ async function route(request: Request, env: Env): Promise<Response> {
       }
       record.status=record.results.every((r:Data)=>r.status==='succeeded')&&record.results.length===record.actions.length?'applied':record.results.some((r:Data)=>r.status==='succeeded')?'partial':'failed';
       await env.DB.prepare('UPDATE meta SET value=? WHERE key=?').bind(stringify(record),key).run();
-      return json({proposal:publicProposal(record)});
+      return json({proposal:publicProposal(record),...(credentials.length?{credentials}:{})});
+    }
+    if(path==='/api/admin/payment-settings'&&method==='PUT'){
+      await limit(env,'payment-settings:'+admin.id,10,3600);
+      return json({payments:await savePaymentSettings(env,await body(request))});
+    }
+    if(path==='/api/admin/course/revise'&&method==='POST') {
+      const data=await body(request);allowed(data,['course','instruction']);
+      const original=validateContent('course',data.course||{}),instruction=text(data.instruction,'Requested edits',6000,true);
+      await limit(env,'course-generation:'+admin.id,24,3600);
+      const revised=await generateCourse(env,instruction,original.lessons.length,original.level,original);
+      return json({course:{...validateContent('course',{...original,...revised}),revision:data.course.revision},mode:'ai-revision'});
     }
     if(path==='/api/admin/course/generate'&&method==='POST') {
       const data=await body(request);allowed(data,['brief','lessonCount','audience']);
       const brief=text(data.brief,'Course description',6000,true),lessonCount=number(data.lessonCount,'Number of lessons',1,8),audience=text(data.audience,'Audience',200,true);
-      await limit(env,'course-generation:'+admin.id,10,3600);
+      await limit(env,'course-generation:'+admin.id,24,3600);
       const draft=await generateCourse(env,brief,lessonCount,audience);
       try{return json({course:validateContent('course',draft),mode:'ai-draft'});}
       catch(error){if(error instanceof ApiError)fail(502,'The AI draft needs another attempt. Your description is still here. Try again or write the course yourself.');throw error;}
@@ -747,6 +866,23 @@ async function route(request: Request, env: Env): Promise<Response> {
     if(path==='/api/admin/ai-settings'&&method==='PUT') {
       const data=await body(request); allowed(data,['model','apiKey','removeApiKey']);
       return json({aiSettings:await saveAISettings(env,data as {model:string;apiKey?:string;removeApiKey?:boolean})});
+    }
+    if(path==='/api/admin/mentor-onboarding'&&method==='POST'){
+      const input=await body(request);allowed(input,['mentorId','name','username','role','company','story','expertise','experiences','stage','availability','capacity']);
+      await limit(env,'mentor-onboarding:'+admin.id,20,3600);
+      const existing=input.mentorId?await content(env,'mentor',text(input.mentorId,'Mentor',100,true)):null;
+      if(input.mentorId&&!existing)fail(404,'Mentor not found.');
+      if(existing&&!existing.active)fail(409,'Activate this mentor profile before creating a sign-in.');
+      const profile=existing||validateContent('mentor',{role:'Details pending',company:'Not provided',story:'This mentor has not added their biography yet.',expertise:[],experiences:[],stage:'Not specified',availability:'Not provided',capacity:0,...input,verified:false,active:true});
+      if(await env.DB.prepare('SELECT user_id FROM mentor_accounts WHERE mentor_id=?').bind(profile.id).first())fail(409,'This mentor already has a sign-in account.');
+      const username=input.username?text(input.username,'Username',40,true).toLowerCase():'mentor-'+crypto.randomUUID().slice(0,8);
+      if(!/^[a-z0-9._-]{3,40}$/.test(username))fail(400,'Username must use 3–40 lowercase letters, numbers, dots, underscores or dashes.');
+      const password='Ns!'+hex(crypto.getRandomValues(new Uint8Array(16))),account={id:id('mentor-account'),username,name:profile.name,role:'mentor',mentorId:profile.id,active:true,createdAt:now()};
+      const statements=[];
+      if(!existing)statements.push(env.DB.prepare("INSERT INTO content(kind,id,data) VALUES('mentor',?,?)").bind(profile.id,stringify(profile)));
+      statements.push(env.DB.prepare("INSERT INTO users(id,username,password_hash,role,active,data) VALUES(?,?,?,'mentor',1,?)").bind(account.id,username,await hashPassword(password),stringify(account)),env.DB.prepare('INSERT INTO mentor_accounts(user_id,mentor_id) VALUES(?,?)').bind(account.id,profile.id));
+      try{await env.DB.batch(statements);}catch(error){if(String(error).includes('UNIQUE'))fail(409,'That username or mentor login already exists. Choose another username.');throw error;}
+      return json({account,mentor:profile,credentials:{username,password,name:profile.name}},201);
     }
     const mentorAccountId=path.match(/^\/api\/admin\/mentors\/([\w-]+)\/account$/)?.[1];
     if(mentorAccountId&&method==='POST') {

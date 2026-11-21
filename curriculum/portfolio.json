@@ -1,0 +1,140 @@
+{
+  "id": "study-portfolio",
+  "mentorPrompt": "I am studying Build a Skills-Based Resume and Portfolio. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "ASU: Résumés and Cover Letters",
+      "url": "https://career.engineering.asu.edu/resumes-and-cover-letters/"
+    }
+  ],
+  "title": "Build a Skills-Based Resume and Portfolio",
+  "category": "Career development",
+  "level": "Beginner",
+  "minutes": 60,
+  "description": "Use evidence from paid work, volunteering, coursework, or personal projects to show what you can do. You’ll turn raw notes into honest resume bullets, choose examples for a target role, and draft a short portfolio case study. The course is designed for adult beginners, career changers, and returning professionals. You can complete it on your own and request a mentor if you’d like feedback. No mentor is assigned yet.",
+  "skills": [
+    "Collect and verify evidence of your skills",
+    "Write specific accomplishment statements without invented numbers",
+    "Choose and tailor examples to match a role",
+    "Draft a skills-based resume section and a portfolio case study"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-e6a15562-28a3-496c-9a53-f9074fe3be6e",
+      "title": "1. Collect Honest Evidence of Skills",
+      "body": "Start with what you did, not with a list of traits. A skill like “organization” is easier to show when you can name the task, explain your part, and point to something you made or changed. Paid work is only one source. A volunteer handoff, a course project, or a tool you built for yourself can also show a skill. Label the setting so readers know what kind of experience it was.\n\n**Worked example (fictional):** Sam’s raw notes say, “Helped at a community clothing swap. Three people staffed the welcome table. I wrote a one-page guide from the organizer’s instructions. The next shift used it. I don’t know how many visitors it served.” Sam has a draft of the guide and a message from the next shift confirming that they used it.\n\nSam’s evidence entry reads: **Setting:** clothing swap, volunteer. **My part:** wrote a welcome-table guide covering check-in and clothing drop-off. **Evidence:** guide draft and a message confirming use. **Skill:** writing clear instructions. **Limit:** no visitor count and no evidence that the guide shortened wait times. The draft can support a resume claim even if Sam keeps the message private.\n\n**Practice:** Pick two activities from any setting. For each, write an entry using Sam’s five labels. If you have only a memory, describe the actions you remember and mark details to verify. Keep private records out of anything you plan to share.\n\n**Suggested mentor discussion, if you request a mentor:** Which entry best shows a skill I can explain, and which detail should I verify first?",
+      "question": "Which evidence entry best separates your contribution from the team’s work?",
+      "options": [
+        "Team project: we ran a swap. My skill: event leadership.",
+        "Volunteer shift: I wrote the check-in guide. Evidence: my draft and a message confirming use.",
+        "Swap project: I improved visitor flow. Evidence: I remember the table being busy."
+      ],
+      "answer": 1,
+      "explanation": "The entry names what you personally did and identifies evidence for it. The other entries claim leadership or improved visitor flow without showing what supports those claims."
+    },
+    {
+      "id": "lesson-460b16de-9f2d-425b-800b-0dea10027ecb",
+      "title": "2. Turn Activities Into Concrete Accomplishment Statements",
+      "body": "A strong accomplishment statement tells the reader what you did and why it mattered in that setting. Start with an action verb that matches your part. Name the thing you made or changed. Finish with a verified result if you have one, or describe the purpose or who used it. A concrete statement does not need a number. Don’t estimate a percentage, imply that you saved time, or take credit for someone else’s work just to make a bullet sound stronger.\n\n**Worked example (fictional):** Jules’s first draft says, “Helped improve volunteer scheduling.” The raw notes say, “The coordinator made a shift spreadsheet. I added a single tab that listed open shifts by day. The coordinator used it when sending reminder emails. We didn’t track whether more shifts were filled.”\n\n**Revised bullet:** “Added a day-by-day list of open shifts to the volunteer spreadsheet, which the coordinator used to send reminders.” The verb “added” gives Jules credit for the change without suggesting Jules created the spreadsheet. The coordinator’s use is a real outcome. “Increased shift coverage” would claim something the notes do not show. If Jules knew only the intended purpose, a truthful ending would be “to help the coordinator find open shifts when drafting reminders.”\n\n**Practice:** Take one evidence entry from Lesson 1. Underline the action you personally took and circle the item you made or changed. Write one bullet. Check each claim against your notes and replace any unsupported result with a purpose or a concrete detail.\n\n**Suggested mentor discussion, if you request a mentor:** What would you ask me to prove in this bullet, and what could I say more precisely?",
+      "question": "You added room numbers to a workshop schedule for attendees. You did not track late arrivals. Which bullet is supported?",
+      "options": [
+        "Cut late arrivals by adding room numbers to the workshop schedule.",
+        "Rebuilt the workshop schedule to improve attendance.",
+        "Added room numbers to the workshop schedule so attendees could locate their sessions."
+      ],
+      "answer": 2,
+      "explanation": "This bullet describes the specific change and its purpose. It does not claim that fewer people arrived late or that you rebuilt the whole schedule."
+    },
+    {
+      "id": "lesson-90afef97-74bf-41e9-87ad-9fa80ad44b9c",
+      "title": "3. Tailor Your Examples to a Fictional Role",
+      "body": "Tailoring means putting your most relevant evidence first, not rewriting your history to match a job posting. Pick two tasks from the posting. For each, find an example of yourself doing a similar task. The setting can differ: a volunteer sign-up list can show the same recordkeeping skill as a list maintained at work. If you haven’t done an exact task, show a related skill without claiming the missing experience.\n\n**Worked example (fictional):** A community center is hiring a Program Support Assistant to maintain participant lists and send clear session updates. Ren’s evidence includes these notes: “At a volunteer repair café, I updated the sign-up sheet when bookings changed and flagged duplicate entries for the lead. When a session moved rooms, I emailed attendees the new room number and arrival instructions. I also designed the café’s poster.”\n\nFor this role, Ren puts the sign-up sheet first and the email second, under **Program Coordination — Repair café, volunteer**:\n\n- “Updated the repair café sign-up sheet after booking changes and flagged duplicate entries for the lead.”\n- “Emailed attendees the new room number and arrival instructions after a session moved.”\n\nThe poster shows a skill, but it is less relevant to these duties. Ren describes the sheet accurately rather than calling it a participant database.\n\n**Practice:** Use the fictional posting above. Match one of your examples to each duty. Choose which example belongs first and explain why. If you have no close match, identify the gap rather than adding the posting’s wording to an unrelated bullet.\n\n**Suggested mentor discussion, if you request a mentor:** Which example would help you see the fit fastest, and what connection still needs explaining?",
+      "question": "A role prioritizes keeping registration records current. Which verified example should come first?",
+      "options": [
+        "Updated a class sign-up sheet when people changed sessions.",
+        "Designed a flyer that explained how to register.",
+        "Welcomed guests and showed them where to wait."
+      ],
+      "answer": 0,
+      "explanation": "Updating the sign-up sheet directly shows that you maintained registration records. The flyer and guest welcome show related communication skills, but neither shows record maintenance."
+    },
+    {
+      "id": "lesson-546a6111-fab3-4f3d-86d3-0ddabe2b8291",
+      "title": "4. Capstone: Draft a Resume Section and a Project Case Study",
+      "body": "Use one small project to make two pieces: a short resume section for quick scanning and a case study that explains how you worked. Use the fictional role from Lesson 3 or a role you’re exploring. Your resume section should have a skill heading, a setting label, and two bullets. Write a case study of about 100–150 words with four labels: Need, My role, Actions, and Result or evidence. You don’t need a website. Keep both drafts in one document.\n\n**Worked example (fictional):** Lee’s notes say, “At a tool-lending library, borrowers asked how to return tools after hours. Staff set the rules. I drafted a card from those rules, revised it after staff feedback, and staff put it at the checkout desk. We didn’t track return errors.”\n\n**Resume section: Clear Instructions | Tool-lending library, volunteer**\n- Wrote an after-hours return card using staff-approved instructions.\n- Revised the card after staff feedback before it was placed at checkout.\n\n**Case study excerpt:** **Need:** Borrowers asked how to return tools after closing. **My role:** I wrote the card; staff set the rules. **Actions:** I turned the rules into steps and revised them after staff review. **Result:** Staff placed the card at checkout. We did not track changes in return errors.\n\n**Practice and four-point self-review:** Draft both pieces. Give yourself one point for each check you meet:\n1. Both bullets show actions I took and connect to the target role.\n2. The case study contains all four labels and explains my contribution.\n3. I can support each claim, and I distinguish confirmed results from unknowns.\n4. I left out private details and material I don’t have permission to share.\n\nRevise any item that scores zero.\n\n**Suggested mentor discussion, if you request a mentor:** Where do you need more detail to understand my contribution?",
+      "question": "A group made a guide. You wrote its setup section, and the group used the guide at orientation. Which case study entry is best?",
+      "options": [
+        "I led the guide project, and it made orientation faster.",
+        "I wrote the setup section. The group used the finished guide at orientation.",
+        "Our group produced a useful setup section and ran orientation."
+      ],
+      "answer": 1,
+      "explanation": "This entry identifies your specific contribution and reports the confirmed use of the guide. It neither claims leadership nor hides your work behind a vague team statement."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "Which note gives you the strongest starting point for a claim about clear writing?",
+      "options": [
+        "I’m a strong writer because people often ask me questions.",
+        "The team’s instructions looked professional, and I attended the planning meetings.",
+        "I rewrote the supply sign-out instructions, and the lead posted my draft."
+      ],
+      "answer": 2,
+      "explanation": "This note names something you wrote and what happened to it. The other notes do not identify a writing contribution you made."
+    },
+    {
+      "question": "You labeled shared supply drawers so volunteers could find materials. You did not measure search time. Which bullet fits the evidence?",
+      "options": [
+        "Labeled shared supply drawers by material type to help volunteers find what they needed.",
+        "Reduced the time volunteers spent searching for supplies.",
+        "Managed supply ordering and reorganized the entire storage area."
+      ],
+      "answer": 0,
+      "explanation": "The first bullet describes a specific action and its purpose. The second claims a result that wasn’t measured, and the third adds duties you didn’t describe."
+    },
+    {
+      "question": "A role asks you to write clear directions. Which experience should you feature first in your resume and portfolio?",
+      "options": [
+        "Checked attendance for a series of training sessions.",
+        "Wrote a one-page guide that new volunteers used to open the meeting room.",
+        "Booked a meeting room and ordered supplies."
+      ],
+      "answer": 1,
+      "explanation": "The guide directly shows that you can write directions and gives you a concrete example to describe in a case study."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "You want to show that you maintained a shared inventory list. Which record best supports your own contribution?",
+      "options": [
+        "A photo of the tidy storage shelves after the team finished.",
+        "Your saved edits showing which item counts you updated and the notes you added.",
+        "A message thanking everyone for helping with the inventory."
+      ],
+      "answer": 1,
+      "explanation": "The saved edits show the actual work you did. The photo and thank-you message document team activity but don’t identify your changes to the list."
+    },
+    {
+      "question": "You made a closing checklist, and the next shift used it. No one recorded missed tasks. Which resume bullet is accurate?",
+      "options": [
+        "Reduced closing mistakes by introducing a checklist.",
+        "Managed closing shifts and trained staff on every procedure.",
+        "Created a closing checklist that the next shift used."
+      ],
+      "answer": 2,
+      "explanation": "The bullet gives you credit for creating the checklist and reports a verified use without claiming fewer mistakes or extra responsibilities."
+    },
+    {
+      "question": "A role calls for notifying participants about schedule changes. What should lead your resume section and case study?",
+      "options": [
+        "A session update you wrote and sent, with your role explained and recipient details removed.",
+        "A flyer you designed for the original session date, with notes on its layout.",
+        "A calendar you updated for your own use after the session moved."
+      ],
+      "answer": 0,
+      "explanation": "The update shows that you communicated a schedule change to participants. Removing recipient details protects their privacy without hiding your contribution."
+    }
+  ],
+  "published": true
+}

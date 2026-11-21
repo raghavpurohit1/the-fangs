@@ -1,0 +1,257 @@
+{
+  "id": "college-forensic-science",
+  "mentorPrompt": "I am studying Introduction to Forensic Science. Please connect me with a mentor who can discuss the subject, review my academic project and reasoning, and suggest further study. I will bring my draft, the course readings, and two specific questions.",
+  "sources": [
+    {
+      "title": "NIST: Forensic science",
+      "url": "https://www.nist.gov/forensic-science"
+    },
+    {
+      "title": "NIST: Human factors in forensic science",
+      "url": "https://www.nist.gov/forensic-science/human-factors-forensic-science"
+    }
+  ],
+  "title": "Introduction to Forensic Science",
+  "category": "Forensic studies",
+  "level": "Introductory undergraduate-style",
+  "minutes": 240,
+  "description": "College-style introductory study course for independent learning. Prerequisites: Basic secondary-school science, reading tables, and careful note-taking; no laboratory experience required. Includes eight lessons, practice, an academic capstone, and optional mentor review. This course does not award college credit or an accredited qualification.",
+  "skills": [
+    "Turn a forensic claim into a testable question with competing explanations.",
+    "Read a paper custody log and distinguish documented continuity from factual accuracy.",
+    "Explain how transfer and persistence limit interpretations of trace and DNA evidence.",
+    "Interpret controls, calibration, contamination risks, and measurement uncertainty.",
+    "Evaluate pattern comparisons using documented features, validation, and possible error.",
+    "Distinguish conditional probabilities and explain the value of independent review.",
+    "Write a critical report that separates observations, interpretations, and limitations."
+  ],
+  "lessons": [
+    {
+      "id": "lesson-2d9215cb-012d-4a7d-82f5-b8f7ee4b7b53",
+      "title": "1. Scope of Forensic Science: Testable Questions and Competing Explanations",
+      "body": "Forensic science applies scientific methods to questions arising from investigations or disputes. Its first task is often to narrow a broad question into a claim that observations can test. “Who caused the damage?” may be too broad for the available material. “Are the particles on the damaged panel consistent with either of two candidate materials?” defines what will be compared without assuming who was present or what happened.\n\nA hypothesis is a proposed explanation. Competing hypotheses describe different ways an observation could have arisen. State what you would expect under each, and look for observations that would differ between them. Two explanations can both predict the same observation. In that situation, finding the observation may confirm that something occurred without helping much to distinguish the explanations.\n\nWorked example (fictional data). Input: A cabinet has a dent surrounded by white powder. A fallen ceiling tile and a broken chalk block are nearby. Reference specimens show that both materials are white, but only the tile specimen contains visible paper fragments. The powder contains white grains and visible paper fragments. Output: The paper fragments distinguish the two supplied reference specimens better than color does. They support considering the tile as a possible contributor, but the powder could contain mixed debris, and its source does not establish what made the dent.\n\nPractice: Write one testable question about the powder. List one observation that both explanations predict and one that might distinguish them.\n\nOptional mentor discussion: How would your interpretation change if paper scraps were already common in the room?",
+      "question": "Which question can be addressed most directly by comparing the powder with the two reference specimens?",
+      "options": [
+        "Did the dent occur before the ceiling tile fell?",
+        "Who caused the cabinet damage?",
+        "Does the powder share features with either supplied material?",
+        "Was the cabinet damaged deliberately?"
+      ],
+      "answer": 2,
+      "explanation": "The comparison can address observable similarities and differences. The same observations do not directly establish timing, identity, or intent."
+    },
+    {
+      "id": "lesson-06b27aae-7eac-41d7-aa41-0cbb55e511e8",
+      "title": "2. Evidence Preservation and Chain-of-Custody Documentation",
+      "body": "Evidence preservation aims to retain an item's condition and identity so later observations can be interpreted. Packaging and storage records describe how the item was kept. The chain of custody documents possession and transfers. A useful paper entry records the item identifier, date and time, people involved, purpose or location, and package condition. Initials or signatures link the record to the people who made or acknowledged the entry.\n\nWorked example (entirely fictional paper evidence log). Input: Item P-04 is a fabric tab recorded as collected from a reading-room mat on 6 May. Entry 1, 09:10: A. Vale collects P-04, records envelope seal S17 as intact after sealing, and initials AV. Entry 2, 10:00: A. Vale hands P-04 to B. Chen for storage in locker 3; S17 intact; AV/BC. Entry 3, 13:40: B. Chen hands P-04 to D. Moss for examination; S17 intact; BC/DM. The page ends there.\n\nOutput: The page links the item through the recorded handoffs to Moss at 13:40. It does not document what Moss did afterward. It also does not independently prove that the tab came from the mat: a collection-location error could be copied into a continuous record. A later gap would leave custody unaccounted for on the page, but would not itself prove tampering.\n\nPractice: Make a two-column table headed “Documented” and “Not established.” Place the last signed handoff, later storage, and the actual collection location in the appropriate columns. Distinguish the recorded location from its accuracy.\n\nOptional mentor discussion: What could a later signed clarification resolve that a silent edit could not?",
+      "question": "What does the final signed entry directly document?",
+      "options": [
+        "Moss received P-04 from Chen with seal S17 recorded as intact.",
+        "Moss returned P-04 to locker 3 after examination.",
+        "The fabric tab was correctly identified as coming from the mat.",
+        "The envelope was never opened after the final handoff."
+      ],
+      "answer": 0,
+      "explanation": "The final entry records the handoff and seal condition at that time. It does not verify the original location or account for later handling."
+    },
+    {
+      "id": "lesson-c4e83f46-94fe-4f5c-8b4a-a22e80af2bbf",
+      "title": "3. Trace Evidence: Transfer and Persistence",
+      "body": "Trace evidence consists of small amounts of material, such as fibers, particles, or fragments. Transfer is movement from one surface to another. Direct transfer occurs between surfaces that touch. Secondary transfer occurs through an intermediary, such as a shared cloth. Persistence is how long transferred material remains available to be found. Surface texture, use, and cleaning can affect persistence. Detecting a trace does not normally tell you when it arrived, and failing to find one does not automatically rule out contact.\n\nComparison answers a different question from transfer. Shared features may make two materials consistent with each other, meaning the observed features do not distinguish them. If those features also occur in other materials, the comparison does not identify a unique source. Even identifying a source would not necessarily establish the route by which the material moved.\n\nWorked example (fictional data). Input: Three yellow fibers are recovered from a cart handle. They share color and apparent width with fibers from a yellow runner. A shared cleaning cloth also contains yellow fibers with those features. The cart could have brushed the runner, or the cloth could have carried fibers to the handle. No information is available about how long fibers remain on that handle. Output: Both contact routes are compatible with the observations. The comparison does not establish a route or date, and the feature set does not exclude other yellow textiles.\n\nPractice: Sketch the two routes with arrows. Add one observation that could help distinguish them, and explain one limitation of that observation.\n\nOptional mentor discussion: What would you need to know before treating three fibers as more informative than one?",
+      "question": "What is the strongest conclusion supported by the cart-handle observations?",
+      "options": [
+        "Three fibers establish that the cart touched the runner.",
+        "Fibers on the cloth establish that the cloth deposited those on the handle.",
+        "The handle fibers most likely arrived on the day they were recovered.",
+        "The shared features are compatible with either proposed route."
+      ],
+      "answer": 3,
+      "explanation": "Both routes could produce the observed fibers. Their number and shared features do not establish timing, source, or the route of transfer."
+    },
+    {
+      "id": "lesson-6625528d-7fe7-4d6a-8bce-4b4db6a2f7de",
+      "title": "4. Analytical Measurement: Controls, Calibration, Contamination, and Uncertainty",
+      "body": "A measurement must be interpreted alongside information about how well the measurement system performed. Calibration relates instrument responses to reference values. A control checks an expectation: a known-value check tests whether the system gives an acceptable reading for a known item, while a blank is expected to give no meaningful signal. An unexpected blank signal can indicate contamination, meaning unintended material, or another source of background. An acceptable blank does not rule out every kind of contamination.\n\nUncertainty describes the doubt around a reported value. It is not the same as a known mistake, and it cannot be eliminated just by reporting extra digits. A result written with a plus-or-minus allowance needs an explanation of what that allowance represents.\n\nWorked example (fictional data, not a laboratory protocol). Input: After calibration, a separate 10.0-unit check reads 10.1, within a fictional acceptance band of 9.8–10.2. The blank reads 0.6, above its fictional maximum of 0.2. Two samples read 6.2 and 6.5 units, each with a stated comparison allowance of ±0.3 units. Output: The known-value check passes, but the elevated blank flags possible background or contamination. The nominal ranges, 5.9–6.5 and 6.2–6.8, overlap. The data do not establish that the samples differ in the measured property or that they are identical. The blank problem limits interpretation separately from the overlap.\n\nPractice: Write separate statements about the known-value check, the blank, and the two ranges. Avoid replacing all three with a single “passed” or “failed” judgment.\n\nOptional mentor discussion: Why might repeating only the known-value check leave the main concern unresolved?",
+      "question": "What does the elevated blank show even though the known-value check passed?",
+      "options": [
+        "Exactly 0.6 units must be subtracted from both sample readings.",
+        "There is unexpected background that warrants caution in interpreting the readings.",
+        "The calibration necessarily failed across the entire measurement range.",
+        "Both sample readings are precise enough to establish a difference."
+      ],
+      "answer": 1,
+      "explanation": "The blank flags an unexpected signal. It does not identify the cause or establish that every sample has an identical additive error."
+    },
+    {
+      "id": "lesson-4de6abb7-2954-4ee7-8efb-b4152aa5df53",
+      "title": "5. DNA Evidence: Profiles, Mixtures, and Activity",
+      "body": "A forensic DNA profile summarizes observed variants at selected locations in DNA. Each location is called a locus; the plural is loci. A reference profile comes from a known source and can be compared with the evidence profile. A mixture contains DNA from more than one contributor. In a mixture, several people may share variants, and it can be difficult to assign the observed variants to particular contributors. Compatibility alone does not measure how strongly a result supports one contributor explanation over another.\n\nSeparate a source-level question, such as whether someone contributed DNA, from an activity-level question, such as whether that person opened a door on a particular evening. DNA can persist from earlier contact or arrive through indirect transfer. A profile does not itself timestamp deposition or describe the activity that produced it.\n\nWorked example (fictional, simplified data). Input: A drawer pull yields a profile reported as a mixture. At one displayed locus, the evidence includes variants labeled 8, 10, and 12; Ari's reference shows 8 and 12. No other loci or signal details are supplied. Ari used the drawer the previous week; someone else later handled it while moving shared supplies. Output: Ari's displayed variants are present at this locus, but this one comparison does not establish that Ari contributed to the mixture. Even a well-supported contributor association would not establish that Ari handled the drawer during the move.\n\nPractice: Write one source-level question and one activity-level question. For the activity question, identify one relevant fact outside the DNA profile.\n\nOptional mentor discussion: Why might the drawer's use history matter even if a contributor association were strong?",
+      "question": "Suppose further evidence strongly supports Ari as a DNA contributor. What remains unresolved by that association?",
+      "options": [
+        "Whether Ari handled the drawer during the move",
+        "Whether 8 appeared at the displayed locus",
+        "Whether Ari's reference included variant 12",
+        "Whether the evidence was reported as a mixture"
+      ],
+      "answer": 0,
+      "explanation": "Contributor support addresses whose DNA may be present. Earlier contact or indirect transfer could explain its presence without handling during the move."
+    },
+    {
+      "id": "lesson-625247f0-2fa7-4fa0-bf5d-abed7e6f3638",
+      "title": "6. Fingerprint and Pattern Comparison: Features, Validation, and Error",
+      "body": "A fingerprint impression records some of the friction ridges on a skin surface. An examiner can describe features such as a ridge ending or a bifurcation, where one ridge divides into two. The position and arrangement of features matter as well as their type. A partial impression may omit useful regions, and pressure, motion, or the receiving surface may distort visible details. An obscured feature is not the same as a clear disagreement.\n\nValidation tests how well a method performs under specified conditions, often using examples whose true origins are known. Relevant tests include impressions of comparable quality and opportunities for both correct and mistaken conclusions. Two possible errors are a false association of impressions from different sources and a false exclusion of impressions from the same source. A validation result from clear impressions does not automatically describe performance on smeared fragments.\n\nWorked example (fictional data). Input: An impression on a binder clip shows two ridge endings and one bifurcation in the same relative positions as a reference. A fourth region is smeared in the recovered impression but clear in the reference. No additional detail suitable for comparison is documented. Output: Three features agree, and the fourth region cannot be assessed. These observations alone establish neither common origin nor different origins; counting agreements is not a substitute for evaluating comparison quality and method performance.\n\nPractice: Make a feature table with labels for “agrees,” “disagrees,” and “not assessable.” Explain why the smeared region belongs in the last category.\n\nOptional mentor discussion: What kinds of test impressions would make a validation exercise relevant to this comparison?",
+      "question": "How should the smeared region be reported?",
+      "options": [
+        "As a disagreement because the reference has a visible feature there",
+        "As an agreement because nearby features agree",
+        "As not assessable because the recovered detail is obscured",
+        "As evidence that the recovered impression has a different source"
+      ],
+      "answer": 2,
+      "explanation": "The smear prevents the examiner from determining whether the underlying detail agrees or disagrees."
+    },
+    {
+      "id": "lesson-bb6d4efd-4932-44f8-b47f-1ae77fdc40a9",
+      "title": "7. Human Factors and Evidence Interpretation",
+      "body": "Context bias occurs when information outside the comparison influences how an examiner notices or interprets features. The influence need not be deliberate. Relevant technical context, such as whether an image is compressed, can help. A preferred investigative explanation can instead encourage an examiner to read an ambiguous feature as an agreement. Independent review is more informative when the reviewer records an assessment before seeing the first examiner's conclusion or irrelevant case details. Review can reveal disagreement without automatically resolving it.\n\nConditional probability describes what is assumed when evaluating a probability. In P(E|H), read the bar as “given”: how probable is evidence E if hypothesis H is true? P(H|E) reverses what is assumed: how probable is H given E? The first quantity does not equal the second. To reason from evidence to a hypothesis, you need information about how the evidence behaves under alternatives and the relative plausibility of the hypotheses before considering that evidence. A comparison result alone does not provide a probability of guilt.\n\nWorked example (fictional teaching model, not empirical data). Input: The model gives a blue mark probability of 0.8 if a blue stamp touched a card and 0.4 if the mark arose from blue residue on a tray. A blue mark is observed. Output: Within the model, the mark is twice as probable under stamp contact as under tray transfer. Neither value is the probability that its explanation occurred.\n\nPractice: Translate both model values into “given” sentences. Then specify what an independent reviewer should receive before assessing the mark.\n\nOptional mentor discussion: Which context would help distinguish a mark from an image artifact?",
+      "question": "What does the fictional value P(blue mark | tray transfer) = 0.4 mean?",
+      "options": [
+        "Given a blue mark, the model gives tray transfer a probability of 0.4.",
+        "Given tray transfer, the model gives a blue mark a probability of 0.4.",
+        "Given no blue mark, the model gives tray transfer a probability of 0.4.",
+        "Given stamp contact, the model gives a blue mark a probability of 0.4."
+      ],
+      "answer": 1,
+      "explanation": "The condition is the event to the right of the bar: tray transfer. The calculation concerns how probable the mark is under that condition."
+    },
+    {
+      "id": "lesson-1832ca2a-8535-4cd0-b907-47e5ddb69db9",
+      "title": "8. Capstone: Critical Report on a Fictional Case Packet",
+      "body": "Case packet (entirely fictional): A display panel was found shifted at 12:00. Its rail carried two violet fibers, labeled V-2. The fibers share visible color and width with fibers from a maintenance cart pad and a shared dusting cloth. The cart was beside the panel that morning; both the cloth and cart had been used nearby the previous day. No one observed contact during the shift. Other violet textiles were not surveyed. The proposed explanations are direct transfer from the cart during the shift and earlier transfer from the cloth followed by persistence.\n\nPaper log: 12:15, I. Ren records collecting V-2 from the rail, seals envelope R6, and initials IR. 12:35, Ren transfers V-2 to custodian T. Bell, R6 intact, IR/TB. 14:10, examiner S. Noor records receiving V-2, R6 intact, SN; sender and release time are not entered.\n\nMeasurements: A color index for V-2 is 5.3, the cart pad 5.2, and the cloth 5.5, each with a comparison allowance of ±0.3 units. The postcalibration check is 5.0 (acceptable: 4.8–5.2); the blank is 0.3 (maximum: 0.2).\n\nWorked example: Input: V-2 and cloth readings with their allowances. Output: The ranges 5.0–5.6 and 5.2–5.8 overlap. The cloth is not distinguished on these results; the elevated blank adds a separate concern.\n\nPractice: Write a 250–400-word report using only the packet. Score it out of four, one point each: (1) describes the missing handoff without alleging tampering; (2) interprets the check, blank, and overlapping ranges; (3) evaluates both transfer explanations and identifies a missing observation that would help distinguish them; (4) separates observations from inferences and avoids attributing the shift to either item.\n\nOptional mentor discussion: Which additional observation would most improve your report, and why?",
+      "question": "Which conclusion is best supported by the case packet?",
+      "options": [
+        "The pad is the source because its reading is numerically closest to V-2.",
+        "The cloth is excluded because its central reading exceeds the V-2 reading.",
+        "The missing release entry proves the evidence was substituted.",
+        "Neither candidate is distinguished by the measurements, and the transfer timing is unresolved."
+      ],
+      "answer": 3,
+      "explanation": "All three ranges overlap, and the blank is elevated. The trace observations do not establish when or how the fibers arrived, and the log gap does not prove substitution."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "A paper log has signed, consecutive handoffs for a sealed pouch. What does the log most directly support?",
+      "options": [
+        "The item inside came from the location printed on its label.",
+        "The pouch passed between the recorded custodians.",
+        "The item was correctly identified before packaging.",
+        "The pouch contents were never affected by storage."
+      ],
+      "answer": 1,
+      "explanation": "The signatures document custody. They do not independently verify the label, identification, or storage effects."
+    },
+    {
+      "question": "A profile association supports Lee as a DNA contributor to a shared mug. What does that association alone not establish?",
+      "options": [
+        "Whether the mug was the sampled object",
+        "Whether the comparison involved DNA",
+        "Whether Lee drank from the mug at a particular meeting",
+        "Whether the result supports considering Lee as a contributor"
+      ],
+      "answer": 2,
+      "explanation": "A contributor association does not specify an activity or time. DNA could have arrived earlier or by indirect transfer."
+    },
+    {
+      "question": "If E is a green speck and H is contact with a green mat, how should P(E|H) be read?",
+      "options": [
+        "The probability of observing the green speck if mat contact occurred",
+        "The probability that mat contact occurred if the speck was observed",
+        "The probability that both mat contact and the speck occurred",
+        "The probability of observing the green speck if mat contact did not occur"
+      ],
+      "answer": 0,
+      "explanation": "The term after the bar supplies the condition. The expression asks about the speck given mat contact."
+    },
+    {
+      "question": "A fictional measurement report gives a value but no information about measurement uncertainty. What is a reasonable response?",
+      "options": [
+        "Assume every reported digit is exact.",
+        "Ask what uncertainty and quality checks apply.",
+        "Conclude the result must be false.",
+        "Replace the value with a more precise guess."
+      ],
+      "answer": 1,
+      "explanation": "A value needs context about measurement performance and uncertainty. Missing information does not prove that the value is false."
+    },
+    {
+      "question": "Which review arrangement best reduces the chance that a first examiner’s conclusion shapes a second examiner’s assessment?",
+      "options": [
+        "Show the first conclusion before the materials.",
+        "Ask the reviewer to confirm the preferred explanation.",
+        "Have the reviewer record an initial assessment before seeing the first conclusion.",
+        "Keep no record of disagreements."
+      ],
+      "answer": 2,
+      "explanation": "An independently recorded assessment helps reveal disagreement rather than encouraging agreement with a prior conclusion."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "An examiner signs a receipt for a sealed envelope, but there is no entry showing who released it from storage. What is supported?",
+      "options": [
+        "The storage custodian personally handed it to the examiner.",
+        "The original collection location has been verified.",
+        "The examiner opened it before signing.",
+        "Receipt is documented, but the preceding handoff is not fully documented."
+      ],
+      "answer": 3,
+      "explanation": "The signed receipt is present; the release entry is missing. Neither fact identifies the sender or establishes what happened during the gap."
+    },
+    {
+      "question": "A profile comparison strongly supports Sam as a DNA contributor to a shared tool handle. Can it by itself show Sam used the tool during a specific repair?",
+      "options": [
+        "Yes, because strong contributor support also identifies the most recent activity.",
+        "No, because earlier handling or indirect transfer could also explain the DNA.",
+        "Yes, if the comparison also rules out other contributors.",
+        "No, because shared surfaces cannot yield evidence about possible contributors."
+      ],
+      "answer": 1,
+      "explanation": "Contributor support and activity support are different. Even DNA from only one supported contributor could have arrived earlier or indirectly."
+    },
+    {
+      "question": "A fictional model assigns a 0.6 probability to observing a streak if a label rubbed against a case. Which conclusion follows?",
+      "options": [
+        "The probability that the label rubbed the case, given a streak, is 0.6.",
+        "The probability of a streak under any alternative explanation is 0.4.",
+        "The model gives the streak a probability of 0.6 conditional on rubbing.",
+        "The model gives a 0.6 probability that rubbing and the streak both occurred."
+      ],
+      "answer": 2,
+      "explanation": "The model specifies the probability of the observation under one assumed explanation, not the reverse probability, the joint probability, or a probability under an alternative."
+    },
+    {
+      "question": "Fictional readings are 7.0 ± 0.4 and 7.4 ± 0.4 units. What can you say about the stated ranges?",
+      "options": [
+        "They are 6.6–7.4 and 7.0–7.8; they overlap.",
+        "They do not overlap, proving different sources.",
+        "They are identical, proving the same source.",
+        "The first range is 7.0–7.4 only."
+      ],
+      "answer": 0,
+      "explanation": "Subtract and add 0.4 to each value. The ranges overlap from 7.0 to 7.4. Overlap alone establishes neither identity nor a common source."
+    },
+    {
+      "question": "An unclear pattern is called an agreement after an examiner learns the investigator’s preferred explanation. What needs review?",
+      "options": [
+        "Whether context may have influenced interpretation of the ambiguous feature.",
+        "Whether every earlier measurement must now be discarded.",
+        "Whether the preferred explanation has become scientific proof.",
+        "Whether a review can be skipped because the story is consistent."
+      ],
+      "answer": 0,
+      "explanation": "Context can influence interpretation without conscious intent. Review the observation and relevant method evidence, and document uncertainty and disagreement."
+    }
+  ],
+  "published": true
+}

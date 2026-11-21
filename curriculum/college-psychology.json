@@ -1,0 +1,254 @@
+{
+  "id": "college-psychology",
+  "mentorPrompt": "I am studying Introduction to Psychology. Please connect me with a mentor who can discuss the subject, review my academic project and reasoning, and suggest further study. I will bring my draft, the course readings, and two specific questions.",
+  "sources": [
+    {
+      "title": "OpenStax: Psychology 2e",
+      "url": "https://openstax.org/books/psychology-2e/pages/1-introduction"
+    }
+  ],
+  "title": "Introduction to Psychology",
+  "category": "Psychology",
+  "level": "Introductory undergraduate-style self-study",
+  "minutes": 240,
+  "description": "College-style introductory study course for independent learning. Prerequisites: Comfort reading short academic passages and calculating simple percentages; no prior psychology study required. Includes eight lessons, practice, an academic capstone, and optional mentor review. This course does not award college credit or an accredited qualification.",
+  "skills": [
+    "Distinguish behavior from mental processes and define how a claim could be measured",
+    "Compare experiments and observational studies, identify confounds, and explain informed consent",
+    "Describe neural signaling and interpret brain-behavior evidence cautiously",
+    "Distinguish sensation, perception, and selective attention",
+    "Distinguish classical conditioning, reinforcement, and punishment",
+    "Explain encoding, retrieval, and reconstructive memory",
+    "Compare cross-sectional and longitudinal evidence without stereotyping individuals",
+    "Evaluate hypotheses, variables, confounds, and limits in a fictional experiment"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-fde62c89-a941-42ff-8a51-c5fc9a4b931c",
+      "title": "1. Psychology as a science: behavior, mental processes, and evidence",
+      "body": "Psychology is the scientific study of behavior and mental processes. Behavior is observable action, such as choosing an answer or turning a page. Mental processes include remembering, interpreting, and deciding. Researchers cannot directly observe a decision as a mental event, but they can infer aspects of it from evidence such as choices, response times, or self-reports. Each measure captures something different: a quick answer could reflect familiarity, guessing, or a decision to prioritize speed.\n\nA testable hypothesis predicts an outcome that evidence could count against. To test it, researchers use an operational definition: a rule for turning a concept into something they can measure. If a researcher defines checking as reopening a passage before submitting an answer, that rule makes counting consistent. It does not capture silent rereading from memory, so the measure is narrower than the everyday idea of checking.\n\nWorked example — fictional input: Two readers reopen a passage on 3 of 5 questions and 1 of 5 questions, respectively. Output: Their observed reopening rates are 60% and 20%. The first reader reopened the passage more often under this rule; the counts alone do not show that the reader was more careful or less confident.\n\nPractice: Write one operational definition of persistence on a word puzzle. Name one reason two people with the same score might differ in persistence.\n\nOptional mentor discussion: If two measures of persistence disagree, what additional evidence could help you interpret the difference?",
+      "question": "What do the fictional reopening counts directly support?",
+      "options": [
+        "The first reader was less confident.",
+        "The first reader reopened the passage more often.",
+        "The first reader remembered less of the passage.",
+        "The first reader cared more about getting the answers right."
+      ],
+      "answer": 1,
+      "explanation": "Reopening the passage was directly counted. Confidence, memory, and motivation are possible interpretations, but none was measured."
+    },
+    {
+      "id": "lesson-b8b47647-6c0b-4368-b0b7-06b42dbb2625",
+      "title": "2. Research design and ethics: experiment versus observation",
+      "body": "In an experiment, researchers manipulate an independent variable and measure a dependent variable. Random assignment uses chance to put participants into conditions. It helps prevent preexisting differences from systematically favoring one condition, but it does not guarantee identical groups, especially in small samples. In an observational study, researchers measure differences without assigning the exposure or activity. These studies can identify associations, but the groups may differ in other ways that help explain the result.\n\nWorked example — fictional input: In an observational study, adults choose to read a passage with or without section headings. Those choosing headings average 8 correct answers out of 10; others average 6. Output: Heading choice is associated with a two-point difference. Prior familiarity could help explain it. A stronger experiment would randomly assign readers to versions and keep the wording, reading time, and quiz the same. A confound is a factor that varies with the intended condition and supplies a competing explanation; giving only the heading group extra reading time would introduce one.\n\nInformed consent means that people receive understandable information about what participation involves, foreseeable risks, how data will be handled, and their freedom to decline or withdraw. This course uses fictional scenarios only. Do not recruit, survey, observe, or collect data from real people for course activities.\n\nPractice: Draft two sentences of consent information for the hypothetical experiment: one on the reading task and one on the right to stop.\n\nOptional mentor discussion: Why does random assignment not make a volunteer sample representative of all adults?",
+      "question": "Which change most directly helps test whether headings caused the score difference?",
+      "options": [
+        "Recruit more readers but let everyone choose a version.",
+        "Give the headings group more reading time.",
+        "Ask readers afterward which version they would have preferred.",
+        "Randomly assign versions and keep reading time and quiz items the same."
+      ],
+      "answer": 3,
+      "explanation": "Random assignment reduces systematic differences between groups before the task. Holding time and quiz items constant removes two competing explanations."
+    },
+    {
+      "id": "lesson-58b74342-8f0b-4d09-bceb-c531cbd372d8",
+      "title": "3. Biological foundations: neurons, signaling, and brain networks",
+      "body": "Neurons are cells specialized for signaling. A neuron receives inputs and, if their combined effect brings it to threshold, can generate an action potential, a brief electrical event that travels along its axon. At many synapses, the junctions where cells communicate, an arriving signal triggers the release of neurotransmitters. These chemicals bind to receptors and can change how likely the receiving cell is to fire. A neurotransmitter's effect depends in part on the receptor it binds to; the chemical's name alone does not tell you the outcome.\n\nBrain functions depend on networks of interacting regions. Reading a sentence, for example, involves processing visual patterns, identifying words, and connecting them with meaning and context. A region may contribute to more than one task. Evidence that a region is active during one task does not show that its activity identifies that task or that the region performs it alone.\n\nWorked example — fictional input: An imaging report shows a stronger signal in region R when readers interpret sentences than when they view letter strings. Output: Activity in R differed between the two tasks. The signal does not establish that R is necessary for understanding sentences. The sentence task might also demand more attention, and standard functional MRI measures changes related to blood oxygenation rather than recording individual neurons firing.\n\nPractice: Rewrite the claim “Region R is the brain's meaning center” so that it matches the evidence.\n\nOptional mentor discussion: What comparison task could help separate the demands of interpreting meaning from the demands of paying attention?",
+      "question": "What conclusion does the fictional imaging result support?",
+      "options": [
+        "Region R is the only part of the brain involved in understanding sentences.",
+        "Region R must be active for anyone to understand a sentence.",
+        "The measured signal in region R was stronger during the sentence task.",
+        "Individual neurons in region R were directly observed firing faster."
+      ],
+      "answer": 2,
+      "explanation": "The fictional report documents a difference in the measured signal between tasks. It does not establish necessity, exclusivity, or individual neuron firing rates."
+    },
+    {
+      "id": "lesson-d2f54cf9-0b0b-4cef-9e68-18b6a558d480",
+      "title": "4. Sensation, perception, and attention",
+      "body": "Sensation starts when sensory receptors respond to physical energy or other stimuli. In vision, receptors in the retina respond to light. Perception is the organization and interpretation of sensory information, such as recognizing marks as letters or using a sentence to choose between meanings of a word. Selective attention is the prioritization of some information over other information. A feature can be available to the senses without being the feature a reader attends to or later reports.\n\nWorked example — fictional input: On an ordinary text page, a reader sees “The seal on the envelope was blue. A seal rested on the rocks.” The instruction is to count uses of the word “seal.” Output: The reader reports two uses, interprets the first as a closure and the second as an animal, but does not recall the color. Light from the page provides sensory input; choosing the two meanings is perception shaped by context; counting the target word gives attention a specific goal. Not recalling the color could reflect limited attention or later forgetting. The report by itself cannot distinguish those explanations.\n\nPractice: Read “The crane stood beside the pond. The crane lifted a beam.” Identify which words support each interpretation. Then describe how searching for verbs instead of nouns would change what you prioritize without changing the printed text.\n\nOptional mentor discussion: How could you distinguish a feature that was difficult to see from one that was easy to see but irrelevant to the task?",
+      "question": "Which part of the seal example best illustrates perception shaped by context?",
+      "options": [
+        "Interpreting the same printed word as a closure and then as an animal",
+        "Retinal receptors responding to light from the page",
+        "Prioritizing the target word because the instructions ask for a count",
+        "Reporting the final count aloud"
+      ],
+      "answer": 0,
+      "explanation": "The surrounding words guide the reader toward two meanings of the same word. Receptor response illustrates sensation, and prioritizing occurrences illustrates selective attention."
+    },
+    {
+      "id": "lesson-81c58d44-54ab-4f18-b9ac-c0e99fa02e3a",
+      "title": "5. Learning: classical and operant conditioning",
+      "body": "Classical conditioning is learning an association between stimuli. A previously neutral cue can come to elicit a response after it predicts another stimulus that already elicits a response. Operant conditioning is learning in which the consequences of a behavior change how often that behavior occurs. Ask whether the example is mainly about a cue predicting an event or a behavior producing a consequence. Both kinds of learning can occur in the same setting.\n\nIn operant conditioning, reinforcement increases the future frequency of a behavior; punishment decreases it. Positive means a stimulus is added, and negative means a stimulus is removed. A label depends on the observed behavior change, not on what someone intended or whether the consequence sounds pleasant.\n\nWorked example — fictional input: A short chime repeatedly precedes a burst of cool air that makes Fay blink. Later, the chime alone elicits a blink. Output: The chime has become a learned cue, an example of classical conditioning. In a separate fictional task, submitting a draft removes a reminder banner. Fay goes from submitting promptly on 2 of 5 opportunities to 4 of 5 under this arrangement. Output: The pattern illustrates negative reinforcement: the banner is removed after submission, and prompt submission increases.\n\nPractice: Classify each fictional pattern: adding a badge after a puzzle attempt increases attempts; removing a game token after a premature guess decreases premature guesses. Explain each using both the consequence and the behavior change.\n\nOptional mentor discussion: Why might the same added consequence reinforce one person's behavior but not another's?",
+      "question": "A reminder disappears when a learner saves a draft, and saving becomes more frequent. What is this?",
+      "options": [
+        "Positive reinforcement",
+        "Negative punishment",
+        "Negative reinforcement",
+        "Classical conditioning"
+      ],
+      "answer": 2,
+      "explanation": "Saving becomes more frequent, so the change is reinforcement. The reminder is removed rather than added, so it is negative reinforcement."
+    },
+    {
+      "id": "lesson-251ccba5-041e-42c8-a096-79b91798b680",
+      "title": "6. Memory and cognition: encoding, retrieval, and reconstruction",
+      "body": "Cognition includes processes such as thinking, remembering, and reasoning. Encoding is the initial processing of information into a form memory can use. Relating a new idea to existing knowledge can support encoding by creating connections that later serve as cues. Retrieval is bringing information back to mind. A failed attempt at recall does not necessarily mean the information was never encoded: a cue that connects to the original material can sometimes make retrieval easier.\n\nMemory is reconstructive. When remembering, people can combine stored details with expectations or information encountered later. A report can therefore capture the general meaning of an event while getting a specific detail wrong. Confidence in a detail is not proof that it was present in the original material.\n\nWorked example — fictional input: A learner reads, “Nira set a receipt beside a mug.” Later, another note mentions a spoon near a mug. Asked what was beside the mug in the first sentence, the learner answers “receipt and spoon.” Output: The receipt matches the first sentence; the spoon comes from the later note. The answer is consistent with a source-monitoring error, which means confusing where a remembered detail came from. This fictional example illustrates a memory process, not a medical assessment.\n\nPractice: Encode the pair “lantern–bridge” by imagining a connection. After a short pause, use “lantern” as a cue for “bridge.” Describe what the imagery did at encoding and what the cue did at retrieval.\n\nOptional mentor discussion: Why might a cue help someone recall an event but also lead them to report a detail that was not present?",
+      "question": "Which result most directly illustrates reconstructive memory?",
+      "options": [
+        "A reader relates a new term to a familiar concept while studying.",
+        "A reader recalls a passage after being reminded of its title.",
+        "A reader chooses a quiet place to focus on a passage.",
+        "A reader recalls a later detail as part of an earlier passage."
+      ],
+      "answer": 3,
+      "explanation": "Attributing the later detail to the earlier passage shows how a remembered account can combine information from different sources."
+    },
+    {
+      "id": "lesson-ccfc1311-9791-47c2-88ad-420eb225c9d1",
+      "title": "7. Development and social influence",
+      "body": "Development is change and continuity across the lifespan. Age describes how much time has passed, but it is not by itself an explanation for change. Practice, opportunity, social expectations, and the conditions people live in can matter. Social influence occurs when other people affect judgments or actions. A person might follow others because they seem better informed or because disagreeing could carry a social cost. The same visible choice does not establish which motive was involved.\n\nA cross-sectional study compares groups at one time. When those groups differ in age, they may also differ in historical experiences or opportunities; this is a possible cohort effect. A longitudinal study follows the same people across time and can measure within-person change. Its results can still be affected by repeated testing or by attrition, the loss of participants during follow-up.\n\nWorked example — fictional input: In one year, 6 of 10 younger adults and 4 of 10 older adults revise a puzzle answer after seeing a fictional unanimous group response. Output: The observed rates are 60% and 40%. This cross-sectional difference does not show that anyone becomes less likely to revise answers as they age. Both groups contain people who revise and people who do not. Task experience or the meaning of group agreement in this setting might differ between individuals.\n\nPractice: Propose a fictional longitudinal follow-up. State what you would measure again in the same people and how losing participants who dislike group tasks might change the sample.\n\nOptional mentor discussion: How might a private versus public response change the interpretation of agreement?",
+      "question": "Which design directly measures whether the same people change how often they revise answers?",
+      "options": [
+        "Compare three age groups at one session.",
+        "Measure answer revision in the same adults at multiple time points.",
+        "Measure a new sample from the same age category each year.",
+        "Compare public and private responses in one session."
+      ],
+      "answer": 1,
+      "explanation": "Repeated measurements of the same adults provide evidence of within-person change. The other designs can answer different questions but cannot directly show that a given person changed over time."
+    },
+    {
+      "id": "lesson-af794a86-cc10-415b-9e4a-e3ee512cb67a",
+      "title": "8. Capstone: evaluate a fictional learning experiment",
+      "body": "Case file — all details and data are fictional. Twenty adult volunteers with no prior instruction in an invented map code were randomly assigned, 10 per group. Everyone studied the same ten symbol–meaning pairs for six minutes. For the next six minutes, one group tried to recall meanings and then viewed an answer key; the other reread the pairs. Only the recall group received the printed hint “border shapes give category clues,” which applied to several test items. A day later, everyone completed the same ten no-hint items under the same instructions, earning one point per correct answer. Nobody dropped out. Mean scores were 8 out of 10 for recall and 6 out of 10 for rereading. No individual scores are supplied.\n\nThe research hypothesis predicts a higher mean after recall practice; the null hypothesis predicts no difference in mean scores between conditions. The intended independent variable is review method. The dependent variable is the next-day correct-answer score.\n\nWorked example — input: means of 8 and 6 on the ten-item test, plus the unequal hint. Output: Mean scores differ by two points, or 20 percentage points. The direction matches the prediction, but the hint is a confound, so the result does not isolate the effect of recall practice.\n\nPractice: Write a short evaluation. Four-point rubric, one point each: (1) state both hypotheses; (2) identify both variables; (3) explain how the hint could account for part of the gap and propose equal hint access; (4) interpret the gap and name a limit, such as no evidence about retention beyond one day.\n\nOptional mentor discussion: Why didn't random assignment eliminate the hint confound?",
+      "question": "Which redesign best isolates the effect of review method in the fictional experiment?",
+      "options": [
+        "Keep random assignment and give both groups the same hint at the same time.",
+        "Enroll more volunteers but keep the hint exclusive to the recall group.",
+        "Let volunteers choose their review method and remove the hint.",
+        "Keep the unequal hint and report each group's median instead of its mean."
+      ],
+      "answer": 0,
+      "explanation": "Giving both groups the same hint removes its systematic link to review method, while random assignment still helps balance preexisting differences."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "Fictional example: Learners who choose to review aloud score higher than those who choose silent review. What can you conclude?",
+      "options": [
+        "Reviewing aloud caused the higher scores.",
+        "Reviewing aloud was associated with higher scores in this comparison.",
+        "The score difference caused learners to choose aloud review.",
+        "The groups must have had equal knowledge before reviewing."
+      ],
+      "answer": 1,
+      "explanation": "Learners chose their own review methods. The comparison shows an association but leaves open explanations such as differences in prior knowledge."
+    },
+    {
+      "question": "Fictional example: Finishing a practice item stops a repeating alert. Practice-item completion increases. How is this classified?",
+      "options": [
+        "Positive punishment",
+        "Negative punishment",
+        "Positive reinforcement",
+        "Negative reinforcement"
+      ],
+      "answer": 3,
+      "explanation": "The alert is removed and completion increases. Removal makes it negative; an increase in completion makes it reinforcement."
+    },
+    {
+      "question": "Fictional example: A reader remembers a red gate in an earlier story only after seeing one in a later illustration. What best fits?",
+      "options": [
+        "The reader may have combined the story with information from the later illustration.",
+        "The reader must have encoded the red gate from the original story.",
+        "The reader's confidence establishes where the detail came from.",
+        "The later image could affect interpretation but could not affect the memory report."
+      ],
+      "answer": 0,
+      "explanation": "Memory can incorporate later information. Remembering the red gate does not establish that it appeared in the original story."
+    },
+    {
+      "question": "A brain region shows more measured activity during reading than during rest. What follows directly?",
+      "options": [
+        "The region is the only place where reading happens.",
+        "The measured signal differs between these tasks.",
+        "The result diagnoses a reading disorder.",
+        "The region’s activity proves it is necessary for reading."
+      ],
+      "answer": 1,
+      "explanation": "A task difference is observed. Necessity, exclusivity, and diagnosis require evidence the comparison does not supply."
+    },
+    {
+      "question": "A study compares two age groups once. Which interpretation is too strong?",
+      "options": [
+        "The groups differed on the measured task.",
+        "Other experiences might differ between the groups.",
+        "Every person necessarily changes by that amount as they age.",
+        "The result describes this sample at this time."
+      ],
+      "answer": 2,
+      "explanation": "A cross-sectional difference does not measure within-person development. Cohort and individual differences may contribute."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "Fictional example: Randomly assigned diagram users get extra study time and score higher than outline users. What is the main problem?",
+      "options": [
+        "Test scores cannot be dependent variables.",
+        "Random assignment is incompatible with comparing study formats.",
+        "Extra time varies with study format and could account for the higher scores.",
+        "A comparison is impossible unless the groups earn the same mean score."
+      ],
+      "answer": 2,
+      "explanation": "Extra study time is a confound because it was provided only in the diagram condition. Random assignment does not separate two features that the researchers changed together."
+    },
+    {
+      "question": "Fictional example: Careful guessing becomes less common after a token is removed whenever a player makes a careful guess. What is this?",
+      "options": [
+        "Negative punishment",
+        "Negative reinforcement",
+        "Positive punishment",
+        "Positive reinforcement"
+      ],
+      "answer": 0,
+      "explanation": "A token is removed, so the consequence is negative. The behavior it follows decreases, so it is punishment, regardless of whether anyone intended to discourage careful guessing."
+    },
+    {
+      "question": "Fictional example: A notice said Tuesday. After reading a later message saying Thursday, a learner recalls that the notice said Thursday. What best explains this?",
+      "options": [
+        "The learner accurately recalled the notice because Thursday appeared somewhere.",
+        "The learner attributed a detail from the later message to the earlier notice.",
+        "The later message proved that the earlier notice had always said Thursday.",
+        "The error shows that the learner could not encode any details from either message."
+      ],
+      "answer": 1,
+      "explanation": "The learner remembers a detail that was presented but assigns it to the wrong source. This is a source-monitoring error consistent with reconstructive memory."
+    },
+    {
+      "question": "A reader interprets “bat” as an animal in one sentence and sports equipment in another. What does this illustrate?",
+      "options": [
+        "A diagnosis based on word choice.",
+        "A change in the physical word itself.",
+        "Classical conditioning without a paired stimulus.",
+        "Perception and interpretation shaped by context."
+      ],
+      "answer": 3,
+      "explanation": "Surrounding language changes the interpretation of the same word. This is not a clinical assessment or evidence of conditioning."
+    },
+    {
+      "question": "A fictional longitudinal study loses many participants who dislike the task. What is a relevant limitation?",
+      "options": [
+        "The remaining sample may differ systematically from those who left.",
+        "All results must be exactly the same as before dropout.",
+        "Longitudinal studies cannot have missing participants.",
+        "Dropout proves the task caused developmental change."
+      ],
+      "answer": 0,
+      "explanation": "Attrition can change who is represented at follow-up. Repeated measurements alone do not remove this source of bias."
+    }
+  ],
+  "published": true
+}

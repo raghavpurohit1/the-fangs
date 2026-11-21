@@ -1,0 +1,254 @@
+{
+  "id": "college-research-methods",
+  "mentorPrompt": "I am studying Research Methods and Evidence. Please connect me with a mentor who can discuss the subject, review my academic project and reasoning, and suggest further study. I will bring my draft, the course readings, and two specific questions.",
+  "sources": [
+    {
+      "title": "Kwantlen Polytechnic University: Research Methods in Psychology, 4th edition",
+      "url": "https://kpu.pressbooks.pub/psychmethods4e/"
+    }
+  ],
+  "title": "Research Methods and Evidence",
+  "category": "Research methods",
+  "level": "Introductory undergraduate-style",
+  "minutes": 240,
+  "description": "College-style introductory study course for independent learning. Prerequisites: Reading tables, percentages, and short academic summaries; no prior research project required. Includes eight lessons, practice, an academic capstone, and optional mentor review. This course does not award college credit or an accredited qualification.",
+  "skills": [
+    "Turn research questions into testable hypotheses and operational definitions",
+    "Distinguish study claims from the evidence offered for them",
+    "Identify selection bias and explain why missing responses matter",
+    "Compare observational and randomized designs and identify confounders",
+    "Evaluate measurement reliability and validity",
+    "Report effect sizes in original units, uncertainty, and missing-data rules",
+    "Explain consent, privacy, preregistration, and replication",
+    "Write a feasible research proposal and critically analyze a study"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-6f40b8a7-a425-40a6-8437-bb198f946045",
+      "title": "1. Research questions, hypotheses, and operational definitions",
+      "body": "A research question identifies what you want to learn and about whom or what. A useful question names a comparison or relationship and an outcome. A hypothesis is a testable prediction, not merely a topic or a statement of what you hope is true. A directional hypothesis predicts which group will score higher or whether two variables will rise or fall together. For a comparison of means, a common null hypothesis is that the population mean difference is zero. Failing to find persuasive evidence against that null does not prove the means are identical.\n\nAn operational definition states exactly how a variable is set or measured. A construct is the broader idea you want to study, such as comprehension. A quiz score can represent one aspect of comprehension without capturing the whole construct. Specify the task, timing, and scoring rule so another researcher could repeat your procedure.\n\nWorked example (fictional). Input: the broad idea that headings make instructions easier to follow. Output: “Among adult learners reading a one-page instruction sheet, does the version with headings, compared with the same text without headings, produce a higher mean score on an immediate six-item quiz?” The directional hypothesis predicts a higher mean with headings. The condition is the presence or absence of headings; the outcome is the number of correct answers, from 0 to 6.\n\nPractice: Rewrite “Examples help people learn” using a five-item quiz administered immediately after a lesson. Name both conditions and write a directional hypothesis. Optional mentor discussion: What aspect of learning would an immediate quiz miss?",
+      "question": "Which statement gives an operational definition of quiz performance?",
+      "options": [
+        "How well a learner understands the instructions",
+        "The number of correct answers on six questions given immediately after reading",
+        "The prediction that headings improve learning",
+        "The difference between comprehension and recall"
+      ],
+      "answer": 1,
+      "explanation": "The statement specifies the task, timing, and scoring rule. The other statements name a construct, a hypothesis, or a conceptual distinction."
+    },
+    {
+      "id": "lesson-51475117-13d6-4730-bac1-18b1da87eb42",
+      "title": "2. Reading a study: question, sample, method, results, and limits",
+      "body": "Read a study in five passes. First, identify the question. Second, identify the sample: who or what provided data, and how were those cases chosen? Third, trace the method: what happened, what was measured, and when? Fourth, extract the results, including the units and group sizes if given. Fifth, check the limits: what does the design fail to rule out, and where might the findings not apply?\n\nA claim is a statement the author wants you to accept. Evidence is the observation or analysis offered in support. A result can support a narrow claim without supporting a stronger one. In particular, a measured association does not establish what caused it, and an immediate score does not establish that learning lasted.\n\nWorked example (fictional). Input: At one study club, 12 volunteers chose either a diagram or a paragraph about the same topic, six per format. Immediately afterward, both groups took the same eight-item quiz. The diagram group averaged 6 correct and the paragraph group averaged 5. A summary claims, “Diagrams cause lasting learning for all students.” Output: The question was whether scores differed by format; the sample was 12 club volunteers; the method used self-selected formats and an immediate quiz; the result was a one-point difference. The evidence supports a descriptive claim about these volunteers. Self-selection, the single club, and the lack of a later test limit the stronger claim.\n\nPractice: Write one sentence reporting the evidence and one sentence stating a limit. Optional mentor discussion: Which limit would still matter if a thousand volunteers chose their own formats?",
+      "question": "Which statement is directly supported by the fictional study's reported result?",
+      "options": [
+        "Diagrams caused a one-point gain for each volunteer.",
+        "Volunteers who chose diagrams averaged one point more on the immediate quiz.",
+        "Diagrams improved retention after a delay.",
+        "Students generally learn more from diagrams than from paragraphs."
+      ],
+      "answer": 1,
+      "explanation": "The result compares group means on an immediate quiz. It does not establish individual gains, long-term retention, or a pattern across all students."
+    },
+    {
+      "id": "lesson-431b1d6d-1d90-4dcc-9c66-130ce3e2261b",
+      "title": "3. Sampling and recruitment: populations, selection bias, and missing responses",
+      "body": "The target population is the group you want to describe. A sampling frame is the list or mechanism used to reach that group. The recruited sample consists of the people enrolled; the respondent set consists of those who supply the measure you are analyzing. These sets can differ. Selection bias occurs when the way cases enter the study systematically distorts the estimate. For example, recruiting only at a weekend session may miss learners whose schedules prevent weekend attendance. A large sample recruited the same way does not solve that coverage problem.\n\nDistinguish a missing response from a negative response. If people who did not answer differ on the outcome of interest, the percentage among respondents may not describe everyone who was asked. Report the denominator so readers know exactly whose responses the percentage describes.\n\nWorked example (fictional data). Input: A course has 80 enrolled learners, the target population. A notice aimed only at weekend attendees recruits 20 learners. Of those, 12 select “prefer weekend sessions,” 3 select “do not prefer weekend sessions,” and 5 leave the item blank. Output: The item response rate among recruits is 15/20, or 75%. Among respondents, 12/15, or 80%, prefer weekends. If all five blanks represented “no,” the percentage among recruits would be 60%; if all represented “yes,” it would be 85%. Neither scenario resolves the initial recruitment bias.\n\nPractice: Explain how recruiting from the full roster would address coverage and why unanswered items might still matter. Optional mentor discussion: What could make weekend preference and willingness to answer the survey related?",
+      "question": "What is the weekend-preference percentage among learners who answered the item?",
+      "options": [
+        "60%",
+        "75%",
+        "80%",
+        "85%"
+      ],
+      "answer": 2,
+      "explanation": "Twelve of the 15 learners who answered chose weekend sessions, so the percentage among respondents is 80%."
+    },
+    {
+      "id": "lesson-c8b07490-e9f1-4646-9f7b-6f757f2b50ef",
+      "title": "4. Designs: observational studies, randomized experiments, confounders, and limits",
+      "body": "In an observational study, researchers record conditions or behaviors without assigning them. In a randomized experiment, a chance procedure assigns participants to conditions. Random assignment makes preexisting differences less likely to systematically favor one group, though a small experiment can still produce imbalanced groups by chance. Random assignment differs from random sampling: the former supports a causal comparison within a study; the latter helps the sample represent a population.\n\nA confounder is a factor related to which condition a person experiences and that can also influence the outcome. It provides an alternative explanation for a group difference. Measurement problems and differential dropout can also weaken an experiment, even when assignment was random.\n\nWorked example (fictional data). Input: Learners choose whether to complete practice exercises with or without a worked example. The example group averages 8 out of 10 on a quiz; the no-example group averages 6. The example group had more prior coursework on the topic. Output: The observed difference is 2 points. Prior coursework is a plausible confounder because it is linked to format choice and could raise quiz scores. The design does not establish that examples caused the difference. A proposed experiment would assign formats by chance, give both groups the same study time and quiz, and record missing scores by assigned group. Even then, an immediate quiz would not establish long-term learning.\n\nPractice: Describe a confounder other than prior coursework and explain how it could relate to both format choice and quiz results. Optional mentor discussion: Why might an experiment support a causal claim for its volunteers without showing that the effect generalizes to all learners?",
+      "question": "Which change would make the fictional comparison a randomized experiment?",
+      "options": [
+        "Recruit more learners, then let them choose a format.",
+        "Assign formats based on prior coursework.",
+        "Use a chance procedure to assign learners to formats.",
+        "Select learners at random, then let them choose a format."
+      ],
+      "answer": 2,
+      "explanation": "Randomized experiments use chance to assign the condition. Random recruitment without random assignment leaves the format comparison observational."
+    },
+    {
+      "id": "lesson-46707989-ccd2-4a05-9843-0bfea4719e07",
+      "title": "5. Measurement reliability and validity",
+      "body": "Reliability is consistency across repeated measurements, scorers, or equivalent items when the thing being measured has not changed. Test–retest reliability concerns repeated measurements over time; inter-rater reliability concerns agreement between scorers. Validity concerns whether evidence supports the interpretation you want to make from a score. A score can be consistent but measure the wrong skill. Conversely, a measure with erratic scores makes it hard to interpret differences between learners.\n\nWorked example (fictional toy scores). Input: Two raters independently score the same three source-evaluation responses on a 0–4 scale. Rater A gives 1, 3, and 4; rater B gives 1, 2, and 4. Output: Exact agreement is 2/3, or about 67%; the raters differ by one point on the second response. This is a descriptive check using three responses, not a precise estimate of reliability. Suppose the rubric awards points only for listing facts from a source, while the intended interpretation is that a high scorer can judge whether evidence supports a claim. Even exact agreement on every response would not establish that interpretation: the rubric never asks scorers to look for reasoning about evidence.\n\nPractice: Propose one rubric criterion that directly assesses whether a learner can connect a claim to evidence. Then change rater B's second score to 3 and calculate the new exact agreement. Explain why better agreement alone would not fix the original rubric. Optional mentor discussion: When might two raters agree on every score yet both miss an important feature of the work?",
+      "question": "Which change most directly addresses the validity problem in the fictional rubric?",
+      "options": [
+        "Have a third rater apply the same fact-listing rubric.",
+        "Score more responses using the same fact-listing rubric.",
+        "Ask learners to justify whether a source supports a claim and score that reasoning.",
+        "Use a finer scale to count how many facts learners list."
+      ],
+      "answer": 2,
+      "explanation": "Scoring the reasoning aligns the task with the intended interpretation. More raters, responses, or scale points do not fix the mismatch."
+    },
+    {
+      "id": "lesson-e1ee482f-067d-43f8-a457-b95c58a9911a",
+      "title": "6. Summarizing evidence: effect sizes, uncertainty, and missing data",
+      "body": "An effect size describes the magnitude of a difference or relationship. Start with original units: quiz points, minutes, or percentage points. State the subtraction order so the sign makes sense. The size of a difference is separate from its uncertainty. With small samples or variable scores, the estimated difference may change substantially across repeated studies. A confidence interval from an appropriate method describes the estimate's precision; under the method's assumptions, a procedure that gives 95% confidence intervals would cover the true quantity in about 95% of repeated studies.\n\nWorked example (fictional data). Input: On a 0–10 quiz, the outline group has scores of 8, 6, and one missing result. The no-outline group has scores of 5, 7, and 6. Output: Using observed scores only, the means are 7 and 6. The difference, outline minus no outline, is +1 quiz point. Report 2 of 3 observed scores for the outline group and 3 of 3 for the comparison group. Excluding the missing score is not the same as assuming it was zero. To check sensitivity to the missing value, temporarily set it to each end of the scale. Scores of 0 and 10 would give differences of about −1.33 and +2.00 points. This range reflects possible missing values, not sampling uncertainty or a confidence interval.\n\nPractice: Try a missing score of 4, recalculate the group difference, and label it as hypothetical. Optional mentor discussion: How could a missing score change the interpretation even if the reported arithmetic is correct?",
+      "question": "Which result correctly reports the observed-score difference and its denominators?",
+      "options": [
+        "+1 quiz point, based on 2 of 3 outline scores and 3 of 3 no-outline scores",
+        "+1 percentage point, based on three recorded scores in each group",
+        "−1 quiz point, computed as the outline mean minus the no-outline mean",
+        "+2 quiz points, treating the missing score as observed at the top of the scale"
+      ],
+      "answer": 0,
+      "explanation": "The observed group means are 7 and 6, so outline minus no outline is +1 quiz point. Only two outline scores were recorded."
+    },
+    {
+      "id": "lesson-cd2b01ed-a6c3-4be2-9190-de123e501642",
+      "title": "7. Research ethics, consent, privacy, preregistration, and replication",
+      "body": "Research ethics asks how a study treats people and reports evidence. Informed consent, where applicable, means people receive clear information about procedures, burdens, and how their information will be used, and can make a voluntary decision. Privacy concerns what information is collected and who can access it. In a proposed study, collect only what answers the question, keep any needed identifiers separate, and state how results would be shared. A code can replace a name, but records are not anonymous if someone can link that code back to a person.\n\nPreregistration is a dated record of hypotheses and methods made before examining the relevant outcomes. It helps readers distinguish planned tests from exploratory analyses. Reporting a change is better than hiding it; explain what changed and why. Replication asks whether a finding holds when a study is conducted again with new data. Recalculating a result from the original data can verify the arithmetic, but it is not replication.\n\nWorked example (fictional data). Input: A dated plan specifies the first quiz score per fictional record. Record A has a first score of 4 and a later score of 7; record B has a first score of 6 and a later score of 8. Output: The planned mean is (4 + 6)/2 = 5. The later mean is 7.5; if reported, label it exploratory rather than replacing the planned result. A future replication would use new observations; this course does not conduct one.\n\nPractice: Using only these supplied fictional records, write a two-sentence result that distinguishes planned from exploratory analysis. Do not recruit, contact, or collect data from people. Optional mentor discussion: What risk remains if identified records are replaced with codes but a linking key is kept?",
+      "question": "How should the later quiz results be reported if the dated plan specified first scores only?",
+      "options": [
+        "Replace the first-score result because the later mean is higher.",
+        "Report the first-score result as planned and label the later result exploratory.",
+        "Call the later scores a replication because they were measured at another time.",
+        "Rewrite the dated plan to include both results without noting the change."
+      ],
+      "answer": 1,
+      "explanation": "The first-score analysis follows the plan. The later-score analysis can be useful, but transparent reporting identifies it as exploratory."
+    },
+    {
+      "id": "lesson-26ac6ce2-8975-4213-bcef-71b708d88bc3",
+      "title": "8. Capstone: an unperformed proposal and a fictional study critique",
+      "body": "Submit a 500–700-word brief with two sections. Label Section A “Unperformed mini research proposal”; do not recruit anyone or collect data. Pose a question about a different outcome or comparison from the packet below. Name the target population and proposed recruitment method, justify your design, define the measure and scoring rule, and specify the comparison and missing-data rule. Describe consent and privacy safeguards that would apply if the study were conducted. Name a likely limitation and explain what it would prevent you from concluding.\n\nFictional study packet (all data supplied). Question: Does a checklist improve immediate proofreading? Ten adult volunteers from one reading group were assigned by a shuffled set of five checklist and five no-checklist cards. Both groups had four minutes with the same passage. The outcome was the number of seeded errors correctly marked, from 0 to 8. Checklist scores: 7, 6, 5, 6, missing. No-checklist scores: 5, 4, 4, 5, 2. No reason for the missing score was recorded. The fictional report states that volunteers consented and no names were stored with scores, but gives no retention plan. Its claim: “Checklists improve proofreading for all adults.”\n\nWorked example: Using the packet scores as input, the checklist mean is 24/4 = 6 and the no-checklist mean is 20/5 = 4. Output: a difference of +2 errors correctly marked among observed scores. This is not an estimate for all adults.\n\nPractice: In Section B, critique the design, measure, evidence, missing score, privacy reporting, and limits. Score the brief out of four, one point each: (1) testable proposal and justified design; (2) clear measurement and analysis plan; (3) concrete ethics safeguards and justified limits; (4) accurate packet calculations and critique. Optional mentor discussion: Which limitation most weakens the report's claim, and why?",
+      "question": "Which conclusion is best supported by the supplied fictional packet?",
+      "options": [
+        "The checklist group averaged two more marked errors among observed scores; broader claims remain uncertain.",
+        "All adults would mark exactly two more errors whenever given a checklist.",
+        "The missing score should be treated as zero because it was not recorded.",
+        "The random assignment guarantees that the volunteers represent all adults."
+      ],
+      "answer": 0,
+      "explanation": "The observed difference is 6 minus 4, or two correctly marked errors. One missing score, a small volunteer sample, and one immediate task limit the conclusion."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "Which measure gives a clear operational definition of recall for a word-list task?",
+      "options": [
+        "How strong each learner's memory seems",
+        "The number of list words correctly written from memory after five minutes",
+        "Whether the researcher thinks memory improved",
+        "How motivated a learner feels to remember the list"
+      ],
+      "answer": 1,
+      "explanation": "The measure specifies a task, timing, and scoring rule. A general impression or a rating of motivation does not measure recall in the same way."
+    },
+    {
+      "question": "In a fictional study, learners choose a study guide and score higher. What can you conclude from this comparison alone?",
+      "options": [
+        "The guide caused the higher scores.",
+        "The guide will help all learners equally.",
+        "Guide use and higher scores were associated in this sample.",
+        "Taking the same quiz rules out preexisting group differences."
+      ],
+      "answer": 2,
+      "explanation": "The comparison shows an association. Learners chose their condition, so preexisting differences could account for the result."
+    },
+    {
+      "question": "Fictional scores: group A has 6, 8, and one missing score; group B has 5, 6, 7. What is A minus B using observed scores?",
+      "options": [
+        "+1 point, using 2 scores from A and 3 from B",
+        "−1 point, using 2 scores from A and 3 from B",
+        "+1 point, using 3 recorded scores from each group",
+        "About −1.33 points, omitting A's missing score"
+      ],
+      "answer": 0,
+      "explanation": "The observed means are 7 and 6. Group A contributes two observed scores; omitting a missing score does not mean replacing it with zero."
+    },
+    {
+      "question": "Two scorers give identical scores to every response. What does this establish by itself?",
+      "options": [
+        "The rubric measures every intended skill.",
+        "The task predicts all future performance.",
+        "The two scorers agreed on these responses.",
+        "The study needs no other quality checks."
+      ],
+      "answer": 2,
+      "explanation": "Agreement is evidence about scoring consistency for these responses. It does not by itself establish the validity of the intended interpretation."
+    },
+    {
+      "question": "A dated analysis plan specifies the first attempt, but the analyst later prefers best-attempt scores. What is transparent reporting?",
+      "options": [
+        "Report the planned analysis and clearly label the later change.",
+        "Silently replace the first-attempt result.",
+        "Call both analyses planned from the beginning.",
+        "Delete records that lower the preferred result."
+      ],
+      "answer": 0,
+      "explanation": "Readers need to distinguish the prespecified analysis from a later exploratory choice and understand why it changed."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "Which revision makes 'accuracy on a map-reading task' operationally defined?",
+      "options": [
+        "Describe accuracy as good navigation judgment.",
+        "Use the number of correct route choices on a specified ten-item map task.",
+        "Predict that practice will improve accuracy.",
+        "Ask how confident learners feel before the task."
+      ],
+      "answer": 1,
+      "explanation": "A count of correct choices on a specified task tells another researcher what to observe and how to score it. Confidence is a different construct."
+    },
+    {
+      "question": "In a fictional study, morning-session volunteers score higher and have more prior training. What limits the causal claim?",
+      "options": [
+        "The quiz used the same scoring scale in both sessions.",
+        "The morning group had a higher mean score.",
+        "The scores were recorded immediately instead of being estimated later.",
+        "Prior training may affect scores and is related to which session volunteers attend."
+      ],
+      "answer": 3,
+      "explanation": "Prior training is a plausible confounder: it differs by session and may influence performance, so the comparison does not isolate session timing."
+    },
+    {
+      "question": "Fictional completion times: P has 9, 11, and one missing; Q has 12, 10, 14. What is P minus Q using observed times?",
+      "options": [
+        "+2 minutes, using 2 times from P and 3 from Q",
+        "−2 minutes, using 3 recorded times from each group",
+        "−2 minutes, using 2 times from P and 3 from Q",
+        "About −5.33 minutes, omitting P's missing time"
+      ],
+      "answer": 2,
+      "explanation": "The observed means are 10 minutes for P and 12 for Q. Subtracting Q from P gives −2 minutes, based on two and three recorded times, respectively."
+    },
+    {
+      "question": "A consistent scoring rubric counts spelling errors, but the claim concerns reasoning quality. What is the main concern?",
+      "options": [
+        "The rubric has too much scorer agreement.",
+        "The number of words must always be zero.",
+        "All consistent measures are invalid.",
+        "The score may not support the intended interpretation about reasoning."
+      ],
+      "answer": 3,
+      "explanation": "A measure can be reliable yet fail to measure the construct used in the claim. Validity depends on evidence for the intended interpretation."
+    },
+    {
+      "question": "A team reruns an analysis on the same saved dataset and gets the original result. What has it done?",
+      "options": [
+        "Collected new observations for a replication.",
+        "Verified computational reproducibility using the original data.",
+        "Proved the finding applies to all populations.",
+        "Removed every source of sampling bias."
+      ],
+      "answer": 1,
+      "explanation": "Reanalysis of the same data checks reproducibility of the calculation. A replication needs new observations and does not follow from this check alone."
+    }
+  ],
+  "published": true
+}

@@ -1,0 +1,151 @@
+{
+  "id": "study-github",
+  "mentorPrompt": "I am studying GitHub and Collaborative Projects. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "GitHub: Hello World",
+      "url": "https://docs.github.com/en/get-started/using-github/hello-world"
+    }
+  ],
+  "title": "GitHub and Collaborative Projects",
+  "category": "Developer tools",
+  "level": "Beginner",
+  "minutes": 75,
+  "description": "Practice a small GitHub documentation contribution from start to finish: write a useful README, make a focused commit on a branch, ask for review, and plan how to undo the change if needed. The fictional examples follow a nonprofit volunteer project. You can complete the activities with a practice repository you control or draft your work offline. The mentor prompts are optional: you can request a mentor, but none is assigned yet. Optional further reading: GitHub: Hello World — https://docs.github.com/en/get-started/using-github/hello-world",
+  "skills": [
+    "Write a README that helps a newcomer take the next step",
+    "Check repository content and visibility before sharing",
+    "Use a branch and write a commit message that describes the change",
+    "Open a pull request and give constructive, specific review feedback",
+    "Plan a small documentation contribution with verification and rollback"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-8796ff14-ef74-4943-a83a-99c27d4ee8f3",
+      "title": "1. Repositories, README Files, and Safe Sharing",
+      "body": "A repository, or repo, holds project files and their saved history. A README is the project's front door: on GitHub, a root-level `README.md` is usually displayed below the file list. A useful README tells newcomers what the project is for, where to start, and what information belongs elsewhere.\n\n**Worked example (fictional):** The Lantern Library team has two files: `README.md` and `docs/setup-checklist.md`. The README currently says only `# Lantern Library`. A draft adds a volunteer's personal phone number, but newcomers do not need it to complete setup. Before saving the draft to Git history, the team removes the number and adds a link to the checklist instead.\n\nThe resulting `README.md` contains:\n\n```markdown\n# Lantern Library\nThis repository holds the volunteer setup guide.\n\n## Start here\nOpen the [setup checklist](docs/setup-checklist.md).\nComplete the items under Before your first shift.\n\nDo not add volunteer records to this repository.\n```\n\nThe link points to a file in the same repository. A newcomer now has a first action, and the README shares no personal contact details. Before sharing a real repo, check its visibility and follow the project's sharing rules. A private repo limits access, but it is not a place to store passwords or unnecessary personal data. Deleting a line later does not necessarily remove it from saved history.\n\n**Practice:** Draft a README for an imaginary project. Add a purpose, a first action, and one sharing boundary. If you include a link, check that its destination exists.\n\n**Suggested mentor discussion:** What would you check before inviting someone to this repository?",
+      "question": "A never-committed README draft includes a volunteer's personal phone number that readers do not need. What should you do?",
+      "options": [
+        "Commit the number on a branch but leave the pull request unopened.",
+        "Remove the number before committing and give readers a task-related next step.",
+        "Move the number into a separate Markdown file in the same repository.",
+        "Commit the draft privately and remove the number just before sharing the repository."
+      ],
+      "answer": 1,
+      "explanation": "Removing unnecessary personal information before the first commit keeps it out of Git history. Moving it or deleting it in a later commit does not do that."
+    },
+    {
+      "id": "lesson-d353b922-fa16-406d-9f59-c13d5b1cbf6b",
+      "title": "2. Branches, Commits, and Meaningful Messages",
+      "body": "A branch is a separate line of work. Make a branch from the project's default branch so your draft changes do not immediately alter the version other people use. A commit records a snapshot of the changes you selected. Its message should say what changed in plain language so someone can recognize the edit later without opening every file.\n\n**Worked example (fictional):** Lantern Library's `main` branch has a setup checklist that says `Get the sign-in sheet.` A maintainer confirms the sheet is in the front desk binder. Starting from `main`, a contributor creates the branch `docs/clarify-sign-in-sheet`, opens `docs/setup-checklist.md` on that branch, and replaces the line with `Get the sign-in sheet from the front desk binder.` In GitHub's edit view, they choose to commit to the work branch and enter the message `Clarify where to find the sign-in sheet`.\n\nAfter the commit, viewing the file on `docs/clarify-sign-in-sheet` shows the new sentence; viewing it on `main` still shows the original. Comparing the branches shows one removed line and one added line in one file. The message `Fix stuff` would save the same edit but make it harder to identify later. If the comparison also showed an unrelated change to the project logo, the contributor would leave that out of this commit.\n\n**Practice:** On a practice branch, change one vague instruction. Check the before-and-after view and write a message that names what you clarified. If working offline, record the branch name, both lines, and the commit message.\n\n**Suggested mentor discussion:** Which words in your commit message would help a teammate find the change later?",
+      "question": "Your only change tells readers where to find the sign-in sheet. Which commit message best describes it?",
+      "options": [
+        "Update volunteer documents",
+        "Fix the volunteer sign-in process",
+        "Clarify where to find the sign-in sheet",
+        "Move the sign-in sheet to the front desk binder"
+      ],
+      "answer": 2,
+      "explanation": "The change clarifies the sheet's location in the documentation. It does not move the sheet or change the sign-in process."
+    },
+    {
+      "id": "lesson-ece8f490-9e96-4d4c-9870-6591a6d75b92",
+      "title": "3. Pull Requests and Constructive Review",
+      "body": "A pull request, or PR, asks teammates to review changes from your work branch before bringing them into a target branch. Opening a PR does not merge the work. Confirm that the target, called the base branch, is correct and that the comparison shows only what you intend to submit. A good PR description tells reviewers why the change matters and how you checked it.\n\n**Worked example (fictional):** A Lantern Library contributor opens a PR from `docs/clarify-sign-in-sheet` into `main`. The title is `Clarify where volunteers find the sign-in sheet`. The description reads: `The checklist names the sheet but not its location. I added “front desk binder” after a maintainer confirmed the location. I previewed the checklist and checked that only one line changed.`\n\nA reviewer writes: `Could you split retrieval and return into two checklist items? A reader could miss the return step in the current combined item.` The file showed `- Get the sign-in sheet from the front desk binder and return it after your shift.` The contributor updates it to two items:\n\n```markdown\n- Get the sign-in sheet from the front desk binder.\n- Return the sign-in sheet to the binder after your shift.\n```\n\nThe contributor commits the edit to the same work branch, so the open PR updates. They reply, `Split the item into two steps. Could you check the wording?` The review identifies a reader's problem and asks for a change without criticizing the author.\n\n**Practice:** Draft a PR description for your earlier edit. Write one review comment that points to a specific line, names a reader's problem, and suggests a next step.\n\n**Suggested mentor discussion:** Which of your comments would you ask the author to address before merging, and why?",
+      "question": "Which review comment gives the author a clear, constructive next step?",
+      "options": [
+        "Could you split this into two bullets so readers don't miss the return step?",
+        "This feels wrong. Can you make the whole checklist better?",
+        "Please rewrite the section in a more professional style.",
+        "I'd write this differently, but the details are up to you."
+      ],
+      "answer": 0,
+      "explanation": "This comment names a specific edit and explains how it helps the reader. The other comments leave the author guessing about what to change or why."
+    },
+    {
+      "id": "lesson-d9c83f32-55cc-4945-9c45-82473170d451",
+      "title": "4. Capstone: Plan a Documentation Contribution with Review and Rollback",
+      "body": "Plan one documentation change small enough to review in a few minutes. Choose a broken link, a missing first step, or one unclear sentence in a practice repo you control. If you prefer to work offline, draft the same materials without opening a pull request. Do not count on a mentor or another reviewer being available.\n\n**Worked example (fictional):** Lantern Library's `README.md` contains `[Start here](docs/start.md)`, but the file list shows `docs/setup-checklist.md` and no `docs/start.md`. On the branch `docs/fix-start-link`, the contributor changes the line to `[Start here](docs/setup-checklist.md)` and drafts a PR titled `Fix the README setup link`. Their verification note says: `The link in the branch preview opens the setup checklist; the comparison shows one changed line.` Their review request asks: `Does the link open the intended checklist, and is it the only change?`\n\n**Practice and deliverable:** Submit one contribution packet: the file path, before and after text, branch name, commit message, PR draft, verification note, review request, and rollback plan. If the PR has not merged and the change should be withdrawn, plan to close it without merging. If it has merged and the team needs to undo it, plan to ask a maintainer to make a targeted revert, then verify that unrelated edits remain. For the fictional example, restoring the previous link would also restore a broken link, so flag that trade-off before reverting.\n\n**Four-point self-review (one point each):**\n1. The packet shows one focused before-and-after edit.\n2. The verification note names the check and its result.\n3. The review request asks a specific question.\n4. The rollback plan covers both merge states.\n\n**Suggested mentor discussion:** When would you fix forward rather than revert?",
+      "question": "A documentation PR has merged, and the team agrees it must be undone. What is the best plan?",
+      "options": [
+        "Close the merged PR so GitHub removes its edits.",
+        "Delete the work branch so the default branch returns to its earlier state.",
+        "Restore the whole repository to its earlier state without checking later edits.",
+        "Ask a maintainer for a targeted revert and verify unrelated edits remain."
+      ],
+      "answer": 3,
+      "explanation": "A targeted revert undoes the relevant change through a new commit. Closing a PR or deleting its branch does not undo a change that has already merged."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "You are drafting a public README for new volunteers. Which content belongs there?",
+      "options": [
+        "A roster with volunteer names and personal email addresses",
+        "A shared password so volunteers can start without asking",
+        "A short project purpose and a link to the setup checklist",
+        "A first-shift checklist with personal contact notes copied from a private file"
+      ],
+      "answer": 2,
+      "explanation": "A purpose and a checklist help readers start without exposing private information or credentials."
+    },
+    {
+      "question": "You want to correct one setup instruction without changing the default branch yet. What should you do?",
+      "options": [
+        "Create a work branch and commit the correction with a message that describes it.",
+        "Commit directly to the default branch with a message saying the edit is a draft.",
+        "Create a work branch but commit the correction on the default branch.",
+        "Put the correction in an issue comment and mark the file itself as fixed."
+      ],
+      "answer": 0,
+      "explanation": "Committing on a work branch records the change while leaving the default branch unchanged. A message that calls a default-branch commit a draft does not isolate it."
+    },
+    {
+      "question": "A teammate has prepared a guide edit on a branch. What lets the team review the exact change before accepting it?",
+      "options": [
+        "Merge the change first, then ask for comments on the updated guide.",
+        "Rename the branch to include the reviewer's name.",
+        "Paste the revised guide into a chat message without showing the original.",
+        "Open a pull request against the intended branch and ask for feedback on the diff."
+      ],
+      "answer": 3,
+      "explanation": "A pull request shows the proposed changes relative to the target branch. Reviewers can inspect additions and removals before the team decides whether to merge."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "A README links to an internal roster and to an approved public orientation guide. What should you do before making the repo public?",
+      "options": [
+        "Keep both links because the README does not display the roster itself.",
+        "Use only the orientation link and check files and history for material that must stay private.",
+        "Hide the roster link under a collapsed heading so most visitors won't see it.",
+        "Keep the roster link in an appendix and remove the approved orientation link."
+      ],
+      "answer": 1,
+      "explanation": "Use the approved public resource. Check the repository's files and history before changing visibility, since the current README is not the only content that may become visible."
+    },
+    {
+      "question": "Your branch comparison shows a guide link fix and an accidental logo edit. What should you submit for the link repair?",
+      "options": [
+        "Both edits in one commit titled `Update repository`.",
+        "The logo edit only, with the link fix described in the PR.",
+        "Only the link fix, with a message such as `Fix orientation guide link`.",
+        "The link fix on the default branch and the logo edit on the work branch."
+      ],
+      "answer": 2,
+      "explanation": "A focused change is easier to review and undo. The specific message helps a teammate identify the link repair later."
+    },
+    {
+      "question": "A reviewer tests your PR's new checklist link and reports that it opens an archived file. What should you do before merging?",
+      "options": [
+        "Fix the link on the same branch, test it, and ask the reviewer to recheck the updated PR.",
+        "Resolve the comment without changing the file because the link does open.",
+        "Merge the PR and add a note telling readers to ignore the archive.",
+        "Correct the link in the PR description but leave the checklist file unchanged."
+      ],
+      "answer": 0,
+      "explanation": "Committing to the same branch updates the PR. Testing the destination and asking for a recheck addresses both the file error and the reviewer's concern."
+    }
+  ],
+  "published": true
+}

@@ -1,0 +1,141 @@
+{
+  "id": "study-web",
+  "mentorPrompt": "I am studying Build Your First Accessible Web Page. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "MDN: Basic HTML syntax",
+      "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax"
+    }
+  ],
+  "title": "Build Your First Accessible Web Page",
+  "category": "Web development",
+  "level": "Beginner",
+  "minutes": 90,
+  "description": "Build a one-page site for a fictional community event using a text editor and a browser. Practice organizing content with HTML, writing descriptive links, and making the page readable on narrow and wide screens. Start with a three-question baseline, then compare your understanding with a different three-question final check. No coding experience is required. No mentor is assigned yet; you can request one and use the suggested discussion prompts if you meet. Optional further reading: MDN, Basic HTML syntax — https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax",
+  "skills": [
+    "Create an HTML document with a page title, language, and main content area",
+    "Organize sections with meaningful headings",
+    "Write descriptive links and use lists to group related items",
+    "Use CSS to keep text readable and layouts flexible",
+    "Check a page with the keyboard, a narrow browser window, and browser zoom"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-6cf99761-7983-4c66-b98c-faf249dfae20",
+      "title": "1. Give Your Page a Structure",
+      "body": "HTML describes what each part of a page is. The `head` holds information about the document, including the title shown in the browser tab. The `body` holds page content. Set `lang=\"en\"` on the `html` element so tools such as screen readers can use English pronunciation. Put the primary content inside `main` so people using assistive technology can find it more easily.\n\nWorked example (fictional): Save this input as `event.html`, then open the file in a browser.\n```html\n<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Seed Swap | Maple Corner</title>\n</head>\n<body>\n  <main>\n    <h1>Maple Corner Seed Swap</h1>\n    <h2>When and where</h2>\n    <p>Saturday, May 15, 2027, from 10 a.m. to noon at Maple Corner Hall.</p>\n    <h2>What to bring</h2>\n    <p>Bring labeled seeds or come to browse.</p>\n  </main>\n</body>\n</html>\n```\nOutput: The browser tab reads “Seed Swap | Maple Corner.” On the page, “Maple Corner Seed Swap” is the main heading. “When and where” and “What to bring” are headings of equal rank. The tab title and the visible heading can differ, but both should identify the page. Choose heading levels by how topics fit together, not by how large the text looks.\n\nPractice: Add an `h2` titled “Getting there,” followed by a paragraph. Under it, add an `h3` titled “Bus stop” and a paragraph with fictional directions. Refresh the browser and explain why “Bus stop” belongs under “Getting there” rather than alongside it.\n\nSuggested mentor discussion, if you request a mentor: What can you tell about the page from its headings alone? Which heading would you rename?",
+      "question": "“Bus stop” is a subsection of “Getting there,” which is an h2. Which markup fits?",
+      "options": [
+        "<h2>Bus stop</h2>",
+        "<h3>Bus stop</h3>",
+        "<p><strong>Bus stop</strong></p>"
+      ],
+      "answer": 1,
+      "explanation": "An h3 marks a subsection under an h2. Another h2 would place it at the same rank, and bold paragraph text would not make it a heading."
+    },
+    {
+      "id": "lesson-1175f9f6-6aff-42a3-a477-87ee43f7a664",
+      "title": "2. Write Links and Lists That Make Sense",
+      "body": "A link should tell readers where it goes before they follow it. “Click here” is hard to understand when someone scans the page or hears links read out of context. Name the destination instead. Use an unordered list (`ul`) for a group of items that can appear in any order. Use an ordered list (`ol`) when the sequence matters. Both use `li` for each item.\n\nWorked example (fictional): Replace the “What to bring” heading and paragraph in `event.html` with this input. Keep the new block inside `main`.\n```html\n<p><a href=\"#bring\">See what to bring to the seed swap</a></p>\n<h2 id=\"bring\">What to bring</h2>\n<ul>\n  <li>Seeds in labeled envelopes, if you have some</li>\n  <li>A bag for seeds you take home</li>\n</ul>\n<p>No seeds to share? You can still attend.</p>\n```\nOutput: The page shows a link followed by a heading, two bullet points, and a note. Activating the link takes you to “What to bring” because `#bring` matches the heading’s `id=\"bring\"`. On a short page, you may not see much scrolling; check that `#bring` appears in the address bar and that the heading exists. The note makes clear that bringing seeds is optional.\n\nPractice: Add a “How to check in” section with two numbered steps: greet the volunteer, then pick up a name tag. Add a link to that section near the top. Press Tab until the link has focus, then press Enter to test it. Check that the two sections have different IDs.\n\nSuggested mentor discussion, if you request a mentor: Read your link labels without the surrounding sentences. Can your mentor predict where each link leads?",
+      "question": "Which link label best describes a link to the event’s check-in instructions?",
+      "options": [
+        "Read more",
+        "Event information",
+        "See how to check in"
+      ],
+      "answer": 2,
+      "explanation": "The third label names the specific destination. The other labels could lead to many different parts of the page."
+    },
+    {
+      "id": "lesson-8a91eb4c-f62a-4ca6-8b27-2e3a7bdec402",
+      "title": "3. Make the Page Readable on Small and Large Screens",
+      "body": "CSS controls how a page looks. Spacing between lines helps readers track the text, and limiting the width of a column keeps lines from stretching across a large screen. A fixed-width column can force sideways scrolling on a phone. A maximum width lets the column shrink when there is less room.\n\nWorked example (fictional): Add this input inside the `head` of your seed swap page, after the character encoding line. The viewport setting tells mobile browsers to lay out the page at the device’s width.\n```html\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<style>\n  body {\n    margin: 0;\n    font-family: system-ui, sans-serif;\n    font-size: 1rem;\n    line-height: 1.6;\n    color: #1a1a1a;\n    background: #fff;\n  }\n  main {\n    max-width: 65ch;\n    margin: 0 auto;\n    padding: 1rem;\n  }\n  a { color: #164a8b; text-decoration: underline; }\n  a:focus-visible { outline: 3px solid #164a8b; outline-offset: 3px; }\n</style>\n```\nOutput: On a wide screen, the text sits in a centered column. In a narrow window, the lines wrap and padding keeps text away from the edges. Links stay underlined, so color is not the only clue. When you Tab to a link, a visible outline shows where keyboard focus is.\n\nPractice: Temporarily change `max-width: 65ch` to `width: 900px`. Open a narrow browser window and compare the sideways scrolling with the original. Restore `max-width`, set browser zoom to 200%, and check that you can still read the event details without scrolling sideways. Use Tab to confirm that you can see which link is focused.\n\nSuggested mentor discussion, if you request a mentor: Compare the page at two widths. At which width is the first paragraph easiest to read, and what makes the difference?",
+      "question": "Which change lets a plain text column shrink when the browser is narrower than 900 pixels?",
+      "options": [
+        "Replace width: 900px with max-width: 900px",
+        "Keep width: 900px and increase the line height",
+        "Keep width: 900px and center it with automatic margins"
+      ],
+      "answer": 0,
+      "explanation": "A maximum width sets an upper limit without forcing that width on a narrow screen. Line height and centering do not make a fixed-width column shrink."
+    },
+    {
+      "id": "lesson-d74c0da5-76f3-4a2b-8ed3-057e09269c7a",
+      "title": "4. Capstone: Publish-Ready Practice for a Fictional Event",
+      "body": "Create a single local `index.html` page for a fictional community event. No hosting, signup form, or real contact information is needed. Include an English language setting, a tab title, one visible `h1`, and a `main` section containing the event date, time, place, and visitor instructions. Add at least two `h2` sections, one list, one descriptive link to a section, and the responsive CSS from Lesson 3.\n\nWorked example (fictional): Input notes: “Bike Care Meetup; June 12, 2027, 2–4 p.m.; Willow Room; bring a bike and a rag.” Name the tab “Bike Care Meetup | Willow Room” and the `h1` “Bike Care Meetup.” Under “When and where,” put the date, time, and room in a paragraph. For the packing section, enter `<h2 id=\"bring\">What to bring</h2>` and `<ul><li>A bike</li><li>A rag</li></ul>`. Above the event details, enter `<a href=\"#bring\">See what to bring to the bike meetup</a>`. Output: The tab identifies the event, the schedule appears under its own heading, and activating the link takes you to a two-item packing list.\n\nPractice: Build the page with your own fictional details or use the meetup notes. Save the file and a short review note with one fix you made, or write that no fix was needed and name the checks you ran.\n\nFour-point self-review rubric (one point per item):\n1. The tab title names the event; the document declares its language and uses `main` and ordered heading levels.\n2. Date, time, and place are easy to locate, and the list matches the instructions.\n3. Tab visibly focuses the descriptive link; Enter takes you to the intended section.\n4. Text wraps without sideways scrolling in a narrow window and at 200% zoom.\n\nSuggested mentor discussion, if you request a mentor: Which check changed your page most, and why?",
+      "question": "Tab reaches your link and Enter activates it, but you cannot see which link has focus. What should you fix?",
+      "options": [
+        "Rename the section heading to match the link label exactly",
+        "Restore or add a visible keyboard focus outline",
+        "Replace the list at the destination with a paragraph"
+      ],
+      "answer": 1,
+      "explanation": "The link already works with the keyboard, but its focus state is not visible. A visible focus outline shows keyboard users which control they are about to activate."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "You are making a page for a fictional repair café. Which element should contain its main visible heading?",
+      "options": [
+        "<title>",
+        "<h2>",
+        "<h1>"
+      ],
+      "answer": 2,
+      "explanation": "The h1 marks the main heading on the page. The title names the document in the browser tab, and h2 marks a section below the main heading."
+    },
+    {
+      "question": "A link goes straight to a fictional event’s schedule. Which label best tells readers what to expect?",
+      "options": [
+        "View the event schedule",
+        "Click here",
+        "More event details"
+      ],
+      "answer": 0,
+      "explanation": "The first label names the exact destination, even when it is read without nearby text."
+    },
+    {
+      "question": "Which setup best helps a text column fit both a phone and a desktop screen?",
+      "options": [
+        "A fixed 800-pixel width and a smaller font",
+        "A flexible width with a maximum width",
+        "A fixed 800-pixel width centered on the page"
+      ],
+      "answer": 1,
+      "explanation": "A flexible column can shrink on a phone, while the maximum width prevents very long lines on a desktop."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "On a fictional workshop page, “Schedule” and “Supplies” are sections directly under the event h1. How should they be marked?",
+      "options": [
+        "Use h2 for both",
+        "Use h2 for Schedule and h3 for Supplies",
+        "Use h1 for both"
+      ],
+      "answer": 0,
+      "explanation": "Both sections are at the same level beneath the event heading, so both use h2."
+    },
+    {
+      "question": "A fictional event page has <h2 id=\"arrival\">Arrival instructions</h2>. Which link is descriptive and goes there?",
+      "options": [
+        "<a href=\"#arrival\">Learn more</a>",
+        "<a href=\"#instructions\">Read the arrival instructions</a>",
+        "<a href=\"#arrival\">Read the arrival instructions</a>"
+      ],
+      "answer": 2,
+      "explanation": "The third link names the destination and uses a fragment that matches the heading’s ID. The first reaches the right place but has a vague label; the second uses the wrong fragment."
+    },
+    {
+      "question": "A fictional event page looks fine on a laptop, but a fixed-width text column makes readers scroll sideways at 200% zoom. What should you try?",
+      "options": [
+        "Lower the font size until the lines look shorter",
+        "Replace the fixed width with a maximum width, then retest at 200% zoom",
+        "Keep the fixed width and center the column"
+      ],
+      "answer": 1,
+      "explanation": "A maximum width lets the column shrink to fit the space available, and retesting confirms whether the text wraps without sideways scrolling."
+    }
+  ],
+  "published": true
+}

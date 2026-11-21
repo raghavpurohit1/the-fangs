@@ -1,0 +1,140 @@
+{
+  "id": "study-ai-literacy",
+  "mentorPrompt": "I am studying AI Literacy and Responsible Use. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "NIST: Generative AI Profile",
+      "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+    }
+  ],
+  "title": "AI Literacy and Responsible Use",
+  "category": "AI literacy",
+  "level": "Beginner",
+  "minutes": 45,
+  "description": "Learn to use generative AI without treating fluent text as evidence. Designed for adult beginners, career changers, and returning professionals in a nonprofit mentorship program, this course uses fictional workplace examples and ends with a short editing exercise. No AI account is needed. No mentor is assigned yet. You can request one and save your discussion notes for later. Optional further reading: NIST, Generative AI Profile (https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf).",
+  "skills": [
+    "Distinguish AI-generated wording from verified facts",
+    "Classify claims as supported, contradicted, or unconfirmed",
+    "Reduce unnecessary data sharing and spot biased assumptions",
+    "Revise an AI-written summary using supplied evidence"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-629dba17-7eaa-41a9-9954-63729f3a9cc2",
+      "title": "1. AI Outputs and Limitations",
+      "body": "Generative AI can turn rough notes into a readable email, outline, or summary. It generates text that fits the prompt and context, but the wording alone does not show whether the tool checked a fact. A draft can sound finished while quietly adding a detail you never supplied. For routine work, let the tool help with wording while you stay responsible for the facts.\n\nFictional worked example. Input: “Draft a one-sentence reminder. The volunteer orientation is Tuesday at 6 p.m. Bring a notebook.” Example AI output: “Join us Tuesday at 6 p.m. in Room 204 for volunteer orientation, and bring a notebook.” The time and notebook instruction come from the input. Room 204 does not. It might happen to be correct, but nothing here establishes that. A usable revision is: “Volunteer orientation is Tuesday at 6 p.m. Please bring a notebook.” If recipients need the location, confirm it before sending.\n\nA tighter input would be: “Write a friendly reminder using only these details. If the location is missing, flag it separately.” That instruction makes the draft easier to review, but it does not replace checking the result.\n\nPractice with a fictional draft. Source note: “The supply pickup is Friday; bring a reusable bag.” Draft: “Pick up your supplies Friday morning at the front desk, and bring a reusable bag.” Underline the supported details, circle two additions, and rewrite the reminder without them.\n\nSuggested mentor discussion: If you request a mentor, ask which details in a routine message they would verify before sending and which wording choices they would leave to the drafter.",
+      "question": "What is the best way to handle “Room 204” in the orientation reminder?",
+      "options": [
+        "Keep it because adding a room makes the reminder more useful.",
+        "Omit it unless the location can be confirmed from a reliable source.",
+        "Change it to “probably Room 204” so readers know it is uncertain."
+      ],
+      "answer": 1,
+      "explanation": "The source note does not establish a room. Qualifying the guess still gives readers a location they might act on."
+    },
+    {
+      "id": "lesson-4b8d5980-96fa-45de-bd4b-d0997f2eb561",
+      "title": "2. Checking Unsupported Claims",
+      "body": "Check a draft one claim at a time. A claim is supported when the relevant source backs it up, contradicted when the source gives an incompatible fact, and unconfirmed when the source is silent or too vague. Unconfirmed does not mean false. It means you do not yet have enough evidence to present the claim as fact.\n\nFictional worked example. Input: “Summarize these approved notes: The résumé clinic ran from 2 to 3 p.m. Twelve participants signed in. The notes do not include feedback.” Example AI output: “The two-hour résumé clinic drew 12 participants, and everyone said it was useful.” The time range contradicts “two-hour”: it lasted one hour. The notes support “12 participants signed in,” which is more precise than a general attendance claim. The feedback claim is unconfirmed. A checked version is: “The résumé clinic ran from 2 to 3 p.m., and 12 participants signed in.”\n\nMatch the source to the claim. Approved session notes can establish the recorded time. A feedback claim needs actual feedback records, and comments from a few people cannot establish what everyone thought. Asking the AI to repeat or explain a claim is not an independent check.\n\nPractice: A fictional draft says, “The drop-in session was held Monday, and every visitor received a handout.” The coordinator’s record says, “Held Monday; handouts placed on the welcome table.” Label each claim and rewrite the line using only what the record supports.\n\nSuggested mentor discussion: If you request a mentor, compare which records you would trust for event timing, sign-ins, and participant feedback, and discuss what to write when a record is missing.",
+      "question": "What do the approved clinic notes establish about “everyone said it was useful”?",
+      "options": [
+        "They support it because 12 participants signed in.",
+        "They contradict it because the notes contain no positive comments.",
+        "They leave it unconfirmed because they contain no feedback."
+      ],
+      "answer": 2,
+      "explanation": "A sign-in records participation, not opinion. Missing feedback neither proves nor disproves the claim."
+    },
+    {
+      "id": "lesson-0085e44a-3428-4cd8-929b-cb669cc63345",
+      "title": "3. Privacy and Bias in Everyday Tools",
+      "body": "Before pasting text into an AI tool, ask what information it actually needs and whether your organization permits that tool for the task. Use the minimum necessary detail. Removing a name is not always enough: an unusual combination of details can still identify someone. Then check the output for assumptions about who can do a task, attend a session, or benefit from an opportunity.\n\nFictional worked example. Input: “Draft a reply to Jordan Lee, who shared a medical reason for missing evening sessions. Offer alternatives.” Example AI output: “Jordan, because of your health, remote sessions will be easier for you.” The prompt shares more than the drafting task needs. The output also assumes which format the person prefers. If these options are confirmed, a better input is: “Draft a short reply to someone who cannot attend evenings. Offer daytime on-site sessions and a remote option. Ask which works.” Example revised output: “We can offer a daytime on-site session or a remote session. Which option works for you?”\n\nBias can also show up as an unsupported judgment about ability. In a fictional course intake, “Send returning workers to the simplest class” substitutes a group label for evidence of skill. Instead, apply the same relevant criteria to everyone, such as prior experience with the software and what they want to practice.\n\nPractice: Rewrite the fictional prompt “A named participant lost their job and cannot join on Saturday; draft a reply offering Tuesday.” Remove details the tool does not need, then draft a reply that offers Tuesday without assuming why Saturday is unavailable.\n\nSuggested mentor discussion: If you request a mentor, bring a made-up example and discuss what you would leave out of the prompt and what assumptions you would check in the reply.",
+      "question": "Which input is best for drafting a reply about two confirmed session options?",
+      "options": [
+        "Offer the daytime and remote options, and ask which the recipient prefers.",
+        "Include the recipient’s medical details so the tool can choose the better option.",
+        "Recommend remote attendance because the recipient cannot attend evenings."
+      ],
+      "answer": 0,
+      "explanation": "The tool can draft the message without personal details, and asking about preference avoids assuming which format works best."
+    },
+    {
+      "id": "lesson-bfd4fd8d-84a5-417b-acfb-d1f18eb1b4b4",
+      "title": "4. Capstone: Evaluate an AI-Written Event Summary",
+      "body": "Your task is to turn an AI draft into a short public recap that the event record can support. You can do this in a document or on paper; no AI tool is needed.\n\nFictional source packet: The library hosted a job-search workshop on May 8. Eighteen participants signed in. Activities included a résumé demonstration and paired practice. The event record confirms that the workshop was held in person only. No participant feedback was collected. The internal notes include one participant’s phone number for follow-up; it is not needed in the recap.\n\nFictional input: “Write a public recap of the May 8 workshop from the event record.” Example AI output: “On May 8, the library welcomed 18 participants to a hybrid job-search workshop with a résumé demonstration and paired practice. Everyone left feeling more confident.”\n\nWorked review: “Hybrid” is contradicted by “in person only,” so change it to “in person.” The confidence claim is unconfirmed: the record contains no feedback. Delete it rather than turning it into a weaker guess such as “many felt more confident.” The record supports saying that 18 participants signed in.\n\nPractice and deliverable: Create a one-page review with four claims labeled supported, contradicted, or unconfirmed. Cite the fact or gap behind each label. Then write a two-sentence public recap based only on the packet.\n\nSelf-review rubric: Give yourself one point for each item met, for a total of four:\n1. All four claim labels match the source packet.\n2. Each label identifies the relevant fact or evidence gap.\n3. The recap corrects the format, drops the confidence claim, and adds no new facts.\n4. The recap is two clear public-facing sentences and omits private contact details.\n\nSuggested mentor discussion: If you request a mentor, compare recaps and discuss what evidence would justify adding a statement about participant experience.",
+      "question": "Which pair of edits makes the draft match the record?",
+      "options": [
+        "Keep “hybrid” and replace “everyone” with “some participants.”",
+        "Replace “hybrid” with “in person” and remove the confidence claim.",
+        "Remove the format and change the ending to “participants likely felt more confident.”"
+      ],
+      "answer": 1,
+      "explanation": "The record confirms the event was in person. It does not establish how confident any participants felt afterward."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "You give an AI tool a meeting date and time. Its polished draft also names a meeting room. What should you conclude?",
+      "options": [
+        "The room is reliable because the tool used the correct date and time.",
+        "The room is confirmed if the AI names it again in a second draft.",
+        "The room is an unverified addition that needs a separate check."
+      ],
+      "answer": 2,
+      "explanation": "Correct details elsewhere in a draft do not verify a new detail. Neither does getting the same answer twice."
+    },
+    {
+      "question": "A draft says a workshop ended at noon. The organizer’s confirmed record says it ended at 11:30 a.m. How should you label the noon claim?",
+      "options": [
+        "Contradicted, because the record gives a different end time.",
+        "Unconfirmed, because the record does not use the word “noon.”",
+        "Supported, because both times fall near the end of the morning."
+      ],
+      "answer": 0,
+      "explanation": "The source supplies an incompatible end time, so this is a contradiction rather than a gap in the evidence."
+    },
+    {
+      "question": "You want help writing a generic appointment reminder. What should you send to an approved AI tool?",
+      "options": [
+        "A previous client’s reminder with their name removed but their personal history intact.",
+        "The reminder’s purpose, tone, and placeholders for the date and time.",
+        "The appointment roster so the tool can personalize the template."
+      ],
+      "answer": 1,
+      "explanation": "A generic template only needs instructions and placeholders. Personal history and appointment rosters are not necessary."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "You ask AI to shorten “Applications open June 3.” It returns “Online applications open June 3.” What is the best edit before publishing?",
+      "options": [
+        "Keep “online” because that is a common way to apply.",
+        "Remove “online” unless the application method is separately confirmed.",
+        "Write “probably online” to show that the application method is uncertain."
+      ],
+      "answer": 1,
+      "explanation": "The task was to shorten the notice, not add an application method. Readers could act on that detail, so it needs confirmation."
+    },
+    {
+      "question": "A sign-in log lists nine people. The approved notes do not mention certificates. A recap says “nine people signed in and all received certificates.” What does the evidence support?",
+      "options": [
+        "Both claims, because certificates are a normal part of many events.",
+        "Neither claim, because the notes do not confirm certificates.",
+        "The sign-in count only; the certificate claim is unconfirmed."
+      ],
+      "answer": 2,
+      "explanation": "The log directly supports the count. Silence about certificates does not show whether they were given out."
+    },
+    {
+      "question": "You have confirmed phone and on-site help options. Which prompt avoids unnecessary sharing and assumptions about an older participant?",
+      "options": [
+        "Draft a reply offering phone or on-site help, and ask which the person prefers.",
+        "Mention the participant’s age and suggest phone help as the easier choice.",
+        "Paste the full intake note so the tool can match the person to an option."
+      ],
+      "answer": 0,
+      "explanation": "The tool only needs the confirmed options and the request for a preference. Age does not establish which format is easier for this person."
+    }
+  ],
+  "published": true
+}

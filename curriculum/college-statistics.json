@@ -1,0 +1,258 @@
+{
+  "id": "college-statistics",
+  "mentorPrompt": "I am studying Introduction to Statistics. Please connect me with a mentor who can discuss the subject, review my academic project and reasoning, and suggest further study. I will bring my draft, the course readings, and two specific questions.",
+  "sources": [
+    {
+      "title": "OpenStax: Introductory Statistics 2e",
+      "url": "https://openstax.org/books/introductory-statistics-2e/pages/1-introduction"
+    },
+    {
+      "title": "OpenStax: Descriptive Statistics",
+      "url": "https://openstax.org/books/introductory-statistics-2e/pages/2-introduction"
+    }
+  ],
+  "title": "Introduction to Statistics",
+  "category": "Mathematics and statistics",
+  "level": "Introductory undergraduate-style self-study",
+  "minutes": 300,
+  "description": "College-style introductory study course for independent learning. Prerequisites: Arithmetic, fractions, percentages, and basic algebra; a calculator or spreadsheet is helpful. Includes eight lessons, practice, an academic capstone, and optional mentor review. This course does not award college credit or an accredited qualification.",
+  "skills": [
+    "Distinguish populations, samples, variables, and measurement scales",
+    "Read frequency tables and graphs and identify misleading scales",
+    "Calculate and interpret the mean, median, and range",
+    "Compute probabilities and conditional probabilities from counts",
+    "Distinguish selection bias from confounding and random sampling from random assignment",
+    "Interpret confidence intervals and p-values",
+    "Evaluate linear models using scatterplots and residuals",
+    "Document and interpret a reproducible comparison of two groups"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-fd0e3c71-3932-40e4-b1ea-3eb55ce81fde",
+      "title": "1. Populations, Samples, Variables, and Measurement Scales",
+      "body": "A population is the complete set of units a question is about. A sample is the subset observed. An observational unit is one member of that set, and a variable is a characteristic recorded for each unit. In a data table, rows often represent units and columns represent variables. Define the population before collecting data: a narrow definition can make a conclusion more defensible, while a vague one can make it unclear who is represented.\n\nA nominal scale names categories without ranking them. An ordinal scale ranks categories without establishing equal gaps. An interval scale has equal units but no meaningful zero, as with Celsius temperature: 20°C is not twice as hot as 10°C. A ratio scale has equal units and a meaningful zero, so a duration of 20 minutes is twice a duration of 10 minutes. Numbers used as category codes do not change a variable's scale.\n\nWorked example (fictional data): A researcher wants to describe all 60 entries in a weekend puzzle contest but records 12 entries. Each record contains puzzle type, difficulty rated low/medium/high, and solving time in minutes. The population is the 60 entries, the sample is the 12 entries, and one entry is the unit. The three variables are nominal, ordinal, and ratio, respectively.\n\nPractice: Code the difficulty ratings as 1, 2, and 3. Explain why the codes preserve rank but do not establish equal differences in difficulty.\n\nOptional mentor discussion: How would the unit change if the question were about contestants rather than entries?",
+      "question": "Which variable is measured on an ordinal scale?",
+      "options": [
+        "Puzzle type: logic, word, or number",
+        "Difficulty: low, medium, or high",
+        "Solving time in minutes",
+        "Room temperature in degrees Celsius"
+      ],
+      "answer": 1,
+      "explanation": "Difficulty ratings have a natural order, but the gaps between categories are not established as equal."
+    },
+    {
+      "id": "lesson-0660885c-fde2-41be-a4bf-d3cc181570bb",
+      "title": "2. Tables, Graphs, Distributions, and Misleading Scales",
+      "body": "A distribution describes the values a variable takes and how often they occur. A frequency table gives counts; a relative-frequency table divides each count by the total. A bar chart compares categories with separate bars. A histogram groups a quantitative variable into numerical intervals called bins; neighboring bins usually touch. A dot plot is useful for a small quantitative dataset because it can show each observation and reveal gaps or repeated values.\n\nWorked example (fictional data): Ten craft entries use paper, paper, paper, paper, paper, paper, fabric, fabric, fabric, or wood as their main material. The frequency table is paper 6, fabric 3, wood 1. The relative frequencies are 60%, 30%, and 10%, totaling 100%. A zero-based bar chart with heights 6, 3, and 1 shows that paper occurs twice as often as fabric. If the vertical axis instead begins at 2, the visible portions of the paper and fabric bars are 4 and 1 units high, and the wood count falls below the baseline. That view exaggerates the ratio and hides a category.\n\nBar lengths should start at zero when they encode magnitude. For other graphs, a narrowed axis can reveal variation, but the limits and tick spacing should be clear. When comparing histograms, using the same bin boundaries helps separate real distribution differences from differences caused by display choices.\n\nPractice: Add two wood entries. Rebuild the count table and sketch a zero-based chart. Check: the counts are now 6, 3, and 3.\n\nOptional mentor discussion: When might a dot plot reveal a pattern that a histogram hides?",
+      "question": "Which display best represents the fictional material counts of 6, 3, and 1?",
+      "options": [
+        "A bar chart beginning at 2, with the wood bar omitted",
+        "A histogram treating the three material names as numerical bins",
+        "A bar chart beginning at zero, with equal tick spacing and all three categories",
+        "A bar chart with equally spaced tick marks labeled 0, 1, 3, and 6"
+      ],
+      "answer": 2,
+      "explanation": "A zero baseline and evenly spaced numerical ticks make the bar lengths proportional to the counts. The categories belong in a bar chart, not a histogram."
+    },
+    {
+      "id": "lesson-cda063d2-1784-435e-8e93-06b049e9785f",
+      "title": "3. Mean, Median, and Spread",
+      "body": "Measures of center describe where values tend to lie. The mean is the sum divided by the number of observations. The median is the middle value after sorting, or the average of the two middle values when the count is even. Spread describes how far apart observations are. The range, calculated as maximum minus minimum, is a simple measure of spread. Report the unit for each measure when the observations have units.\n\nWorked example (fictional data): Five players complete [2, 4, 4, 6, 9] puzzle rounds. The mean is (2 + 4 + 4 + 6 + 9) / 5 = 25 / 5 = 5 rounds. The sorted list has five values, so the median is the third value, 4 rounds. The range is 9 − 2 = 7 rounds. The mean includes every value in the sum; the median uses position rather than the magnitude of each value. The mean need not be an observed value: no player completed exactly 5 rounds.\n\nThe range uses only two observations and does not show whether the other values cluster near the center. Likewise, identical means do not imply identical distributions. Use a graph or the sorted values alongside summary statistics when the shape matters.\n\nPractice: Replace 9 with 14 and recalculate all three measures. The new sum is 30, so the mean is 6. The middle value stays 4, and the range increases to 14 − 2 = 12.\n\nOptional mentor discussion: If you wanted to describe a typical player, which measure would you report, and what would you show alongside it?",
+      "question": "What are the median and range of the fictional values [2, 4, 4, 6, 9], respectively?",
+      "options": [
+        "5 and 7",
+        "4 and 9",
+        "5 and 9",
+        "4 and 7"
+      ],
+      "answer": 3,
+      "explanation": "The third value in the sorted list is 4, and the difference between the largest and smallest values is 9 − 2 = 7."
+    },
+    {
+      "id": "lesson-56a5c81a-a8e0-44fd-88e0-9f27e9ac88d4",
+      "title": "4. Probability and Conditional Probability",
+      "body": "A probability measures how likely an event is under a stated chance process. If one record is drawn uniformly from a table, every record is equally likely, so the probability of an event is its count divided by the total. A joint probability is the chance that two events occur together. A conditional probability is the chance of one event given that another is known to have occurred. Conditioning changes which records belong in the denominator.\n\nWorked example (fictional data): A puzzle club logged 20 kit requests. The full frequency table is shown below.\n\nPickup method | Large kit | Small kit | Total\n--- | ---: | ---: | ---:\nDesk | 6 | 4 | 10\nLocker | 2 | 8 | 10\nTotal | 8 | 12 | 20\n\nDraw one request uniformly from all 20. The probability of a large kit is 8/20 = 40%. The joint probability of a large kit and desk pickup is 6/20 = 30%. Given desk pickup, only the 10 desk records remain eligible, so the chance of a large kit is 6/10 = 60%. Given a large kit instead, the chance of desk pickup is 6/8 = 75%. The same cell supplies both numerators, but the conditions give different denominators.\n\nPractice: Find the probability of locker pickup given a small kit. Check: 8 of the 12 small kits use lockers, so the probability is 8/12 = 2/3.\n\nOptional mentor discussion: Why do these probabilities describe a random draw from the log, not necessarily the club's next request?",
+      "question": "In the fictional log, what is the probability of a small kit given locker pickup?",
+      "options": [
+        "8/20",
+        "8/12",
+        "8/10",
+        "12/20"
+      ],
+      "answer": 2,
+      "explanation": "The condition restricts the denominator to the 10 locker requests. Of those, 8 are for small kits."
+    },
+    {
+      "id": "lesson-d44b489d-09d9-4b06-be73-bb2e7461d414",
+      "title": "5. Sampling and Random Assignment: Selection Bias Versus Causal Confounding",
+      "body": "Random sampling and random assignment answer different questions. Random sampling uses chance to choose units from a sampling frame, the list or source from which units can be selected. With good coverage and response, it helps a sample represent its target population. Selection bias can occur when inclusion is related to what is being measured, such as when only frequent attendees enter a survey about how often people attend.\n\nRandom assignment uses chance to allocate the units already in a study to different conditions. It helps make groups comparable in expectation, though a small experiment can still have imbalances by chance. Confounding occurs when a factor related to both group membership and the outcome makes their effects difficult to separate. Randomly selecting people does not by itself remove confounding if those people then choose their own conditions.\n\nWorked example (fictional data): A researcher recruits 20 volunteers from an advanced puzzle club to compare two hint formats. Ten choose illustrated hints and average 8 solved puzzles; ten choose text hints and average 6. The observed difference is 8 − 6 = 2 puzzles. If more experienced solvers favor illustrated hints, prior experience could confound the comparison. Separately, recruiting only from the advanced club limits how confidently the result can be generalized to all local solvers.\n\nPractice: Propose one change for each problem. For broader coverage, sample from a list that includes eligible solvers at different experience levels. For a stronger causal comparison, randomly assign enrolled participants to hint formats.\n\nOptional mentor discussion: What can a well-run randomized experiment with volunteers establish, and what might still limit generalization?",
+      "question": "Researchers keep the same volunteers but randomly assign hint formats. Which problem does this change directly address?",
+      "options": [
+        "Confounding from participants choosing a hint format",
+        "Undercoverage of solvers outside the advanced club",
+        "Nonresponse among people who never volunteered",
+        "Ambiguity about which local solvers are eligible"
+      ],
+      "answer": 0,
+      "explanation": "Random assignment removes self-selection into the hint formats. It does not change who was recruited or whose results the study can represent."
+    },
+    {
+      "id": "lesson-3172a094-574a-4995-a93d-d09826288aec",
+      "title": "6. Sampling Uncertainty, Confidence Intervals, and P-values",
+      "body": "A sample statistic, such as a mean, can vary from one random sample to another even when the population stays fixed. This is sampling uncertainty. A confidence interval uses a procedure designed to account for that variation. A 95% confidence procedure, when its assumptions hold, produces intervals that contain the fixed population value in about 95% of repeated samples. It does not guarantee that any particular interval contains that value or correct bias from poor sampling.\n\nWorked example (fictional teaching exercise): In a simulated population with a known mean of 12 minutes, a learner repeats the same sampling and interval procedure 40 times. Of the resulting intervals, 38 contain 12. The observed coverage is 38/40 = 95%. Another run of 40 need not give exactly 38 covering intervals.\n\nA null hypothesis is a reference claim, such as no group difference. A p-value is the probability, under the null hypothesis and the test assumptions, of obtaining a test statistic at least as extreme as the observed one, according to the test's definition of extreme. In a separate fictional example, a null model has 100 equally likely outcomes, and 4 are at least as extreme as the observed outcome. The p-value is 4/100 = 0.04. This is not the probability that the null is true and does not measure the size of an effect.\n\nPractice: If 19 of 20 simulated intervals cover the known value, report the observed coverage: 19/20 = 95%, not a guarantee for future intervals.\n\nOptional mentor discussion: How could a very small effect produce a small p-value?",
+      "question": "What does the 95% in a 95% confidence procedure refer to?",
+      "options": [
+        "The fraction of individual observations that must lie inside each interval",
+        "The approximate fraction of intervals that cover the fixed value in repeated sampling",
+        "The probability that the null hypothesis is true",
+        "The fraction of all samples guaranteed to produce identical endpoints"
+      ],
+      "answer": 1,
+      "explanation": "The percentage describes long-run coverage of the interval procedure under its assumptions. Individual intervals can miss the fixed population value."
+    },
+    {
+      "id": "lesson-19335e4a-f493-4253-ad6d-1b08871f75ed",
+      "title": "7. Correlation and Linear Models",
+      "body": "A scatterplot places each pair of quantitative observations at its horizontal and vertical coordinates. Before summarizing the relationship, look for direction, curvature, clusters, and unusual points. Correlation describes the direction and strength of a linear association; it does not summarize every curved pattern well. A linear model predicts an outcome using a straight line. Its slope is the change in predicted outcome for a one-unit increase in the predictor.\n\nWorked example (fictional data): Four puzzle players report practice sessions (x) and a quiz score (y). Their pairs are (1, 5), (2, 5), (3, 7), and (4, 11). Plotting the pairs shows an overall increase with a flat start. Consider the candidate line: predicted score = 2 + 2x. Its slope is 2 points per session. The predictions in order are 4, 6, 8, and 10. A residual is observed minus predicted, so the residuals are 1, −1, −1, and 1. Positive residuals at both ends and negative ones in the middle suggest checking for curvature, but four points are too few to draw a strong conclusion.\n\nAssociation alone does not establish causation: prior skill could affect both practice and quiz scores. Extrapolation means predicting outside the observed predictor range, where the pattern may not hold. Here, a prediction for ten sessions would be extrapolation.\n\nPractice: At three sessions, find the prediction and residual. Check: the prediction is 8 and the residual is 7 − 8 = −1.\n\nOptional mentor discussion: What would a single unusual point do to your trust in a linear summary?",
+      "question": "What does the residual of +1 for the player with four practice sessions mean?",
+      "options": [
+        "The line overpredicts the score by 1 point.",
+        "The player practiced one more session than predicted.",
+        "An additional session causes a 1-point gain.",
+        "The observed score is 1 point above the predicted score."
+      ],
+      "answer": 3,
+      "explanation": "At four sessions the line predicts 10, and the observed score is 11. The residual is 11 − 10 = +1."
+    },
+    {
+      "id": "lesson-e7c9070a-1c90-44bb-9279-8c90ab65def7",
+      "title": "8. Capstone: Analyze a Fictional Dataset",
+      "body": "Question: How did completion times differ between two instruction layouts in a fictional assembly task? Eight convenience volunteers each chose one layout and completed the task once. The full dataset is listed as (volunteer ID, layout, minutes): (1, A, 6), (2, A, 8), (3, A, 8), (4, A, 10), (5, B, 5), (6, B, 9), (7, B, 11), (8, B, 15). No records are missing.\n\nReproducible steps: Copy the records into three columns labeled ID, Layout, and Minutes. Verify eight unique IDs and four records per layout. Sort minutes within each layout. Record each count, sum, mean, median, and range. Draw two dot plots on the same horizontal scale and stack repeated values. Write a comparison that names the units, describes what the summaries show, and states what the design cannot establish.\n\nWorked result: A totals 32 minutes and B totals 40, so their means are 8 and 10 minutes. The medians are (8 + 8)/2 = 8 and (9 + 11)/2 = 10. The ranges are 10 − 6 = 4 and 15 − 5 = 10 minutes. B took 2 minutes longer on average and had a larger range, although the fastest volunteer used B. The small convenience sample limits generalization. Layout choice may be confounded with prior assembly experience, which was not recorded.\n\nPractice: Reproduce the analysis without copying the worked totals. Score one point each for accurate data and counts, correct summaries, a reproducible plot and numerical comparison, and an interpretation that explains both design limitations.\n\nOptional mentor discussion: How would you redesign this study to isolate the effect of layout?",
+      "question": "Which conclusion is supported by the fictional assembly data?",
+      "options": [
+        "Layout B caused every volunteer to take 2 minutes longer.",
+        "Layout B averaged 2 minutes more in this sample, but layout choice prevents a causal conclusion.",
+        "Layout A had a larger range because its observations were more tightly clustered.",
+        "All future users of layout A will finish in 6 to 10 minutes."
+      ],
+      "answer": 1,
+      "explanation": "The sample means differ by 10 − 8 = 2 minutes. Volunteers chose layouts, so other factors may explain some or all of the difference."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "A fictional log has 20 requests: 8 online and 12 on paper. Of the 8 online requests, 6 are complete. For a uniformly drawn request known to be online, what is the probability it is complete?",
+      "options": [
+        "6/20",
+        "8/20",
+        "6/8",
+        "6/12"
+      ],
+      "answer": 2,
+      "explanation": "The known condition restricts the denominator to the 8 online requests, of which 6 are complete."
+    },
+    {
+      "question": "In a fictional study, students choose whether to use practice cards. Card users start with higher quiz scores. What threatens a causal interpretation of their higher final scores?",
+      "options": [
+        "Starting skill is related to group choice and may also affect final scores.",
+        "The outcome is numerical, so the groups cannot be compared.",
+        "Using the same final quiz makes the score difference meaningless.",
+        "Group choice is equivalent to random assignment when both groups take a quiz."
+      ],
+      "answer": 0,
+      "explanation": "Starting skill is a potential confounder because it differs between the groups and may influence final scores."
+    },
+    {
+      "question": "A fictional test of no difference in average puzzle scores gives a p-value of 0.08. What does 0.08 describe?",
+      "options": [
+        "The probability that there is no difference",
+        "The proportion of players with equal scores",
+        "The probability that a repeat study gives exactly the same result",
+        "The probability, under the null and test assumptions, of a statistic at least as extreme as observed"
+      ],
+      "answer": 3,
+      "explanation": "A p-value assumes the null and test conditions when calculating a tail probability. It does not assign a probability to the null hypothesis."
+    },
+    {
+      "question": "For the fictional scores [1, 3, 3, 5, 8], what is the median?",
+      "options": [
+        "4",
+        "3",
+        "5",
+        "7"
+      ],
+      "answer": 1,
+      "explanation": "The sorted list has five values. Its middle, third value is 3."
+    },
+    {
+      "question": "A 95% confidence interval procedure is used on repeated random samples under its assumptions. What does 95% describe?",
+      "options": [
+        "About 95% of all individual data points are identical.",
+        "The fixed population parameter changes after every sample.",
+        "Every resulting interval is guaranteed to contain the population value.",
+        "About 95% of the resulting intervals cover the fixed population value."
+      ],
+      "answer": 3,
+      "explanation": "The percentage describes the repeated-sampling coverage of the procedure, not a guarantee for one interval."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "Transfer problem: A fictional archive contains 24 maps. Of 10 folded maps, 3 need repair. Of 14 flat maps, 4 need repair. A map is drawn uniformly and found to need repair. What is the probability it is folded?",
+      "options": [
+        "3/7",
+        "3/10",
+        "7/24",
+        "4/7"
+      ],
+      "answer": 0,
+      "explanation": "There are 3 + 4 = 7 maps that need repair, and 3 of those are folded. The condition changes the denominator from 24 to 7."
+    },
+    {
+      "question": "In a fictional sorting study, volunteers choose a visual or text guide. People with more sorting experience tend to choose the visual guide and may sort faster. Keeping the same volunteers, what change most directly reduces this confounding?",
+      "options": [
+        "Recruit more volunteers and still let everyone choose a guide.",
+        "Select which results to analyze at random after volunteers choose guides.",
+        "Randomly assign the volunteers to the two guides before the task.",
+        "Use a larger graph to display the same observed times."
+      ],
+      "answer": 2,
+      "explanation": "Random assignment breaks the link between guide preference and assigned guide in expectation. It addresses group comparability, not population representation."
+    },
+    {
+      "question": "In a fictional test of no layout effect, the null model has 200 equally likely outcomes. The observed test statistic is matched or exceeded in extremeness by 6 outcomes. What is the p-value interpretation?",
+      "options": [
+        "There is a 97% probability that layout affects the outcome.",
+        "Under the null model, the probability of a result at least as extreme is 6/200 = 0.03.",
+        "There is a 3% probability that the null hypothesis is true.",
+        "Under the null model, the probability of the exact observed result must be 0.03."
+      ],
+      "answer": 1,
+      "explanation": "Six of 200 equally likely null outcomes are at least as extreme, giving 0.03. This is a probability about outcomes under the null, not about whether the null is true."
+    },
+    {
+      "question": "Fictional times are [3, 5, 5, 7, 10] minutes. What are their mean and median?",
+      "options": [
+        "Mean 6, median 5",
+        "Mean 5, median 6",
+        "Mean 6, median 7",
+        "Mean 7, median 5"
+      ],
+      "answer": 0,
+      "explanation": "The sum is 30 and there are five times, so the mean is 6. The third sorted value is 5, the median."
+    },
+    {
+      "question": "In a fictional simulation, 94 of 100 intervals cover a known population mean. Which statement is accurate?",
+      "options": [
+        "The next interval is guaranteed to cover the mean.",
+        "Observed coverage in this run is 94%; another run may differ.",
+        "94% of the population has the same value.",
+        "The fixed population mean changed in six runs."
+      ],
+      "answer": 1,
+      "explanation": "The count describes empirical coverage in this simulation. A procedure’s long-run coverage does not force an exact count in every finite run."
+    }
+  ],
+  "published": true
+}

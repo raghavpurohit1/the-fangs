@@ -1,0 +1,98 @@
+[
+  [
+    "ai-literacy",
+    "AI Literacy and Responsible Use",
+    "AI literacy",
+    "AI outputs and limitations; checking unsupported claims; privacy and bias in everyday tools; capstone: evaluate a fictional AI-written event summary against supplied facts",
+    "NIST: Generative AI Profile",
+    "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+  ],
+  [
+    "prompting",
+    "Practical Prompting and Verification",
+    "AI skills",
+    "Task context audience and constraints; worked prompt comparison; checking claims against a supplied fact sheet; capstone: build and test a reusable prompt for a volunteer event notice",
+    "NIST: Generative AI Profile",
+    "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+  ],
+  [
+    "spreadsheets",
+    "Spreadsheets for Community Impact",
+    "Data skills",
+    "Rows columns and clean data; SUM and AVERAGE with a tiny fictional attendance dataset; sorting and filtering whole rows without mixing records; capstone: summarize attendance with denominator and missing data caveats",
+    "Google Sheets: Sort and filter data",
+    "https://support.google.com/docs/answer/3540681"
+  ],
+  [
+    "python",
+    "Python for Everyday Problem Solving",
+    "Programming",
+    "Variables numbers and strings; lists and simple iteration; conditionals and input checking; capstone: calculate attendance from an explicitly fictional list with tests and expected outputs",
+    "Python: An informal introduction",
+    "https://docs.python.org/3/tutorial/introduction.html"
+  ],
+  [
+    "web",
+    "Build Your First Accessible Web Page",
+    "Web development",
+    "HTML document structure and headings; links lists and descriptive text; CSS readability and responsive layout; capstone: create a fictional community event page with semantic HTML and self-checks",
+    "MDN: Basic HTML syntax",
+    "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax"
+  ],
+  [
+    "cybersecurity",
+    "Everyday Cybersecurity for Work",
+    "Cybersecurity",
+    "Recognize a fictional phishing message; unique passwords and password managers; MFA and updates; capstone: create a personal account safety checklist without sharing secrets",
+    "CISA: Secure Our World — four steps for online safety",
+    "https://content.govdelivery.com/accounts/USDHSCISA/bulletins/3730a64"
+  ],
+  [
+    "accessibility",
+    "Inclusive Design and Accessibility",
+    "Design",
+    "Understand a user task before designing; headings and meaningful links; labels text alternatives and keyboard checks; capstone: review and improve a fictional program application form",
+    "W3C WAI: Accessibility tutorials",
+    "https://www.w3.org/WAI/tutorials/"
+  ],
+  [
+    "career",
+    "Explore Your Next Tech Career",
+    "Career development",
+    "Inventory interests and transferable skills; compare developer data and support tasks without invented salaries; conduct an informational conversation; capstone: make a 30-day exploration plan with evidence of learning",
+    "ASU: Career Roadmap",
+    "https://thecollege.asu.edu/student-life/careers/roadmap"
+  ],
+  [
+    "portfolio",
+    "Build a Skills-Based Resume and Portfolio",
+    "Career development",
+    "Collect honest evidence of skills; turn activities into concrete accomplishment statements without invented numbers; tailor examples to a fictional role; capstone: draft a resume section and a project case study",
+    "ASU: Résumés and Cover Letters",
+    "https://career.engineering.asu.edu/resumes-and-cover-letters/"
+  ],
+  [
+    "interviews",
+    "Practice Confident Interviews",
+    "Career development",
+    "Analyze a fictional role; structure a STAR example; explain a project and ask useful questions; capstone: prepare three honest stories and a mock interview rubric",
+    "ASU: Crafting your career story",
+    "https://studentemployment.asu.edu/crafting-your-career-story"
+  ],
+  [
+    "github",
+    "GitHub and Collaborative Projects",
+    "Developer tools",
+    "Repositories README files and safe sharing; branches commits and meaningful messages; pull requests and constructive review; capstone: plan a small documentation contribution with review and rollback",
+    "GitHub: Hello World",
+    "https://docs.github.com/en/get-started/using-github/hello-world"
+  ],
+  [
+    "teamwork",
+    "Lead a Small Community Tech Project",
+    "Leadership",
+    "Define user need success and scope; break work into ordered small tasks with ownership; review progress and adapt; capstone: plan a two-week community workshop project with acceptance criteria and a retrospective",
+    "Scrum Guides: The Scrum Guide",
+    "https://scrumguides.org/scrum-guide.html"
+  ]
+]

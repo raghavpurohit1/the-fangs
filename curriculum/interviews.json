@@ -1,0 +1,150 @@
+{
+  "id": "study-interviews",
+  "mentorPrompt": "I am studying Practice Confident Interviews. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "ASU: Crafting your career story",
+      "url": "https://studentemployment.asu.edu/crafting-your-career-story"
+    }
+  ],
+  "title": "Practice Confident Interviews",
+  "category": "Career development",
+  "level": "Beginner",
+  "minutes": 75,
+  "description": "Build interview answers from work, volunteering, classes, caregiving, or other experiences you are comfortable sharing. You will analyze a fictional job posting, build a STAR answer, explain a project in plain language, and rehearse three truthful stories. You can complete the course on your own. You may request a mentor to discuss your practice; no mentor has been assigned.",
+  "skills": [
+    "Identify role priorities and match them to firsthand evidence",
+    "Structure an honest interview story using STAR",
+    "Explain a project clearly and ask a useful follow-up question",
+    "Rehearse interview answers and use a four-point self-review rubric"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-fe78cb62-1be0-434f-ae3b-757319d51563",
+      "title": "1. Analyze a Fictional Role",
+      "body": "Start with what the employer needs someone to do, not with whether your past job titles match. Underline action verbs in the posting, then turn each duty into an interview question. Look for an experience where you did something similar, even if it happened in a different setting. If you spot a gap, distinguish what you have done from what you would need to learn.\n\nFictional worked example. A community center seeks a program assistant who will “confirm workshop registrations, track attendance in a spreadsheet, and alert the coordinator when a session fills.” A candidate returning to paid work has these notes from a school book swap: “I checked names against a signup list, updated a shared sheet when families arrived, and told the organizer when all afternoon slots were taken.”\n\nThe candidate turns “track attendance” into “Tell me about a time you kept a record up to date.” Their evidence match is: “I updated the book swap’s shared sheet as families checked in, so the organizer could see who had arrived.” Their gap note is: “I haven’t used a registration platform. I have maintained a shared signup sheet.” The note gives the interviewer a clear distinction instead of an inflated claim.\n\nPractice: Pick three duties from the fictional posting or a real one. For each, write a likely interview question and one action you personally took that could answer it. Mark one gap instead of stretching an example to fit.\n\nSuggested mentor discussion: Which of my evidence matches sounds strongest, and which needs a more specific detail?",
+      "question": "Which example best supports the duty “alert the coordinator when a session fills”?",
+      "options": [
+        "I updated the spelling of names on the signup list.",
+        "I told the organizer when all afternoon slots were taken.",
+        "I helped put signs near the check-in table.",
+        "I attended a planning meeting about how to schedule the sessions."
+      ],
+      "answer": 1,
+      "explanation": "Telling the organizer when no slots remained shows both that you noticed the session was full and that you notified the person responsible."
+    },
+    {
+      "id": "lesson-6656ea40-a6b5-4fcf-a207-31d207a38572",
+      "title": "2. Structure a STAR Example",
+      "body": "STAR stands for Situation, Task, Action, and Result. Give just enough context to explain the problem, name your responsibility, then spend most of the answer on what you did. End with what you know happened. A result can be something you observed or a lesson you applied later; it does not have to be a number. Use “we” for shared work and “I” for your part.\n\nFictional worked example. Interview question: “Tell me about a time you caught a problem before it affected someone.” Raw notes from a pantry volunteer: “Saturday pickup; two bags labeled Ortiz; different order numbers; my job was to match bags to the pickup list; checked numbers; asked shift lead to confirm; relabeled bags; both went to correct households.”\n\nSpoken answer: “At a Saturday pantry pickup, two bags had the same last name on their labels. I was responsible for matching bags to the pickup list. I paused the handoff, checked the order numbers against the list, and asked the shift lead to confirm the match before I added the order numbers to both labels. I handed each bag to the household listed for that order.” This version names the volunteer’s judgment without claiming they redesigned the whole process or prevented problems on later shifts.\n\nPractice: Pick one evidence match from Lesson 1. Make four short notes labeled S, T, A, and R, then say the answer aloud. If the result is unclear, write down what you actually saw rather than filling in a success claim.\n\nSuggested mentor discussion: Where can I shorten the setup so my decision and actions are easier to hear?",
+      "question": "Which sentence belongs in the Action part of the pantry story?",
+      "options": [
+        "Two bags at Saturday pickup had the same last name.",
+        "My responsibility was to match bags to the pickup list.",
+        "Each bag went to the household listed for its order.",
+        "I checked the order numbers and asked the shift lead to confirm the match."
+      ],
+      "answer": 3,
+      "explanation": "Checking the numbers and asking for confirmation are steps the volunteer took. The other options describe the situation, task, or result."
+    },
+    {
+      "id": "lesson-3d035bba-d525-4964-ab74-b87dfa39f57f",
+      "title": "3. Explain a Project and Ask Useful Questions",
+      "body": "For a project overview, start with the problem the project addressed. Then explain what changed, what you personally contributed, and what you know about how it worked. Unlike a STAR answer about one moment, a project overview can summarize work across several steps. Use words an interviewer outside your field would understand. To learn how the new team works, ask about a decision, handoff, or expectation that the posting doesn't explain.\n\nFictional worked example. Input notes from a neighborhood tool library: “Borrowers asked when items were due; volunteer team made reminder template; I drafted wording and tested it on sample entries; coordinator approved final text; volunteers used it during the next lending cycle; no return-rate data.”\n\nSpoken overview: “Borrowers sometimes weren't sure when tools were due back, so our volunteer team made a standard reminder. I drafted the message and checked sample entries to be sure each reminder named the tool and its return date. The coordinator approved the final wording, and volunteers used the reminder during the next lending cycle. We didn't measure whether more tools came back on time.” The answer shows what was delivered without implying an improvement the team didn't measure.\n\nIf a posting mentions sending participant reminders, a useful question is: “When a session time changes, who updates the schedule and who contacts participants?” The answer reveals how the team divides the work.\n\nPractice: Write a four-sentence project overview. Replace one insider term with plain language, then write a question about a role responsibility the posting leaves unclear.\n\nSuggested mentor discussion: After hearing my overview once, what do you think I owned, and what still needs clarification?",
+      "question": "Which question best clarifies how the team handles changes to participant reminders?",
+      "options": [
+        "When a session moves, who updates the schedule and who notifies participants?",
+        "What do you most enjoy about working here?",
+        "How many years has the program offered workshops?",
+        "Which part of the interview should I spend the most time preparing for?"
+      ],
+      "answer": 0,
+      "explanation": "This question gets at a specific handoff: who updates the information and who communicates it. The other questions do not clarify that responsibility."
+    },
+    {
+      "id": "lesson-e0a9832d-e723-408c-9694-313fd3c63a1e",
+      "title": "4. Capstone: Three Honest Stories and a Mock Interview",
+      "body": "Build a one-page interview sheet for one role. List three duties and prepare one truthful STAR story for each. Use four brief cues per story instead of a memorized script. Mark your own contribution and keep only outcomes you observed or can support. Add one question for the interviewer about how the team works.\n\nFictional worked example. For the community center role, a candidate's three story cues are: “Registration: duplicate signup → check the list → confirm with the organizer → correct the entry”; “Attendance: walk-ins arrive → log arrivals → add names to the shared sheet → organizer sees who's present”; “Full session: last slot taken → flag capacity → message the organizer → organizer starts a waitlist.” In the first story, the spoken result is “I corrected the duplicate entry,” not “I made the registration process more efficient.”\n\nPractice: Run a ten-minute mock interview with a partner or record yourself. For each duty, answer “Tell me about a time you did something similar.” Ask your interviewer question aloud, then use the rubric. Score each item 1 if met and 0 if not, for a total of 0–4:\n\n1. Relevance: Each story matches a different role duty.\n2. Structure: Each answer includes all four STAR parts.\n3. Accuracy: You separate your actions from team actions and report only supported results.\n4. Question: Your question clarifies a role responsibility or team handoff not explained in the posting.\n\nCapstone deliverable: Save the one-page sheet, your four scores, and one revised answer based on your review.\n\nSuggested mentor discussion: Which story should I revise first, and what one change would make it more useful to an interviewer?",
+      "question": "A story matches the role, but you claim the team cut errors without evidence. What should you revise?",
+      "options": [
+        "Use a smaller estimate so the claim sounds more cautious.",
+        "Move the claim into the Situation part of the story.",
+        "Replace the claim with what you personally did and what you observed.",
+        "Keep the claim but speak more slowly when you describe the result."
+      ],
+      "answer": 2,
+      "explanation": "A verifiable or observed result makes the story accurate. Changing the estimate, its position, or its delivery does not support the claim."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "A role asks you to maintain accurate sign-in records. Which experience most directly shows that skill?",
+      "options": [
+        "I greeted guests as they entered an event.",
+        "I compared check-in entries with a roster and corrected duplicates.",
+        "I designed a sign directing guests to the entrance.",
+        "I attended a volunteer briefing about event setup."
+      ],
+      "answer": 1,
+      "explanation": "Comparing entries with a roster and correcting duplicates directly demonstrates that you can maintain an accurate record."
+    },
+    {
+      "question": "Which sentence describes a result rather than a task or action?",
+      "options": [
+        "I needed to find a room for the meeting.",
+        "I checked which rooms were open.",
+        "I emailed the group with the new room number.",
+        "Everyone arrived at the new room before the meeting began."
+      ],
+      "answer": 3,
+      "explanation": "The group's arrival is what happened afterward. Finding a room was the task; checking and emailing were actions."
+    },
+    {
+      "question": "A posting says you will share updates with volunteers. Which question best clarifies how that work is done?",
+      "options": [
+        "Who approves volunteer updates, and how are they usually sent?",
+        "What kinds of events do volunteers usually attend?",
+        "How long has the organization worked with volunteers?",
+        "What do volunteers say they enjoy about the program?"
+      ],
+      "answer": 0,
+      "explanation": "Asking who approves updates and how they are sent clarifies the steps and responsibilities behind the duty."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "A role asks you to flag low supplies before a session. Which story best demonstrates that skill?",
+      "options": [
+        "I handed out materials at the start of a craft class.",
+        "I labeled a shelf so instructors could find the spare materials.",
+        "I compared stock with the class list and told the lead we were short on kits.",
+        "I sorted the unused kits after the class ended."
+      ],
+      "answer": 2,
+      "explanation": "This example shows that you identified a shortage before the session and alerted the person who could address it."
+    },
+    {
+      "question": "You made a checklist and saw two teammates use it. You did not track speed. Which STAR result is best supported?",
+      "options": [
+        "The checklist helped everyone finish their shifts faster.",
+        "Two teammates used the checklist on the next shift.",
+        "The checklist made the process more efficient.",
+        "I was asked to make a checklist for the next shift."
+      ],
+      "answer": 1,
+      "explanation": "You observed two teammates using the checklist. You did not measure speed or efficiency, and being asked to make it describes the task."
+    },
+    {
+      "question": "A posting says you will prepare weekly activity summaries. Which question best clarifies what a useful summary contains?",
+      "options": [
+        "How long has the team been writing weekly summaries?",
+        "Is the summary prepared at the beginning or end of the week?",
+        "How many people work on the team that receives the summaries?",
+        "Who reads the summary, and what decisions do they use it to make?"
+      ],
+      "answer": 3,
+      "explanation": "Knowing the readers and the decisions they make helps you determine which details to include. The other questions do not clarify what information the readers need."
+    }
+  ],
+  "published": true
+}

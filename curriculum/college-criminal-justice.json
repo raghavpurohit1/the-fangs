@@ -1,0 +1,257 @@
+{
+  "id": "college-criminal-justice",
+  "mentorPrompt": "I am studying Introduction to Criminal Justice. Please connect me with a mentor to review my academic project, explain difficult concepts and discuss further study. I will bring my draft, the suggested readings, and two questions.",
+  "sources": [
+    {
+      "title": "Open Oregon: Introduction to the American Criminal Justice System — An Equity Lens",
+      "url": "https://openoregon.pressbooks.pub/crimjustsysintro1e/"
+    },
+    {
+      "title": "United States Courts: Criminal cases",
+      "url": "https://www.uscourts.gov/about-federal-courts/types-cases/criminal-cases"
+    }
+  ],
+  "title": "Introduction to Criminal Justice",
+  "category": "Criminal justice studies",
+  "level": "Introductory undergraduate",
+  "minutes": 240,
+  "description": "College-style introductory study course for independent learning. Prerequisites: Reading short academic texts and interpreting counts and percentages; no prior legal study required. Eight lessons, an academic project, and optional mentor review. No college credit or accredited qualification is awarded. General U.S. educational scope; procedures vary by jurisdiction.",
+  "skills": [
+    "Distinguish criminal justice institutions from criminological research",
+    "Identify federal, state, and local roles without assuming uniform procedures",
+    "Explain the presumption of innocence and the government's burden at trial",
+    "Map major case stages and recognize alternative pathways",
+    "Distinguish scientific interpretation from legal fact-finding",
+    "Calculate and interpret rates using appropriate denominators",
+    "Evaluate policy comparisons and write evidence-limited memos"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-ebec46c1-5c96-45f5-be8a-749617d2cee5",
+      "title": "1. Criminal Justice and Criminology",
+      "body": "Criminal justice refers to the institutions and practices through which a society responds to suspected and established violations of criminal law. Police agencies, courts, and corrections agencies perform different jobs and operate under different forms of oversight. Criminology is the study of crime, its patterns and possible causes, and how societies respond to it. A criminologist may study the same agency that a criminal justice practitioner works in, but studying an agency's decisions is different from making those decisions.\n\nPublic safety and fair treatment are both important goals. A public safety question asks whether harm is prevented or reduced. A fair treatment question asks, for example, whether people can understand a decision, whether similar cases are treated consistently, or whether people have a meaningful chance to contest a decision. A count of agency activity does not answer either question by itself.\n\nWorked example (fictional). Input: A city agency changes how it receives incident reports, and its records show more reports the following month. Output: The change in intake is an institutional action. Asking why recorded reports increased is a research question. More reports could reflect easier reporting, more underlying incidents, or both. The count alone cannot distinguish these explanations.\n\nPractice: Write one question about whether the intake process is fair and one research question that could help explain the change in reports. For each, name a source of information you would want.\n\nOptional mentor discussion: How could a reporting change improve access while making a short-term trend harder to interpret?",
+      "question": "Which question is primarily criminological rather than a question about an agency's operational duties?",
+      "options": [
+        "Who is responsible for recording a report?",
+        "Who schedules staff to receive reports?",
+        "What might explain differences in reporting between neighborhoods?",
+        "Which office sends confirmation that a report was received?"
+      ],
+      "answer": 2,
+      "explanation": "The neighborhood question asks for an explanation of a pattern. The other questions ask who performs particular institutional duties."
+    },
+    {
+      "id": "lesson-c18cfa10-77c5-4ec0-8a3c-7b3868adb3dc",
+      "title": "2. Federal, State, and Local Roles",
+      "body": "The United States has multiple criminal justice systems, not one chain of command. Federal authorities handle matters within federal jurisdiction. State authorities enforce state criminal law, and many local agencies carry out policing or other functions under state and local arrangements. A city police department, a county prosecutor's office, and a court located in the same city may belong to different levels of government. The location of a building tells you little about its legal authority.\n\nAt the federal level, an authorized federal agency may investigate a matter. Prosecutors in a U.S. Attorney's Office represent the United States in federal criminal cases. Federal district courts handle federal criminal trials, and defense counsel represents the accused. An investigator does not determine guilt, and a prosecutor does not supervise the judge. In a state case, the titles, allocation of responsibilities, and procedures can differ. Both state and federal authorities may have an interest in the same conduct; that does not make their cases interchangeable.\n\nWorked example (fictional). Input: City officers receive a report. A federal agency later investigates, a federal prosecutor brings a case, and a U.S. district court hears it. Output: Receiving the report was a local function; the later investigation, prosecution, and court proceeding were federal functions. The city officers' involvement did not make the federal court a city court.\n\nPractice: Draw three columns labeled investigation, prosecution, and adjudication. Place the actors from the example in the correct columns and label their level of government.\n\nOptional mentor discussion: Why is it useful to identify both an actor's role and the source of that actor's authority?",
+      "question": "Which pairing correctly identifies a federal role in the worked example?",
+      "options": [
+        "City police department: decides federal guilt",
+        "U.S. Attorney's Office: prosecutes on behalf of the United States",
+        "U.S. district court: conducts the agency investigation",
+        "Federal investigative agency: represents the accused"
+      ],
+      "answer": 1,
+      "explanation": "The U.S. Attorney's Office represents the United States in the prosecution. Investigators investigate, the court adjudicates, and defense counsel represents the accused."
+    },
+    {
+      "id": "lesson-dd8e6a11-7e76-4e39-b4d5-9d509d012bef",
+      "title": "3. Fair Process and Ethical Decision-Making",
+      "body": "The presumption of innocence means that an accusation is not a finding of guilt. At a U.S. criminal trial, the government must prove each element of the charged offense beyond a reasonable doubt. An element is a fact the law requires the government to prove for that offense. The accused does not have to prove innocence. A not-guilty verdict means the government did not obtain a finding of guilt under the trial standard; it does not necessarily establish what happened outside the courtroom.\n\nEthical decision-making requires stating conclusions at the level the record supports. An arrest, a filed charge, and a conviction describe different events. A fair summary names the current stage, distinguishes allegations from findings, and does not treat silence or missing information as proof of guilt. These are general U.S. educational principles, not advice about a real case. Particular procedures and terms vary by jurisdiction.\n\nWorked example (fictional). Input: A public notice says Morgan was charged and that a witness gave a statement. It reports no plea or verdict. Output: 'Morgan has been charged, and the notice describes a witness statement. It reports no determination of guilt.' The statement does not tell the reader what weight a fact-finder would give the witness account.\n\nPractice: Rewrite the fictional headline 'Charge proves Morgan committed the offense.' Then list one fact the notice establishes and one question it leaves unresolved.\n\nOptional mentor discussion: Why might a careful summary sound less definite than a headline even when both refer to the same notice?",
+      "question": "What must happen for the government to obtain a guilty verdict at a criminal trial?",
+      "options": [
+        "The accused must fail to prove an alternative account.",
+        "The charge must be supported by suspicion alone.",
+        "The government must show only that guilt is more likely than not.",
+        "The government must prove each element beyond a reasonable doubt."
+      ],
+      "answer": 3,
+      "explanation": "The burden remains with the government, and the criminal trial standard is proof beyond a reasonable doubt for each element."
+    },
+    {
+      "id": "lesson-fae20d8c-a113-4b1c-a229-b7abf69c4f97",
+      "title": "4. The Broad Pathway of a Criminal Case",
+      "body": "A case pathway is a map of possible decisions, not a checklist every matter completes. During investigation, authorities gather and assess information. A charging decision determines whether to bring a formal accusation through the applicable process. After charges are brought, initial proceedings may include notice of the charges, arrangements for counsel, and decisions about release or detention. The sequence, names, and decision-makers can vary by jurisdiction. An early decision about whether a case can proceed is not a trial verdict.\n\nSome matters end without charges. Others end after charging through dismissal, or they may resolve through a negotiated guilty plea if accepted by the court under applicable procedures. If a case goes to trial, the fact-finder determines whether the government has met its burden. Sentencing follows conviction, whether the conviction follows an accepted guilty plea or a guilty verdict. A later review, such as an appeal, may address eligible legal issues; it is not automatically a second trial.\n\nWorked example (fictional). Input: An agency investigates a report, a prosecutor files a charge, an initial hearing occurs, and a court accepts a negotiated guilty plea and later imposes a sentence. The summary says nothing about an appeal. Output: Investigation → charging → initial hearing → plea and conviction → sentencing. No trial occurred, and review is not established by the summary.\n\nPractice: Draw a branching map with one path ending before charging and another ending in acquittal at trial. Mark which stages would not occur on each path.\n\nOptional mentor discussion: What errors can arise when a case timeline leaves out decisions that ended a matter early?",
+      "question": "Which conclusion is supported by the fictional case summary?",
+      "options": [
+        "The case went to sentencing after conviction without a trial.",
+        "The initial hearing was itself a guilty verdict.",
+        "Appeal was required before the court could impose a sentence.",
+        "The prosecutor imposed the sentence when filing the charge."
+      ],
+      "answer": 0,
+      "explanation": "The court accepted a guilty plea and later sentenced the defendant. A conviction can occur without a trial, and the summary does not establish any appeal."
+    },
+    {
+      "id": "lesson-48d57271-f416-4e00-8baf-49d75a924879",
+      "title": "5. Evidence, Fact-Finding, and Professional Roles",
+      "body": "Evidence is information offered to help resolve a disputed issue. Its meaning depends on what question it addresses, how it was obtained or interpreted, and how it fits with other information. Evidence does not decide guilt on its own. In a jury trial, the judge rules on legal issues, including whether evidence may be admitted, and instructs the jury on the law. The jury evaluates admitted evidence and applies those instructions to reach a verdict. In a trial without a jury, the judge also serves as fact-finder.\n\nProsecutors represent the government and present its case. Defense counsel represents the accused and may challenge whether the government's evidence supports the inferences it asks the fact-finder to draw. A forensic expert interprets findings within a field of expertise and explains relevant limitations. An expert may inform fact-finding without deciding the ultimate legal question of guilt.\n\nWorked example (fictional). Input: An examiner says fibers on a bag are consistent with a common type of jacket fabric. The examiner cannot identify the particular jacket or say when the fibers were deposited. Output: The finding supports compatibility with a type of fabric, but not a unique source or time of contact. The fact-finder assesses its weight alongside the rest of the admitted evidence.\n\nPractice: Write a two-sentence summary for a general reader. In the first sentence, state the finding; in the second, rule out an inference the finding does not support.\n\nOptional mentor discussion: How could the phrase 'the fibers match' make the finding sound stronger than it is?",
+      "question": "What does the fictional examiner's finding support?",
+      "options": [
+        "The bag contacted a particular jacket at a particular time.",
+        "The fibers are compatible with a type of jacket fabric.",
+        "The court must treat the finding as conclusive.",
+        "The examiner has determined that the accused is guilty."
+      ],
+      "answer": 1,
+      "explanation": "Compatibility with a fabric type is narrower than identification of a particular source. The examiner also cannot establish timing or determine guilt."
+    },
+    {
+      "id": "lesson-9dbb6421-b7f8-43bd-8449-278b66b5b944",
+      "title": "6. Crime Data and Measurement",
+      "body": "Reported incidents, arrests, and convictions describe different things. An incident count records events that were reported and entered under a dataset's rules. An arrest count records arrests under its own counting rules, not findings of guilt. A conviction count records case outcomes or other units specified by the dataset. Counts from the same year do not necessarily track the same events or people. You cannot calculate the share of reported incidents leading to conviction by dividing unrelated annual totals.\n\nA rate puts a count in relation to a specified denominator. To calculate recorded incidents per 1,000 residents, divide the recorded incidents by the population and multiply by 1,000. Compare rates only after checking the definitions and observation periods. Even comparable recorded rates can differ from the rates of underlying events: some events are never reported. Selection bias can occur when the events captured differ systematically from those that are missing.\n\nWorked example (fictional data). Input: Over one year, North records 60 incidents among 12,000 residents and South records 45 among 5,000 residents, using the same counting definition. Output: North has 5 recorded incidents per 1,000 residents; South has 9. North has the larger count, but South has the higher recorded rate. Neither rate measures unreported events.\n\nPractice (fictional data): Add East, with 24 recorded incidents and 4,000 residents over the same period. Calculate 6 per 1,000 and check that East falls between North and South. Explain why the ranking describes records rather than all events.\n\nOptional mentor discussion: What reporting differences would you want to investigate before interpreting these rates?",
+      "question": "Using the fictional data, which comparison is correct?",
+      "options": [
+        "North has a higher recorded rate because 60 is greater than 45.",
+        "South has 9 recorded incidents per 100 residents.",
+        "East and North have equal recorded rates.",
+        "South has a higher recorded rate than North despite having fewer recorded incidents."
+      ],
+      "answer": 3,
+      "explanation": "South records 9 incidents per 1,000 residents compared with North's 5. The raw counts do not account for the different population sizes."
+    },
+    {
+      "id": "lesson-6b5c3165-5ae5-401b-9975-a49b4d27ae34",
+      "title": "7. Corrections, Rehabilitation, and Policy Evaluation",
+      "body": "Corrections can include custody, community supervision, and services that support a return to community life. These activities may serve different goals. Accountability concerns the response to an offense; incapacitation limits opportunities for some harmful conduct during confinement; rehabilitation seeks to develop skills or address needs related to future behavior. Reintegration concerns the transition back into community life. A policy may pursue several goals, but a measure suited to one goal might say little about another.\n\nEvaluation starts by defining the outcome, the eligible population, and the observation window. A difference between groups is not automatically an effect of a program. People who enroll may differ from others at baseline, before the program starts. Follow-up may also be incomplete or uneven. Ethical safeguards include explaining how information will be used, limiting collection to needed data, protecting confidentiality, and ensuring that evaluation participation is not coerced.\n\nWorked example (fictional data, not an efficacy study). Input: At six months, 18 of 30 learners enrolled in a reentry education program and 12 of 30 eligible non-enrollees have a recorded credential. More enrollees already had qualifying coursework at intake. Output: The observed rates are 60% and 40%. The 20-percentage-point gap does not show that the program caused the difference, because prior coursework could influence both enrollment and completion.\n\nPractice: Name one baseline variable to compare, one safeguard for handling credential records, and one limit of using credentials to assess overall reintegration.\n\nOptional mentor discussion: How would unequal follow-up change your confidence in the comparison?",
+      "question": "What is the most defensible interpretation of the fictional credential results?",
+      "options": [
+        "The program caused the full 20-percentage-point gap.",
+        "Equal group sizes show the baseline difference does not matter.",
+        "Enrollees had a higher observed rate, but prior coursework limits causal interpretation.",
+        "Credential records directly measure every goal of corrections."
+      ],
+      "answer": 2,
+      "explanation": "The rate difference describes the groups. Prior coursework could affect both enrollment and credential attainment, so the comparison does not isolate the program's effect."
+    },
+    {
+      "id": "lesson-58034fa6-68cf-4ea7-8c95-f4e5a693e503",
+      "title": "8. Capstone: An Evidence-Limited Policy Memo",
+      "body": "A policy memo should separate what the record shows from what the author infers. Use only the packet below. It is fictional and illustrates general U.S. concepts, not the rules of any real jurisdiction.\n\nFictional packet. State case summary: Local officers investigated an allegation. A state prosecutor filed a charge. Defense counsel represented the accused. A state judge held an initial hearing. A jury found the defendant guilty at trial; the judge then imposed a sentence. The summary does not mention an appeal. Policy summary: A county corrections office offered voluntary reentry coaching to 200 eligible adults. Of 80 who enrolled, 12 had a new recorded arrest within six months after release. Of 120 who did not enroll, 30 had a new recorded arrest in the same window. Follow-up records were available for all 200. At intake, stable housing was more common among enrollees. A draft announcement says, 'Coaching caused the lower arrest rate.' The case summary is separate from the program data.\n\nWorked example. Input: 12 of 80 versus 30 of 120. Output: 15% versus 25%, a 10-percentage-point lower recorded arrest rate among enrollees. Voluntary enrollment and differences in housing at intake limit causal interpretation. An arrest is not a conviction or a count of all offenses.\n\nPractice: Write a 150–200 word memo to the county evaluation team. Map the case actors to their roles, compare the rates, critique the announcement, and propose one follow-up analysis with a privacy safeguard.\n\nFour-point rubric (one point each): accurate role and stage map; correct rates and gap; accurate outcome and causal limits; feasible next analysis and specific privacy safeguard.\n\nOptional mentor discussion: What wording would communicate the result without overstating it?",
+      "question": "Which sentence best summarizes the fictional program comparison?",
+      "options": [
+        "Recorded arrest rates were 15% and 25%; the comparison does not establish a coaching effect.",
+        "Coaching caused a 10-percentage-point reduction in offending.",
+        "Complete follow-up proves the groups were equivalent at intake.",
+        "The 12 and 30 recorded arrests are counts of convictions."
+      ],
+      "answer": 0,
+      "explanation": "The sentence reports the correct rates and limits the inference. Complete follow-up does not remove baseline differences or make arrests equivalent to convictions or offending."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "In a fictional U.S. criminal trial, who must prove the elements of the charged offense?",
+      "options": [
+        "The defense, by showing innocence",
+        "The government, beyond a reasonable doubt",
+        "The jury, by collecting its own evidence",
+        "The government, by showing guilt is slightly more likely than not"
+      ],
+      "answer": 1,
+      "explanation": "At trial, the government's burden is to prove each element beyond a reasonable doubt. The defense need not prove innocence."
+    },
+    {
+      "question": "Fictional data: A town records 30 incidents in one year and has 6,000 residents. What is the recorded rate per 1,000 residents?",
+      "options": [
+        "0.5",
+        "30",
+        "50",
+        "5"
+      ],
+      "answer": 3,
+      "explanation": "Divide 30 by 6,000 and multiply by 1,000 to get 5 recorded incidents per 1,000 residents."
+    },
+    {
+      "question": "In a fictional program comparison, volunteers find jobs more often but had more work experience at intake. Why does that matter?",
+      "options": [
+        "Work experience could help explain the outcome difference apart from the program.",
+        "Any baseline difference makes the job records unusable.",
+        "Voluntary enrollment guarantees a fair comparison.",
+        "The higher job rate proves the program caused the difference."
+      ],
+      "answer": 0,
+      "explanation": "Prior experience may influence later employment. The observed difference can be reported, but it does not isolate the program's effect."
+    },
+    {
+      "question": "In a general U.S. jury-trial example, which pairing identifies a role correctly?",
+      "options": [
+        "A forensic expert determines the legal verdict.",
+        "The prosecutor supervises the judge.",
+        "The judge rules on legal questions and instructs the jury.",
+        "The investigator acts as defense counsel."
+      ],
+      "answer": 2,
+      "explanation": "The judge handles legal questions and jury instructions. The jury evaluates admitted evidence under those instructions; an expert informs that evaluation."
+    },
+    {
+      "question": "A dataset counts arrests in a year. What does that count establish by itself?",
+      "options": [
+        "How many people were convicted that year.",
+        "All underlying incidents, including unreported ones.",
+        "The guilt of every arrested person.",
+        "Recorded arrests under the dataset’s counting rules."
+      ],
+      "answer": 3,
+      "explanation": "Arrests, incidents, and convictions are different measures. An arrest count alone does not establish guilt or the number of all underlying events."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "At a fictional criminal trial, one required element remains in reasonable doubt. The accused offers no evidence. What follows?",
+      "options": [
+        "The lack of defense evidence supplies proof of the missing element.",
+        "The fact-finder can convict if most of the elements were proved.",
+        "The government has not met its burden for that charge.",
+        "The remaining element is presumed true because a charge was filed."
+      ],
+      "answer": 2,
+      "explanation": "The government must prove every required element beyond a reasonable doubt. The accused's decision not to offer evidence does not shift that burden."
+    },
+    {
+      "question": "Fictional data: District A records 36 incidents among 9,000 residents; B records 24 among 4,000. Which has the higher rate per 1,000?",
+      "options": [
+        "A, with 4 per 1,000 versus B's 6",
+        "B, with 6 per 1,000 versus A's 4",
+        "A, because it recorded 12 more incidents",
+        "Neither; both recorded 6 per 1,000"
+      ],
+      "answer": 1,
+      "explanation": "A's rate is 36 ÷ 9,000 × 1,000 = 4. B's is 24 ÷ 4,000 × 1,000 = 6. B's lower count is spread over a smaller population."
+    },
+    {
+      "question": "Fictional data: A support program group misses fewer appointments. At intake, that group had better transport access. What can a memo say?",
+      "options": [
+        "The program caused the difference because the appointments were documented.",
+        "Transport access is irrelevant because it was measured before the program.",
+        "The groups cannot be described unless a causal effect can be established.",
+        "The difference was observed, but baseline transport access could help explain it."
+      ],
+      "answer": 3,
+      "explanation": "The comparison supports a descriptive statement. A preexisting difference in transport access is a plausible alternative explanation, so the memo should not claim a causal effect."
+    },
+    {
+      "question": "An examiner reports that fibers are compatible with a common fabric type but cannot identify a source. Who decides a jury-trial verdict?",
+      "options": [
+        "The jury, applying the judge’s instructions to the admitted evidence.",
+        "The examiner, because a scientific result replaces legal proof.",
+        "The investigator, because the case began with an investigation.",
+        "The prosecutor alone, because the government brought the charge."
+      ],
+      "answer": 0,
+      "explanation": "The jury is the fact-finder in a jury trial. Expert interpretation is one input and does not itself decide guilt."
+    },
+    {
+      "question": "A city has 90 reported incidents and 30 convictions recorded in the same year, without linked case records. Which statement is supported?",
+      "options": [
+        "Exactly one third of those incidents led to conviction.",
+        "The totals measure different events; a linked cohort is needed for an incident-to-conviction rate.",
+        "Every remaining incident was proven false.",
+        "Convictions must refer to incidents from the same year."
+      ],
+      "answer": 1,
+      "explanation": "Annual totals may involve different events and dates. Without linked records, dividing them does not track what happened to a particular set of incidents."
+    }
+  ],
+  "published": true
+}

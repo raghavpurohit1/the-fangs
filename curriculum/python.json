@@ -1,0 +1,150 @@
+{
+  "id": "study-python",
+  "mentorPrompt": "I am studying Python for Everyday Problem Solving. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "Python: An informal introduction",
+      "url": "https://docs.python.org/3/tutorial/introduction.html"
+    }
+  ],
+  "title": "Python for Everyday Problem Solving",
+  "category": "Programming",
+  "level": "Beginner",
+  "minutes": 100,
+  "description": "Use Python 3 to work with numbers and text, process lists, check inputs, and calculate attendance for a fictional workshop. Designed for adult beginners, career changers, and returning professionals. Try each worked example, then change the inputs and predict the result before running it. You can request a mentor to discuss your work; no mentor has been assigned. Optional further reading: Python: An informal introduction — https://docs.python.org/3/tutorial/introduction.html",
+  "skills": [
+    "Store numbers and text in variables and display calculated results",
+    "Use a loop to process a list and update a running total",
+    "Normalize text and use conditionals to handle invalid input",
+    "Calculate attendance and compare results with expected outputs"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-9ee6ba85-e78d-4a83-b1ca-97684b5d96ef",
+      "title": "1. Variables, Numbers, and Strings",
+      "body": "A variable is a name that refers to a value. Give variables names that explain what their values mean: `kits` is easier to understand than `x`. A whole number such as `4` is an integer. A number with a decimal point, such as `1.5`, is a float. Text in quotes is a string. Python treats `4` and `\"4\"` differently: the first is a number and the second is text.\n\n**Worked example (fictional):** A volunteer is packing four supply kits with three notebooks in each. Run this code in Python 3:\n\n```python\nactivity = \"Supply packing\"\nkits = 4\nnotebooks_per_kit = 3\ntotal = kits * notebooks_per_kit\nprint(f\"{activity}: {total} notebooks\")\n```\n\nThe inputs are `\"Supply packing\"`, `4`, and `3`. The output is `Supply packing: 12 notebooks`. The `*` operator multiplies the two numbers. The final line uses an f-string: the `f` before the opening quote tells Python to insert the values of expressions inside braces. That lets you display a number in a sentence without changing the number itself into a stored string.\n\n**Practice:** Predict the output if you change `kits` to `6` and `notebooks_per_kit` to `2`. Run the code and compare: it still prints `Supply packing: 12 notebooks`. Next, change `activity` to `\"Welcome table\"` without changing either number. The expected output is `Welcome table: 12 notebooks`. Notice which variables affect the calculation and which affect only the label.\n\n**Suggested mentor discussion:** If another volunteer inherited this script, which variable name would help them decide what to edit? What would you rename if the kits contained pencils instead of notebooks?",
+      "question": "With kits = 5 and notebooks_per_kit = 2, what does print(f\"Total: {kits * notebooks_per_kit}\") display?",
+      "options": [
+        "Total: 7",
+        "Total: 10",
+        "Total: 52",
+        "Total: kits * notebooks_per_kit"
+      ],
+      "answer": 1,
+      "explanation": "Python evaluates the expression inside the braces. It multiplies 5 by 2 and inserts 10 into the sentence."
+    },
+    {
+      "id": "lesson-ca3ef58e-2067-4d69-9c13-9ef1c095423f",
+      "title": "2. Lists and Simple Iteration",
+      "body": "A list holds several values in order. Write its items between square brackets and separate them with commas. A `for` loop visits each item in turn, so the same instructions can handle a list of three items or a list of thirty. The indented lines belong to the loop. A line that returns to the left margin runs after the loop finishes.\n\n**Worked example (fictional):** A community center receives three boxes of donated books. The box counts are `[8, 5, 7]`. Add them without writing a separate equation for each box:\n\n```python\nbooks_per_box = [8, 5, 7]\ntotal_books = 0\nfor count in books_per_box:\n    total_books = total_books + count\nprint(f\"Books received: {total_books}\")\n```\n\n`total_books` starts at `0`. On the first pass, `count` is `8`, so the total becomes `8`. On the second pass it becomes `13`, and on the third it becomes `20`. The output is one line: `Books received: 20`. If you indent the `print` line to match the update line, the program prints three lines instead, with totals `8`, `13`, and `20`.\n\n**Practice:** Replace the list with `[4, 0, 6]` and write down the total after each pass. Compare your trace with `4`, `4`, and `10`; the final output should be `Books received: 10`. Then try `[]`. The loop has no items to visit, so it never updates the starting total, and the output is `Books received: 0`.\n\n**Suggested mentor discussion:** When would you want a running total after every box rather than one final total? Show which line you would move.",
+      "question": "A loop starts total at 0 and adds each item in [2, 0, 4]. What is total after all three items?",
+      "options": [
+        "4",
+        "3",
+        "2",
+        "6"
+      ],
+      "answer": 3,
+      "explanation": "The running total becomes 2, stays at 2 when zero is added, and becomes 6 when 4 is added."
+    },
+    {
+      "id": "lesson-277eab01-dac8-43bc-a26e-7dde36a45ee7",
+      "title": "3. Conditionals and Input Checking",
+      "body": "Programs often need to check what someone typed before using it. Python's `input()` returns text. People may type extra spaces or use different capitalization. For simple labels like `yes` and `no`, remove spaces at the ends with `.strip()` and convert letters to lowercase with `.lower()` before comparing. These methods return new strings, so store the cleaned result in a variable.\n\n**Worked example (fictional):** A volunteer enters whether a room setup is complete. The program accepts `yes` or `no` and reports anything else as invalid:\n\n```python\nraw = input(\"Setup complete? Enter yes or no: \")\nreply = raw.strip().lower()\nif reply == \"yes\":\n    print(\"Setup recorded as complete.\")\nelif reply == \"no\":\n    print(\"Setup recorded as not complete.\")\nelse:\n    print(\"Invalid entry: type yes or no.\")\n```\n\nPython runs only the first matching branch. `==` compares two values; `=` assigns a value to a variable. If the person types ` YES ` with spaces at the ends, `reply` becomes `yes` and the result is `Setup recorded as complete.` If they type `no`, the result is `Setup recorded as not complete.` If they type `maybe`, the result is `Invalid entry: type yes or no.` An unclear answer should not be recorded as a definite `no`.\n\n**Practice:** Predict the result for ` No ` and for pressing Enter without typing anything. Run the program once for each. The first produces `Setup recorded as not complete.` The blank reply produces `Invalid entry: type yes or no.` The script reports an invalid reply and ends; it does not ask again.\n\n**Suggested mentor discussion:** Why might it matter to keep a missing reply separate from a valid `no`? Describe a checklist where that distinction would help.",
+      "question": "What does the setup script print after the prompt if someone enters \" no? \" with a question mark?",
+      "options": [
+        "Setup recorded as not complete.",
+        "Invalid entry: type yes or no.",
+        "Setup recorded as complete.",
+        "Nothing; it skips all three branches."
+      ],
+      "answer": 1,
+      "explanation": "Cleaning removes the surrounding spaces but keeps the question mark. The result, \"no?\", matches neither accepted label, so the else branch runs."
+    },
+    {
+      "id": "lesson-90d773fd-9283-4de5-93ab-8b480408c791",
+      "title": "4. Capstone: Calculate Workshop Attendance",
+      "body": "Build a Python script that counts attendance from a list of status strings. Each entry represents one fictional registration. Count `present`, `absent`, and invalid entries separately. Calculate the attendance rate as present divided by valid entries (`present + absent`). Report invalid entries rather than treating them as absences. When nobody has a valid status, show `N/A` instead of dividing by zero.\n\n**Worked example (explicitly fictional):** A practice workshop has the status list shown below. Use it to check your script:\n\n```python\nstatuses = [\"present\", \" Absent \", \"PRESENT\", \"?\"]\npresent = absent = invalid = 0\nfor raw in statuses:\n    status = raw.strip().lower()\n    if status == \"present\":\n        present += 1\n    elif status == \"absent\":\n        absent += 1\n    else:\n        invalid += 1\nvalid = present + absent\nif valid == 0:\n    rate = \"N/A\"\nelse:\n    rate = f\"{present / valid:.1%}\"\nprint(f\"Present: {present}; Absent: {absent}; Invalid: {invalid}; Rate: {rate}\")\n```\n\n`+= 1` adds one to a counter. The format `.1%` displays a fraction as a percentage with one decimal place. Two of the three valid entries are present, so the output is `Present: 2; Absent: 1; Invalid: 1; Rate: 66.7%`.\n\n**Practice and deliverable:** Save `attendance.py` with the fictional list and a comment explaining the denominator. Run the worked case, then temporarily replace the list to run these two tests. Record the expected and actual output for all three runs, then restore the original list.\n\n- `[\"absent\", \" ABSENT \"]` → `Present: 0; Absent: 2; Invalid: 0; Rate: 0.0%`\n- `[\"\", \"?\"]` → `Present: 0; Absent: 0; Invalid: 2; Rate: N/A`\n\n**Self-review (one point each):**\n1. The script uses only the fictional status list, with no personal data.\n2. It handles spaces and capitalization and counts invalid entries separately.\n3. It uses the valid-entry denominator and handles zero valid entries.\n4. The recorded outputs match all three expected results.\n\n**Suggested mentor discussion:** Explain why `0.0%` and `N/A` tell different stories.",
+      "question": "What rate does the capstone script display for [\" Present \", \"absent\", \"unknown\"]?",
+      "options": [
+        "33.3%",
+        "50.0%",
+        "66.7%",
+        "N/A"
+      ],
+      "answer": 1,
+      "explanation": "Cleaning gives one present entry and one absent entry. The invalid entry is excluded from the denominator, so one of two valid entries is 50.0%."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "A fictional workshop sets rows = 3 and chairs_per_row = 4. Which expression calculates the number of chairs?",
+      "options": [
+        "rows + chairs_per_row",
+        "\"rows * chairs_per_row\"",
+        "rows * chairs_per_row",
+        "chairs_per_row - rows"
+      ],
+      "answer": 2,
+      "explanation": "Multiplication gives 3 groups of 4 chairs, or 12. Quotes around the expression would make it text rather than a calculation."
+    },
+    {
+      "question": "In a fictional delivery log, total starts at 0. A loop adds each value in [3, 5, 2]. What is the final total?",
+      "options": [
+        "10",
+        "8",
+        "2",
+        "3"
+      ],
+      "answer": 0,
+      "explanation": "The loop adds every value. The total goes from 0 to 3, then to 8, then to 10."
+    },
+    {
+      "question": "A fictional check-in accepts only \"present\" and \"absent\" after removing outer spaces and ignoring capitalization. How should \" unsure \" be classified?",
+      "options": [
+        "Present",
+        "Absent",
+        "A valid blank entry",
+        "Invalid"
+      ],
+      "answer": 3,
+      "explanation": "Removing the surrounding spaces leaves \"unsure\", which is neither of the accepted labels."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "In a fictional stockroom, packs = 6 and labels_per_pack = 4. What does print(f\"Labels: {packs * labels_per_pack}\") display?",
+      "options": [
+        "Labels: 10",
+        "Labels: 24",
+        "Labels: 64",
+        "Labels: 6 * 4"
+      ],
+      "answer": 1,
+      "explanation": "Python multiplies the two numeric values and inserts the result, 24, into the f-string."
+    },
+    {
+      "question": "A fictional pickup log uses a loop to add each value in [6, 0, 2] to a total that starts at 0. What prints if the total is printed once after the loop?",
+      "options": [
+        "6",
+        "2",
+        "8",
+        "3"
+      ],
+      "answer": 2,
+      "explanation": "The loop adds 6, 0, and 2. The print statement runs once, after all updates, so it displays 8."
+    },
+    {
+      "question": "In the capstone, a fictional check-in contains [\" ? \", \" \"]. What should the script report?",
+      "options": [
+        "Present: 0; Absent: 0; Invalid: 2; Rate: N/A",
+        "Present: 0; Absent: 2; Invalid: 0; Rate: 0.0%",
+        "Present: 0; Absent: 0; Invalid: 2; Rate: 0.0%",
+        "Present: 0; Absent: 1; Invalid: 1; Rate: 0.0%"
+      ],
+      "answer": 0,
+      "explanation": "After stripping whitespace, the entries are \"?\" and an empty string. Neither is valid. With zero valid entries, the script reports N/A rather than dividing by zero."
+    }
+  ],
+  "published": true
+}

@@ -171,3 +171,38 @@ CREATE TABLE IF NOT EXISTS enrollment_courses (
 INSERT OR IGNORE INTO enrollment_courses(enrollment_id,data)
 SELECT e.id,c.data FROM enrollments e JOIN content c ON c.kind='course' AND c.id=e.course_id;
 INSERT OR IGNORE INTO meta(key,value) VALUES('migration-0004-course-snapshots',strftime('%Y-%m-%dT%H:%M:%fZ','now'));
+CREATE TABLE IF NOT EXISTS course_reviews (
+ enrollment_id TEXT PRIMARY KEY REFERENCES enrollments(id) ON DELETE CASCADE,
+ answers TEXT NOT NULL CHECK(json_valid(answers)),
+ evidence_source TEXT NOT NULL DEFAULT 'final' CHECK(evidence_source IN ('final','practice')),
+ review TEXT CHECK(review IS NULL OR json_valid(review)),
+ review_claim TEXT,
+ review_started_at INTEGER,
+ course_claim TEXT,
+ course_started_at INTEGER
+);
+CREATE TABLE IF NOT EXISTS personalized_courses (
+ id TEXT PRIMARY KEY,
+ user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ source_enrollment_id TEXT NOT NULL UNIQUE REFERENCES enrollments(id) ON DELETE CASCADE,
+ data TEXT NOT NULL CHECK(json_valid(data))
+);
+CREATE INDEX IF NOT EXISTS personalized_courses_user ON personalized_courses(user_id);
+INSERT OR IGNORE INTO meta(key,value) VALUES('migration-0005-personal-learning',strftime('%Y-%m-%dT%H:%M:%fZ','now'));
+CREATE TABLE IF NOT EXISTS paypal_orders (
+ id TEXT PRIMARY KEY,
+ user_id TEXT NOT NULL REFERENCES users(id),
+ paypal_id TEXT UNIQUE,
+ plan_id TEXT NOT NULL,
+ amount TEXT NOT NULL,
+ currency TEXT NOT NULL,
+ billing_period TEXT NOT NULL,
+ status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','completed','canceled')),
+ approval_url TEXT,
+ created_at TEXT NOT NULL,
+ completed_at TEXT,
+ capture_id TEXT UNIQUE,
+ expires_at TEXT
+);
+CREATE UNIQUE INDEX IF NOT EXISTS paypal_pending_user ON paypal_orders(user_id) WHERE status='pending';
+INSERT OR IGNORE INTO meta(key,value) VALUES('migration-0006-paypal-sandbox','applied');

@@ -1,0 +1,140 @@
+{
+  "id": "study-cybersecurity",
+  "mentorPrompt": "I am studying Everyday Cybersecurity for Work. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "CISA: Secure Our World — four steps for online safety",
+      "url": "https://content.govdelivery.com/accounts/USDHSCISA/bulletins/3730a64"
+    }
+  ],
+  "title": "Everyday Cybersecurity for Work",
+  "category": "Cybersecurity",
+  "level": "Beginner",
+  "minutes": 40,
+  "description": "Practice four everyday account safety habits: verify suspicious messages, use a different password for each account, turn on multi-factor authentication and updates, and make a personal safety checklist you can share without exposing secrets. This course is designed for adult beginners, career changers, and returning professionals. You can request a mentor to discuss your work; no mentor is assigned yet. Optional further reading: CISA, Four ways to stay safe online (https://content.govdelivery.com/accounts/USDHSCISA/bulletins/3730a64).",
+  "skills": [
+    "Verify suspicious messages through a trusted channel",
+    "Use a password manager to keep account passwords unique",
+    "Respond safely to unexpected sign-in prompts and confirm device updates",
+    "Create and review an account safety checklist without sharing secrets"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-b7910fee-c3dc-47d7-a271-5af183810448",
+      "title": "Recognize a Fictional Phishing Message",
+      "body": "Phishing is a message that tries to get you to hand over information or take an unsafe action. A message can look polished and still be unsafe. Pay attention to what it asks you to do, who appears to have sent it, and whether you can check the request without using anything the message supplies.\n\nFictional worked example. Input: An email displays the sender name “Staff Scheduling,” but the address is notice@schedule-check.example. The subject says “Confirm tomorrow’s shift.” The message asks you to select “Keep my shift” and enter your work password within 20 minutes. You normally use the scheduling portal from a saved bookmark, and your team directory lists a scheduling coordinator.\n\nOutput: You leave the email button alone, open your saved bookmark, and see that tomorrow’s shift is still listed. That does not prove the email is fake, so you check with the coordinator using the directory. In this example, the coordinator confirms no password check was requested. You use your workplace’s phishing-report option. The clues that prompted the check were the unfamiliar sender address, the short deadline, and the request for a password.\n\nPractice: Imagine a message says, “Your training access expires today. Use this button to sign in.” Write one sentence naming a trusted place to check and one sentence describing what you would do if the request cannot be verified. Do not open a real suspicious message for this exercise.\n\nSuggested mentor discussion: If you request a mentor, ask how to find your workplace’s reporting option before you need it.",
+      "question": "A scheduling email asks you to sign in through its button. Which action lets you check the request independently?",
+      "options": [
+        "Reply to the sender and ask whether the button is safe.",
+        "Open the scheduling portal from your saved bookmark.",
+        "Use the button if the email shows the correct department name."
+      ],
+      "answer": 1,
+      "explanation": "The saved bookmark lets you check the scheduling portal without relying on the message. A reply goes back to the same sender, and a department name is not proof of identity."
+    },
+    {
+      "id": "lesson-134a5514-2a69-4a4a-942a-49bce2f7740b",
+      "title": "Use Unique Passwords and a Password Manager",
+      "body": "A unique password is one you use on only one account. If two accounts share a password and it is exposed at one service, someone could try it at the other. Changing the last digit or adding the service name creates a predictable variation, not a good substitute for a separately generated password. A password manager can generate and store a different password for each login, so you do not have to remember every one. For work accounts, use the manager your workplace approves and ask your support team if you are unsure what is allowed.\n\nFictional worked example. Input: Your “Work training” and “Personal shopping” accounts share a password. Both offer a password-change screen, and the training site accepts up to 24 characters. For training, you open the site from a trusted bookmark, generate a fresh 24-character password in the approved work manager, submit the change, and save it to the matching entry. For shopping, you generate a separate password in your personal manager and repeat the process. Output: Two entries now hold independently generated passwords, and each new login works. A shareable progress note says only “Training: changed and tested; Shopping: changed and tested.”\n\nPractice: On paper, list two fictional account labels. For each, write “generate separately,” “save to matching entry,” and “test sign-in.” Add one line identifying where you would confirm the approved tool for work accounts. Do not write a real password, even as an example.\n\nSuggested mentor discussion: If you request a mentor, ask how to confirm that a new password was saved to the right entry without showing it.",
+      "question": "Two accounts share a password. Which change resolves the reuse?",
+      "options": [
+        "Add a different digit to the end of the old password for each account.",
+        "Replace the old password with the same longer password on both accounts.",
+        "Generate and save a separate new password for each account."
+      ],
+      "answer": 2,
+      "explanation": "Generating two independent passwords removes the shared credential and avoids a predictable pattern."
+    },
+    {
+      "id": "lesson-537906f9-f456-4cda-8ca6-5bec86b681fb",
+      "title": "Use MFA and Keep Devices Updated",
+      "body": "Multi-factor authentication (MFA) adds another check to signing in. For example, after entering a password, you may need to confirm the sign-in with an approved app. This makes a stolen password less useful by itself. Enroll through your known account settings or your workplace’s setup process. If an approval prompt arrives when you did not start a sign-in, do not approve it. Check through a trusted route, such as your usual IT help desk for a work account.\n\nFictional worked example. Input: You are editing a document and have not tried to sign in. Your phone displays “Approve sign-in?” At the same time, your laptop’s built-in update settings show “Security update downloaded — restart required.” Output: You deny the unexpected sign-in request and contact the help desk using your staff directory. You save your document and restart at a time allowed by workplace policy. After the restart, you open the same update settings. The pending restart is gone and update history marks the security update as installed. You record “Prompt reported; update installed,” without recording a code or account identifier.\n\nPractice: Write two lines for a fictional device: “Unexpected MFA prompt: my next action is ___” and “Pending update: my completion check is ___.” For a personal device, locate its automatic update setting. For a managed work device, follow the workplace process rather than changing controls yourself.\n\nSuggested mentor discussion: If you request a mentor, ask how to tell the difference between an update that has downloaded and one that has finished installing.",
+      "question": "You did not start a sign-in, but your phone asks you to approve one. What should you do?",
+      "options": [
+        "Deny or ignore it without approving, then check through your usual support channel.",
+        "Approve it once and contact support only if it happens again.",
+        "Approve it if the prompt displays the right account name."
+      ],
+      "answer": 0,
+      "explanation": "An unexpected approval could let someone else finish signing in. Use a known support channel instead of trusting the prompt."
+    },
+    {
+      "id": "lesson-ef266162-9101-4719-abaf-5f1b6196a966",
+      "title": "Capstone: Build a Personal Account Safety Checklist",
+      "body": "Create a one-page checklist you can keep and revisit. Take about ten minutes. Choose two accounts you use; if you prefer not to use real accounts for practice, choose two fictional ones. Use generic labels such as “Work training” and “Personal email,” not usernames or exact email addresses. For each row, record whether the password is unique, the MFA status, and one next action with a target day. Use “unknown” rather than guessing. Add a device update check and a trusted way to verify a suspicious message.\n\nFictional worked example. Input: Work training has a unique password, but MFA status is unknown. Personal email has MFA on, but its password is reused. The laptop shows a pending restart. Output: “Work training | unique | MFA unknown | check official settings Tuesday.” “Personal email | reused | MFA on | generate and save a unique password Wednesday.” “Laptop | restart Thursday after saving work; confirm installation in update settings.” “Suspicious message | open the service from a saved bookmark or contact support through a known directory.”\n\nPractice and deliverable: Write your checklist now. Keep passwords, usernames, verification codes, recovery codes, and screenshots out of it. Before sharing, make a copy containing only generic labels, statuses, and actions.\n\nFour-point self-review: Give yourself one point for each item you can verify. (1) Two labeled rows show password and MFA status. (2) Each row has a specific next action and target day. (3) The checklist includes an update completion check and an independent message verification route. (4) The shareable copy contains no secrets or account identifiers.\n\nSuggested mentor discussion: If you request a mentor, share only the cleaned copy and ask which action to do first and why.",
+      "question": "Which checklist entry has useful status and a next step without exposing a secret?",
+      "options": [
+        "Work training | MFA on | attach a screenshot showing recovery codes.",
+        "Personal email | password reused | generate a unique password Wednesday.",
+        "Personal email | password reused | write the current password beside the task."
+      ],
+      "answer": 1,
+      "explanation": "A generic label, status, and target day are enough to guide the work. A password or recovery code is not needed to review the checklist."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "A message says your training account will close today unless you use its link. What is the safest first step?",
+      "options": [
+        "Use the link because it mentions a service you recognize.",
+        "Reply and ask the sender to extend the deadline.",
+        "Open the training site from a known bookmark and check there."
+      ],
+      "answer": 2,
+      "explanation": "A known bookmark gives you a way to verify the claim without trusting the incoming message."
+    },
+    {
+      "question": "Why is using the same password on two unrelated sites risky even when it is long?",
+      "options": [
+        "If the password is exposed at one site, it can be tried at the other.",
+        "Logging in to one site automatically signs you out of the other.",
+        "Changing the password at one site changes it at the other."
+      ],
+      "answer": 0,
+      "explanation": "Password reuse means that exposure at one service can put another account at risk."
+    },
+    {
+      "question": "A phone asks you to approve a sign-in you did not start. Your laptop update says a restart is required. What should you do?",
+      "options": [
+        "Approve the sign-in if it shows your account name; restart later and verify the update.",
+        "Do not approve the sign-in; restart when allowed and confirm the update installed.",
+        "Do not approve the sign-in; mark the update complete because it already downloaded."
+      ],
+      "answer": 1,
+      "explanation": "An unexpected sign-in should not be approved, and a pending restart may mean the update has not finished."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "A chat message claiming to be from IT asks you to open an attachment to keep your account active. How should you verify it?",
+      "options": [
+        "Ask the same chat sender for a ticket number, then open the attachment.",
+        "Open the attachment if the sender uses the IT team’s usual profile picture.",
+        "Contact IT through the staff directory without opening the attachment."
+      ],
+      "answer": 2,
+      "explanation": "A staff directory provides an independent contact route. The message sender and profile picture are not independent verification."
+    },
+    {
+      "question": "Your approved password manager shows that your work calendar and training account share a password. What should your checklist say?",
+      "options": [
+        "Calendar and training | reused | generate, save, and test a different password for each by Friday.",
+        "Calendar and training | reused | generate one longer replacement for both by Friday.",
+        "Calendar and training | reused | keep both passwords and add MFA by Friday."
+      ],
+      "answer": 0,
+      "explanation": "Separate generated passwords resolve reuse. MFA is useful, but adding it does not make a reused password unique."
+    },
+    {
+      "question": "You receive an MFA prompt while away from your computer. Later you restart for a security update. What belongs in your safety log?",
+      "options": [
+        "Approved the prompt because the account name matched; confirmed update installation in settings.",
+        "Denied the unexpected prompt; confirmed update installation in the device’s update history.",
+        "Denied the unexpected prompt; marked the update installed based only on the download notice."
+      ],
+      "answer": 1,
+      "explanation": "The log records a safe response to an unexpected prompt and a reliable update completion check without including secrets."
+    }
+  ],
+  "published": true
+}

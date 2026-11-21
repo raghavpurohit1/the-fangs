@@ -1,0 +1,140 @@
+{
+  "id": "study-teamwork",
+  "mentorPrompt": "I am studying Lead a Small Community Tech Project. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "Scrum Guides: The Scrum Guide",
+      "url": "https://scrumguides.org/scrum-guide.html"
+    }
+  ],
+  "title": "Lead a Small Community Tech Project",
+  "category": "Leadership",
+  "level": "Beginner",
+  "minutes": 65,
+  "description": "Practice leading a small nonprofit tech project from the first conversation about user needs to a two-week workshop plan. You can complete the course on your own. No mentor is assigned yet, but you can request one and use the suggested discussion prompts if you meet. Optional further reading: Scrum Guides: The Scrum Guide, https://scrumguides.org/scrum-guide.html.",
+  "skills": [
+    "Define a user need, a measurable success criterion, and a clear scope boundary",
+    "Order small tasks by dependency and assign one owner to each task",
+    "Use progress evidence to adapt a plan without losing sight of the goal",
+    "Write a two-week project plan with acceptance criteria and a retrospective"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-7b02132c-af53-4211-86bd-8e60cd5546e9",
+      "title": "1. Define User Need, Success, and Scope",
+      "body": "Start with what people need to do, not with the tool someone wants to build. Ask who is affected, what they are trying to accomplish, and where they get stuck. Then write a success criterion you can check by observing what people do. Set a scope boundary so the team knows what it will deliver and what it will leave for later.\n\nFictional worked example: A neighborhood center asks a volunteer team to “make a better website.” In a short walkthrough, two residents find the event name but miss the date and room because those details are buried in a flyer. The center can edit its existing calendar but has no budget for a redesign.\n\nOutput from those inputs: “Residents using a phone need to find the next drop-in session’s date and room without opening a flyer.” The team will edit one calendar entry and test it on a phone. The success check: two invited residents can each find and state the correct date and room within one minute, without hints. A redesign, online registration, and updates to other calendar entries are out of scope. This check gives the team evidence about the specific change, not proof that it works for every visitor.\n\nPractice: Pick a community service you know. Write one user need, one observable success criterion, one item in scope, and one item out. If your need names a tool, rewrite it without the tool.\n\nSuggested mentor discussion: What would you ask a resident before committing to my proposed scope?",
+      "question": "Which success criterion best checks whether the revised calendar entry meets the residents’ need?",
+      "options": [
+        "The coordinator approves the calendar entry before Friday.",
+        "Two residents each state the correct date and room within one minute, without hints.",
+        "The volunteer publishes a shorter calendar entry with a clearer heading."
+      ],
+      "answer": 1,
+      "explanation": "The residents demonstrate the action the project is meant to help them complete. Approval and publication do not show that residents can find the details."
+    },
+    {
+      "id": "lesson-daf7b77a-a267-4047-8f24-4ddbb02e2832",
+      "title": "2. Break Work Into Small, Ordered Tasks With Owners",
+      "body": "Turn your scope into tasks that produce something another person can see or use. Name one owner per task: that person makes sure the output is ready and flags problems, even if others help. Then look for dependencies: if one task needs another task’s output, put the required task first. Tasks that do not depend on each other can happen in parallel.\n\nFictional worked example: The calendar team has three workdays. Jo can confirm event details on Monday, Ren has editing access on Tuesday, and Sal can run a phone test on Wednesday. A task called “fix the calendar” would hide the handoffs. Here is the team’s ordered plan:\n\n1. Monday, Jo: confirm the date and room with the event coordinator. Output: one verified line of event details.\n2. Tuesday, Ren: use Jo’s verified line to update the entry. Output: a live link sent to Sal.\n3. Wednesday, Sal: give the link to two residents and ask each to find the date and room on a phone. Output: a note recording whether each person found both details within one minute without hints.\n\nSal can invite testers on Monday without waiting for the live link. But testing the revised entry depends on Ren’s update. If Jo cannot confirm the room, Ren can prepare the layout but should not publish a guess.\n\nPractice: Break your project into three to five tasks. For each, name an owner, a due day, and a visible output. Mark what must happen before each task can finish.\n\nSuggested mentor discussion: Which handoff in my plan needs a clearer output?",
+      "question": "What must happen before Sal can test the revised entry with residents?",
+      "options": [
+        "Sal must finish writing the test results.",
+        "Jo must invite a new group of residents.",
+        "Ren must provide the link to the updated entry."
+      ],
+      "answer": 2,
+      "explanation": "Sal needs the revised entry to test it. Recruiting people can happen before the edit, but testing cannot."
+    },
+    {
+      "id": "lesson-a5bb1c8f-971e-442a-bcb9-a2c36b243a3b",
+      "title": "3. Review Progress and Adapt the Plan",
+      "body": "At a short progress review, compare what you planned with what actually happened. Ask for evidence: a finished draft, a test result, or a specific blocker. Then decide what to keep, change, or drop. An update is useful only if the team knows what happens next, who owns it, and when you will check again.\n\nFictional worked example: On Wednesday, Sal reports that both residents found the calendar date within one minute, but neither found the room. They stopped reading before the room line, which appeared below a long description on their phones. The calendar edit is complete, but the success check has not passed. The team considers adding a separate map page, then rejects it: the room is known, and the evidence points to where the detail appears, not to a need for directions.\n\nThe team records its decision: “Keep the goal and test unchanged. On Thursday, Ren will move the room beside the date at the top of the entry and send the updated link. On Friday, Sal will repeat the same test with two different residents so prior exposure does not affect the check.” If the Friday check still fails, the team will record what people did and decide on another small change rather than count the task as accepted.\n\nPractice: Imagine that a test in your project fails. Write down the observed result, one adjustment that addresses it, an owner, and the evidence you will review next.\n\nSuggested mentor discussion: Does my adjustment address what we observed, or am I solving a problem I only assume exists?",
+      "question": "What is the best response to the calendar test result?",
+      "options": [
+        "Move the room next to the date and repeat the original success check.",
+        "Mark the change as accepted because both residents found the date.",
+        "Replace the success check with confirmation that the room appears somewhere on the page."
+      ],
+      "answer": 0,
+      "explanation": "Moving the room addresses the observed problem while keeping the original requirement. The repeat test checks whether the change helped."
+    },
+    {
+      "id": "lesson-2f21e406-8af6-4d5a-bb5c-b32c967acce5",
+      "title": "4. Capstone: Plan a Two-Week Community Workshop",
+      "body": "Create a one-page plan for preparing and running one community tech workshop in two weeks. You do not need to run the event to complete the capstone. Include the audience’s need, a goal, an out-of-scope item, an ordered task list with owners and dates, acceptance criteria, a progress checkpoint, and a short retrospective agenda. Acceptance criteria spell out the evidence the team needs before it can call a deliverable ready or complete.\n\nFictional worked example: A library has a room, six practice laptops, and two volunteers. Six adult beginners want to attach a file to an email. Plan: Week 1 Monday, Mina confirms the room and training inbox; Wednesday, Dev drafts a one-page handout and sample file; Friday, both run a practice session. The materials are ready when a volunteer can follow the handout on a practice laptop and send the sample file to the training inbox without verbal help. If the dry run fails, Dev revises the handout and Mina retests on Week 2 Tuesday. On Thursday, Mina leads the 45-minute workshop and Dev checks whether each participant who attempts the exercise sends a message with the correct attachment. Personal account setup is out of scope. Afterward, they spend ten minutes asking what helped, where people got stuck, and what to change next time. They record one action with an owner and a due date.\n\nPractice: Draft your own plan. Score it one point for each item present, for a total of four:\n1. A specific user need, goal, and scope boundary.\n2. Ordered tasks with owners and dates that fit two weeks.\n3. Observable acceptance criteria and a checkpoint with a fallback.\n4. A retrospective that produces one action with an owner and a due date.\n\nSuggested mentor discussion: What would you cut if one volunteer became unavailable?",
+      "question": "Which retrospective note shows that the team turned an observation into a follow-up action?",
+      "options": [
+        "Participants liked the session, so we should keep most of it.",
+        "Two learners missed the attachment icon. Dev will add a labeled screenshot by Tuesday.",
+        "The handout should be clearer the next time we run the workshop."
+      ],
+      "answer": 1,
+      "explanation": "The note ties a specific observation to a change, assigns Dev to make it, and sets a due date."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "Fictional scenario: Food pantry visitors call to ask where to enter. Which is the clearest project goal?",
+      "options": [
+        "Publish an illustrated map on the pantry website.",
+        "Help first-time visitors identify the correct entrance from the pantry’s mobile page.",
+        "Rewrite the pantry website so it answers more questions."
+      ],
+      "answer": 1,
+      "explanation": "This goal names the users and the action they need to take. It stays focused without committing to a particular solution."
+    },
+    {
+      "question": "Fictional scenario: An editor needs a verified holiday schedule before updating a notice. How should the team plan the work?",
+      "options": [
+        "Have the editor publish draft hours first and correct them after verification.",
+        "Give both volunteers joint ownership of one task called “holiday notice.”",
+        "Assign one volunteer to verify the hours, then have the editor update the notice using them."
+      ],
+      "answer": 2,
+      "explanation": "Verification produces the information the editor needs. Separate owners make the handoff clear."
+    },
+    {
+      "question": "Fictional scenario: In a workshop trial, people could not read the printed instructions. Which review note is most useful?",
+      "options": [
+        "Lee will print a larger version by Thursday and ask a volunteer to try it before the workshop.",
+        "The team completed the trial and will keep the workshop date.",
+        "The handout needs work, so the team will discuss it again after the workshop."
+      ],
+      "answer": 0,
+      "explanation": "The note responds to observed evidence and names a change, an owner, a deadline, and a check."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "Fictional scenario: A repair café updates one event listing so newcomers can find what to bring. Which is the best acceptance check?",
+      "options": [
+        "The editor confirms that all required items appear somewhere in the listing.",
+        "Two first-time visitors each use the listing to name the required items without hints.",
+        "The listing includes a photo, a supply list, and the organizer’s contact details."
+      ],
+      "answer": 1,
+      "explanation": "The check shows whether the intended users can find the right information in the revised listing, not merely whether it was published."
+    },
+    {
+      "question": "Fictional scenario: Priya will confirm a room Friday. Dan is due to print directions Thursday. What is the best adjustment?",
+      "options": [
+        "Ask Dan to print Thursday using the room from last month’s event.",
+        "Keep Thursday as the print deadline and make Priya and Dan joint owners.",
+        "Have Dan draft Thursday, then add the room and print after Priya confirms it Friday."
+      ],
+      "answer": 2,
+      "explanation": "Dan can do part of the work in parallel, but printing accurate directions depends on Priya’s confirmation."
+    },
+    {
+      "question": "Fictional scenario: At a retrospective, the team learns that two practice laptops lost power because they were unplugged. What should it record?",
+      "options": [
+        "Nora will add a power check to the setup list by Monday and use it at the next rehearsal.",
+        "Laptop setup needs more attention, so reserve time to discuss it at the next retrospective.",
+        "The facilitator will shorten the next session to allow for possible laptop interruptions."
+      ],
+      "answer": 0,
+      "explanation": "The follow-up addresses the observed cause and names an owner, a deadline, and a chance to try the change."
+    }
+  ],
+  "published": true
+}

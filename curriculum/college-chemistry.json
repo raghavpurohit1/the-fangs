@@ -1,0 +1,266 @@
+{
+  "id": "college-chemistry",
+  "mentorPrompt": "I am studying Introduction to Chemistry. Please connect me with a mentor to review my academic project, explain difficult concepts and discuss further study. I will bring my draft, the suggested readings, and two questions.",
+  "sources": [
+    {
+      "title": "OpenStax: Chemistry 2e",
+      "url": "https://openstax.org/books/chemistry-2e/pages/1-introduction"
+    },
+    {
+      "title": "OpenStax Chemistry 2e: Measurement uncertainty, accuracy, and precision",
+      "url": "https://openstax.org/books/chemistry-2e/pages/1-5-measurement-uncertainty-accuracy-and-precision"
+    },
+    {
+      "title": "OpenStax Chemistry 2e: Molarity",
+      "url": "https://openstax.org/books/chemistry-2e/pages/3-3-molarity"
+    },
+    {
+      "title": "OpenStax Chemistry 2e: Writing and balancing chemical equations",
+      "url": "https://openstax.org/books/chemistry-2e/pages/4-1-writing-and-balancing-chemical-equations"
+    }
+  ],
+  "title": "Introduction to Chemistry",
+  "category": "Chemical sciences",
+  "level": "Introductory undergraduate",
+  "minutes": 300,
+  "description": "College-style introductory study course for independent learning. Prerequisites: Fractions, percentages, scientific notation, and elementary algebra; a calculator is useful. Eight lessons, an academic project, and optional mentor review. No college credit or accredited qualification is awarded. All exercises use paper, a calculator, or a simulation; no laboratory work.",
+  "skills": [
+    "Calculate density and report measurements with units and appropriate precision.",
+    "Use atomic number, mass number, and charge to count subatomic particles.",
+    "Distinguish ionic and covalent bonding, compounds and mixtures, and common chemical representations.",
+    "Balance symbolic chemical equations without changing subscripts.",
+    "Convert between mass and moles and use balanced-equation mole ratios.",
+    "Calculate molarity and solve theoretical dilution problems.",
+    "Explain activation energy and catalyst effects and compare pH values logarithmically.",
+    "Use supplied data to explain conservation and interpret measurement uncertainty."
+  ],
+  "lessons": [
+    {
+      "id": "lesson-c3a7c476-63bc-4dbd-941e-4154fead02b2",
+      "title": "1. Matter, Measurements, Units, and Significant Figures",
+      "body": "Matter has mass and occupies space. Mass and volume depend on how much material is present, but density is the ratio of the two. For a uniform material under the same conditions, a larger sample has more mass and more volume in the same proportion. Its density therefore stays the same. Write density as d = m/V. If mass is in grams and volume is in cubic centimeters, the resulting unit is g/cm³.\n\nA measured value communicates both size and precision. In 12.6 g, the last reported digit is in the tenths place. Leading zeros mark the decimal position, so 0.042 has two significant figures. A trailing zero after a decimal can communicate precision: 4.20 has three significant figures, whereas 4.2 has two. For multiplication or division of measured values, the usual introductory rule is to report as many significant figures as the input with the fewest. Exact definitions, such as 1 cm³ = 1 mL, do not limit precision. Keep extra calculator digits until the final step.\n\nFictional worked example: A data card lists a block's mass as 12.6 g and its volume as 4.00 cm³. Dividing gives (12.6 g)/(4.00 cm³) = 3.15 g/cm³. Both inputs have three significant figures, so the result does too.\n\nFictional practice: A second data card gives 18.4 g and 5.6 cm³. Predict the unit before dividing. The calculator gives approximately 3.2857; report 3.3 g/cm³ to two significant figures.\n\nOptional mentor discussion: Why can a result be displayed to many digits without being known to that precision?",
+      "question": "Fictional data: A sample card lists 8.40 g and 2.0 cm³. What density should be reported?",
+      "options": [
+        "4.20 g/cm³",
+        "4.2 g/cm³",
+        "0.24 g/cm³",
+        "4.2 cm³/g"
+      ],
+      "answer": 1,
+      "explanation": "Divide mass by volume. The volume has two significant figures, so report 4.2 g/cm³."
+    },
+    {
+      "id": "lesson-d5e0baab-c071-4337-9ce2-587bde375148",
+      "title": "2. Atomic Structure, Isotopes, Ions, and the Periodic Table",
+      "body": "An element is defined by the number of protons in its nuclei. This count is the atomic number, Z, and the periodic table lists elements in order of increasing Z. The mass number, A, counts protons plus neutrons in one nucleus. Subtract Z from A to find neutron count. Isotopes are atoms of the same element with different neutron counts. The decimal atomic mass commonly printed on a periodic table is an abundance-weighted average, not the mass number of an individual atom.\n\nA neutral atom has as many electrons as protons. An ion has unequal counts. Expressed in elementary charge units, its charge equals proton count minus electron count. A positive ion has fewer electrons than protons; a negative ion has more. Changing electron count changes charge, not element identity. Periodic table columns are called groups. Their recurring chemical patterns reflect similarities in the electrons most involved in bonding, not similarities in neutron counts.\n\nFictional worked example: A textbook card identifies a sulfur-34 ion with Z = 16 and charge 2−. It has 16 protons and 34 − 16 = 18 neutrons. Its electron count is 16 − (−2) = 18. The matching neutral isotope has the same nucleus but only 16 electrons.\n\nFictional practice: A card gives Z = 12, A = 25, and charge 2+. Find all three counts before checking: 12 protons, 13 neutrons, and 10 electrons.\n\nOptional mentor discussion: Why is atomic number alone enough to identify the element but not enough to identify its isotope or charge?",
+      "question": "Fictional particle card: Z = 17, A = 37, and charge is 1−. What are the proton, neutron, and electron counts, in that order?",
+      "options": [
+        "17, 20, 16",
+        "17, 18, 20",
+        "20, 17, 18",
+        "17, 20, 18"
+      ],
+      "answer": 3,
+      "explanation": "Z gives 17 protons. The neutron count is 37 − 17 = 20, and the negative charge indicates one extra electron, for 18."
+    },
+    {
+      "id": "lesson-ea5a7e87-cf5e-4855-a799-fc6662a2603b",
+      "title": "3. Bonding and Molecular Structure",
+      "body": "A chemical bond is an attraction that holds atoms or ions together. In a covalent bond, atoms share electron density. Many covalent substances consist of discrete molecules, but some form extended networks instead. In an ionic solid, positive and negative ions attract one another in an extended arrangement. An ionic formula normally gives the simplest whole-number ratio of ions, not the makeup of a separate molecule. For instance, NaCl represents a one-to-one ratio of sodium ions to chloride ions in the solid.\n\nA compound has elements chemically combined in a fixed proportion. A mixture contains more than one substance and can vary in composition. A mixture can look uniform, so uniform appearance alone does not establish that something is a compound. A collection containing only one kind of elemental molecule can also be a pure substance without being a compound: it contains only one element.\n\nFictional worked example: A model card shows three identical groups, each with a carbon atom between two oxygen atoms and two double bonds. The formula for each group is CO₂, and the line representation is O=C=O. The card represents a pure molecular compound because all three groups are the same and each contains two elements. The formula gives atom counts; the line representation adds connectivity and bond information. A ball-and-stick drawing could also emphasize geometry, but its balls and sticks would not be literal pictures of atoms and bonds.\n\nFictional practice: A second card shows separate CO₂ groups and separate O₂ groups. Classify the whole collection. It is a mixture of a compound and an elemental substance.\n\nOptional mentor discussion: What might a simple formula hide about the arrangement of atoms?",
+      "question": "Fictional model card: An ionic solid contains ions with charges X²⁺ and Y⁻. Which simplest ratio gives a neutral formula?",
+      "options": [
+        "XY",
+        "X₂Y",
+        "XY₂",
+        "X₂Y₃"
+      ],
+      "answer": 2,
+      "explanation": "One X²⁺ contributes +2 and two Y⁻ ions contribute −2. The simplest neutral ratio is one X to two Y."
+    },
+    {
+      "id": "lesson-3e6f11fa-b285-47b3-b4c1-0a14e6dcee8d",
+      "title": "4. Chemical Equations and Conservation",
+      "body": "A chemical equation lists reactants to the left of an arrow and products to the right. In an ordinary chemical reaction, atoms change partners without gaining or losing their elemental identities. An equation is balanced when it represents the same number of atoms of each element on both sides. If all matter is accounted for, this atom conservation also accounts for conservation of mass. A balanced equation does not by itself establish whether a reaction happens readily or at all under particular conditions.\n\nA subscript is part of a substance's formula. A coefficient multiplies the entire formula. For example, a coefficient of 2 in front of a formula containing three oxygen atoms gives six oxygen atoms in total. Changing a subscript would describe a different substance, not correct its count. On paper, make a row for each element, adjust coefficients, then recount every row. Use the smallest whole-number coefficients when asked for the conventional form.\n\nFictional worked example: A paper exercise gives Al + O₂ → Al₂O₃ as a skeleton equation. Oxygen occurs in groups of two on the left and three on the right. A common total is six, so place 3 before O₂ and 2 before Al₂O₃. The right side now has four aluminum atoms. Put 4 before Al to obtain 4Al + 3O₂ → 2Al₂O₃. Both sides contain four Al and six O atoms.\n\nFictional practice: Balance Mg + O₂ → MgO on paper. Check your atom counts against 2Mg + O₂ → 2MgO.\n\nOptional mentor discussion: Why do equations with all coefficients doubled describe the same proportions?",
+      "question": "Fictional paper equation: Fe + O₂ → Fe₂O₃. What are the smallest whole-number coefficients in the order shown?",
+      "options": [
+        "2, 1, 1",
+        "4, 3, 2",
+        "2, 3, 1",
+        "4, 2, 2"
+      ],
+      "answer": 1,
+      "explanation": "Four Fe atoms and six O atoms appear on each side with coefficients 4, 3, and 2."
+    },
+    {
+      "id": "lesson-dacef6f4-b7f9-4f31-851d-8fb9e4b0c5b5",
+      "title": "5. Moles and Stoichiometry",
+      "body": "The mole is a unit for amount of substance. One mole contains exactly 6.02214076 × 10²³ specified entities, such as atoms, molecules, or formula units. Molar mass is mass per mole, usually written in g/mol. To find it, multiply each element's supplied atomic molar mass by its subscript, then add the contributions. If m is mass and M is molar mass, the amount n is m/M. Dividing grams by grams per mole leaves moles.\n\nThe coefficients of a balanced equation also give ratios in moles. They do not generally give ratios in grams because different substances have different molar masses. A useful paper calculation has three stages: convert the given mass to moles, apply the mole ratio, and convert back to mass if asked. At each stage, check that the units and the substance labels cancel as intended.\n\nFictional worked example: A worksheet uses CaCO₃ → CaO + CO₂ as a symbolic equation and assigns 40.08 g/mol for Ca, 12.01 g/mol for C, and 16.00 g/mol for O. Thus M(CaCO₃) = 40.08 + 12.01 + 3(16.00) = 100.09 g/mol. A theoretical accounting entry of 25.0 g CaCO₃ corresponds to 25.0/100.09 = 0.2498 mol before final rounding. The 1:1 coefficient ratio gives 0.250 mol CO₂ to three significant figures. Since M(CO₂) = 44.01 g/mol, the predicted CO₂ mass is 11.0 g using the unrounded amount.\n\nFictional practice: For 0.500 mol CaCO₃ in the same equation, predict the amount and mass of CO₂: 0.500 mol and 22.0 g.\n\nOptional mentor discussion: Why does a 1:1 mole ratio not imply equal masses?",
+      "question": "Fictional calculation: M(CO₂) = 44.01 g/mol. How much substance is represented by 8.802 g of CO₂?",
+      "options": [
+        "0.2000 mol",
+        "0.02000 mol",
+        "5.000 mol",
+        "387.4 mol"
+      ],
+      "answer": 0,
+      "explanation": "Divide 8.802 g by 44.01 g/mol. Grams cancel, leaving 0.2000 mol."
+    },
+    {
+      "id": "lesson-73260f45-05df-4263-bf21-a470f91b081f",
+      "title": "6. Solutions and Concentration",
+      "body": "A solution is a uniform mixture. The solute is the component whose amount is being tracked, and the solvent is the medium in which it is distributed. Molarity measures amount of solute per liter of the entire solution, not per liter of solvent alone. Write C = n/V, where n is solute amount in moles and V is solution volume in liters. The unit mol/L can also be written M. If a paper data table gives milliliters, divide by 1000 to obtain liters; 1000 mL = 1 L is exact.\n\nIn a theoretical dilution calculation, a larger solution volume corresponds to a lower concentration when the tracked solute amount stays constant. Since n = CV, the same amount can be represented by C₁V₁ = C₂V₂. This relationship depends on the conservation assumption: the solute is not gained, lost, or changed into another substance. It also matters which volume is reported. V₂ denotes the final total solution volume in the model, not a change in volume.\n\nFictional worked example: A simulation record lists 0.0300 mol of solute and a total volume of 0.150 L. Its concentration is 0.0300/0.150 = 0.200 mol/L. The same record models a second state with the same solute amount and a total volume of 0.500 L. The second concentration is 0.0300/0.500 = 0.0600 mol/L. Its lower value agrees with the larger denominator.\n\nFictional practice: A model record changes from 0.400 mol/L at 0.125 L to a total volume of 0.250 L at fixed solute amount. Check that the predicted concentration is 0.200 mol/L.\n\nOptional mentor discussion: If two solutions have equal molarity but different volumes, must they contain equal amounts of solute?",
+      "question": "Fictional solution data: The solute amount is 0.0150 mol and the total solution volume is 75.0 mL. What is the molarity?",
+      "options": [
+        "0.000200 mol/L",
+        "5.00 mol/L",
+        "2.00 mol/L",
+        "0.200 mol/L"
+      ],
+      "answer": 3,
+      "explanation": "Convert 75.0 mL to 0.0750 L, then divide 0.0150 mol by 0.0750 L."
+    },
+    {
+      "id": "lesson-bb2446be-89c8-4cab-b705-eb0504772530",
+      "title": "7. Energy, Rates, and Acid–Base Concepts",
+      "body": "Reaction rate describes how quickly the amounts or concentrations of substances change. On a simple reaction energy diagram, activation energy is the barrier from the starting state to the top of the pathway. This barrier is not the same as the energy difference between reactants and products. A process can lead to lower-energy products and still proceed slowly if its activation barrier is large.\n\nA catalyst provides a different pathway with a lower barrier. In a reversible system it speeds the approach to equilibrium by facilitating both directions. At fixed conditions, it does not change the equilibrium composition. At dynamic equilibrium, the forward and reverse rates are equal, so there is no net change in composition even though both directions continue.\n\nIn a proton-transfer model, an acid donates a proton and a base accepts one. The pH scale describes acidity in terms of hydrogen-ion activity, a measure of effective rather than simply counted concentration. The definition pH = −log₁₀(a) uses hydrogen-ion activity a. The negative sign means that lower pH corresponds to higher activity. A difference of one pH unit corresponds to a tenfold activity ratio, not a one-unit difference in activity.\n\nFictional worked example: A simulation reports pH 4.0 for state A and pH 6.0 for state B. The activity ratio A/B is 10^(6.0 − 4.0) = 100. State A has 100 times the hydrogen-ion activity of state B.\n\nFictional practice: Compare pH 5.0 with pH 8.0. Check that the lower-pH state has 1,000 times the activity.\n\nOptional mentor discussion: How would concentration-versus-time graphs distinguish faster equilibration from a different equilibrium composition?",
+      "question": "Fictional reversible simulation: A catalyst is introduced while conditions otherwise stay fixed. What does the model predict?",
+      "options": [
+        "The equilibrium permanently shifts toward products.",
+        "Only the forward reaction is accelerated.",
+        "Equilibrium is reached sooner, with the same equilibrium composition.",
+        "The equilibrium composition stays the same because both reactions stop."
+      ],
+      "answer": 2,
+      "explanation": "A catalyst helps both directions proceed faster without changing the equilibrium composition. At equilibrium, both directions continue at equal rates."
+    },
+    {
+      "id": "lesson-b1435b32-5f27-454c-a054-10c704dba440",
+      "title": "8. Academic Capstone: Calculation, Conservation, and Uncertainty",
+      "body": "Use this fully supplied fictional data packet to write a short academic analysis on paper or with a calculator. Record A: A virtual solution contains 5.844 ± 0.006 g of modeled NaCl in a total solution volume of 0.5000 ± 0.0010 L. For this exercise, treat the supplied molar mass, 58.44 g/mol, as exact. Treat the stated uncertainty intervals as bounds that may vary independently. Record B is separate from Record A: its unbalanced symbolic equation is X₂ + Y₂ → XY₂, where X and Y are fictional elements.\n\nFictional worked analysis: The central amount is 5.844 g ÷ 58.44 g/mol = 0.1000 mol. The central concentration is 0.1000 mol ÷ 0.5000 L = 0.2000 mol/L. To estimate the lowest concentration, pair the smallest mass with the largest volume: (5.838/58.44)/0.5010 ≈ 0.1994 mol/L. The largest mass and smallest volume give (5.850/58.44)/0.4990 ≈ 0.2006 mol/L. The interval describes the effect of the supplied bounds; it does not prove that the central value is exact. For Record B, X₂ + 2Y₂ → 2XY₂ gives two X and four Y atoms on each side. The coefficients preserve atom counts without changing any formula.\n\nPractice: Cover the worked analysis. Rebuild it with units, draw a two-row atom tally, and explain in your own words why volume affects concentration but not the amount calculated from mass.\n\nFour-point rubric, one point each: (1) correct amount and units; (2) correct concentration and units; (3) balanced equation plus an atom tally that explains conservation; (4) correct uncertainty bounds with an explanation of how the input extremes determine them.\n\nOptional mentor discussion: Why does using the largest mass and largest volume together not give the upper concentration bound?",
+      "question": "In fictional Record A, if the mass is fixed at its central value but volume is at its upper bound, what happens?",
+      "options": [
+        "The amount stays the same and the concentration falls.",
+        "The amount falls and the concentration stays the same.",
+        "The amount stays the same and the concentration rises.",
+        "The amount and concentration both rise."
+      ],
+      "answer": 0,
+      "explanation": "With mass and molar mass fixed, n = m/M stays the same. A larger V makes n/V smaller."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "Fictional ion card: A particle has 11 protons and charge 1+. How many electrons does it have?",
+      "options": [
+        "12",
+        "11",
+        "10",
+        "1"
+      ],
+      "answer": 2,
+      "explanation": "A charge of 1+ means the particle has one fewer electron than proton: 11 − 1 = 10."
+    },
+    {
+      "question": "Fictional paper equation: X₂ + Y₂ → XY, with X and Y as fictional elements. Which change balances it?",
+      "options": [
+        "Put a coefficient of 2 before X₂ only.",
+        "Put a coefficient of 2 before XY only.",
+        "Put a coefficient of 2 before Y₂ only.",
+        "Put a coefficient of 2 before every formula."
+      ],
+      "answer": 1,
+      "explanation": "Two units of XY contain two X atoms and two Y atoms, matching the left side without changing any formula."
+    },
+    {
+      "question": "Fictional solution record: A total volume of 0.500 L contains 0.200 mol of solute. What is its molarity?",
+      "options": [
+        "0.100 mol/L",
+        "0.200 mol/L",
+        "2.50 mol/L",
+        "0.400 mol/L"
+      ],
+      "answer": 3,
+      "explanation": "Molarity is amount divided by total solution volume: 0.200 mol ÷ 0.500 L = 0.400 mol/L."
+    },
+    {
+      "question": "Fictional density data give 15.0 g for 5.00 cm³. What is the density?",
+      "options": [
+        "0.333 g/cm³",
+        "3.00 g/cm³",
+        "75.0 g/cm³",
+        "10.0 g/cm³"
+      ],
+      "answer": 1,
+      "explanation": "Density is mass divided by volume: 15.0/5.00 = 3.00 g/cm³, with three significant figures."
+    },
+    {
+      "question": "How does hydrogen-ion activity at pH 3 compare with pH 4?",
+      "options": [
+        "It is 10 times greater at pH 3.",
+        "It is equal at both values.",
+        "It is one unit smaller at pH 3.",
+        "It is 100 times smaller at pH 3."
+      ],
+      "answer": 0,
+      "explanation": "The pH scale is logarithmic. A one-unit decrease corresponds to a tenfold increase in hydrogen-ion activity."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "Fictional ion card: A particle has atomic number 8, mass number 18, and charge 2−. How many electrons does it have?",
+      "options": [
+        "10",
+        "6",
+        "8",
+        "18"
+      ],
+      "answer": 0,
+      "explanation": "Atomic number gives eight protons. The 2− charge means two more electrons than protons, for ten. Mass number counts protons and neutrons, not electrons."
+    },
+    {
+      "question": "Fictional paper equation: Q₂ + R₂ → Q₂R₃, with Q and R as fictional elements. Which smallest coefficients balance it?",
+      "options": [
+        "1, 1, 1",
+        "1, 3, 2",
+        "2, 3, 2",
+        "2, 2, 3"
+      ],
+      "answer": 2,
+      "explanation": "The coefficients 2, 3, and 2 give four Q atoms and six R atoms on each side."
+    },
+    {
+      "question": "Fictional solution record: The solute amount is 0.0360 mol and the total volume is 120.0 mL. What is its molarity?",
+      "options": [
+        "0.000300 mol/L",
+        "3.33 mol/L",
+        "0.00432 mol/L",
+        "0.300 mol/L"
+      ],
+      "answer": 3,
+      "explanation": "Convert 120.0 mL to 0.1200 L and divide 0.0360 mol by that volume. The result is 0.300 mol/L."
+    },
+    {
+      "question": "Fictional density data give 9.60 g and 3.00 cm³. What density should be reported?",
+      "options": [
+        "28.8 g/cm³",
+        "0.313 g/cm³",
+        "6.60 g/cm³",
+        "3.20 g/cm³"
+      ],
+      "answer": 3,
+      "explanation": "Divide 9.60 by 3.00 to obtain 3.20 g/cm³. Three significant figures are supported by both inputs."
+    },
+    {
+      "question": "In a fictional comparison, state P has pH 5 and state Q has pH 7. What is the activity ratio P/Q?",
+      "options": [
+        "2",
+        "10",
+        "100",
+        "1/100"
+      ],
+      "answer": 2,
+      "explanation": "The activity ratio is 10^(7 − 5) = 100. Lower pH corresponds to higher hydrogen-ion activity."
+    }
+  ],
+  "published": true
+}

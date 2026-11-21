@@ -1,0 +1,150 @@
+{
+  "id": "study-prompting",
+  "mentorPrompt": "I am studying Practical Prompting and Verification. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "NIST: Generative AI Profile",
+      "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+    }
+  ],
+  "title": "Practical Prompting and Verification",
+  "category": "AI skills",
+  "level": "Beginner",
+  "minutes": 65,
+  "description": "Practice writing clear prompts, comparing drafts, and checking AI-generated claims against a fact sheet. Finish by building a reusable prompt for volunteer event notices and testing it with two fictional events. This course is designed for adult beginners, career changers, and returning professionals. No mentor is assigned yet. You can request one and use the suggested discussion prompts if you meet. Optional further reading: NIST: Generative AI Profile, https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+  "skills": [
+    "Specify the task, context, audience, and constraints in a prompt",
+    "Compare AI-generated drafts against the same source and requirements",
+    "Check individual claims against a supplied fact sheet",
+    "Build and test a reusable prompt with complete and incomplete inputs"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-dd00cf4a-97bd-4ac7-88b6-f53f02d64320",
+      "title": "1. Task, Context, Audience, and Constraints",
+      "body": "A prompt is the instruction you give an AI tool. Start with four pieces: the task (what to produce), the context (what facts or background to use), the audience (who will read it), and the constraints (what the output must or must not do). Keep them separate when drafting. That makes it easier to see whether a missing detail belongs in the source material or in the instructions.\n\nFictional example — input: “Task: Write a reminder for the volunteer group chat. Context: The book-sorting shift starts at 10 a.m. on Saturday, May 9, at Cedar Library, Room B. Volunteers should bring a pencil. Audience: First-time volunteers who have already signed up. Constraints: Use two short sentences. Include the date, time, room, and item to bring. Use only these facts; do not add arrival instructions.”\n\nSample output: “Your book-sorting shift starts at 10 a.m. on Saturday, May 9, in Room B at Cedar Library. Please bring a pencil.”\n\nThe audience matters: people who already signed up need a reminder, not a recruitment pitch. The source tells the tool which room to name, while the constraints tell it not to improvise about check-in or early arrival. Notice that a short prompt can still be specific.\n\nPractice: Rewrite the input for a calendar entry instead of a group chat. Ask for a title and one details line. Keep the source facts unchanged, then draft the output yourself or test the prompt with an AI tool.\n\nSuggested mentor discussion: Which instruction would you change first if the reminder were going to people who had not signed up?",
+      "question": "Which addition supplies a key piece of context for a shift reminder?",
+      "options": [
+        "Write two short sentences.",
+        "The shift starts at 10 a.m.",
+        "Write for first-time volunteers.",
+        "Put the reminder in plain language."
+      ],
+      "answer": 1,
+      "explanation": "The start time is a fact about the shift. The other options specify the audience or place constraints on the writing."
+    },
+    {
+      "id": "lesson-c024d328-0f3e-41f2-8440-f2c9583d5d77",
+      "title": "2. Worked Prompt Comparison",
+      "body": "Compare drafts by giving both prompts the same source facts. Before you look at the results, decide what the output needs to do. Otherwise, a lively draft may seem better even when it leaves out information the reader needs.\n\nFictional example — shared source: “Poster-making session: Thursday, June 11, 6 p.m., Maple Community Room. Materials are provided. Sign up at the front desk by June 9.”\n\nPrompt A: “Use the source to write a fun announcement.” Sample output A: “Get creative with us at a poster-making night on June 11! Bring a friend, grab a snack, and join the fun at Maple Community Room.”\n\nPrompt B: “Use the source to write a two-sentence announcement for community center visitors. Include the date, time, location, materials, and sign-up steps and deadline. Do not add perks or policies not in the source.” Sample output B: “Join us for poster making at Maple Community Room on Thursday, June 11, at 6 p.m.; materials are provided. Sign up at the front desk by June 9.”\n\nDraft A has an inviting tone, but it omits the time and sign-up instructions. It also suggests guests and snacks, neither of which the source confirms. Draft B serves readers better because it tells them when to come and how to sign up without adding unsupported details. One good result does not prove that the prompt will work every time, so check each new draft.\n\nPractice: Revise Prompt B to ask for a warmer tone without dropping any requirements. Draft or generate a new result and compare it with the same source and checklist.\n\nSuggested mentor discussion: How would you balance a friendly tone with essential details on a small poster?",
+      "question": "Which comparison best explains why draft B is more useful than draft A?",
+      "options": [
+        "Draft B is better because a semicolon makes the notice easier to verify.",
+        "Draft B is better because a more detailed prompt makes checking unnecessary.",
+        "Draft B is better because it includes the time and sign-up steps without inventing perks.",
+        "Draft B is better because a neutral tone matters more than including a deadline."
+      ],
+      "answer": 2,
+      "explanation": "Draft B includes details readers need to act and avoids unsupported additions. Style and prompt detail do not replace a check against the source."
+    },
+    {
+      "id": "lesson-4a94059a-f9a3-4e6d-b6a9-77f198e10811",
+      "title": "3. Checking Claims Against a Supplied Fact Sheet",
+      "body": "Treat a draft as wording to review, not as evidence. Break it into individual claims, then compare each one with the supplied fact sheet. A claim is supported if the sheet confirms it, contradicted if the sheet says something incompatible, and unconfirmed if the sheet does not settle it. Check for omitted requirements too: a draft can contain only true claims and still leave out something important.\n\nFictional fact sheet: “Coat collection: Saturday, November 14, 1–3 p.m., Oak Hall, north entrance. Accept clean adult coats only. Do not accept other clothing.”\n\nDraft to check: “Drop off clean coats and scarves at Oak Hall on Saturday, November 14, from 1 to 3 p.m. Parking is free.”\n\nWorked check: The date, time, and building are supported. Accepting scarves is contradicted by the rule against other clothing. Free parking is unconfirmed: the sheet says nothing about parking, which does not mean parking costs money. The draft also omits the north entrance and fails to specify adult coats.\n\nCorrected output: “Drop off clean adult coats at the north entrance of Oak Hall on Saturday, November 14, from 1 to 3 p.m. Other clothing is not accepted.” If parking information matters to readers, ask the organizer to confirm it before adding it.\n\nPractice: Check this alternate draft: “Bring clean coats of any size to the north entrance of Oak Hall on November 14. Volunteers will help unload cars.” Label the size and unloading claims, then restore the missing hours in a corrected version.\n\nSuggested mentor discussion: When would you leave an unconfirmed detail out, and when would you hold the notice until someone verifies it?",
+      "question": "How should you label “Volunteers will help unload cars” using only the supplied fact sheet?",
+      "options": [
+        "Unconfirmed, because the sheet does not say whether unloading help is available.",
+        "Supported, because the sheet identifies which entrance to use.",
+        "Contradicted, because the sheet does not list an unloading service.",
+        "Supported, because the event accepts coats."
+      ],
+      "answer": 0,
+      "explanation": "The fact sheet is silent about unloading. Silence neither confirms the claim nor contradicts it."
+    },
+    {
+      "id": "lesson-f95b7295-96b7-40ca-80bc-bdf0cbe4cb3b",
+      "title": "4. Capstone: Build and Test a Reusable Volunteer Notice Prompt",
+      "body": "Your deliverable is one reusable prompt plus two test records. For each test, save the fact sheet, the output, and a brief note showing what passed and what you changed. If you do not have an AI tool, write a sample output for each test and label it as a simulation. That lets you practice verification without treating a simulation as evidence of model performance.\n\nStarter prompt: “Using [FACT SHEET], write a volunteer event notice in no more than three short sentences for first-time volunteers. Include the event name, date, start time, meeting point, and sign-up directions. Use only the sheet. If any required field is missing, return a list of missing fields instead of a notice.”\n\nFictional test A input: “Path Tidy; Saturday, April 18; 9 a.m.; Birch Park kiosk; sign up at the community desk.” Sample output: “Join Path Tidy on Saturday, April 18, at 9 a.m. Meet at the Birch Park kiosk. Sign up at the community desk.”\n\nFictional test B input: “Seed Sorting; Saturday, April 25; 11 a.m.; Willow Center lobby.” Sample output: “Missing required field: sign-up directions.” The second test checks whether the prompt stops instead of guessing.\n\nPractice: Adapt the starter and run both tests without changing your prompt between them. If a test fails, revise the prompt and rerun both. Keep the final prompt and results together.\n\nFour-point self-review rubric (one point each): (1) The prompt separates reusable instructions from the replaceable fact sheet. (2) The complete output meets the audience, length, and field requirements. (3) Every factual claim in the complete output matches the source. (4) The incomplete test flags the missing field without guessing or producing a notice.\n\nSuggested mentor discussion: What different missing field would you test next, and why?",
+      "question": "Your prompt says to list missing required fields instead of drafting. What should it return if only the start time is missing?",
+      "options": [
+        "A notice that leaves out the start time",
+        "A notice that says “Time to be announced”",
+        "A notice that uses the start time from the previous test",
+        "A missing-field message naming the start time, with no notice"
+      ],
+      "answer": 3,
+      "explanation": "The missing-field message follows the prompt's explicit rule and prevents an incomplete or invented detail from appearing in a public notice."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "You want a reminder for volunteers who have already registered. Which prompt best defines the task, audience, source, and constraints?",
+      "options": [
+        "Summarize these notes in a friendly way.",
+        "Write a reminder for registered volunteers. Use only these shift notes and keep it to two sentences.",
+        "Write a two-sentence pitch to attract new volunteers. Use these shift notes.",
+        "Write a reminder for registered volunteers. Add helpful details that aren't in the notes."
+      ],
+      "answer": 1,
+      "explanation": "This prompt identifies the deliverable and audience, specifies which facts to use, and sets a length limit."
+    },
+    {
+      "question": "The source says “Bring gloves.” Draft A says “Bring gloves.” Draft B says “Gloves are provided.” What is the best reason to choose A?",
+      "options": [
+        "It preserves the action the source asks readers to take.",
+        "It sounds more welcoming than B.",
+        "It is shorter, which makes it more accurate.",
+        "It avoids telling readers what to do."
+      ],
+      "answer": 0,
+      "explanation": "Draft A preserves the source instruction. Draft B replaces it with an unsupported claim about what the organizer provides."
+    },
+    {
+      "question": "A reusable prompt must flag missing locations. Which test best shows whether that rule works without breaking a normal run?",
+      "options": [
+        "Run two complete fact sheets and compare the notices.",
+        "Run the same incomplete fact sheet twice and compare the wording.",
+        "Run a complete sheet, then run it without the location and check for a missing-field message.",
+        "Run a complete sheet, then try a shorter prompt with a different complete sheet."
+      ],
+      "answer": 2,
+      "explanation": "A complete run checks normal behavior. Removing only the location isolates the missing-field rule and lets you see whether the output changes as instructed."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "Your prompt says “Use this fact sheet to write two sentences about the pantry shift for the website.” Which addition specifies the audience?",
+      "options": [
+        "Include the shift start time.",
+        "Use the heading “Pantry Shift.”",
+        "Do not add claims not found in the fact sheet.",
+        "Write for people considering their first volunteer shift."
+      ],
+      "answer": 3,
+      "explanation": "The audience is the group expected to read the message. The other options specify content or formatting constraints."
+    },
+    {
+      "question": "A toy drive sheet lists drop-off from 2 to 4 p.m. and says nothing about receipts. Draft A includes the hours and promises receipts. Draft B gives the hours only. Which evaluation is best?",
+      "options": [
+        "Choose B over A: both give the correct hours, but A adds an unconfirmed promise.",
+        "Choose A over B: receipts are a plausible addition for a toy drive.",
+        "Choose B over A: the sheet proves receipts will not be available.",
+        "Treat the drafts as equally accurate because both give the correct hours."
+      ],
+      "answer": 0,
+      "explanation": "Both drafts preserve the hours, but only B avoids the unsupported promise. The missing receipt information does not show that receipts are unavailable."
+    },
+    {
+      "question": "A reusable announcement prompt worked with a complete fact sheet. To test whether it flags a missing sign-up deadline, what should you do next?",
+      "options": [
+        "Change the deadline to another date and check whether the new date appears.",
+        "Remove only the deadline, keep the prompt unchanged, and check for a missing-deadline message.",
+        "Keep the complete sheet and ask for a shorter output.",
+        "Remove the deadline and rewrite the prompt to say exactly what it should return for this particular test."
+      ],
+      "answer": 1,
+      "explanation": "Keeping the prompt and all other inputs unchanged isolates the missing deadline. The result shows whether the reusable prompt handles that gap without a test-specific instruction."
+    }
+  ],
+  "published": true
+}

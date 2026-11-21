@@ -1,0 +1,151 @@
+{
+  "id": "study-accessibility",
+  "mentorPrompt": "I am studying Inclusive Design and Accessibility. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "W3C WAI: Accessibility tutorials",
+      "url": "https://www.w3.org/WAI/tutorials/"
+    }
+  ],
+  "title": "Inclusive Design and Accessibility",
+  "category": "Design",
+  "level": "Beginner",
+  "minutes": 65,
+  "description": "Practice turning a user task into a clear page, then check whether the words, form controls, and keyboard behavior help someone complete it. The course ends with a review of a fictional nonprofit application form. No coding is required. You can request a mentor; none is assigned yet. The discussion prompts also work as reflection exercises. Optional further reading: W3C WAI Accessibility tutorials, https://www.w3.org/WAI/tutorials/.",
+  "skills": [
+    "Describe a user task with a clear goal and observable endpoint",
+    "Write descriptive headings and meaningful link text",
+    "Write visible form labels and purpose-based text alternatives",
+    "Use a keyboard to check a form and document barriers",
+    "Prioritize and explain revisions to an application form"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-d9a6c78c-69ec-4453-a600-36f186d50a5e",
+      "title": "Understand a user task before designing",
+      "body": "Start with what someone needs to accomplish, not with the page you think they need. A task statement names the person’s goal and a sign that they reached it. It is different from a feature request: “Add a dashboard” suggests a solution, while “Find out whether my application arrived” describes a problem you can investigate.\n\n**Worked example (fictional):** A volunteer at Harbor Skills says, “Applicants keep asking if we got their forms. Can we build a dashboard?” An applicant says, “I pressed Submit, but the page went back to the start. I don’t know if I should send it again.” The applicant’s statement is one piece of evidence, not proof that everyone has the same problem.\n\n**Design output:** The task statement is “After submitting an application, confirm it arrived without sending a duplicate.” For a first draft, replace the return to the start page with a confirmation that appears only when the submission succeeds: “We received your Harbor Skills application. You do not need to send it again.” To check the draft, give someone a sample application to submit. Ask, “What happened, and what would you do next?” Record whether they can tell that it arrived and that no second submission is needed. If they cannot, note where they looked and what they expected to see.\n\n**Practice:** For the fictional request “Add a calendar,” use this applicant input: “I need to know whether I can still apply today.” Write a task statement and one observable sign of success. Leave the interface choice open.\n\n**Suggested mentor discussion:** What would you ask to find out whether people need a deadline, an open-or-closed status, or both?",
+      "question": "Which statement best describes the applicant’s task in the Harbor Skills example?",
+      "options": [
+        "Add a dashboard with a status card.",
+        "Confirm that the application arrived without submitting it again.",
+        "Make the Submit button easier to notice.",
+        "Send a reminder to applicants who have not finished."
+      ],
+      "answer": 1,
+      "explanation": "This describes what the applicant needs to find out and what they can avoid doing. The other options propose features or address a different problem."
+    },
+    {
+      "id": "lesson-063bb72d-a684-4ebb-8b94-2ee167d2cd7f",
+      "title": "Write headings and meaningful links",
+      "body": "Headings help readers scan and let people using assistive technology navigate by section. Use headings to show how topics fit together, not just to make words larger. In a webpage editor, choose actual heading levels: a page title at level 1, main sections at level 2, and subsections at level 3. Link text has a different job: it tells readers where a link goes or what it opens. It should make sense even if someone encounters it without the surrounding paragraph.\n\n**Worked example (fictional):** A Bridge Workshop page has the title “Welcome,” two bold lines reading “Information” and “Next steps,” and two links labeled “Click here.” One link opens a schedule PDF; the other opens an online application. Someone scanning just the headings or links gets little help choosing where to go.\n\n**Revised output:** Use the level 1 heading “Bridge Workshop: How to apply,” then the level 2 headings “Check workshop dates” and “Submit your application.” Under the first section, use “Download the Bridge Workshop schedule (PDF).” Under the second, use “Open the Bridge Workshop application.” Read the headings as an outline to check the order. Then read each link on its own to check that its promise matches the destination.\n\n**Practice:** On a fictional library volunteer page, change the heading “More” to name a section about shift expectations. Replace two “Read more” links: one opens a shift calendar and the other opens a volunteer handbook PDF.\n\n**Suggested mentor discussion:** In your rewrite, which words help someone tell the two link destinations apart quickly?",
+      "question": "A link opens the Bridge Workshop schedule as a PDF. Which label best describes the destination on its own?",
+      "options": [
+        "Click here",
+        "Workshop resources",
+        "Download PDF",
+        "Download the Bridge Workshop schedule (PDF)"
+      ],
+      "answer": 3,
+      "explanation": "This label names both the document and its format. “Download PDF” names the format but leaves readers guessing what the file contains."
+    },
+    {
+      "id": "lesson-a9e55e36-96c6-4efd-b46a-ac98aa9ba2f9",
+      "title": "Use labels, text alternatives, and keyboard checks",
+      "body": "A visible label tells people what to enter, even after they start typing. In a working form, connect the label to its field using the form builder’s label setting or the page’s code. A hint can add an example, but placeholder text inside the field should not replace the label. Text alternatives serve a different purpose: they convey what an image adds in context. If an image is purely decorative and adds nothing, give it an empty text alternative so assistive technology can skip it.\n\n**Worked example (fictional):** The North Street program form uses a blank field with the placeholder “Email” and an image containing the only copy of the deadline: “Apply by May 14 at 5 p.m. local time.” In the revised form, the field has a connected, visible label “Email address (required)” and a separate hint, “Example: name@example.org.” Move the deadline into ordinary page text before the form. If the remaining banner is only decoration, give it an empty text alternative.\n\n**Keyboard check:** On a test copy, put the mouse aside. Press Tab to move forward and Shift+Tab to move back. Look for a visible marker showing which control has focus. In the original form, Tab went from the email field to a footer link without reaching Submit. After replacing the clickable graphic with a standard “Submit application” button, the expected output is that Tab reaches the button and Enter or Space activates it.\n\n**Practice:** Write a visible label for a field that only displays “Phone.” Try the keyboard check on a test form and record the expected and actual focus order. This check does not test every accessibility need.\n\n**Suggested mentor discussion:** What would you record so someone else could verify a skipped control?",
+      "question": "Which change makes the email field’s purpose available after a person starts typing and connects that purpose to the control?",
+      "options": [
+        "Use a visible “Email address” label connected to the field.",
+        "Put a longer example address inside the field as a placeholder.",
+        "Show the field’s purpose only in an error after submission.",
+        "Add an envelope icon beside the field without a text label."
+      ],
+      "answer": 0,
+      "explanation": "A connected, visible label stays on the page and gives assistive technology a name for the field. A placeholder disappears when the person enters text."
+    },
+    {
+      "id": "lesson-187589d9-b1ee-4b64-ac3d-eb6bec04a5e1",
+      "title": "Capstone: Review and improve a fictional program application form",
+      "body": "Review a form in the order an applicant would use it. Start with whether they can finish the task, then make the information easier to find and understand. Record what you observed separately from what you expect a change to fix.\n\n**Starting form (fictional):** The Maple Path application has the title “Start,” a link labeled “Details” that opens an eligibility page, two empty fields with the placeholders “Name” and “Email,” and an image that says “Email confirmation follows a successful submission.” The keyboard sequence is Name → Email → footer; it skips the graphic used to submit.\n\n**Worked revision:** The task is “Check whether I qualify, send my application, and know it went through.” Use “Maple Path application” as the page title and “Your contact information” as a section heading. Rename the link “Check Maple Path eligibility.” Add visible, connected labels “Full name” and “Email address.” Put the confirmation information in ordinary text and replace the submit graphic with a standard “Submit application” button. Show “We received your application” only after success.\n\n**Practice and deliverable:** Make a one-page review with your task statement, a before-and-after form sketch, and a short check log. With the fictional inputs “Jordan Reed” and “jordan@example.org,” trace how someone would submit and verify receipt. If you have a working test copy, record what actually happens with Tab, Shift+Tab, and Enter. For a sketch, mark the sequence as expected and untested.\n\n**Four-point self-review rubric (one point each):**\n1. The task states how the applicant knows they finished.\n2. Headings show the page structure, and the link names its destination.\n3. Fields have visible, connected labels, and image-only information is available as text.\n4. The log covers focus order and submission, distinguishing observed behavior from predictions.\n\n**Suggested mentor discussion:** Which change would you make first, and what evidence supports that choice?",
+      "question": "Which check-log entry gives the clearest evidence of a barrier to completing the original Maple Path form?",
+      "options": [
+        "The title “Start” does not name the program.",
+        "The “Details” link opens the eligibility page.",
+        "Tab moved from Email to the footer, skipping the only Submit control.",
+        "The confirmation image could be replaced with ordinary text."
+      ],
+      "answer": 2,
+      "explanation": "This entry reports a specific keyboard action and result: the user cannot reach the only control that completes the task. The other entries address clarity or propose a change without showing a submission blocker."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "In a fictional tutoring program, an applicant says, “I work evenings, so I need to know if there’s a morning session.” Which task should guide the design?",
+      "options": [
+        "Add a calendar to the home page.",
+        "Find out whether a morning session is available before applying.",
+        "Make the morning sessions a brighter color.",
+        "Send a welcome message to people who enroll."
+      ],
+      "answer": 1,
+      "explanation": "The task is to find schedule information needed for a decision. A calendar is one possible design, not the task itself."
+    },
+    {
+      "question": "On a fictional volunteer page, a link opens a form for choosing a shift. Which link text makes that destination clearest?",
+      "options": [
+        "Next step",
+        "Volunteer information",
+        "Choose a volunteer shift",
+        "Open form"
+      ],
+      "answer": 2,
+      "explanation": "The label names the action the form supports. “Open form” signals what kind of page will open but not what it is for."
+    },
+    {
+      "question": "Which check tells you whether someone can reach and activate a form’s Submit button without a mouse?",
+      "options": [
+        "In a test copy, use Tab to reach the button, then activate it with Enter or Space.",
+        "Check whether the button is large enough to see at the bottom of the form.",
+        "Use a mouse to click the button and check for a confirmation.",
+        "Use Tab to get to the last field and assume the next control works."
+      ],
+      "answer": 0,
+      "explanation": "The test must cover both reaching and operating the button with the keyboard. Appearance and mouse behavior cannot establish either."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "A fictional training applicant needs to know whether a session fits their work schedule. Which test best checks that task?",
+      "options": [
+        "Ask the applicant whether the schedule page looks professional.",
+        "Count the number of links on the schedule page.",
+        "Ask the applicant to open the schedule and stop when it loads.",
+        "Give the applicant sample work hours and ask them to name a session that does not conflict."
+      ],
+      "answer": 3,
+      "explanation": "Naming a compatible session shows that the person found and used the information. Opening the schedule shows only that they reached it."
+    },
+    {
+      "question": "A fictional application page has a level 1 title. Its eligibility section links to a PDF checklist. Which rewrite best communicates the structure and destination?",
+      "options": [
+        "Bold text “Eligibility”; link “Download the eligibility checklist (PDF)”",
+        "Level 2 heading “Check your eligibility”; link “Download the eligibility checklist (PDF)”",
+        "Level 2 heading “Check your eligibility”; link “Download PDF”",
+        "Level 3 heading “Check your eligibility”; link “Download the eligibility checklist (PDF)”"
+      ],
+      "answer": 1,
+      "explanation": "A level 2 heading identifies a main section under the page title, and the link names the file and its format. Bold text alone does not create a heading, and a level 3 heading would be for a subsection."
+    },
+    {
+      "question": "A revised fictional form has text and labels in place. In a working test copy, Tab reaches Submit, but Enter does nothing. What should you do next?",
+      "options": [
+        "Mark the keyboard check as passed because the button can receive focus.",
+        "Add a note telling applicants to click Submit with a mouse.",
+        "Record the failed activation, check the button’s implementation, and retest reach and activation after fixing it.",
+        "Move the button higher on the page and check whether it looks easier to find."
+      ],
+      "answer": 2,
+      "explanation": "Receiving focus is only part of keyboard access. The control also has to work from the keyboard, and a retest verifies whether the change resolved the observed problem."
+    }
+  ],
+  "published": true
+}

@@ -122,6 +122,23 @@ h1, h2, h3, h4 { letter-spacing: -.025em; }
 .course-card h2, .mentor-card h2 { font-size: 1.25rem; }
 .course-card > p, .mentor-card .story { font-size: 1rem; }
 .course-card .btn, .mentor-card .btn { font-size: .9375rem; }
+/* A card is a flex column inside a grid. Long source URLs must be allowed
+   to shrink and wrap instead of defining the minimum width of its children. */
+.course-grid, .course-card { min-width: 0; }
+.course-card { max-width: 100%; overflow-wrap: anywhere; }
+.course-card > * { min-width: 0; max-width: 100%; }
+.course-card > p { width: 100%; }
+.course-card .chip-list { min-width: 0; max-width: 100%; }
+.course-card .chip, .course-card .badge, .course-card .btn {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.course-card .course-meta { flex-wrap: wrap; }
+.course-card .course-meta > span { min-width: 0; }
+.course-card .course-meta .icon { flex-shrink: 0; }
+
 .learning-item h3 { font-size: 1rem; }
 .learning-item .meta { font-size: .875rem; margin-bottom: 8px; }
 .learning-item .btn { font-size: .875rem; min-height: 44px; }
@@ -244,3 +261,5 @@ h1, h2, h3, h4 { letter-spacing: -.025em; }
   .login-proof, .login-footer { display: none; }
   .recipient-detail, .task-card, .mentor-account-panel, .support-summary { overflow-wrap: anywhere; }
 }
+
+.course-card[hidden], .course-picker [data-plan-course][hidden] { display: none; }

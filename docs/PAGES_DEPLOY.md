@@ -2,15 +2,17 @@
 
 This is an additional deployment target. The existing Workers configuration and its production cron remain in `wrangler.jsonc`. Pages uses `wrangler.pages.jsonc`, a dedicated D1 database, and the generated `dist/pages` folder.
 
-Published and verified on November 21, 2026: [NextStep public review](https://nextstep-techwomenaz.pages.dev). The first verified deployment is [4a14fc14](https://4a14fc14.nextstep-techwomenaz.pages.dev). Login checks passed for `admin` / `test1234` and the explicitly created empty review participant `learner` / `learn1234`. The fresh remote database contains three courses, five resources, no mentor accounts, and no fictional program activity. At the initial publish, no live AI or messaging provider key was configured; encrypted AI key storage was available.
+The current review is published at [NextStep](https://nextstep-techwomenaz.pages.dev), deployment [3d173296](https://3d173296.nextstep-techwomenaz.pages.dev). It includes the plain-chat admin agent, AI course generation and editing, mentor sign-in creation, course-result feedback with private follow-up courses, real mentor discovery and introduction requests, course search and plan locks, and PayPal test checkout. Saved AI and PayPal credentials are encrypted; provider connection checks passed. Payment completion is covered by mocked-provider integration tests; no buyer transaction is claimed as completed.
 
-The earlier survey and Android update is deployment [6a9c9e2d](https://6a9c9e2d.nextstep-techwomenaz.pages.dev). Both role logins, application arrays, and published survey UI were verified. The additive migration preserved both accounts and all three courses, with no application records inserted for testing.
+The catalog contains 12 practical study courses and seven academic subjects: forensic science, psychology, statistics, research methods, biology, chemistry and criminal justice. Existing user courses and participant records were preserved. These independent study materials do not award college credit.
 
-The earlier plan-management and career-stage update is deployment [9b5c9207](https://9b5c9207.nextstep-techwomenaz.pages.dev), served at the stable URL above. It adds editable plan prices, currencies, billing periods, active/default settings, and twelve career stages. Both review logins and normalized plan metadata were verified. Backend checks pass 63 tests; Flutter checks pass 20 tests and static analysis. The ARM64 internal test APK is version 0.1.1 / code 2002, 18,720,075 bytes, with SHA-256 `14d2bdea2068771b3e64d0b3daf2c5abafbd0a5db2970d10a7d9fc76791b6d78`. It installed successfully as an update on the connected Samsung SM-A156U1; no phone UI was driven or inspected. This update required no database migration or reset.
+Migrations `0004_course_snapshots.sql`, `0005_personal_learning.sql` and `0006_paypal_sandbox.sql` were applied locally and remotely without resetting records. Local browser checks verified that an expired admin session can reconnect and finish adding a learner without losing the form. No public test participants or activity were added.
 
-The AI agent, course builder, plan access controls and learner preview update is deployment [218e175d](https://218e175d.nextstep-techwomenaz.pages.dev), served at the stable URL above. Migration `0004_course_snapshots.sql` was applied locally and remotely without resetting records. A real course-generation call using the saved provider key returned an unpublished two-lesson draft without saving it. A live agent request also prepared an exact Guided-plan price proposal using the saved key. Canceling it persisted the canceled history entry, and the plan remained USD 9.99/month. No sample course or member records were created by these live checks. Backend checks pass 69 tests; the targeted agent checks passed again after final changes. Flutter analysis and 20 tests pass. The ARM64 internal APK is version 0.1.2 / code 2003, 18,785,727 bytes, SHA-256 `9a978901255a7212bafbaf1823dfd1f175aeec234b36567d39295294552d7984`. It was installed as an update on the connected Samsung SM-A156U1; package metadata confirmed version 0.1.2 / code 2003. No phone UI was driven or inspected.
+The current deliverable is the website. Android download prompts have been removed from the website interface. Earlier mobile work remains in the repository separately.
 
 The review configuration deliberately sets `DEMO_MODE=true` and `SEED_DEMO_DATA=false`. It starts with the administrator, curriculum, and resource links, with no fictional learners or activity. Email and SMS delivery remain blocked. The initial review login is `admin` / `test1234`; change that password in Settings before giving a public URL access to real program data or a paid AI key. The public review database must stay separate from production.
+
+The final website check passed TypeScript validation and **94 automated tests**. Live browser checks verified course search, wrapping of long course URLs within cards, real mentor discovery with a staff-request form, and an actual AI reply rendered as a table. Local browser checks verified plan-selected course locks and upgrade navigation. These checks did not create public test learning activity or mentor requests.
 
 ## One-time setup
 
@@ -50,7 +52,14 @@ Existing databases also need course snapshots before deploying the course editor
 npx wrangler d1 execute nextstep-pages-review --config wrangler.pages.jsonc --remote --file migrations/0004_course_snapshots.sql
 ```
 
-This additive migration preserves current enrollments and their course content. A fresh `schema.sql` already includes it. The AI agent uses the existing `meta` table.
+This additive migration preserves current enrollments and their course content. A fresh `schema.sql` already includes it. Existing databases also need the learning-review and payment tables:
+
+```bash
+npx wrangler d1 execute nextstep-pages-review --config wrangler.pages.jsonc --remote --file migrations/0005_personal_learning.sql
+npx wrangler d1 execute nextstep-pages-review --config wrangler.pages.jsonc --remote --file migrations/0006_paypal_sandbox.sql
+```
+
+A fresh `schema.sql` includes all of these tables. The AI agent uses the existing `meta` table.
 
 Set the encryption secret before the first deployment. This pipeline creates a 32-byte hex key and passes it directly to Wrangler without displaying it. Keep this secret stable: changing it prevents existing saved AI credentials from being decrypted.
 

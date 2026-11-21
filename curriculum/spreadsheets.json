@@ -1,0 +1,141 @@
+{
+  "id": "study-spreadsheets",
+  "mentorPrompt": "I am studying Spreadsheets for Community Impact. Please connect me with a mentor to review my practical project, discuss difficult skills, and choose one next step. I will bring my project and two specific questions.",
+  "sources": [
+    {
+      "title": "Google Sheets: Sort and filter data",
+      "url": "https://support.google.com/docs/answer/3540681"
+    }
+  ],
+  "title": "Spreadsheets for Community Impact",
+  "category": "Data skills",
+  "level": "Beginner",
+  "minutes": 45,
+  "description": "Learn to build a clean attendance sheet, calculate totals and averages, and sort or filter records without mixing them up. Then create a short summary that explains what was counted and what is still unknown. Designed for adult beginners, career changers, and returning professionals. No mentor is currently assigned. You can request one through your program or use the discussion prompts on your own.",
+  "skills": [
+    "Organize attendance data with one session per row and one field per column",
+    "Distinguish a confirmed zero from a missing attendance count",
+    "Use SUM and AVERAGE on a range of attendance counts",
+    "Sort and filter whole records without changing which values belong together",
+    "Report an average with its denominator and a missing-data caveat"
+  ],
+  "lessons": [
+    {
+      "id": "lesson-e1fce929-1a7f-4be2-b2cb-16614a1583a8",
+      "title": "Rows, Columns, and Clean Data",
+      "body": "Start by deciding what one row represents. In this course, one row is one delivered session, not one participant or one weekly total. Each column holds one kind of information. Use the first row for headers and give each session a unique ID so you can recognize it even after moving rows.\n\n**Worked example (fictional):** A neighborhood center has four notes: “S01, North, 8 people”; “S02, south, 0 people—confirmed”; “S03, North, not yet reported”; and “S04, South, 4 people.” Enter the headers `Session ID`, `Site`, and `Attendance` in cells A1, B1, and C1. Enter the cleaned rows below:\n\n| Session ID | Site | Attendance |\n|---|---|---:|\n| S01 | North | 8 |\n| S02 | South | 0 |\n| S03 | North | |\n| S04 | South | 4 |\n\nThe cleaned sheet uses `South` consistently and stores `8` as a number rather than `8 people` as text. S02 has a confirmed count of zero. S03 has a blank because the count is unknown. Keep the S03 row: the session happened, even though its count is missing. If you need to record why a number is missing, add a separate `Notes` column rather than typing an explanation in the numeric column.\n\n**Practice:** Re-create the table. Check that B3 reads `South`, C3 contains the number `0`, and C4 is truly empty, with no spaces or dash.\n\n**Suggested mentor discussion:** What source would you check before changing a blank count to zero?",
+      "question": "A session took place, but the attendance sheet has not been returned. How should you record it?",
+      "options": [
+        "Keep the session row and enter 0 in Attendance.",
+        "Keep the session row and leave Attendance blank.",
+        "Remove the session row until its count arrives."
+      ],
+      "answer": 1,
+      "explanation": "The row records that the session took place. A blank shows that its attendance count is unknown; zero would mean no one attended."
+    },
+    {
+      "id": "lesson-5ac01aa7-7aae-45cc-a8cb-22aaf857416d",
+      "title": "Calculate Attendance with SUM and AVERAGE",
+      "body": "Use `SUM` to add attendance counts and `AVERAGE` to find the mean count per session with a number recorded. A range such as `C2:C5` means every cell from C2 through C5, including both ends. Put your formulas outside that range so the results don't get mixed into the source data.\n\n**Worked example (fictional):** Use the neighborhood center sheet from Lesson 1: C2 contains `8`, C3 contains `0`, C4 is empty, and C5 contains `4`. In E2, type `=SUM(C2:C5)`. The result is `12`, because 8 + 0 + 4 = 12. In E3, type `=AVERAGE(C2:C5)`. The result is `4`, because the formula divides 12 by the three numeric counts. It includes the confirmed zero and skips the empty cell. Label the results in D2 and D3 as `Recorded attendance total` and `Average per reporting session`.\n\nThe total counts attendance across sessions, not unique people. For example, someone who attended twice would contribute once to each session's count. Also, the average of 4 describes the three reporting sessions, not necessarily all four delivered sessions.\n\n**Practice:** On a copy of the sheet, imagine S03's report arrives with a count of `8`. Enter it in C4. The total should update from `12` to `20`, and the average from `4` to `5`. You now have four numeric counts, so the new calculation is 20 ÷ 4. Restore the blank before continuing.\n\n**Suggested mentor discussion:** When would a total be more useful than an average in a team check-in?",
+      "question": "C2:C5 contains 8, a confirmed 0, a blank, and 4. What does =AVERAGE(C2:C5) return?",
+      "options": [
+        "3, because the range has four cells.",
+        "6, because only positive counts are included.",
+        "4, because there are three numeric counts."
+      ],
+      "answer": 2,
+      "explanation": "AVERAGE uses the numbers 8, 0, and 4. Their sum is 12, and 12 divided by 3 is 4."
+    },
+    {
+      "id": "lesson-355ae4fd-eb96-40d2-828e-0131e328cddd",
+      "title": "Sort and Filter Without Mixing Records",
+      "body": "Sorting changes the order of records. Filtering temporarily hides records that don't meet a condition. Both work best when the spreadsheet knows where the whole table begins and ends. For the attendance sheet, select A1:C5 and use the setting that identifies row 1 as headers. Leave the summary formulas outside the selected range. Never sort just the values in the Site or Attendance column: doing so can attach a count to the wrong session.\n\n**Worked example (fictional):** Sort the whole table by `Site` A to Z, then by `Session ID` A to Z within each site. Before sorting, the session IDs are S01, S02, S03, S04. After sorting, the records are:\n\n| Session ID | Site | Attendance |\n|---|---|---:|\n| S01 | North | 8 |\n| S03 | North | |\n| S02 | South | 0 |\n| S04 | South | 4 |\n\nNow filter `Site` to `South`. You should see S02 with `0` and S04 with `4`. The North sessions are hidden, not deleted. The ordinary `SUM` formula for C2:C5 still returns `12`; it includes values in hidden rows. Don't label that result a South-only total.\n\n**Practice:** Sort a copy of the sheet as shown. Then filter for North and check that S01 still has `8` and S03 is still blank. Clear the filter and verify that all four sessions are visible again.\n\n**Suggested mentor discussion:** What field would you use to spot-check that a sort kept each record intact?\n\nOptional further reading: Google Sheets: Sort and filter data, https://support.google.com/docs/answer/3540681",
+      "question": "How should you group sessions by site without changing which attendance count belongs to each session?",
+      "options": [
+        "Sort the whole table by Site and tell the spreadsheet that the first row contains headers.",
+        "Sort only the Site column and leave the Session ID and Attendance columns in place.",
+        "Sort the Site and Attendance columns together but leave Session ID in its original order."
+      ],
+      "answer": 0,
+      "explanation": "Sorting the whole table moves each session ID, site, and attendance count together. Sorting only some columns can break those links."
+    },
+    {
+      "id": "lesson-840f273d-15d5-472f-b30f-10cae0dc68d1",
+      "title": "Capstone: Summarize Attendance and Its Limits",
+      "body": "Your deliverable is one spreadsheet tab with a clean attendance table, two formulas, and a two- or three-sentence summary for a fictional program coordinator. Use this new example so you can produce the summary yourself. A denominator is the number you divide by. For an average of recorded attendance, that number is the count of sessions with a numeric attendance entry, including any confirmed zeros.\n\n**Practice data (fictional):** Put `Session ID`, `Site`, and `Attendance` in A1:C1. Enter these records in rows 2–6: T01, East, 6; T02, West, 0; T03, East, blank; T04, West, 9; T05, East, 5. Leave T03's attendance cell empty. All five sessions took place. Outside the table, enter `=SUM(C2:C6)` and `=AVERAGE(C2:C6)` and label both results. Filter to East to verify that T03 is the session missing a count, then clear the filter before writing the overall summary.\n\n**Worked result (fictional):** “Recorded attendance totaled 20 across 4 of 5 delivered sessions, averaging 5 per reporting session (20 ÷ 4). T02 had a confirmed zero; T03's count is missing, so the total and average describe reported attendance only. The total counts attendances, not unique people.”\n\n**Four-point self-review rubric:** Give yourself one point for each item you can verify:\n1. All five session rows are intact, with a numeric zero for T02 and a blank for T03.\n2. Your formulas return a total of 20 and an average of 5.\n3. Your summary names the denominator: four reporting sessions out of five delivered.\n4. Your summary identifies the missing count and does not present attendances as unique people.\n\n**Suggested mentor discussion:** What might a coordinator misunderstand if your summary said only “average attendance: 5”?",
+      "question": "Which statement accurately reports the capstone results?",
+      "options": [
+        "Attendance averaged 4 across all five delivered sessions because the missing count stands for zero.",
+        "Attendance averaged 5 across four reporting sessions; one of the five delivered sessions had no count.",
+        "Attendance averaged 5 across all five delivered sessions, and 20 different people attended."
+      ],
+      "answer": 1,
+      "explanation": "The recorded total of 20 is divided by four numeric counts. The fifth session has an unknown count, and the data do not identify unique people."
+    }
+  ],
+  "preQuiz": [
+    {
+      "question": "You are building a sheet with one row per delivered session. How should you enter a session whose attendance count is not known yet?",
+      "options": [
+        "Enter a row with the session ID and site, and leave the count blank.",
+        "Enter a row with the session ID and site, and use zero as a placeholder.",
+        "Leave the session out of the sheet until you receive its count."
+      ],
+      "answer": 0,
+      "explanation": "Keep the session record and leave the missing count blank. This distinguishes an unknown count from a confirmed zero."
+    },
+    {
+      "question": "Three delivered sessions have recorded counts of 3 and 9, with the third count blank. What can you report?",
+      "options": [
+        "A recorded total of 12 and an average of 4 across all three sessions.",
+        "A recorded total of 12 and an average of 6 across two reporting sessions, with one count missing.",
+        "A recorded total of 12 and an average of 6 across all three delivered sessions."
+      ],
+      "answer": 1,
+      "explanation": "The numeric counts add to 12. Dividing by the two reporting sessions gives 6. The third session's count remains unknown."
+    },
+    {
+      "question": "Your table has Date, Site, and Attendance columns. How should you sort it by Date?",
+      "options": [
+        "Sort the Date cells by themselves so Site and Attendance stay where they are.",
+        "Sort Date and Site together but keep Attendance in its original order.",
+        "Sort the full table by Date, treating the first row as headers."
+      ],
+      "answer": 2,
+      "explanation": "A full-table sort moves each date, site, and count together. The header setting keeps the column labels at the top."
+    }
+  ],
+  "postQuiz": [
+    {
+      "question": "A volunteer writes '0 people' for U07 and 'not yet reported' for U08. How should the Attendance cells be entered?",
+      "options": [
+        "Type '0 people' for U07 and 'not yet reported' for U08.",
+        "Enter numeric 0 for U07 and leave U08 blank.",
+        "Leave both cells blank because neither has a positive count."
+      ],
+      "answer": 1,
+      "explanation": "U07 has a confirmed count of zero and should be stored as a number. U08 has no count yet, so its Attendance cell should stay blank."
+    },
+    {
+      "question": "Cells C2:C5 contain 10, 0, a blank, and 8 for four delivered sessions. Which summary matches SUM and AVERAGE?",
+      "options": [
+        "Total 18; average 4.5 across four sessions, counting the blank as zero.",
+        "Total 18; average 9 across two sessions, leaving out the confirmed zero.",
+        "Total 18; average 6 across three reporting sessions, with one count missing."
+      ],
+      "answer": 2,
+      "explanation": "SUM adds 10, 0, and 8 to get 18. AVERAGE divides 18 by three numeric entries, including zero but not the blank."
+    },
+    {
+      "question": "After a whole-table sort, you filter for West and see two sessions. How do you check whether the other records are still there?",
+      "options": [
+        "Clear the Site filter and check that all session IDs reappear with their original counts.",
+        "Sort the Attendance column on its own and check whether more session IDs appear.",
+        "Leave the filter in place and use the visible row count as proof that the other records were deleted."
+      ],
+      "answer": 0,
+      "explanation": "Filtering hides whole records without deleting them. Clearing the filter lets you verify that all IDs and counts are still paired correctly."
+    }
+  ],
+  "published": true
+}
